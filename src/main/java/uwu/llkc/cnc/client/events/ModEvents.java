@@ -10,6 +10,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.entities.models.PeashooterModel;
+import uwu.llkc.cnc.client.entities.renderers.PeaProjectileRenderer;
 import uwu.llkc.cnc.client.entities.renderers.PeashooterRenderer;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
@@ -27,6 +28,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityTypeRegistry.PEASHOOTER.get(), PeashooterRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.PEA.get(), PeaProjectileRenderer::new);
     }
 
     @SubscribeEvent

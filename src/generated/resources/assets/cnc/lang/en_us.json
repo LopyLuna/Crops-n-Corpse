@@ -1,4 +1,6 @@
 {
+  "entity.cnc.pea": "Pea",
   "entity.cnc.peashooter": "Peashooter",
+  "item.cnc.plant_food": "Plant Food",
   "item.cnc.seed_packet": "Seed Packet"
 }

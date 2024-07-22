@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "cnc:seed_packet/seed_packet_peashooter",
+      "predicate": {
+        "cnc:plant": 0.01
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "cnc:item/seed_packet/seed_packet_empty"
+  }
+}

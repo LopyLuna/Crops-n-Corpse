@@ -6,13 +6,18 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.entities.models.PeashooterModel;
-import uwu.llkc.cnc.common.entities.Peashooter;
+import uwu.llkc.cnc.common.entities.plants.Peashooter;
 
-public class PeashooterRenderer extends MobRenderer<Peashooter, PeashooterModel<Peashooter>> {
+public class PeashooterRenderer extends MobRenderer<Peashooter, PeashooterModel> {
     public static final ResourceLocation TEXTURE = CNCMod.rl("textures/entity/peashooter.png");
 
     public PeashooterRenderer(EntityRendererProvider.Context context) {
-        super(context, new PeashooterModel<>(context.bakeLayer(PeashooterModel.MAIN_LAYER)), 0);
+        super(context, new PeashooterModel(context.bakeLayer(PeashooterModel.MAIN_LAYER)), 0);
+    }
+
+    @Override
+    protected float getFlipDegrees(Peashooter livingEntity) {
+        return 0f;
     }
 
     @Override

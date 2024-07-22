@@ -6,11 +6,12 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.CNCMod;
+import uwu.llkc.cnc.client.entities.animations.PeashooterAnimations;
+import uwu.llkc.cnc.common.entities.plants.Peashooter;
 
-public class PeashooterModel<T extends Entity> extends HierarchicalModel<T> {
+public class PeashooterModel extends HierarchicalModel<Peashooter> {
 	public static final ModelLayerLocation MAIN_LAYER = new ModelLayerLocation(CNCMod.rl("peashooter"), "main");
 	private final ModelPart root;
 	private final ModelPart rootStem;
@@ -60,8 +61,14 @@ public class PeashooterModel<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(Peashooter entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animate(entity.attack, PeashooterAnimations.ATTACK, ageInTicks);
+		this.animate(entity.idle, PeashooterAnimations.IDLE, ageInTicks);
+		this.animate(entity.die, PeashooterAnimations.DEATH, ageInTicks);
 
+		rootStem.yRot = (float) Math.toRadians(netHeadYaw);
+		rootHead.xRot = ((float) Math.toRadians(headPitch));
 	}
 
 	@Override

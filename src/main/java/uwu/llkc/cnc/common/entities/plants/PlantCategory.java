@@ -1,4 +1,4 @@
-package uwu.llkc.cnc.common.entities;
+package uwu.llkc.cnc.common.entities.plants;
 
 public enum PlantCategory {
     OFFENSIVE,
