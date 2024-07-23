@@ -50,6 +50,7 @@ public class Peashooter extends CNCPlant {
             @Override
             public boolean canContinueToUse() {
                 var use = super.canContinueToUse() && distanceTo(getTarget()) < 30;
+                if (!use) return false;
                 var angle = Math.toDegrees(Math.atan((getY() - getTarget().getY()) / (position().subtract(getTarget().position()).horizontalDistance())));
                 return use && Math.abs(angle) < 25;
             }
