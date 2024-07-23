@@ -27,6 +27,8 @@ public class ModLanguageProvider extends LanguageProvider {
         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
             addItem(entry, toEnglishTranslation(entry.getId()));
         }
+
+        add("itemGroup.cnc.cnc_tab", "Crops 'n Corpse");
     }
 
     private String toEnglishTranslation(ResourceLocation rl) {

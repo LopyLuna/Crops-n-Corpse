@@ -1,14 +1,15 @@
 package uwu.llkc.cnc.common.entities.plants;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
@@ -21,6 +22,18 @@ public class Peashooter extends CNCPlant {
 
     public Peashooter(EntityType<Peashooter> entityType, Level level) {
         super(entityType, level);
+        moveControl = new MoveControl(this) {
+            @Override
+            public void tick() {}
+        };
+    }
+
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+        var pos = BlockPos.containing(getX(), getY(), getZ());
+        super.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
     }
 
     public static AttributeSupplier.Builder attributes() {
@@ -36,7 +49,9 @@ public class Peashooter extends CNCPlant {
         goalSelector.addGoal(0, new RangedAttackGoal(this, 1, 20, 30) {
             @Override
             public boolean canContinueToUse() {
-                return super.canContinueToUse() && distanceTo(getTarget()) < 30;
+                var use = super.canContinueToUse() && distanceTo(getTarget()) < 30;
+                var angle = Math.toDegrees(Math.atan((getY() - getTarget().getY()) / (position().subtract(getTarget().position()).horizontalDistance())));
+                return use && Math.abs(angle) < 25;
             }
         });
     }
@@ -45,7 +60,7 @@ public class Peashooter extends CNCPlant {
     public void tick() {
         super.tick();
         if (level().isClientSide()) {
-            idle.animateWhen(!attack.isStarted() && !die.isStarted(), tickCount);
+            idle.startIfStopped(tickCount);
         }
     }
 
@@ -62,8 +77,7 @@ public class Peashooter extends CNCPlant {
 
     @Override
     public void setPos(double x, double y, double z) {
-        var pos = BlockPos.containing(x, y, z);
-        super.setPos(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
+        super.setPos(x, y, z);
     }
 
     @Override
@@ -87,7 +101,9 @@ public class Peashooter extends CNCPlant {
         if (projectile == null) return;
         projectile.damage = 3;
         projectile.setPos(this.getX(), this.getEyeY(), this.getZ());
-        projectile.shoot(target.getX() - getX(), target.getEyeY() - getEyeY(), target.getZ() - getZ(), velocity, 0);
+        projectile.setOwner(this);
+        var targetPos = target.getBoundingBox().getCenter();
+        projectile.shoot(targetPos.x - getX(), targetPos.y - getEyeY(), targetPos.z - getZ(), velocity, 0);
         level().addFreshEntity(projectile);
         level().broadcastEntityEvent(this, (byte) 0);
     }

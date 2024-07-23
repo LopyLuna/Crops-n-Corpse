@@ -1,18 +1,16 @@
 package uwu.llkc.cnc.common.entities.plants;
 
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +20,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import uwu.llkc.cnc.common.entities.ai.OwnerHurtByTargetGoalPlant;
+import uwu.llkc.cnc.common.entities.ai.OwnerHurtTargetGoalPlant;
 import uwu.llkc.cnc.common.init.DataComponentRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 
@@ -78,11 +78,9 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true, entity -> !entity.getUUID().equals(owner)) {
-            @Override
-            public void stop() {}
-        });
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Monster.class, true) {
+        targetSelector.addGoal(0, new OwnerHurtByTargetGoalPlant(this));
+        targetSelector.addGoal(0, new OwnerHurtTargetGoalPlant(this));
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, entity -> !entity.getUUID().equals(owner)) {
             @Override
             public void stop() {}
         });
@@ -92,16 +90,37 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
         });
     }
 
-    @Override
-    protected boolean isImmobile() {
-        return true;
-    }
-
     @Nullable
     @Override
     public UUID getOwnerUUID() {
         return owner;
     }
+
+    @Override
+    protected float getKnockback(Entity attacker, DamageSource damageSource) {
+        return 0;
+    }
+
+    @Override
+    public void knockback(double strength, double x, double z) {}
+
+    @Override
+    public boolean canCollideWith(Entity entity) {
+        return false;
+    }
+
+    @Override
+    public boolean canBeCollidedWith() {
+        return false;
+    }
+
+    @Override
+    public boolean isPushable() {
+        return false;
+    }
+
+    @Override
+    protected void pushEntities() {}
 
     @Override
     protected @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
@@ -116,12 +135,13 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
                 this.gameEvent(GameEvent.EAT); // Neo: add EAT game event
                 return InteractionResult.sidedSuccess(this.level().isClientSide());
             }
-        } else if (player.getItemInHand(hand).is(ItemRegistry.SEED_PACKET.get())){
+        } else if (player.getItemInHand(hand).is(ItemRegistry.SEED_PACKET.get()) && getOwner() != null && getOwner().equals(player)){
             if (player.getItemInHand(hand).getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY).isEmpty()) {
                 var itemStack = new ItemStack(ItemRegistry.SEED_PACKET.get(), 1);
                 CompoundTag entityData = new CompoundTag();
                 this.save(entityData);
                 this.discard();
+                entityData.remove("Pos");
                 CustomData customData = CustomData.of(entityData);
                 itemStack.set(DataComponents.ENTITY_DATA, customData);
                 itemStack.set(DataComponentRegistry.PLANTS.get(), getPlantPacketOverrideFloat());
@@ -145,6 +165,31 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
 
     public int getMaxAirSupply() {
         return 20;
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 7) {
+            this.spawnTamingParticles(true);
+        } else if (id == 6) {
+            this.spawnTamingParticles(false);
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
+    protected void spawnTamingParticles(boolean tamed) {
+        ParticleOptions particleoptions = ParticleTypes.HEART;
+        if (!tamed) {
+            particleoptions = ParticleTypes.SMOKE;
+        }
+
+        for (int i = 0; i < 7; i++) {
+            double d0 = this.random.nextGaussian() * 0.02;
+            double d1 = this.random.nextGaussian() * 0.02;
+            double d2 = this.random.nextGaussian() * 0.02;
+            this.level().addParticle(particleoptions, this.getRandomX(1.0), this.getRandomY() + 0.5, this.getRandomZ(1.0), d0, d1, d2);
+        }
     }
 
     public abstract PlantCategory getPlantCategory();

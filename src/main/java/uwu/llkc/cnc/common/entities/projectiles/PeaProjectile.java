@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
+import uwu.llkc.cnc.common.entities.plants.Peashooter;
 
 public class PeaProjectile extends AbstractHurtingProjectile {
     public int damage;
@@ -44,7 +45,7 @@ public class PeaProjectile extends AbstractHurtingProjectile {
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide && result.getType() != HitResult.Type.ENTITY) {
             this.discard();
         }
     }
@@ -54,11 +55,13 @@ public class PeaProjectile extends AbstractHurtingProjectile {
         super.onHitEntity(result);
         if (!this.level().isClientSide) {
             Entity entity = result.getEntity();
-           if (getOwner() != null && getOwner() instanceof LivingEntity owner) {
-               entity.hurt(damageSources().mobProjectile(this, owner), damage);
-           } else {
-               entity.hurt(damageSources().generic(), damage);
-           }
+            if (entity instanceof Peashooter shooter && shooter.getOwner() != null && this.getOwner() instanceof Peashooter shot && shooter.getOwner().getUUID().equals(shot.getOwnerUUID()) || this.getOwner() instanceof Peashooter shott && shott.getOwnerUUID() != null && shott.getOwnerUUID().equals(entity.getUUID())) return;
+            if (getOwner() != null && getOwner() instanceof LivingEntity owner) {
+                entity.hurt(damageSources().mobProjectile(this, owner), damage);
+            } else {
+                entity.hurt(damageSources().generic(), damage);
+            }
+            discard();
         }
     }
 }

@@ -1,5 +1,7 @@
 package uwu.llkc.cnc.client.entities.renderers;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +15,12 @@ public class PeashooterRenderer extends MobRenderer<Peashooter, PeashooterModel>
 
     public PeashooterRenderer(EntityRendererProvider.Context context) {
         super(context, new PeashooterModel(context.bakeLayer(PeashooterModel.MAIN_LAYER)), 0);
+    }
+
+    @Override
+    protected void scale(Peashooter livingEntity, PoseStack poseStack, float partialTickTime) {
+        super.scale(livingEntity, poseStack, partialTickTime);
+        poseStack.scale(1.2f, 1.2f, 1.2f);
     }
 
     @Override
