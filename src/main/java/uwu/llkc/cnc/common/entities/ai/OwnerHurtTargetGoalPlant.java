@@ -38,6 +38,7 @@ public class OwnerHurtTargetGoalPlant extends TargetGoal {
 
     @Override
     public void start() {
+        if (ownerLastHurt instanceof CNCPlant cncplant && cncplant.getOwnerUUID() != null && cncplant.getOwnerUUID().equals(plant.getOwnerUUID())) return;
         this.mob.setTarget(this.ownerLastHurt);
         LivingEntity livingentity = this.plant.getOwner();
         if (livingentity != null) {

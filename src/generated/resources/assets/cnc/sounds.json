@@ -1,0 +1,31 @@
+{
+  "entity.peashooter.death": {
+    "sounds": [
+      "cnc:peashooter_death_1",
+      "cnc:peashooter_death_2"
+    ],
+    "subtitle": "subtitles.cnc.peashooter_death"
+  },
+  "entity.peashooter.hurt": {
+    "sounds": [
+      "cnc:peashooter_hurt_1",
+      "cnc:peashooter_hurt_2",
+      "cnc:peashooter_hurt_3",
+      "cnc:peashooter_hurt_4",
+      "cnc:peashooter_hurt_5"
+    ],
+    "subtitle": "subtitles.cnc.peashooter_hurt"
+  },
+  "entity.peashooter.shoot": {
+    "sounds": [
+      "cnc:peashooter_shoot"
+    ],
+    "subtitle": "subtitles.cnc.peashooter_shoot"
+  },
+  "item.seed_packet.spawn": {
+    "sounds": [
+      "cnc:plant_spawn"
+    ],
+    "subtitle": "subtitles.cnc.plant_spawn"
+  }
+}

@@ -28,7 +28,12 @@ public class ModLanguageProvider extends LanguageProvider {
             addItem(entry, toEnglishTranslation(entry.getId()));
         }
 
-        add("itemGroup.cnc.cnc_tab", "Crops 'n Corpse");
+        add("itemGroup.cnc.cnc_tab", "Crops n Corpse");
+        add("damage_type.cnc.pea_shot", "Pea Shot");
+        add("subtitles.cnc.peashooter_death", "Peashooter Died");
+        add("subtitles.cnc.peashooter_hurt", "Peashooter Hurt");
+        add("subtitles.cnc.peashooter_shoot", "Peashooter Shoot");
+        add("subtitles.cnc.plant_spawn", "Plant Spawned");
     }
 
     private String toEnglishTranslation(ResourceLocation rl) {

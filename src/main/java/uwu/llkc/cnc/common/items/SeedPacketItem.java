@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import uwu.llkc.cnc.common.init.DataComponentRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
+import uwu.llkc.cnc.common.init.SoundRegistry;
 
 public class SeedPacketItem extends Item {
     public static final MapCodec<EntityType<?>> ENTITY_TYPE_FIELD_CODEC = BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("id");
@@ -33,6 +35,7 @@ public class SeedPacketItem extends Item {
                     context.getItemInHand().remove(DataComponents.ENTITY_DATA);
                     context.getItemInHand().remove(DataComponentRegistry.PLANTS.get());
                 }
+                context.getLevel().playSound(null, context.getClickedPos(), SoundRegistry.PLANT_SPAWN.get(), SoundSource.PLAYERS);
                 return InteractionResult.SUCCESS;
             }
         }

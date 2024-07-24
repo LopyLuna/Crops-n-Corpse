@@ -4,10 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import uwu.llkc.cnc.common.init.CreativeModeTabRegistry;
-import uwu.llkc.cnc.common.init.DataComponentRegistry;
-import uwu.llkc.cnc.common.init.EntityTypeRegistry;
-import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.init.*;
 
 @Mod(CNCMod.MOD_ID)
 public class CNCMod {
@@ -18,6 +15,7 @@ public class CNCMod {
         EntityTypeRegistry.ENTITY_TYPES.register(modEventBus);
         DataComponentRegistry.DATA_COMPONENTS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
+        SoundRegistry.SOUNDS.register(modEventBus);
     }
 
     public static ResourceLocation rl(String path) {

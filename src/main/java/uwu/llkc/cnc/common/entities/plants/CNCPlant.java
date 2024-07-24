@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
@@ -84,7 +85,7 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
             @Override
             public void stop() {}
         });
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, entity -> entity instanceof Enemy) {
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, entity -> entity instanceof Enemy && !(entity instanceof Creeper)) {
             @Override
             public void stop() {}
         });
@@ -125,10 +126,10 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
     @Override
     protected @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
         if (player.getItemInHand(hand).is(ItemRegistry.PLANT_FOOD.get())) {
-            if (getOwnerUUID() == null) {
+            if (!level().isClientSide && getOwnerUUID() == null) {
                 tryToTame(player);
                 player.getItemInHand(hand).consume(1, player);
-                return InteractionResult.sidedSuccess(this.level().isClientSide());
+                return InteractionResult.SUCCESS;
             } else if (this.getHealth() < this.getMaxHealth()) {
                 this.heal(2);
                 player.getItemInHand(hand).consume(1, player);

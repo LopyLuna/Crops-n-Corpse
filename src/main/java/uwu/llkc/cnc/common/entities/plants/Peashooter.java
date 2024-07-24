@@ -1,12 +1,15 @@
 package uwu.llkc.cnc.common.entities.plants;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -14,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
+import uwu.llkc.cnc.common.init.SoundRegistry;
 
 public class Peashooter extends CNCPlant {
     public final AnimationState idle = new AnimationState();
@@ -46,13 +50,19 @@ public class Peashooter extends CNCPlant {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        goalSelector.addGoal(0, new RangedAttackGoal(this, 1, 20, 30) {
+        goalSelector.addGoal(1, new RandomLookAroundGoal(this) {
+            @Override
+            public boolean canUse() {
+                return getRandom().nextFloat() < 0.005F;
+            }
+        });
+        goalSelector.addGoal(0, new RangedAttackGoal(this, 1, 40, 30) {
             @Override
             public boolean canContinueToUse() {
-                var use = super.canContinueToUse() && distanceTo(getTarget()) < 30;
+                var use = getTarget() != null && super.canContinueToUse() && distanceTo(getTarget()) < 30;
                 if (!use) return false;
                 var angle = Math.toDegrees(Math.atan((getY() - getTarget().getY()) / (position().subtract(getTarget().position()).horizontalDistance())));
-                return use && Math.abs(angle) < 25;
+                return angle > -60 && angle < 25;
             }
         });
     }
@@ -107,6 +117,7 @@ public class Peashooter extends CNCPlant {
         projectile.shoot(targetPos.x - getX(), targetPos.y - getEyeY(), targetPos.z - getZ(), velocity, 0);
         level().addFreshEntity(projectile);
         level().broadcastEntityEvent(this, (byte) 0);
+        level().playSound(null, blockPosition(), SoundRegistry.PEASHOOTER_SHOOT.get(), SoundSource.NEUTRAL);
     }
 
     @Override
@@ -117,5 +128,17 @@ public class Peashooter extends CNCPlant {
         } else if (id == 1) {
             die.start(tickCount);
         }
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundRegistry.PEASHOOTER_DEATH.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return SoundRegistry.PEASHOOTER_HURT.get();
     }
 }
