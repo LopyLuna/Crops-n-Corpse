@@ -8,9 +8,12 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +32,13 @@ public class Peashooter extends CNCPlant {
         moveControl = new MoveControl(this) {
             @Override
             public void tick() {}
+        };
+
+        lookControl = new LookControl(this) {
+            @Override
+            protected boolean resetXRotOnTick() {
+                return false;
+            }
         };
     }
 
@@ -50,12 +60,8 @@ public class Peashooter extends CNCPlant {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        goalSelector.addGoal(1, new RandomLookAroundGoal(this) {
-            @Override
-            public boolean canUse() {
-                return getRandom().nextFloat() < 0.005F;
-            }
-        });
+        goalSelector.addGoal(2, new RandomLookAroundGoal(this));
+        goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 6, 0.001f));
         goalSelector.addGoal(0, new RangedAttackGoal(this, 1, 40, 30) {
             @Override
             public boolean canContinueToUse() {
@@ -140,5 +146,10 @@ public class Peashooter extends CNCPlant {
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
         return SoundRegistry.PEASHOOTER_HURT.get();
+    }
+
+    @Override
+    public void checkDespawn() {
+        super.checkDespawn();
     }
 }

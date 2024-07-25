@@ -54,6 +54,17 @@ public class PeaProjectile extends AbstractHurtingProjectile {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        applyGravity();
+    }
+
+    @Override
+    protected double getDefaultGravity() {
+        return 0.001d;
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         if (!this.level().isClientSide) {

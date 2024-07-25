@@ -85,7 +85,7 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
             @Override
             public void stop() {}
         });
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, entity -> entity instanceof Enemy && !(entity instanceof Creeper)) {
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, entity -> entity instanceof Enemy && !(entity instanceof Creeper) && !(this.getOwnerUUID() != null && entity instanceof OwnableEntity ownable && ownable.getOwnerUUID() != null && ownable.getOwnerUUID().equals(getOwnerUUID()))) {
             @Override
             public void stop() {}
         });
@@ -158,6 +158,7 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
             owner = player.getUUID();
             this.navigation.stop();
             this.setTarget(null);
+            setPersistenceRequired();
             this.level().broadcastEntityEvent(this, (byte)7);
         } else {
             this.level().broadcastEntityEvent(this, (byte)6);

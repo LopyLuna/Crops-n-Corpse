@@ -1,7 +1,7 @@
 package uwu.llkc.cnc.common.entities.ai;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -39,6 +39,7 @@ public class OwnerHurtByTargetGoalPlant extends TargetGoal {
 
     @Override
     public void start() {
+        if (ownerLastHurtBy instanceof CNCPlant cncplant && cncplant.getOwnerUUID() != null && cncplant.getOwnerUUID().equals(plant.getOwnerUUID()) || plant.getOwnerUUID() != null && plant.getOwnerUUID().equals(ownerLastHurtBy.getUUID()) || plant.getOwnerUUID() != null && targetMob instanceof OwnableEntity ownable && plant.getOwnerUUID().equals(ownable.getOwnerUUID())) return;
         this.mob.setTarget(this.ownerLastHurtBy);
         LivingEntity livingentity = this.plant.getOwner();
         if (livingentity != null) {
