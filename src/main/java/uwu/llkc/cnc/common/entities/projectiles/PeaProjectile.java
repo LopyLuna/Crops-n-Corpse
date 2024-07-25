@@ -60,7 +60,7 @@ public class PeaProjectile extends AbstractHurtingProjectile {
     }
 
     @Override
-    protected double getDefaultGravity() {
+    public double getDefaultGravity() {
         return 0.01d;
     }
 

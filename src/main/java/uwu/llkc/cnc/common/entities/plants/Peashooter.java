@@ -120,7 +120,11 @@ public class Peashooter extends CNCPlant {
         projectile.setPos(this.getX(), this.getEyeY(), this.getZ());
         projectile.setOwner(this);
         var targetPos = target.getBoundingBox().getCenter();
-        projectile.shoot(targetPos.x - getX(), targetPos.y - getEyeY(), targetPos.z - getZ(), velocity, 0);
+
+        var distance = Math.sqrt((targetPos.x - getX()) * (targetPos.x - getX()) + (targetPos.z - getZ()) * (targetPos.z - getZ()));
+        var drop = - (projectile.getDefaultGravity() * 0.6 / 2) * distance * distance;
+
+        projectile.shoot(targetPos.x - getX(), targetPos.y - getEyeY() - drop, targetPos.z - getZ(), 1, 0);
         level().addFreshEntity(projectile);
         level().broadcastEntityEvent(this, (byte) 0);
         level().playSound(null, blockPosition(), SoundRegistry.PEASHOOTER_SHOOT.get(), SoundSource.NEUTRAL);
