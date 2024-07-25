@@ -46,7 +46,7 @@ public class Peashooter extends CNCPlant {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
         var pos = BlockPos.containing(getX(), getY(), getZ());
-        super.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        super.setPos(pos.getX() + 0.5, getY(), pos.getZ() + 0.5);
         return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
     }
 
