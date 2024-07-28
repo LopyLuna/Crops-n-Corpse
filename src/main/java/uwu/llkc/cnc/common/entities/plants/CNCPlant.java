@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtByTargetGoalPlant;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtTargetGoalPlant;
+import uwu.llkc.cnc.common.init.CreativeModeTabRegistry;
 import uwu.llkc.cnc.common.init.DataComponentRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 
@@ -146,6 +147,7 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
                 CustomData customData = CustomData.of(entityData);
                 itemStack.set(DataComponents.ENTITY_DATA, customData);
                 itemStack.set(DataComponentRegistry.PLANTS.get(), getPlantPacketOverrideFloat());
+                itemStack.set(DataComponentRegistry.SUN_COST.get(), getSunCost());
                 player.setItemInHand(hand, ItemUtils.createFilledResult(player.getItemInHand(hand), player, itemStack, true));
                 return InteractionResult.sidedSuccess(player.level().isClientSide);
             }
@@ -194,9 +196,15 @@ public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttac
         }
     }
 
+    @Nullable
+    @Override
+    public ItemStack getPickResult() {
+        return CreativeModeTabRegistry.getSeedPacket(getPlantPacketOverrideFloat(), getType(), getSunCost());
+    }
+
     public abstract PlantCategory getPlantCategory();
 
     public abstract float getPlantPacketOverrideFloat();
 
-    public abstract int sunCost();
+    public abstract int getSunCost();
 }

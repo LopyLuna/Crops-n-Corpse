@@ -16,6 +16,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(ItemRegistry.PLANT_FOOD.get());
+        basicItem(ItemRegistry.SUN.get());
         withExistingParent("seed_packet", "item/generated")
                 .texture("layer0", CNCMod.rl("item/seed_packet/seed_packet_empty")).override()
                 .model(basicItem(CNCMod.rl("seed_packet/seed_packet_peashooter")))

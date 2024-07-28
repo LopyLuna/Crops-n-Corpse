@@ -25,20 +25,21 @@ public class CreativeModeTabRegistry {
 
     public static final Supplier<CreativeModeTab> CNC_TAB = CREATIVE_MODE_TABS.register("cnc_tab",
             () -> CreativeModeTab.builder()
-                    .title(Component.translatableWithFallback("ítemGroup." + CNCMod.MOD_ID + ".cnc_tab", "Crops 'n Corpse"))
+                    .title(Component.translatableWithFallback("ítemGroup." + CNCMod.MOD_ID + ".cnc_tab", "Crops 'n' Corpse"))
                     .icon(() -> new ItemStack(ItemRegistry.PLANT_FOOD.get()))
                     .displayItems((params, output) -> {
                         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
                             output.accept(entry.get());
                         }
-                        output.accept(getSeedPacket(0.01f, EntityTypeRegistry.PEASHOOTER.get()));
+                        output.accept(getSeedPacket(0.01f, EntityTypeRegistry.PEASHOOTER.get(), 16));
                     }).build());
 
-    private static ItemStack getSeedPacket(float override, EntityType<?> type) {
+    public static ItemStack getSeedPacket(float override, EntityType<?> type, int sunCost) {
         var tag = SeedPacketItem.ENTITY_TYPE_FIELD_CODEC.codec().encodeStart(NbtOps.INSTANCE, type).getOrThrow();
         if (tag.getType() == CompoundTag.TYPE) {
             return new ItemStack(ItemRegistry.SEED_PACKET, 1, DataComponentPatch.builder()
                     .set(DataComponentRegistry.PLANTS.get(), override)
+                    .set(DataComponentRegistry.SUN_COST.get(), sunCost)
                     .set(DataComponents.ENTITY_DATA, CustomData.of((CompoundTag) tag)).build());
         } else return ItemStack.EMPTY;
     }

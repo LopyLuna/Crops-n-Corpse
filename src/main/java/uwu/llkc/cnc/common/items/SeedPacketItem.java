@@ -2,12 +2,13 @@ package uwu.llkc.cnc.common.items;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -19,7 +20,9 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import uwu.llkc.cnc.common.init.DataComponentRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
+import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
+import uwu.llkc.cnc.common.util.ItemUtils;
 
 import java.util.List;
 
@@ -35,14 +38,20 @@ public class SeedPacketItem extends Item {
         if (context.getClickedFace() == Direction.UP && !context.getLevel().isClientSide) {
             var data = context.getItemInHand().getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
             if (!data.isEmpty()) {
-                data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(EntityTypeRegistry.PEASHOOTER.get())
-                        .spawn((ServerLevel) context.getLevel(), context.getItemInHand(), context.getPlayer(), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
-                if (context.getPlayer() != null && !context.getPlayer().hasInfiniteMaterials()) {
-                    context.getItemInHand().remove(DataComponents.ENTITY_DATA);
-                    context.getItemInHand().remove(DataComponentRegistry.PLANTS.get());
+                var entity = data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(EntityTypeRegistry.PEASHOOTER.get());
+                if (context.getPlayer() != null && (context.getPlayer().hasInfiniteMaterials() || ItemUtils.tryTakeItems(context.getPlayer(), new ItemStack(ItemRegistry.SUN.get(), context.getItemInHand().getOrDefault(DataComponentRegistry.SUN_COST.get(), 1))))) {
+                    entity.spawn((ServerLevel) context.getLevel(), context.getItemInHand(), context.getPlayer(), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
+                    if (context.getPlayer() != null && !context.getPlayer().hasInfiniteMaterials()) {
+                        context.getItemInHand().remove(DataComponents.ENTITY_DATA);
+                        context.getItemInHand().remove(DataComponentRegistry.PLANTS.get());
+                    }
+                    context.getLevel().playSound(null, context.getClickedPos(), SoundRegistry.PLANT_SPAWN.get(), SoundSource.PLAYERS);
+                    return InteractionResult.SUCCESS;
                 }
-                context.getLevel().playSound(null, context.getClickedPos(), SoundRegistry.PLANT_SPAWN.get(), SoundSource.PLAYERS);
-                return InteractionResult.SUCCESS;
+                if (context.getPlayer() != null) {
+                    context.getPlayer().displayClientMessage(Component.translatableWithFallback("item.seed_packet.sun", "Insufficient Sun"), true);
+                }
+                return InteractionResult.FAIL;
             }
         }
         return InteractionResult.PASS;

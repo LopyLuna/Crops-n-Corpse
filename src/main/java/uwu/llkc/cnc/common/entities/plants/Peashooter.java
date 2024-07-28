@@ -108,7 +108,7 @@ public class Peashooter extends CNCPlant {
     }
 
     @Override
-    public int sunCost() {
+    public int getSunCost() {
         return 16;
     }
 
