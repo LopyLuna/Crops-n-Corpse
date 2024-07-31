@@ -14,6 +14,7 @@ public class CNCMod {
         CreativeModeTabRegistry.CREATIVE_MODE_TABS.register(modEventBus);
         EntityTypeRegistry.ENTITY_TYPES.register(modEventBus);
         DataComponentRegistry.DATA_COMPONENTS.register(modEventBus);
+        BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUNDS.register(modEventBus);
     }

@@ -13,9 +13,9 @@ import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
 
 public class PeaProjectileRenderer extends EntityRenderer<PeaProjectile> {
-    private static final ResourceLocation PEA_TEXTURE = CNCMod.rl("textures/entity/pea.png");
-    private static final ResourceLocation COOKED_PEA_TEXTURE = CNCMod.rl("textures/entity/pea.png");
-    private static final ResourceLocation FROZEN_PEA_TEXTURE = CNCMod.rl    ("textures/entity/pea.png");
+    private static final ResourceLocation PEA_TEXTURE = CNCMod.rl("textures/item/raw_pea.png");
+    private static final ResourceLocation COOKED_PEA_TEXTURE = CNCMod.rl("textures/item/cooked_pea.png");
+    private static final ResourceLocation FROZEN_PEA_TEXTURE = CNCMod.rl    ("textures/item/frozen_pea.png");
     private static final RenderType RENDER_TYPE_PEA = RenderType.entityCutoutNoCull(PEA_TEXTURE);
     private static final RenderType RENDER_TYPE_COOKED_PEA = RenderType.entityCutoutNoCull(COOKED_PEA_TEXTURE);
     private static final RenderType RENDER_TYPE_FROZEN_PEA = RenderType.entityCutoutNoCull(FROZEN_PEA_TEXTURE);

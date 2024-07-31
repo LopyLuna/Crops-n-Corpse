@@ -4,9 +4,11 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import uwu.llkc.cnc.CNCMod;
+import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 
@@ -25,7 +27,12 @@ public class ModLanguageProvider extends LanguageProvider {
         }
 
         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
+            if (entry == ItemRegistry.RAW_PEA) continue;
             addItem(entry, toEnglishTranslation(entry.getId()));
+        }
+
+        for (DeferredHolder<Block, ? extends Block> entry : BlockRegistry.BLOCKS.getEntries()) {
+            addBlock(entry, toEnglishTranslation(entry.getId()));
         }
 
         add("itemGroup.cnc.cnc_tab", "Crops 'n' Corpse");

@@ -1,0 +1,6 @@
+// 1.21	2024-07-31T15:25:18.9379889	Block States: cnc
+49344d01e777635fb7b4da6ec93f0d33a3e7508e assets/cnc/blockstates/peashooter_block.json
+aced849e3f6e0fea8a9c496e4ceb15743184d4ed assets/cnc/models/block/pea_crop_stage0.json
+8c4440d8c066d52704f5a1a75c9823b2d5203af8 assets/cnc/models/block/pea_crop_stage1.json
+9ff1b8fa4eba3ca04dea73bd64fe1654f07c383b assets/cnc/models/block/pea_crop_stage2.json
+7cdc0994bc13d253641a4d9b6e596fd1debf9aae assets/cnc/models/block/pea_crop_stage3.json
