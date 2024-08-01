@@ -1,0 +1,10 @@
+{
+  "values": {
+    "cnc:pea_pod": {
+      "chance": 0.3
+    },
+    "cnc:raw_pea": {
+      "chance": 0.1
+    }
+  }
+}

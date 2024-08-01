@@ -1,5 +1,11 @@
-// 1.21	2024-07-31T14:21:26.5022287	Recipes
+// 1.21	2024-08-01T21:24:25.8733836	Recipes
 60f6390b47d5b790cc03e4d85ef367b3d718f058 data/cnc/advancement/recipes/misc/seed_packet.json
 d111edc1be193a73ce277c2f8eb9afe3bbbdfbf5 data/cnc/recipe/seed_packet.json
 38799f926ab23f14016027077ca0cd25081fea8d data/minecraft/advancement/recipes/combat/sead_packet_peashooter.json
+cd5cce1f8fc01abf6562158abfda992a7f687764 data/minecraft/advancement/recipes/food/cooked_pea_campfire.json
+d79f255b9038c4336046c09918f11e0c20b8befe data/minecraft/advancement/recipes/food/cooked_pea_smelting.json
+f524703fe72911ecf5844bb297e47097090a35cb data/minecraft/advancement/recipes/food/cooked_pea_smoking.json
+ca18ec1dcd38bdd56f4cb649e47e964edaaf60ff data/minecraft/recipe/cooked_pea_campfire.json
+4abb9201e32a4d191af9474d5e074d7f208aeacd data/minecraft/recipe/cooked_pea_smelting.json
+637046b7bcf098b9e2688fe110cd292e5cf0ff9a data/minecraft/recipe/cooked_pea_smoking.json
 cab06fb28f6f6c8f3bacc003e937d3b02ef01b4c data/minecraft/recipe/sead_packet_peashooter.json

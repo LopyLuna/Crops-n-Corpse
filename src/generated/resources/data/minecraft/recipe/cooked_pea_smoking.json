@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "cnc:raw_pea"
+  },
+  "result": {
+    "count": 1,
+    "id": "cnc:cooked_pea"
+  }
+}
