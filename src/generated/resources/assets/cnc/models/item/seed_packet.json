@@ -4,7 +4,13 @@
     {
       "model": "cnc:seed_packet/seed_packet_peashooter",
       "predicate": {
-        "cnc:plant": 0.01
+        "cnc:plant": 0.1
+      }
+    },
+    {
+      "model": "cnc:seed_packet/seed_packet_sunflower",
+      "predicate": {
+        "cnc:plant": 0.2
       }
     }
   ],

@@ -26,7 +26,12 @@ public class NeoForgeEvents {
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemCost(ItemRegistry.PEA_POD.get(), pRandom.nextIntBetweenInclusive(12, 17)),
                     new ItemStack(Items.EMERALD, 1),
-                    10, 8, 0.02f));
+                    16, 2, 0.02f));
+
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemCost(ItemRegistry.SUNFLOWER_SEEDS.get(), pRandom.nextIntBetweenInclusive(13, 18)),
+                    new ItemStack(Items.EMERALD, 1),
+                    16, 2, 0.02f));
         }
     }
 
@@ -37,6 +42,11 @@ public class NeoForgeEvents {
         genericTrades.add((pTrader, pRandom) -> new MerchantOffer(
                 new ItemCost(Items.EMERALD, 1),
                 new ItemStack(ItemRegistry.PEA_POD.get(), 3),
-                20, 2, 0.1f));
+                16, 2, 0.1f));
+
+        genericTrades.add((pTrader, pRandom) -> new MerchantOffer(
+                new ItemCost(Items.EMERALD, 1),
+                new ItemStack(ItemRegistry.SUNFLOWER_SEEDS.get(), 5),
+                16, 2, 0.1f));
     }
 }

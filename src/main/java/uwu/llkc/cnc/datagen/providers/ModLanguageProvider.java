@@ -27,7 +27,6 @@ public class ModLanguageProvider extends LanguageProvider {
         }
 
         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
-            if (entry == ItemRegistry.RAW_PEA) continue;
             addItem(entry, toEnglishTranslation(entry.getId()));
         }
 

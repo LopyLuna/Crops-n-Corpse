@@ -16,6 +16,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.common.blocks.PeashooterCropBlock;
+import uwu.llkc.cnc.common.blocks.SunflowerCropBlock;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 
@@ -35,6 +36,8 @@ public class ModBlockLootTableSubProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        this.add(BlockRegistry.SUNFLOWER_CROP.get(), createCropDrops(BlockRegistry.SUNFLOWER_CROP.get(), ItemRegistry.SUNFLOWER_SEEDS.get(), ItemRegistry.SUNFLOWER_SEEDS.get(), LootItemBlockStatePropertyCondition.hasBlockStateProperties(BlockRegistry.SUNFLOWER_CROP.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SunflowerCropBlock.AGE, 7))));
         this.add(BlockRegistry.PEASHOOTER_CROP.get(),
                 this.applyExplosionDecay(BlockRegistry.PEASHOOTER_CROP.get(), LootTable.lootTable()
                         .withPool(LootPool.lootPool()

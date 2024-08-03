@@ -18,7 +18,7 @@ public abstract class PlantCropBlock extends CropBlock {
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.randomTick(state, level, pos, random);
-        if (getAge(state) == getMaxAge()) {
+        if (getAge(level.getBlockState(pos)) == getMaxAge()) {
             getEntityType(state, level, pos).ifPresent(entityType -> entityType.spawn(level, pos, MobSpawnType.SPAWNER));
         }
     }

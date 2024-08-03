@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "cnc:walnut"
+  },
+  "result": {
+    "count": 3,
+    "id": "cnc:walnut_flour"
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/crop",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "cnc:block/pea_crop_stage2"
+    "crop": "cnc:block/pea_crop_stage2"
   }
 }

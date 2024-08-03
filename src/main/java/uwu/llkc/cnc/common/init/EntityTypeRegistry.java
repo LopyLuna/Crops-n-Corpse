@@ -6,6 +6,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.Peashooter;
+import uwu.llkc.cnc.common.entities.plants.Sunflower;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
 
 import java.util.function.Supplier;
@@ -15,6 +16,9 @@ public class EntityTypeRegistry {
 
     public static final Supplier<EntityType<Peashooter>> PEASHOOTER = ENTITY_TYPES.register("peashooter",
             () -> EntityType.Builder.of(Peashooter::new, MobCategory.MISC).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("peashooter")));
+
+    public static final Supplier<EntityType<Sunflower>> SUNFLOWER = ENTITY_TYPES.register("sunflower",
+            () -> EntityType.Builder.of(Sunflower::new, MobCategory.MISC).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("sunflower")));
 
     public static final Supplier<EntityType<PeaProjectile>> PEA = ENTITY_TYPES.register("pea",
             () -> EntityType.Builder.of(PeaProjectile::new, MobCategory.MISC).sized(.5f, .5f).build(CNCMod.rlStr("pea")));

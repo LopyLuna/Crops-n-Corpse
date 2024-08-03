@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -22,7 +23,7 @@ import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 
-public class Peashooter extends CNCPlant {
+public class Peashooter extends CNCPlant implements RangedAttackMob {
     public final AnimationState idle = new AnimationState();
     public final AnimationState attack = new AnimationState();
     public final AnimationState die = new AnimationState();
@@ -104,7 +105,7 @@ public class Peashooter extends CNCPlant {
 
     @Override
     public float getPlantPacketOverrideFloat() {
-        return 0.01f;
+        return 0.1f;
     }
 
     @Override
@@ -150,10 +151,5 @@ public class Peashooter extends CNCPlant {
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
         return SoundRegistry.PEASHOOTER_HURT.get();
-    }
-
-    @Override
-    public void checkDespawn() {
-        super.checkDespawn();
     }
 }

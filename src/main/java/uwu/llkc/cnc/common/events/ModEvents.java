@@ -12,5 +12,6 @@ public class ModEvents {
     @SubscribeEvent
     public static void entityAttributeCreation(final EntityAttributeCreationEvent event) {
         event.put(EntityTypeRegistry.PEASHOOTER.get(), Peashooter.attributes().build());
+        event.put(EntityTypeRegistry.SUNFLOWER.get(), Peashooter.attributes().build());
     }
 }

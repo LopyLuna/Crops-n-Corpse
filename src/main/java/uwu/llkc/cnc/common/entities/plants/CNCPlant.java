@@ -12,7 +12,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -29,7 +28,7 @@ import uwu.llkc.cnc.common.init.ItemRegistry;
 
 import java.util.UUID;
 
-public abstract class CNCPlant extends Mob implements OwnableEntity, RangedAttackMob {
+public abstract class CNCPlant extends Mob implements OwnableEntity {
     private UUID owner;
 
     protected CNCPlant(EntityType<? extends Mob> entityType, Level level) {

@@ -15,13 +15,11 @@ public class PeashooterModel extends HierarchicalModel<Peashooter> {
 	public static final ModelLayerLocation MAIN_LAYER = new ModelLayerLocation(CNCMod.rl("peashooter"), "main");
 	private final ModelPart root;
 	private final ModelPart rootStem;
-	private final ModelPart steam;
 	private final ModelPart rootHead;
 
 	public PeashooterModel(ModelPart root) {
 		this.root = root.getChild("root");
 		this.rootStem = this.root.getChild("rootStem");
-		this.steam = rootStem.getChild("Stem");
 		this.rootHead = rootStem.getChild("rootHead");
 	}
 

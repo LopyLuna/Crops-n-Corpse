@@ -20,14 +20,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         crop(BlockRegistry.PEASHOOTER_CROP.get(),
-                models().cross("pea_crop_stage0", CNCMod.rl("block/pea_crop_stage0")),
-                models().cross("pea_crop_stage0", CNCMod.rl("block/pea_crop_stage0")),
-                models().cross("pea_crop_stage1", CNCMod.rl("block/pea_crop_stage1")),
-                models().cross("pea_crop_stage1", CNCMod.rl("block/pea_crop_stage1")),
-                models().cross("pea_crop_stage2", CNCMod.rl("block/pea_crop_stage2")),
-                models().cross("pea_crop_stage2", CNCMod.rl("block/pea_crop_stage2")),
-                models().cross("pea_crop_stage2", CNCMod.rl("block/pea_crop_stage2")),
-                models().cross("pea_crop_stage3", CNCMod.rl("block/pea_crop_stage3")));
+                models().crop("pea_crop_stage0", CNCMod.rl("block/pea_crop_stage0")),
+                models().crop("pea_crop_stage0", CNCMod.rl("block/pea_crop_stage0")),
+                models().crop("pea_crop_stage1", CNCMod.rl("block/pea_crop_stage1")),
+                models().crop("pea_crop_stage1", CNCMod.rl("block/pea_crop_stage1")),
+                models().crop("pea_crop_stage2", CNCMod.rl("block/pea_crop_stage2")),
+                models().crop("pea_crop_stage2", CNCMod.rl("block/pea_crop_stage2")),
+                models().crop("pea_crop_stage2", CNCMod.rl("block/pea_crop_stage2")),
+                models().crop("pea_crop_stage3", CNCMod.rl("block/pea_crop_stage3")));
+
+        crop(BlockRegistry.SUNFLOWER_CROP.get(),
+                models().crop("sunflower_crop_stage0", CNCMod.rl("block/sunflower_crop_stage0")),
+                models().crop("sunflower_crop_stage0", CNCMod.rl("block/sunflower_crop_stage0")),
+                models().crop("sunflower_crop_stage1", CNCMod.rl("block/sunflower_crop_stage1")),
+                models().crop("sunflower_crop_stage1", CNCMod.rl("block/sunflower_crop_stage1")),
+                models().crop("sunflower_crop_stage2", CNCMod.rl("block/sunflower_crop_stage2")),
+                models().crop("sunflower_crop_stage2", CNCMod.rl("block/sunflower_crop_stage2")),
+                models().crop("sunflower_crop_stage2", CNCMod.rl("block/sunflower_crop_stage2")),
+                models().crop("sunflower_crop_stage3", CNCMod.rl("block/sunflower_crop_stage3")));
     }
 
     void crop(PlantCropBlock block, BlockModelBuilder... builders) {

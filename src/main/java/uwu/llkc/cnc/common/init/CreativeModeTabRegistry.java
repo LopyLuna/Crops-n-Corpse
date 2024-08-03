@@ -31,7 +31,8 @@ public class CreativeModeTabRegistry {
                         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
                             output.accept(entry.get());
                         }
-                        output.accept(getSeedPacket(0.01f, EntityTypeRegistry.PEASHOOTER.get(), 16));
+                        output.accept(getSeedPacket(0.1f, EntityTypeRegistry.PEASHOOTER.get(), 16));
+                        output.accept(getSeedPacket(0.2f, EntityTypeRegistry.SUNFLOWER.get(), 8));
                     }).build());
 
     public static ItemStack getSeedPacket(float override, EntityType<?> type, int sunCost) {
