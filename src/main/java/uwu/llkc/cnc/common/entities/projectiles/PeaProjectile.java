@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
+import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.entities.plants.Peashooter;
 import uwu.llkc.cnc.common.init.DamageTypeInit;
 
@@ -69,7 +70,7 @@ public class PeaProjectile extends AbstractHurtingProjectile {
         super.onHitEntity(result);
         if (!this.level().isClientSide) {
             Entity entity = result.getEntity();
-            if (entity instanceof Peashooter shooter && shooter.getOwner() != null && this.getOwner() instanceof Peashooter shot && shooter.getOwner().getUUID().equals(shot.getOwnerUUID()) || this.getOwner() instanceof Peashooter shott && shott.getOwnerUUID() != null && shott.getOwnerUUID().equals(entity.getUUID())) return;
+            if (entity instanceof CNCPlant shooter && shooter.getOwner() != null && this.getOwner() instanceof CNCPlant shot && shooter.getOwner().getUUID().equals(shot.getOwnerUUID()) || this.getOwner() instanceof CNCPlant shott && shott.getOwnerUUID() != null && shott.getOwnerUUID().equals(entity.getUUID())) return;
             if (getOwner() != null && getOwner() instanceof LivingEntity owner) {
                 entity.hurt(new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypeInit.PEA_SHOT), this, owner), damage);
             } else {

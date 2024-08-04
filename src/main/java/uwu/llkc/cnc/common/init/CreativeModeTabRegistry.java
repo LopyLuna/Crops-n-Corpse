@@ -32,7 +32,7 @@ public class CreativeModeTabRegistry {
                             output.accept(entry.get());
                         }
                         output.accept(getSeedPacket(0.1f, EntityTypeRegistry.PEASHOOTER.get(), 16));
-                        output.accept(getSeedPacket(0.2f, EntityTypeRegistry.SUNFLOWER.get(), 8));
+                        output.accept(getSeedPacket(0.2f, EntityTypeRegistry.SUNFLOWER.get(), 0));
                     }).build());
 
     public static ItemStack getSeedPacket(float override, EntityType<?> type, int sunCost) {

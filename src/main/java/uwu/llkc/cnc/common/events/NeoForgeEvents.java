@@ -48,5 +48,10 @@ public class NeoForgeEvents {
                 new ItemCost(Items.EMERALD, 1),
                 new ItemStack(ItemRegistry.SUNFLOWER_SEEDS.get(), 5),
                 16, 2, 0.1f));
+
+        genericTrades.add((pTrader, pRandom) -> new MerchantOffer(
+                new ItemCost(Items.EMERALD, 12),
+                new ItemStack(ItemRegistry.SEED_PACKET.get(), 1),
+                2, 2, 0.1f));
     }
 }

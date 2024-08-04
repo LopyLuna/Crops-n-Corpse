@@ -12,14 +12,16 @@ public class SpawnItemGoal extends Goal {
     private final int minCooldown;
     private final int maxCooldown;
     private int cooldown;
+    private int animTiming;
 
-    public SpawnItemGoal(ItemStack stack, float range, CNCPlant plant, boolean separateItems, int minCooldown, int maxCooldown) {
+    public SpawnItemGoal(ItemStack stack, float range, CNCPlant plant, boolean separateItems, int minCooldown, int maxCooldown, int animTiming) {
         item = stack;
         this.range = range;
         this.plant = plant;
         this.separateItems = separateItems;
         this.minCooldown = minCooldown;
         this.maxCooldown = maxCooldown;
+        this.animTiming = animTiming;
     }
 
     @Override
@@ -39,12 +41,14 @@ public class SpawnItemGoal extends Goal {
 
     @Override
     public void tick() {
-        if (cooldown-- <= 0) {
-            cooldown = plant.getRandom().nextIntBetweenInclusive(minCooldown, maxCooldown);
+        if (cooldown-- == animTiming) {
             plant.level().broadcastEntityEvent(plant, (byte) 0);
+        }
+        if (cooldown <= 0) {
+            cooldown = plant.getRandom().nextIntBetweenInclusive(minCooldown, maxCooldown);
             if (separateItems) {
                 for (int i = 0; i < item.getCount(); i++) {
-                    plant.spawnAtLocation(item.copyWithCount(1));
+                    plant.spawnAtLocation(item.copyWithCount(1), 0.5f);
                 }
             } else {
                 plant.spawnAtLocation(item);

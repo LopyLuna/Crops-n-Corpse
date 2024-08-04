@@ -33,7 +33,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_peashooter");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CreativeModeTabRegistry.getSeedPacket(0.2f, EntityTypeRegistry.SUNFLOWER.get(), 8))
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CreativeModeTabRegistry.getSeedPacket(0.2f, EntityTypeRegistry.SUNFLOWER.get(), 0))
                 .pattern(" f ")
                 .pattern("ses")
                 .pattern(" f ")
@@ -43,16 +43,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_packet", has(ItemRegistry.SEED_PACKET.get()))
                 .unlockedBy("has_sunflower_seeds", has(ItemRegistry.SUNFLOWER_SEEDS.get()))
                 .save(recipeOutput, "seed_packet_sunflower");
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, new ItemStack(ItemRegistry.SEED_PACKET.get()))
-                .pattern("plp")
-                .pattern("sss")
-                .pattern("plp")
-                .define('p', Items.PAPER)
-                .define('l', Items.LIME_DYE)
-                .define('s', ItemRegistry.SUN.get())
-                .unlockedBy("has_sun", has(ItemRegistry.SUN.get()))
-                .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, new ItemStack(ItemRegistry.SUNFLOWER_SEED_MUFFIN.get()))
                 .requires(ItemRegistry.SUNFLOWER_SEEDS)

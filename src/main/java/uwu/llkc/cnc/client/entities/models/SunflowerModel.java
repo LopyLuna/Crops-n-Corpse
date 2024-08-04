@@ -39,9 +39,9 @@ public class SunflowerModel extends HierarchicalModel<Sunflower> {
 
 		PartDefinition StemLeafRight = Stem.addOrReplaceChild("StemLeafRight", CubeListBuilder.create().texOffs(0, 23).addBox(-3.0F, -1.0F, -1.0F, 3.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -3.0F, 0.5F, 0.0F, 0.0F, 0.3927F));
 
-		PartDefinition rootHead = rootStem.addOrReplaceChild("rootHead", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition rootHead = rootStem.addOrReplaceChild("rootHead", CubeListBuilder.create(), PartPose.offset(-0.5F, -10.0F, 1.15F));
 
-		PartDefinition Head = rootHead.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 28).addBox(-3.0F, -3.0F, -3.0F, 7.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, -10.0F, 1.15F));
+		PartDefinition Head = rootHead.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 28).addBox(-3.0F, -3.0F, -3.0F, 7.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0, 0, 0));
 
 		PartDefinition Petals = Head.addOrReplaceChild("Petals", CubeListBuilder.create(), PartPose.offset(0.5F, 0.0F, -1.65F));
 
