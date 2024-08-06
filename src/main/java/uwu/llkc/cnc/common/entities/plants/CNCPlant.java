@@ -4,20 +4,25 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtByTargetGoalPlant;
@@ -60,6 +65,13 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
             if (i % 2 != 0 && this.tickCount > 1) {
                 profilerfiller.push("targetSelector");
                 this.targetSelector.tickRunningGoals(false);
+                if (level().getGameTime() % 40 == 0) {
+                    for (Monster nearbyEntity : level().getNearbyEntities(Monster.class, TargetingConditions.DEFAULT, this, AABB.ofSize(this.position(), 30, 10, 30))) {
+                        if (nearbyEntity.getType().is(EntityTypeTags.UNDEAD) && nearbyEntity.getTarget() == null) {
+                            nearbyEntity.setTarget(this);
+                        }
+                    }
+                }
                 profilerfiller.pop();
                 profilerfiller.push("goalSelector");
                 this.goalSelector.tickRunningGoals(false);

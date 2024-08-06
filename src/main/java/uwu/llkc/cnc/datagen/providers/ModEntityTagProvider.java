@@ -3,6 +3,7 @@ package uwu.llkc.cnc.datagen.providers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.tags.EntityTypeTags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.CNCMod;
@@ -21,5 +22,7 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
         tag(Tags.EntityTypes.PLANTS)
                 .add(EntityTypeRegistry.PEASHOOTER.get())
                 .add(EntityTypeRegistry.SUNFLOWER.get());
+        tag(EntityTypeTags.UNDEAD)
+                .add(EntityTypeRegistry.BROWNCOAT.get());
     }
 }
