@@ -19,6 +19,9 @@
       "items": "cnc:seed_packet",
       "strict": true
     },
+    "f": {
+      "item": "cnc:plant_food"
+    },
     "p": {
       "item": "cnc:pea_pod"
     },
@@ -28,7 +31,7 @@
   },
   "pattern": [
     " p ",
-    "ses",
+    "sef",
     " p "
   ],
   "result": {

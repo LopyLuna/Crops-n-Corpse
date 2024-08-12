@@ -105,6 +105,7 @@ public class Sunflower extends CNCPlant {
         super.handleEntityEvent(id);
         if (id == 0) {
             produce.start(tickCount);
+            playSound(SoundRegistry.SUNFLOWER_PRODUCE.get());
         } else if (id == 1) {
             die.start(tickCount);
         }
@@ -113,14 +114,12 @@ public class Sunflower extends CNCPlant {
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        //todo
-        return SoundRegistry.PEASHOOTER_DEATH.get();
+        return SoundRegistry.SUNFLOWER_DEATH.get();
     }
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        //todo
-        return SoundRegistry.PEASHOOTER_HURT.get();
+        return SoundRegistry.SUNFLOWER_HURT.get();
     }
 }

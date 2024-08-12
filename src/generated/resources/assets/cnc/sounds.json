@@ -22,6 +22,28 @@
     ],
     "subtitle": "subtitles.cnc.peashooter_shoot"
   },
+  "entity.sunflower.death": {
+    "sounds": [
+      "cnc:sunflower_death_1",
+      "cnc:sunflower_death_2"
+    ],
+    "subtitle": "subtitles.cnc.sunflower_death"
+  },
+  "entity.sunflower.hurt": {
+    "sounds": [
+      "cnc:sunflower_hurt_1",
+      "cnc:sunflower_hurt_2",
+      "cnc:sunflower_hurt_3"
+    ],
+    "subtitle": "subtitles.cnc.sunflower_hurt"
+  },
+  "entity.sunflower.produce": {
+    "sounds": [
+      "cnc:sunflower_produce_1",
+      "cnc:sunflower_produce_2"
+    ],
+    "subtitle": "subtitles.cnc.sunflower_produce"
+  },
   "item.seed_packet.spawn": {
     "sounds": [
       "cnc:plant_spawn"

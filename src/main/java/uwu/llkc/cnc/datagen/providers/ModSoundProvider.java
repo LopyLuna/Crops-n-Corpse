@@ -31,5 +31,18 @@ public class ModSoundProvider extends SoundDefinitionsProvider {
         add(SoundRegistry.PLANT_SPAWN, SoundDefinition.definition()
                 .subtitle("subtitles.cnc.plant_spawn")
                 .with(sound(CNCMod.rl("plant_spawn"))));
+        add(SoundRegistry.SUNFLOWER_DEATH, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.sunflower_death")
+                .with(sound(CNCMod.rl("sunflower_death_1")),
+                        sound(CNCMod.rl("sunflower_death_2"))));
+        add(SoundRegistry.SUNFLOWER_HURT, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.sunflower_hurt")
+                .with(sound(CNCMod.rl("sunflower_hurt_1")),
+                        sound(CNCMod.rl("sunflower_hurt_2")),
+                        sound(CNCMod.rl("sunflower_hurt_3"))));
+        add(SoundRegistry.SUNFLOWER_PRODUCE, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.sunflower_produce")
+                .with(sound(CNCMod.rl("sunflower_produce_1")),
+                        sound(CNCMod.rl("sunflower_produce_2"))));
     }
 }

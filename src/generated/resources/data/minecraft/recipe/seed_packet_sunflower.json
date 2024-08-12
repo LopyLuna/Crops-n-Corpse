@@ -2,6 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "F": {
+      "item": "cnc:plant_food"
+    },
     "e": {
       "type": "neoforge:components",
       "components": {
@@ -28,13 +31,13 @@
   },
   "pattern": [
     " f ",
-    "ses",
+    "seF",
     " f "
   ],
   "result": {
     "components": {
       "cnc:plants": 0.2,
-      "cnc:sun_cost": 8,
+      "cnc:sun_cost": 0,
       "minecraft:entity_data": {
         "id": "cnc:sunflower"
       }

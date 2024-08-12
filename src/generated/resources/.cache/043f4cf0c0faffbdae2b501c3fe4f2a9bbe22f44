@@ -1,2 +1,3 @@
-// 1.21	2024-08-03T16:48:54.1843494	Tags for minecraft:entity_type mod id cnc
+// 1.21	2024-08-08T20:51:39.0010572	Tags for minecraft:entity_type mod id cnc
 71bcc9cb044d868027a490c62f13b110a116476a data/cnc/tags/entity_type/plants.json
+8676d787e9a9004ac438f2f470ccacf65bcf383c data/minecraft/tags/entity_type/undead.json

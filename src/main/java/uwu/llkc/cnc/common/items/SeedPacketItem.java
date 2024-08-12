@@ -75,20 +75,34 @@ public class SeedPacketItem extends Item {
             tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.empty", "Empty").withStyle(ChatFormatting.GRAY));
         } else {
             var entity = data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(EntityTypeRegistry.PEASHOOTER.get());
+            tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.plant", "Plant:").withStyle(ChatFormatting.BLUE));
             tooltipComponents.add(entity.getDescription().plainCopy().withStyle(ChatFormatting.GRAY));
+
+            tooltipComponents.add(Component.empty());
+
+            tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.cost", "Sun Cost:").withStyle(ChatFormatting.GRAY));
+
             if (stack.has(DataComponentRegistry.SUN_COST.get())) {
-                tooltipComponents.add(Component.literal("Cost: " + stack.get(DataComponentRegistry.SUN_COST.get()) + " Sun").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.add(Component.literal(stack.get(DataComponentRegistry.SUN_COST.get()) + " Sun").withStyle(ChatFormatting.BLUE));
             } else {
-                tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.free", "Cost: Free!").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.add(Component.literal("0 Sun").withStyle(ChatFormatting.BLUE));
             }
-            data.read(UUID_FIELD_CODEC).result().ifPresentOrElse(uuid -> {
-                tooltipComponents.add(Component.literal("Owner: " + Minecraft.getInstance().level.getPlayerByUUID(uuid).getName().getString()).withStyle(ChatFormatting.GRAY));
-            }, () -> {
-                tooltipComponents.add(Component.literal("Owner: NONE").withStyle(ChatFormatting.GRAY));
-            });
+
+            tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.hp", "Remaining Health:").withStyle(ChatFormatting.BLUE));
+            var maxHealth = DefaultAttributes.getSupplier((EntityType<? extends LivingEntity>) entity).getValue(Attributes.MAX_HEALTH);
             data.read(HEALTH_FIELD_CODEC).result().ifPresentOrElse(hp -> {
-                tooltipComponents.add(Component.literal("Health: " + hp).withStyle(ChatFormatting.GRAY));
-            }, () -> tooltipComponents.add(Component.literal("Health: " + DefaultAttributes.getSupplier((EntityType<? extends LivingEntity>) entity).getValue(Attributes.MAX_HEALTH)).withStyle(ChatFormatting.GRAY)));
+                tooltipComponents.add(Component.literal(Math.round(hp / maxHealth * 100) + "%").withStyle(ChatFormatting.GRAY));
+            }, () -> tooltipComponents.add(Component.literal("100%").withStyle(ChatFormatting.GRAY)));
+
+            tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.owner", "Owner:").withStyle(ChatFormatting.BLUE));
+
+            data.read(UUID_FIELD_CODEC).result().ifPresentOrElse(uuid -> {
+                tooltipComponents.add(Component.literal( Minecraft.getInstance().level.getPlayerByUUID(uuid).getName().getString()).withStyle(ChatFormatting.GRAY));
+            }, () -> {
+                tooltipComponents.add(Component.literal("NONE").withStyle(ChatFormatting.GRAY));
+            });
+
+
         }
     }
 
