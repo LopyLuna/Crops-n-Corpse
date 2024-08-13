@@ -5,7 +5,6 @@ import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.init.ItemRegistry;
-import uwu.llkc.cnc.common.items.properties.SeedPacketProperty;
 
 public class ModItemModelProvider extends ItemModelProvider {
 
@@ -25,11 +24,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.CHOCOLATE_CHIP_MUFFIN.get());
         basicItem(ItemRegistry.WALNUT_FLOUR.get());
         basicItem(ItemRegistry.WALNUT.get());
-        withExistingParent("seed_packet", "item/generated")
-                .texture("layer0", CNCMod.rl("item/seed_packet/seed_packet_empty")).override()
-                .model(basicItem(CNCMod.rl("seed_packet/seed_packet_peashooter")))
-                .predicate(SeedPacketProperty.ID, 0.1f).end().override()
-                .model(basicItem(CNCMod.rl("seed_packet/seed_packet_sunflower")))
-                .predicate(SeedPacketProperty.ID, 0.2f).end();
+        basicItem(ItemRegistry.EMPTY_SEED_PACKET.get());
+        basicItem(ItemRegistry.PEASHOOTER_SEED_PACKET.get());
+        basicItem(ItemRegistry.SUNFLOWER_SEED_PACKET.get());
     }
 }

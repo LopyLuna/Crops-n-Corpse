@@ -19,7 +19,7 @@
         "minecraft:rarity": "common",
         "minecraft:repair_cost": 0
       },
-      "items": "cnc:seed_packet",
+      "items": "cnc:empty_seed_packet",
       "strict": true
     },
     "f": {
@@ -36,13 +36,13 @@
   ],
   "result": {
     "components": {
-      "cnc:plants": 0.2,
+      "cnc:cooldown": 20,
       "cnc:sun_cost": 0,
       "minecraft:entity_data": {
         "id": "cnc:sunflower"
       }
     },
     "count": 1,
-    "id": "cnc:seed_packet"
+    "id": "cnc:sunflower_seed_packet"
   }
 }

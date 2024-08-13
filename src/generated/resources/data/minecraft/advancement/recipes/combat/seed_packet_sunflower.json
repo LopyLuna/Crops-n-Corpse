@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "cnc:seed_packet"
+            "items": "cnc:empty_seed_packet"
           }
         ]
       },

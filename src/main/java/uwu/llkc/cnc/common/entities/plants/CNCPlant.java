@@ -22,7 +22,6 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtByTargetGoalPlant;
@@ -30,6 +29,7 @@ import uwu.llkc.cnc.common.entities.ai.OwnerHurtTargetGoalPlant;
 import uwu.llkc.cnc.common.init.CreativeModeTabRegistry;
 import uwu.llkc.cnc.common.init.DataComponentRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.items.SeedPacketItem;
 
 import java.util.UUID;
 
@@ -148,17 +148,17 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
                 this.gameEvent(GameEvent.EAT); // Neo: add EAT game event
                 return InteractionResult.sidedSuccess(this.level().isClientSide());
             }
-        } else if (player.getItemInHand(hand).is(ItemRegistry.SEED_PACKET.get()) && getOwner() != null && getOwner().equals(player)){
+        } else if (player.getItemInHand(hand).is(ItemRegistry.EMPTY_SEED_PACKET.get()) && getOwner() != null && getOwner().equals(player)){
             if (player.getItemInHand(hand).getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY).isEmpty()) {
-                var itemStack = new ItemStack(ItemRegistry.SEED_PACKET.get(), 1);
+                var itemStack = new ItemStack(SeedPacketItem.SEED_PACKET_ITEM_MAP.get().get(getType()), 1);
                 CompoundTag entityData = new CompoundTag();
                 this.save(entityData);
                 this.discard();
                 entityData.remove("Pos");
                 CustomData customData = CustomData.of(entityData);
                 itemStack.set(DataComponents.ENTITY_DATA, customData);
-                itemStack.set(DataComponentRegistry.PLANTS.get(), getPlantPacketOverrideFloat());
                 itemStack.set(DataComponentRegistry.SUN_COST.get(), getSunCost());
+                itemStack.set(DataComponentRegistry.COOLDOWN.get(), getCooldown());
                 player.setItemInHand(hand, ItemUtils.createFilledResult(player.getItemInHand(hand), player, itemStack, true));
                 return InteractionResult.sidedSuccess(player.level().isClientSide);
             }
@@ -210,12 +210,12 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
     @Nullable
     @Override
     public ItemStack getPickResult() {
-        return CreativeModeTabRegistry.getSeedPacket(getPlantPacketOverrideFloat(), getType(), getSunCost());
+        return CreativeModeTabRegistry.getSeedPacket(getType(), getSunCost(), getCooldown());
     }
 
     public abstract PlantCategory getPlantCategory();
 
-    public abstract float getPlantPacketOverrideFloat();
-
     public abstract int getSunCost();
+
+    public abstract int getCooldown();
 }

@@ -51,7 +51,7 @@ public class NeoForgeEvents {
 
         genericTrades.add((pTrader, pRandom) -> new MerchantOffer(
                 new ItemCost(Items.EMERALD, 12),
-                new ItemStack(ItemRegistry.SEED_PACKET.get(), 1),
+                new ItemStack(ItemRegistry.EMPTY_SEED_PACKET.get(), 1),
                 2, 2, 0.1f));
     }
 }

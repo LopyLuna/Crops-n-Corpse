@@ -1,12 +1,11 @@
 package uwu.llkc.cnc.common.init;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.TagType;
-import net.minecraft.nbt.TagTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -31,16 +30,16 @@ public class CreativeModeTabRegistry {
                         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
                             output.accept(entry.get());
                         }
-                        output.accept(getSeedPacket(0.1f, EntityTypeRegistry.PEASHOOTER.get(), 16));
-                        output.accept(getSeedPacket(0.2f, EntityTypeRegistry.SUNFLOWER.get(), 0));
+                        output.accept(getSeedPacket(EntityTypeRegistry.PEASHOOTER.get(), 16, 20));
+                        output.accept(getSeedPacket(EntityTypeRegistry.SUNFLOWER.get(), 0, 20));
                     }).build());
 
-    public static ItemStack getSeedPacket(float override, EntityType<?> type, int sunCost) {
+    public static ItemStack getSeedPacket(EntityType<?> type, int sunCost, int cooldown) {
         var tag = SeedPacketItem.ENTITY_TYPE_FIELD_CODEC.codec().encodeStart(NbtOps.INSTANCE, type).getOrThrow();
         if (tag.getType() == CompoundTag.TYPE) {
-            return new ItemStack(ItemRegistry.SEED_PACKET, 1, DataComponentPatch.builder()
-                    .set(DataComponentRegistry.PLANTS.get(), override)
+            return new ItemStack(Holder.direct(SeedPacketItem.SEED_PACKET_ITEM_MAP.get().get(type)), 1, DataComponentPatch.builder()
                     .set(DataComponentRegistry.SUN_COST.get(), sunCost)
+                    .set(DataComponentRegistry.COOLDOWN.get(), cooldown)
                     .set(DataComponents.ENTITY_DATA, CustomData.of((CompoundTag) tag)).build());
         } else return ItemStack.EMPTY;
     }

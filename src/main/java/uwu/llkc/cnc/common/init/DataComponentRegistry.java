@@ -11,9 +11,9 @@ import java.util.function.Supplier;
 public class DataComponentRegistry {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(CNCMod.MOD_ID);
 
-    public static final Supplier<DataComponentType<Float>> PLANTS = DATA_COMPONENTS.registerComponentType("plants",
-            builder -> builder.networkSynchronized(ByteBufCodecs.FLOAT).persistent(Codec.FLOAT));
-
     public static final Supplier<DataComponentType<Integer>> SUN_COST = DATA_COMPONENTS.registerComponentType("sun_cost",
+            builder -> builder.networkSynchronized(ByteBufCodecs.INT).persistent(Codec.INT));
+
+    public static final Supplier<DataComponentType<Integer>> COOLDOWN = DATA_COMPONENTS.registerComponentType("cooldown",
             builder -> builder.networkSynchronized(ByteBufCodecs.INT).persistent(Codec.INT));
 }

@@ -46,6 +46,8 @@ public class DatagenHandler {
         generator.addProvider(event.includeServer(),
                 new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(
                         ModBlockLootTableSubProvider::new, LootContextParamSets.BLOCK
+                ), new LootTableProvider.SubProviderEntry(
+                        ModEntityLootTableSubProvider::new, LootContextParamSets.ENTITY
                 )), provider));
     }
 }

@@ -104,13 +104,13 @@ public class Peashooter extends CNCPlant implements RangedAttackMob {
     }
 
     @Override
-    public float getPlantPacketOverrideFloat() {
-        return 0.1f;
+    public int getSunCost() {
+        return 16;
     }
 
     @Override
-    public int getSunCost() {
-        return 16;
+    public int getCooldown() {
+        return 20;
     }
 
     @Override

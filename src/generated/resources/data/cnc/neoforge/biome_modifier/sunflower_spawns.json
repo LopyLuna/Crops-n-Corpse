@@ -2,7 +2,7 @@
   "type": "neoforge:add_spawns",
   "biomes": "#cnc:spawns_sunflower",
   "spawners": {
-    "type": "minecraft:pig",
+    "type": "cnc:peashooter",
     "maxCount": 3,
     "minCount": 2,
     "weight": 50

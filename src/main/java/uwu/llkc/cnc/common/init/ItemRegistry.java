@@ -13,7 +13,10 @@ import uwu.llkc.cnc.common.items.SeedPacketItem;
 public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CNCMod.MOD_ID);
 
-    public static final DeferredItem<Item> SEED_PACKET = ITEMS.registerItem("seed_packet", SeedPacketItem::new);
+    public static final DeferredItem<SeedPacketItem> EMPTY_SEED_PACKET = ITEMS.registerItem("empty_seed_packet", SeedPacketItem::new);
+    public static final DeferredItem<SeedPacketItem> PEASHOOTER_SEED_PACKET = ITEMS.registerItem("peashooter_seed_packet", SeedPacketItem::new);
+    public static final DeferredItem<SeedPacketItem> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", SeedPacketItem::new);
+
     public static final DeferredItem<Item> PLANT_FOOD = ITEMS.registerSimpleItem("plant_food");
     public static final DeferredItem<Item> SUN = ITEMS.registerSimpleItem("sun");
     public static final DeferredItem<BlockItem> RAW_PEA = ITEMS.registerItem("raw_pea",

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "cnc:item/seed_packet/seed_packet_sunflower"
+    "layer0": "cnc:item/empty_seed_packet"
   }
 }

@@ -22,27 +22,27 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CreativeModeTabRegistry.getSeedPacket(0.1f, EntityTypeRegistry.PEASHOOTER.get(), 16))
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CreativeModeTabRegistry.getSeedPacket(EntityTypeRegistry.PEASHOOTER.get(), 16, 20))
                 .pattern(" p ")
                 .pattern("sef")
                 .pattern(" p ")
                 .define('p', ItemRegistry.PEA_POD.get())
                 .define('s', ItemRegistry.SUN.get())
                 .define('f', ItemRegistry.PLANT_FOOD.get())
-                .define('e', DataComponentIngredient.of(true, new ItemStack(ItemRegistry.SEED_PACKET.get())))
-                .unlockedBy("has_packet", has(ItemRegistry.SEED_PACKET.get()))
+                .define('e', ItemRegistry.EMPTY_SEED_PACKET.get())
+                .unlockedBy("has_packet", has(ItemRegistry.EMPTY_SEED_PACKET.get()))
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_peashooter");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CreativeModeTabRegistry.getSeedPacket(0.2f, EntityTypeRegistry.SUNFLOWER.get(), 0))
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CreativeModeTabRegistry.getSeedPacket(EntityTypeRegistry.SUNFLOWER.get(), 0, 20))
                 .pattern(" f ")
                 .pattern("seF")
                 .pattern(" f ")
                 .define('f', ItemRegistry.SUNFLOWER_SEEDS.get())
                 .define('F', ItemRegistry.PLANT_FOOD.get())
                 .define('s', ItemRegistry.SUN.get())
-                .define('e', DataComponentIngredient.of(true, new ItemStack(ItemRegistry.SEED_PACKET.get())))
-                .unlockedBy("has_packet", has(ItemRegistry.SEED_PACKET.get()))
+                .define('e', DataComponentIngredient.of(true, new ItemStack(ItemRegistry.EMPTY_SEED_PACKET.get())))
+                .unlockedBy("has_packet", has(ItemRegistry.EMPTY_SEED_PACKET.get()))
                 .unlockedBy("has_sunflower_seeds", has(ItemRegistry.SUNFLOWER_SEEDS.get()))
                 .save(recipeOutput, "seed_packet_sunflower");
 

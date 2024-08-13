@@ -16,10 +16,10 @@ public class EntityTypeRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, CNCMod.MOD_ID);
 
     public static final Supplier<EntityType<Peashooter>> PEASHOOTER = ENTITY_TYPES.register("peashooter",
-            () -> EntityType.Builder.of(Peashooter::new, MobCategory.MISC).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("peashooter")));
+            () -> EntityType.Builder.of(Peashooter::new, MobCategory.CREATURE).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("peashooter")));
 
     public static final Supplier<EntityType<Sunflower>> SUNFLOWER = ENTITY_TYPES.register("sunflower",
-            () -> EntityType.Builder.of(Sunflower::new, MobCategory.MISC).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("sunflower")));
+            () -> EntityType.Builder.of(Sunflower::new, MobCategory.CREATURE).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("sunflower")));
 
     public static final Supplier<EntityType<Browncoat>> BROWNCOAT = ENTITY_TYPES.register("browncoat",
             () -> EntityType.Builder.of(Browncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("browncoat")));

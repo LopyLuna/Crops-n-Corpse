@@ -91,13 +91,13 @@ public class Sunflower extends CNCPlant {
     }
 
     @Override
-    public float getPlantPacketOverrideFloat() {
-        return 0.2f;
+    public int getSunCost() {
+        return 0;
     }
 
     @Override
-    public int getSunCost() {
-        return 0;
+    public int getCooldown() {
+        return 20;
     }
 
     @Override

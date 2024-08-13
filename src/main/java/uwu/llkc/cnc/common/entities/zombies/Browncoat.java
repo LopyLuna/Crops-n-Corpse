@@ -7,7 +7,9 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -18,8 +20,10 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
 import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
@@ -110,13 +114,30 @@ public class Browncoat extends CNCZombie{
     protected void actuallyHurt(DamageSource damageSource, float damageAmount) {
         if (getHealth() / getMaxHealth() > 0.5f) {
             super.actuallyHurt(damageSource, damageAmount);
-            if (getHealth() / getMaxHealth() < 0.5f) {
+            if (entityData.get(HAS_ARM) && getHealth() / getMaxHealth() < 0.5f) {
                 entityData.set(HAS_ARM, false);
                 level().broadcastEntityEvent(this, (byte)0);
             }
         } else {
             super.actuallyHurt(damageSource, damageAmount);
         }
+    }
+
+    @Override
+    protected int getBaseExperienceReward() {
+        //todo cone
+        if (this.getItemBySlot(EquipmentSlot.HEAD).is(Items.ORANGE_DYE)) {
+            return 7;
+        }
+        //todo bucket
+        if (this.getItemBySlot(EquipmentSlot.HEAD).is(Items.GRAY_DYE)) {
+            return 10;
+        }
+        //todo flag
+        if (this.getItemBySlot(EquipmentSlot.MAINHAND).is(Items.STICK)) {
+            return 6;
+        }
+        return 5;
     }
 
     @Override

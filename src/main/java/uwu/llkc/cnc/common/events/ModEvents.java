@@ -1,7 +1,9 @@
 package uwu.llkc.cnc.common.events;
 
+import net.minecraft.world.level.GameRules;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.Peashooter;
