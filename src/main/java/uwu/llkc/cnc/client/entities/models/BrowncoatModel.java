@@ -72,6 +72,7 @@ public class BrowncoatModel extends HierarchicalModel<Browncoat> {
 
 	@Override
 	public void setupAnim(Browncoat entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		delegateBrowncoat.attackTime = this.attackTime;
 		delegateBrowncoat.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		copyFromDelegate();
 

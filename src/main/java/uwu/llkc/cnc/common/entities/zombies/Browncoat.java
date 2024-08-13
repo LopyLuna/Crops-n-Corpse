@@ -1,9 +1,7 @@
 package uwu.llkc.cnc.common.entities.zombies;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -22,9 +20,7 @@ import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
 import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
-import uwu.llkc.cnc.client.entities.renderers.BrowncoatRenderer;
 import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 
