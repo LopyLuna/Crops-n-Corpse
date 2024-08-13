@@ -8,12 +8,9 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -40,12 +37,15 @@ public class PhysicsModelParticle extends Particle {
     private final ModelPart bodyPart;
     private final Consumer<PoseStack> transformation;
 
-    public PhysicsModelParticle(ClientLevel level, double x, double y, double z, ModelPart part, Consumer<PoseStack> transformation) {
+    public PhysicsModelParticle(ClientLevel level, double x, double y, double z, ModelPart part, Consumer<PoseStack> transformation, double xPower, double yPower, double zPower) {
         super(level, x, y, z);
         this.bodyPart = part;
         this.transformation = transformation;
         gravity = 0.9f;
         lifetime = 300;
+        xd = xPower;
+        yd = yPower;
+        zd = zPower;
     }
 
     @Override

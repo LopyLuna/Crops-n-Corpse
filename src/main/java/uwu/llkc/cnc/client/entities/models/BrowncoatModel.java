@@ -19,6 +19,7 @@ public class BrowncoatModel extends HierarchicalModel<Browncoat> {
 	private final ModelPart head;
 	private final ModelPart body;
 	private final ModelPart leftArm;
+	private final ModelPart leftForeArm;
 	private final ModelPart rightArm;
 	private final ModelPart leftLeg;
 	private final ModelPart rightLeg;
@@ -30,6 +31,7 @@ public class BrowncoatModel extends HierarchicalModel<Browncoat> {
 		this.head = this.root.getChild("head");
 		this.body = this.root.getChild("body");
 		leftArm = this.root.getChild("left_arm");
+		leftForeArm = this.leftArm.getChild("left_forearm");
 		rightArm = this.root.getChild("right_arm");
 		leftLeg = this.root.getChild("left_leg");
 		rightLeg = this.root.getChild("right_leg");
@@ -98,6 +100,9 @@ public class BrowncoatModel extends HierarchicalModel<Browncoat> {
 		tie.xRot = (float) Math.toRadians(-(6.0F + f2 / 2.0F + f1));
 		tie.yRot = (float) Math.toRadians(180 - f3 / 2.0F);
 		tie.zRot = (float) Math.toRadians(f3 / 2.0F);
+
+		head.visible = entity.getEntityData().get(Browncoat.HAS_HEAD);
+		leftForeArm.visible = entity.getEntityData().get(Browncoat.HAS_ARM);
 	}
 
 	private void copyFromDelegate() {

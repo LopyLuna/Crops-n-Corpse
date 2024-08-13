@@ -5,6 +5,10 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -17,6 +21,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
 import uwu.llkc.cnc.client.entities.renderers.BrowncoatRenderer;
@@ -24,6 +29,9 @@ import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 
 public class Browncoat extends CNCZombie{
+    public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(Browncoat.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> HAS_ARM = SynchedEntityData.defineId(Browncoat.class, EntityDataSerializers.BOOLEAN);
+
     public double xTieO;
     public double yTieO;
     public double zTieO;
@@ -35,6 +43,13 @@ public class Browncoat extends CNCZombie{
     public Browncoat(EntityType<Browncoat> entityType, Level level) {
         super(entityType, level);
 
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(HAS_HEAD, true);
+        builder.define(HAS_ARM, true);
     }
 
     public static AttributeSupplier.Builder attributes() {
@@ -93,9 +108,31 @@ public class Browncoat extends CNCZombie{
     public void tick() {
         super.tick();
         moveTie();
-        if (level().isClientSide && level().getGameTime() % 10 == 3) {
+    }
+
+    @Override
+    protected void actuallyHurt(DamageSource damageSource, float damageAmount) {
+        if (getHealth() / getMaxHealth() > 0.5f) {
+            super.actuallyHurt(damageSource, damageAmount);
+            if (getHealth() / getMaxHealth() < 0.5f) {
+                entityData.set(HAS_ARM, false);
+                level().broadcastEntityEvent(this, (byte)0);
+            }
+        } else {
+            super.actuallyHurt(damageSource, damageAmount);
+        }
+    }
+
+    @Override
+    public void die(DamageSource damageSource) {
+        super.die(damageSource);
+        entityData.set(HAS_HEAD, false);
+        if (level().isClientSide) {
             var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
-            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY(), this.getZ(), model, poseStack -> poseStack.mulPose(Axis.ZP.rotationDegrees(180))));
+            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY() + 1.5, this.getZ(), model, poseStack -> {
+                poseStack.mulPose(Axis.YN.rotationDegrees(getYRot()));
+                poseStack.mulPose(Axis.XP.rotationDegrees(180));
+            }, Vec3.directionFromRotation(0, getYRot()).x * -0.05, 0.2, Vec3.directionFromRotation(0, getYRot()).z * -0.05));
         }
     }
 
@@ -113,5 +150,18 @@ public class Browncoat extends CNCZombie{
     @Override
     public ZombieCategory getZombieCategory() {
         return ZombieCategory.BASIC;
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        super.handleEntityEvent(id);
+        if (id == 0) {
+            var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("left_arm").getChild("left_forearm");
+            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY() + 1.25, this.getZ(), model, poseStack -> {
+                poseStack.translate(Vec3.directionFromRotation(0, getYRot()).z *.32, 0, Vec3.directionFromRotation(0, getYRot()).x *-.32);
+                poseStack.mulPose(Axis.YP.rotationDegrees(-getYRot()));
+                poseStack.mulPose(Axis.XP.rotationDegrees(90));
+            }, Vec3.directionFromRotation(0, getYRot()).x * -0.05, 0, Vec3.directionFromRotation(0, getYRot()).z * -0.05));
+        }
     }
 }
