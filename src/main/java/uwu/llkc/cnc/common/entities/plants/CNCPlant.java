@@ -150,15 +150,13 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
             }
         } else if (player.getItemInHand(hand).is(ItemRegistry.EMPTY_SEED_PACKET.get()) && getOwner() != null && getOwner().equals(player)){
             if (player.getItemInHand(hand).getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY).isEmpty()) {
-                var itemStack = new ItemStack(SeedPacketItem.SEED_PACKET_ITEM_MAP.get().get(getType()), 1);
+                var itemStack = SeedPacketItem.getSeedPacket(getType());
                 CompoundTag entityData = new CompoundTag();
                 this.save(entityData);
                 this.discard();
                 entityData.remove("Pos");
                 CustomData customData = CustomData.of(entityData);
                 itemStack.set(DataComponents.ENTITY_DATA, customData);
-                itemStack.set(DataComponentRegistry.SUN_COST.get(), getSunCost());
-                itemStack.set(DataComponentRegistry.COOLDOWN.get(), getCooldown());
                 player.setItemInHand(hand, ItemUtils.createFilledResult(player.getItemInHand(hand), player, itemStack, true));
                 return InteractionResult.sidedSuccess(player.level().isClientSide);
             }
@@ -210,12 +208,8 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
     @Nullable
     @Override
     public ItemStack getPickResult() {
-        return CreativeModeTabRegistry.getSeedPacket(getType(), getSunCost(), getCooldown());
+        return SeedPacketItem.getSeedPacket(getType());
     }
 
     public abstract PlantCategory getPlantCategory();
-
-    public abstract int getSunCost();
-
-    public abstract int getCooldown();
 }

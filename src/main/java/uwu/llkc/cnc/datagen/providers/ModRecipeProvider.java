@@ -12,6 +12,7 @@ import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import uwu.llkc.cnc.common.init.CreativeModeTabRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.items.SeedPacketItem;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -22,7 +23,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CreativeModeTabRegistry.getSeedPacket(EntityTypeRegistry.PEASHOOTER.get(), 16, 20))
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.PEASHOOTER.get()))
                 .pattern(" p ")
                 .pattern("sef")
                 .pattern(" p ")
@@ -34,7 +35,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_peashooter");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CreativeModeTabRegistry.getSeedPacket(EntityTypeRegistry.SUNFLOWER.get(), 0, 20))
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.SUNFLOWER .get()))
                 .pattern(" f ")
                 .pattern("seF")
                 .pattern(" f ")

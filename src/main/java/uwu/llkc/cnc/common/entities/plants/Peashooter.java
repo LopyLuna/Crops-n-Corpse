@@ -104,16 +104,6 @@ public class Peashooter extends CNCPlant implements RangedAttackMob {
     }
 
     @Override
-    public int getSunCost() {
-        return 16;
-    }
-
-    @Override
-    public int getCooldown() {
-        return 20;
-    }
-
-    @Override
     public void performRangedAttack(@NotNull LivingEntity target, float velocity) {
         PeaProjectile projectile = EntityTypeRegistry.PEA.get().create(level());
         if (projectile == null) return;

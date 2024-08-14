@@ -1,4 +1,5 @@
-// 1.21	2024-08-13T18:46:44.5672589	Item Models: cnc
+// 1.21	2024-08-14T16:32:57.3483617	Item Models: cnc
+f1fa8e6f305d25dfb5c6ccce635229bd2a0ee3a2 assets/cnc/models/item/bucket_item.json
 da4c50a2fb3aa9429788c8cb0ed6ede51dc85c1c assets/cnc/models/item/chocolate_chip_muffin.json
 2c33436e2ac986566fb7f1ef87cbb6fce0ebe157 assets/cnc/models/item/cooked_pea.json
 94e9ed7944269d91499fbaf987169b196f6cf9bc assets/cnc/models/item/empty_seed_packet.json
@@ -10,5 +11,8 @@ cf631959e0713bed68e79100db47fe1769a5d5c1 assets/cnc/models/item/plant_food.json
 0873704e0abf44b606957a097a1e3aac3c8067f6 assets/cnc/models/item/sunflower_seeds.json
 c47119ea2463b2dc658f72017e527432deca2dc7 assets/cnc/models/item/sunflower_seed_muffin.json
 9a0098009a36198626a05a3adee01f3946fca6f3 assets/cnc/models/item/sunflower_seed_packet.json
+0f41e7c0689db553ce5d82f0c664b252b660b234 assets/cnc/models/item/traffic_cone.json
+a9262ee2056da5bab1a6b57f8a8f1e63137e97b0 assets/cnc/models/item/traffic_cone_item.json
 e56047acb4ddf209be0b9b5aa593a765c1a4b837 assets/cnc/models/item/walnut.json
 1a1d6e5b49d37115fe4a7d2793bf924b631ce96a assets/cnc/models/item/walnut_flour.json
+8e89a3b21db454f5f343d66bb9c9f94ff058289c assets/minecraft/models/item/bucket.json

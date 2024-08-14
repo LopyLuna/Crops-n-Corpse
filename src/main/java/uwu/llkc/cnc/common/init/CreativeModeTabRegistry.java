@@ -30,17 +30,5 @@ public class CreativeModeTabRegistry {
                         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
                             output.accept(entry.get());
                         }
-                        output.accept(getSeedPacket(EntityTypeRegistry.PEASHOOTER.get(), 16, 20));
-                        output.accept(getSeedPacket(EntityTypeRegistry.SUNFLOWER.get(), 0, 20));
                     }).build());
-
-    public static ItemStack getSeedPacket(EntityType<?> type, int sunCost, int cooldown) {
-        var tag = SeedPacketItem.ENTITY_TYPE_FIELD_CODEC.codec().encodeStart(NbtOps.INSTANCE, type).getOrThrow();
-        if (tag.getType() == CompoundTag.TYPE) {
-            return new ItemStack(Holder.direct(SeedPacketItem.SEED_PACKET_ITEM_MAP.get().get(type)), 1, DataComponentPatch.builder()
-                    .set(DataComponentRegistry.SUN_COST.get(), sunCost)
-                    .set(DataComponentRegistry.COOLDOWN.get(), cooldown)
-                    .set(DataComponents.ENTITY_DATA, CustomData.of((CompoundTag) tag)).build());
-        } else return ItemStack.EMPTY;
-    }
 }

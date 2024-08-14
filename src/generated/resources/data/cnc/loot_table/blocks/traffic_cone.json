@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cnc:traffic_cone"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "cnc:blocks/traffic_cone"
+}

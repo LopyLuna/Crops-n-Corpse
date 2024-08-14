@@ -1,0 +1,12 @@
+{
+  "parent": "neoforge:item/default",
+  "base": {
+    "parent": "cnc:item/bucket_item"
+  },
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "head": {
+      "parent": "cnc:item/bucket"
+    }
+  }
+}

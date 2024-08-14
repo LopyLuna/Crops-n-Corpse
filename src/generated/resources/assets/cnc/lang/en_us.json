@@ -1,7 +1,8 @@
 {
   "block.cnc.peashooter_block": "Peashooter Block",
   "block.cnc.sunflower_block": "Sunflower Block",
-  "damage_type.cnc.pea_shot": "Pea Shot",
+  "block.cnc.traffic_cone": "Traffic Cone",
+  "damage_type.cnc.pea_shot": "Pea shot",
   "entity.cnc.browncoat": "Browncoat",
   "entity.cnc.pea": "Pea",
   "entity.cnc.peashooter": "Peashooter",
@@ -12,16 +13,17 @@
   "item.cnc.pea_pod": "Pea Pod",
   "item.cnc.peashooter_seed_packet": "Peashooter Seed Packet",
   "item.cnc.plant_food": "Plant Food",
-  "item.cnc.raw_pea": "Raw Pea",
   "item.cnc.sun": "Sun",
   "item.cnc.sunflower_seed_muffin": "Sunflower Seed Muffin",
   "item.cnc.sunflower_seed_packet": "Sunflower Seed Packet",
-  "item.cnc.sunflower_seeds": "Sunflower Seeds",
   "item.cnc.walnut": "Walnut",
   "item.cnc.walnut_flour": "Walnut Flour",
   "itemGroup.cnc.cnc_tab": "Crops 'n' Corpse",
-  "subtitles.cnc.peashooter_death": "Peashooter Died",
-  "subtitles.cnc.peashooter_hurt": "Peashooter Hurt",
-  "subtitles.cnc.peashooter_shoot": "Peashooter Shoot",
-  "subtitles.cnc.plant_spawn": "Plant Spawned"
+  "subtitles.cnc.peashooter_death": "Peashooter died",
+  "subtitles.cnc.peashooter_hurt": "Peashooter hurt",
+  "subtitles.cnc.peashooter_shoot": "Peashooter shoot",
+  "subtitles.cnc.plant_spawn": "Plant spawned",
+  "subtitles.cnc.sunflower_action": "Sunflower action",
+  "subtitles.cnc.sunflower_death": "Sunflower died",
+  "subtitles.cnc.sunflower_hurt": "Sunflower hurt"
 }

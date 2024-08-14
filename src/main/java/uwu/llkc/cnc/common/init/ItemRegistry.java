@@ -9,13 +9,14 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.items.SeedPacketItem;
+import uwu.llkc.cnc.common.items.TrafficConeItem;
 
 public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CNCMod.MOD_ID);
 
-    public static final DeferredItem<SeedPacketItem> EMPTY_SEED_PACKET = ITEMS.registerItem("empty_seed_packet", SeedPacketItem::new);
-    public static final DeferredItem<SeedPacketItem> PEASHOOTER_SEED_PACKET = ITEMS.registerItem("peashooter_seed_packet", SeedPacketItem::new);
-    public static final DeferredItem<SeedPacketItem> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", SeedPacketItem::new);
+    public static final DeferredItem<SeedPacketItem<?>> EMPTY_SEED_PACKET = ITEMS.registerItem("empty_seed_packet", props -> new SeedPacketItem<>(props, 0, 0, null));
+    public static final DeferredItem<SeedPacketItem<?>> PEASHOOTER_SEED_PACKET = ITEMS.registerItem("peashooter_seed_packet", props -> new SeedPacketItem<>(props, 16, 20, EntityTypeRegistry.PEASHOOTER));
+    public static final DeferredItem<SeedPacketItem<?>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props, 0, 20, EntityTypeRegistry.SUNFLOWER));
 
     public static final DeferredItem<Item> PLANT_FOOD = ITEMS.registerSimpleItem("plant_food");
     public static final DeferredItem<Item> SUN = ITEMS.registerSimpleItem("sun");
@@ -29,6 +30,7 @@ public class ItemRegistry {
             props -> new ItemNameBlockItem(BlockRegistry.SUNFLOWER_CROP.get(), props), new Item.Properties().food(Foods.SUNFLOWER_SEEDS));
     public static final DeferredItem<Item> WALNUT_FLOUR = ITEMS.registerSimpleItem("walnut_flour");
     public static final DeferredItem<Item> WALNUT = ITEMS.registerSimpleItem("walnut");
+    public static final DeferredItem<TrafficConeItem> TRAFFIC_CONE = ITEMS.registerItem("traffic_cone", TrafficConeItem::new, new Item.Properties().durability(15));
 
     static class Foods {
         public static final FoodProperties PEA_POD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.5f).build();

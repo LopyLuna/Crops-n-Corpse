@@ -1,4 +1,4 @@
-// 1.21	2024-08-13T19:57:51.2308428	Recipes
+// 1.21	2024-08-14T15:05:11.9397074	Recipes
 adad54aca898255b5e091c7543da4b12c1aabebc data/cnc/advancement/recipes/food/chocolate_chip_muffin.json
 90901e12d966ad79987e2190dd66e8d1b84fc9ff data/cnc/advancement/recipes/food/sunflower_seed_muffin.json
 265e30748565e2ef3776f01a2e5aa93816f12ada data/cnc/recipe/chocolate_chip_muffin.json
@@ -14,6 +14,6 @@ ca18ec1dcd38bdd56f4cb649e47e964edaaf60ff data/minecraft/recipe/cooked_pea_campfi
 4abb9201e32a4d191af9474d5e074d7f208aeacd data/minecraft/recipe/cooked_pea_smelting.json
 637046b7bcf098b9e2688fe110cd292e5cf0ff9a data/minecraft/recipe/cooked_pea_smoking.json
 e64bc6ac95e5052ca6ae83f3fd8fac1ad88a9613 data/minecraft/recipe/raw_pea_from_pea_pod.json
-a8acc6c0c43de666323ad3bc9934740def93689d data/minecraft/recipe/seed_packet_peashooter.json
-05209fb4b952a96fa7b9f85666d0275850320999 data/minecraft/recipe/seed_packet_sunflower.json
+ca2b6290d7864ef161ae812c3eb7a97db5a46f5b data/minecraft/recipe/seed_packet_peashooter.json
+6a900dd9174bcf2e8218074d6c4f1ee28703ddfc data/minecraft/recipe/seed_packet_sunflower.json
 6ebe054099ab006007cb8773eb062094ceb2d8ce data/minecraft/recipe/walnut_flour_from_walnut_stonecutting.json

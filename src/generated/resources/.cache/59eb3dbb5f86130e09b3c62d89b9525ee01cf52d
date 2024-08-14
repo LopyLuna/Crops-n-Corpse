@@ -1,6 +1,7 @@
-// 1.21	2024-08-13T19:28:20.112335	Loot Tables
+// 1.21	2024-08-14T14:25:50.4830874	Loot Tables
 b3d76196736929f2ca43d07cc28e41d5554daf31 data/cnc/loot_table/blocks/peashooter_block.json
 3dccc09cd2e1b66fca80aca9c1afc622d18acedd data/cnc/loot_table/blocks/sunflower_block.json
+52a5538f0254e29c6cfca55169e5ba49748292a3 data/cnc/loot_table/blocks/traffic_cone.json
 91f40cc34361e2719436e204036bafd958bf0b9c data/cnc/loot_table/entities/browncoat.json
 d1a6f014b0650c8d0bfe4190fbfc22b39b0118c8 data/cnc/loot_table/entities/peashooter.json
 09cd1d016abf6c4090ed6769ea2a3241981332a6 data/cnc/loot_table/entities/sunflower.json

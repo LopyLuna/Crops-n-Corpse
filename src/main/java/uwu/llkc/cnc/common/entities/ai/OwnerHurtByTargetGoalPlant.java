@@ -29,6 +29,7 @@ public class OwnerHurtByTargetGoalPlant extends TargetGoal {
             } else {
                 this.ownerLastHurtBy = livingentity.getLastHurtByMob();
                 int i = livingentity.getLastHurtByMobTimestamp();
+                if (ownerLastHurtBy instanceof CNCPlant cncplant && cncplant.getOwnerUUID() != null && cncplant.getOwnerUUID().equals(plant.getOwnerUUID()) || plant.getOwnerUUID() != null && plant.getOwnerUUID().equals(ownerLastHurtBy.getUUID()) || plant.getOwnerUUID() != null && targetMob instanceof OwnableEntity ownable && plant.getOwnerUUID().equals(ownable.getOwnerUUID())) return false;
                 return i != this.timestamp
                         && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT);
             }
@@ -39,7 +40,6 @@ public class OwnerHurtByTargetGoalPlant extends TargetGoal {
 
     @Override
     public void start() {
-        if (ownerLastHurtBy instanceof CNCPlant cncplant && cncplant.getOwnerUUID() != null && cncplant.getOwnerUUID().equals(plant.getOwnerUUID()) || plant.getOwnerUUID() != null && plant.getOwnerUUID().equals(ownerLastHurtBy.getUUID()) || plant.getOwnerUUID() != null && targetMob instanceof OwnableEntity ownable && plant.getOwnerUUID().equals(ownable.getOwnerUUID())) return;
         this.mob.setTarget(this.ownerLastHurtBy);
         LivingEntity livingentity = this.plant.getOwner();
         if (livingentity != null) {

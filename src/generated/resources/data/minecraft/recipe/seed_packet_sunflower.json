@@ -35,13 +35,6 @@
     " f "
   ],
   "result": {
-    "components": {
-      "cnc:cooldown": 20,
-      "cnc:sun_cost": 0,
-      "minecraft:entity_data": {
-        "id": "cnc:sunflower"
-      }
-    },
     "count": 1,
     "id": "cnc:sunflower_seed_packet"
   }

@@ -6,9 +6,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.client.entities.models.PeashooterModel;
 import uwu.llkc.cnc.client.entities.models.SunflowerModel;
-import uwu.llkc.cnc.common.entities.plants.Peashooter;
 import uwu.llkc.cnc.common.entities.plants.Sunflower;
 
 public class SunflowerRenderer extends MobRenderer<Sunflower, SunflowerModel> {

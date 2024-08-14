@@ -24,5 +24,7 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
                 .add(EntityTypeRegistry.SUNFLOWER.get());
         tag(EntityTypeTags.UNDEAD)
                 .add(EntityTypeRegistry.BROWNCOAT.get());
+        tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
+                .remove(EntityTypeRegistry.BROWNCOAT.get());
     }
 }

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "uwu.llkc.cnc.common.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BucketMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

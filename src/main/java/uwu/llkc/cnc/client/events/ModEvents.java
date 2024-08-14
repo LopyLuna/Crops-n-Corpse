@@ -4,6 +4,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
 import uwu.llkc.cnc.client.entities.models.PeashooterModel;
@@ -13,6 +14,7 @@ import uwu.llkc.cnc.client.entities.renderers.PeaProjectileRenderer;
 import uwu.llkc.cnc.client.entities.renderers.PeashooterRenderer;
 import uwu.llkc.cnc.client.entities.renderers.SunflowerRenderer;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
+import uwu.llkc.cnc.common.items.TrafficConeItem;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModEvents {

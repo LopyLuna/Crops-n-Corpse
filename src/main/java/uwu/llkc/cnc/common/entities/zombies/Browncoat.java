@@ -7,7 +7,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -23,7 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
+import net.neoforged.neoforge.fluids.FluidType;
 import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
 import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
@@ -42,7 +41,6 @@ public class Browncoat extends CNCZombie{
 
     public Browncoat(EntityType<Browncoat> entityType, Level level) {
         super(entityType, level);
-
     }
 
     @Override
@@ -59,6 +57,11 @@ public class Browncoat extends CNCZombie{
                 .add(Attributes.ATTACK_DAMAGE, 3)
                 .add(Attributes.MOVEMENT_SPEED, 0.23)
                 .add(Attributes.ATTACK_SPEED, 1);
+    }
+
+    @Override
+    public boolean canDrownInFluidType(FluidType type) {
+        return super.canDrownInFluidType(type);
     }
 
     private void moveTie() {

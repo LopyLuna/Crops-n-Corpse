@@ -21,13 +21,6 @@
     " p "
   ],
   "result": {
-    "components": {
-      "cnc:cooldown": 20,
-      "cnc:sun_cost": 16,
-      "minecraft:entity_data": {
-        "id": "cnc:peashooter"
-      }
-    },
     "count": 1,
     "id": "cnc:peashooter_seed_packet"
   }

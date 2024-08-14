@@ -91,16 +91,6 @@ public class Sunflower extends CNCPlant {
     }
 
     @Override
-    public int getSunCost() {
-        return 0;
-    }
-
-    @Override
-    public int getCooldown() {
-        return 20;
-    }
-
-    @Override
     public void handleEntityEvent(byte id) {
         super.handleEntityEvent(id);
         if (id == 0) {

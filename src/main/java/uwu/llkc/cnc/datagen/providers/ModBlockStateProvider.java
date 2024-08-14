@@ -38,6 +38,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 models().crop("sunflower_crop_stage2", CNCMod.rl("block/sunflower_crop_stage2")),
                 models().crop("sunflower_crop_stage2", CNCMod.rl("block/sunflower_crop_stage2")),
                 models().crop("sunflower_crop_stage3", CNCMod.rl("block/sunflower_crop_stage3")));
+
+        simpleBlock(BlockRegistry.TRAFFIC_CONE.get(), models().getExistingFile(CNCMod.rl("block/traffic_cone")));
     }
 
     void crop(PlantCropBlock block, BlockModelBuilder... builders) {

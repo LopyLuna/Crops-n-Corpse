@@ -47,5 +47,6 @@ public class ModBlockLootTableSubProvider extends BlockLootSubProvider {
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                                         .apply(ApplyBonusCount.addBonusBinomialDistributionCount(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE), 0.5714286F, 1)
                                 ).otherwise(LootItem.lootTableItem(ItemRegistry.RAW_PEA.get()))))));
+        dropSelf(BlockRegistry.TRAFFIC_CONE.get());
     }
 }

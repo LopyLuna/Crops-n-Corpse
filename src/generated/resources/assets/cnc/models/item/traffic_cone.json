@@ -1,0 +1,26 @@
+{
+  "parent": "neoforge:item/default",
+  "base": {
+    "parent": "cnc:item/traffic_cone_item"
+  },
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "head": {
+      "parent": "cnc:block/traffic_cone",
+      "display": {
+        "head": {
+          "scale": [
+            1.6,
+            1.6,
+            1.6
+          ],
+          "translation": [
+            0,
+            17,
+            0
+          ]
+        }
+      }
+    }
+  }
+}
