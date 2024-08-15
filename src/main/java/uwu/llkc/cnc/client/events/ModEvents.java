@@ -1,8 +1,10 @@
 package uwu.llkc.cnc.client.events;
 
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import uwu.llkc.cnc.CNCMod;
@@ -14,7 +16,9 @@ import uwu.llkc.cnc.client.entities.renderers.PeaProjectileRenderer;
 import uwu.llkc.cnc.client.entities.renderers.PeashooterRenderer;
 import uwu.llkc.cnc.client.entities.renderers.SunflowerRenderer;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
+import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.items.TrafficConeItem;
+import uwu.llkc.cnc.common.items.properties.MultiEntitySpawnEggProperty;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModEvents {
@@ -31,5 +35,12 @@ public class ModEvents {
         event.registerLayerDefinition(PeashooterModel.MAIN_LAYER, PeashooterModel::createBodyLayer);
         event.registerLayerDefinition(SunflowerModel.MAIN_LAYER, SunflowerModel::createBodyLayer);
         event.registerLayerDefinition(BrowncoatModel.MAIN_LAYER, BrowncoatModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void clientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ItemProperties.register(ItemRegistry.BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
+        });
     }
 }

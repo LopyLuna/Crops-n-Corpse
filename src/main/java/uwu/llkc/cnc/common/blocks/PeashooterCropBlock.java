@@ -21,6 +21,7 @@ public class PeashooterCropBlock extends PlantCropBlock{
             return Optional.of(EntityTypeRegistry.PEASHOOTER.get());
         }
         if (level.getRandom().nextFloat() < 0.04f){
+            //todo
             return Optional.empty();
         }
         return Optional.empty();

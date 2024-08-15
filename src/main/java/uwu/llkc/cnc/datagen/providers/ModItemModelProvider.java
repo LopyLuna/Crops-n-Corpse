@@ -12,6 +12,7 @@ import net.neoforged.neoforge.client.model.generators.loaders.SeparateTransforms
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.items.properties.MultiEntitySpawnEggProperty;
 
 public class ModItemModelProvider extends ItemModelProvider {
 
@@ -47,5 +48,14 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .base(nested().parent(basicItem(CNCMod.rl("bucket_item"))))
                 .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("item/bucket"))))
                 .end();
+
+        withExistingParent("browncoat_spawn_egg", "item/generated")
+                .texture("layer0", CNCMod.rl("item/browncoat_spawn_egg")).override()
+                .model(basicItem(CNCMod.rl("flag_spawn_egg")))
+                .predicate(MultiEntitySpawnEggProperty.ID, 0.01f).end().override()
+                .model(basicItem(CNCMod.rl("conehead_spawn_egg")))
+                .predicate(MultiEntitySpawnEggProperty.ID, 0.02f).end().override()
+                .model(basicItem(CNCMod.rl("buckethead_spawn_egg")))
+                .predicate(MultiEntitySpawnEggProperty.ID, 0.03f).end();
     }
 }

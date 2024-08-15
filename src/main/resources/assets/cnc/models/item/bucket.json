@@ -1,7 +1,8 @@
 {
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "cnc:item/bucket_hat"
+		"0": "cnc:item/bucket_hat",
+		"particle": "cnc:item/bucket_hat"
 	},
 	"elements": [
 		{

@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "cnc:item/flag_spawn_egg",
+      "predicate": {
+        "cnc:multi_entity_spawn_egg_property": 0.01
+      }
+    },
+    {
+      "model": "cnc:item/conehead_spawn_egg",
+      "predicate": {
+        "cnc:multi_entity_spawn_egg_property": 0.02
+      }
+    },
+    {
+      "model": "cnc:item/buckethead_spawn_egg",
+      "predicate": {
+        "cnc:multi_entity_spawn_egg_property": 0.03
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "cnc:item/browncoat_spawn_egg"
+  }
+}

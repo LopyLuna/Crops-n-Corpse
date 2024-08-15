@@ -116,11 +116,6 @@ public class SeedPacketItem  <T extends Entity> extends Item {
         }
     }
 
-    @Override
-    public int getMaxStackSize(ItemStack stack) {
-        return stack.has(DataComponents.ENTITY_DATA) ? 1 : getDefaultMaxStackSize();
-    }
-
     public EntityType<?> getFallbackEntityType() {
         if (fallbackEntityType == null) return null;
         return fallbackEntityType.get();

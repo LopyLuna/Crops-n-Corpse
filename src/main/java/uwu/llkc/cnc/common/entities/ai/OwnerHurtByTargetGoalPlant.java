@@ -29,7 +29,7 @@ public class OwnerHurtByTargetGoalPlant extends TargetGoal {
             } else {
                 this.ownerLastHurtBy = livingentity.getLastHurtByMob();
                 int i = livingentity.getLastHurtByMobTimestamp();
-                if (ownerLastHurtBy instanceof CNCPlant cncplant && cncplant.getOwnerUUID() != null && cncplant.getOwnerUUID().equals(plant.getOwnerUUID()) || plant.getOwnerUUID() != null && plant.getOwnerUUID().equals(ownerLastHurtBy.getUUID()) || plant.getOwnerUUID() != null && targetMob instanceof OwnableEntity ownable && plant.getOwnerUUID().equals(ownable.getOwnerUUID())) return false;
+                if (ownerLastHurtBy != null && (ownerLastHurtBy instanceof CNCPlant cncplant && cncplant.getOwnerUUID() != null && cncplant.getOwnerUUID().equals(plant.getOwnerUUID()) || plant.getOwnerUUID() != null && plant.getOwnerUUID().equals(ownerLastHurtBy.getUUID()) || plant.getOwnerUUID() != null && targetMob instanceof OwnableEntity ownable && plant.getOwnerUUID().equals(ownable.getOwnerUUID()))) return false;
                 return i != this.timestamp
                         && this.canAttack(this.ownerLastHurtBy, TargetingConditions.DEFAULT);
             }

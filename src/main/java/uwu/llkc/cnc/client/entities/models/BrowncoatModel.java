@@ -2,6 +2,7 @@ package uwu.llkc.cnc.client.entities.models;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.AnimationUtils;
+import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -12,7 +13,7 @@ import net.minecraft.util.Mth;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 
-public class BrowncoatModel extends HierarchicalModel<Browncoat> {
+public class BrowncoatModel extends HierarchicalModel<Browncoat> implements HeadedModel {
 	public static final ModelLayerLocation MAIN_LAYER = new ModelLayerLocation(CNCMod.rl("browncoat"), "main");
 	private final ModelPart root;
 	private final ModelPart tie;
@@ -113,6 +114,11 @@ public class BrowncoatModel extends HierarchicalModel<Browncoat> {
 		this.leftArm.loadPose(delegateBrowncoat.leftArm.storePose());
 		this.rightLeg.loadPose(delegateBrowncoat.rightLeg.storePose());
 		this.leftLeg.loadPose(delegateBrowncoat.leftLeg.storePose());
+	}
+
+	@Override
+	public ModelPart getHead() {
+		return head;
 	}
 
 	private static class HumanoidBrowncoat extends HumanoidModel<Browncoat> {

@@ -32,6 +32,9 @@ public class ModLanguageProvider extends LanguageProvider {
             addItem(entry, toEnglishTranslation(entry.getId()));
         }
 
+        addItem(ItemRegistry.RAW_PEA, toEnglishTranslation(ItemRegistry.RAW_PEA.getId()));
+        addItem(ItemRegistry.SUNFLOWER_SEEDS, toEnglishTranslation(ItemRegistry.RAW_PEA.getId()));
+
         for (DeferredHolder<Block, ? extends Block> entry : BlockRegistry.BLOCKS.getEntries()) {
             addBlock(entry, toEnglishTranslation(entry.getId()));
         }

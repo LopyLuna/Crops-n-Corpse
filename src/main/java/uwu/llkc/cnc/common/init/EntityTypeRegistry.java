@@ -2,6 +2,7 @@ package uwu.llkc.cnc.common.init;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
@@ -26,4 +27,5 @@ public class EntityTypeRegistry {
 
     public static final Supplier<EntityType<PeaProjectile>> PEA = ENTITY_TYPES.register("pea",
             () -> EntityType.Builder.of(PeaProjectile::new, MobCategory.MISC).sized(.5f, .5f).build(CNCMod.rlStr("pea")));
+
 }

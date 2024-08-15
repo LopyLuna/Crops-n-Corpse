@@ -26,8 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtByTargetGoalPlant;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtTargetGoalPlant;
-import uwu.llkc.cnc.common.init.CreativeModeTabRegistry;
-import uwu.llkc.cnc.common.init.DataComponentRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.items.SeedPacketItem;
 
