@@ -30,4 +30,16 @@ public class SoundRegistry {
 
     public static final Supplier<SoundEvent> SUNFLOWER_PRODUCE = SOUNDS.register("sunflower_produce",
             () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.sunflower.produce")));
+
+    public static final Supplier<SoundEvent> BROWNCOAT_AMBIANCE = SOUNDS.register("browncoat_ambiance",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.browncoat.ambiance")));
+
+    public static final Supplier<SoundEvent> BROWNCOAT_ATTACK = SOUNDS.register("browncoat_attack",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.browncoat.attack")));
+
+    public static final Supplier<SoundEvent> BROWNCOAT_DEATH = SOUNDS.register("browncoat_death",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.browncoat.death")));
+
+    public static final Supplier<SoundEvent> BROWNCOAT_HURT = SOUNDS.register("browncoat_hurt",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.browncoat.hurt")));
 }

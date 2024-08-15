@@ -44,5 +44,26 @@ public class ModSoundProvider extends SoundDefinitionsProvider {
                 .subtitle("subtitles.cnc.sunflower_produce")
                 .with(sound(CNCMod.rl("sunflower_produce_1")),
                         sound(CNCMod.rl("sunflower_produce_2"))));
+        add(SoundRegistry.BROWNCOAT_AMBIANCE, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.browncoat_ambiance")
+                .with(sound(CNCMod.rl("browncoat_ambiance_1")),
+                        sound(CNCMod.rl("browncoat_ambiance_2")),
+                        sound(CNCMod.rl("browncoat_ambiance_3"))));
+        add(SoundRegistry.BROWNCOAT_ATTACK, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.browncoat_attack")
+                .with(sound(CNCMod.rl("browncoat_attack_1")),
+                        sound(CNCMod.rl("browncoat_attack_2"))));
+        add(SoundRegistry.BROWNCOAT_DEATH, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.browncoat_death")
+                .with(sound(CNCMod.rl("browncoat_death_1")),
+                        sound(CNCMod.rl("browncoat_death_2")),
+                        sound(CNCMod.rl("browncoat_death_3"))));
+        add(SoundRegistry.BROWNCOAT_HURT, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.browncoat_hurt")
+                .with(sound(CNCMod.rl("browncoat_hurt_1")),
+                        sound(CNCMod.rl("browncoat_hurt_2")),
+                        sound(CNCMod.rl("browncoat_hurt_3")),
+                        sound(CNCMod.rl("browncoat_hurt_4")),
+                        sound(CNCMod.rl("browncoat_hurt_5"))));
     }
 }

@@ -1,4 +1,37 @@
 {
+  "entity.browncoat.ambiance": {
+    "sounds": [
+      "cnc:browncoat_ambiance_1",
+      "cnc:browncoat_ambiance_2",
+      "cnc:browncoat_ambiance_3"
+    ],
+    "subtitle": "subtitles.cnc.browncoat_ambiance"
+  },
+  "entity.browncoat.attack": {
+    "sounds": [
+      "cnc:browncoat_attack_1",
+      "cnc:browncoat_attack_2"
+    ],
+    "subtitle": "subtitles.cnc.browncoat_attack"
+  },
+  "entity.browncoat.death": {
+    "sounds": [
+      "cnc:browncoat_death_1",
+      "cnc:browncoat_death_2",
+      "cnc:browncoat_death_3"
+    ],
+    "subtitle": "subtitles.cnc.browncoat_death"
+  },
+  "entity.browncoat.hurt": {
+    "sounds": [
+      "cnc:browncoat_hurt_1",
+      "cnc:browncoat_hurt_2",
+      "cnc:browncoat_hurt_3",
+      "cnc:browncoat_hurt_4",
+      "cnc:browncoat_hurt_5"
+    ],
+    "subtitle": "subtitles.cnc.browncoat_hurt"
+  },
   "entity.peashooter.death": {
     "sounds": [
       "cnc:peashooter_death_1",

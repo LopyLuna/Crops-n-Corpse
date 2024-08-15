@@ -47,6 +47,10 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.cnc.sunflower_hurt", "Sunflower hurt");
         add("subtitles.cnc.peashooter_shoot", "Peashooter shoot");
         add("subtitles.cnc.sunflower_action", "Sunflower action");
+        add("subtitles.cnc.browncoat_ambiance", "Browncoat ambiance");
+        add("subtitles.cnc.browncoat_attack", "Browncoat attack");
+        add("subtitles.cnc.browncoat_death", "Browncoat died");
+        add("subtitles.cnc.browncoat_hurt", "Browncoat hurt");
         add("subtitles.cnc.plant_spawn", "Plant spawned");
     }
 

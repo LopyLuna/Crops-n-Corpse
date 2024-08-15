@@ -6,6 +6,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -33,6 +34,7 @@ import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
 import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.init.SoundRegistry;
 
 public class Browncoat extends CNCZombie{
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(Browncoat.class, EntityDataSerializers.BOOLEAN);
@@ -203,5 +205,26 @@ public class Browncoat extends CNCZombie{
                 poseStack.mulPose(Axis.XP.rotationDegrees(90));
             }, Vec3.directionFromRotation(0, getYRot()).x * -0.05, 0, Vec3.directionFromRotation(0, getYRot()).z * -0.05));
         }
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return SoundRegistry.BROWNCOAT_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundRegistry.BROWNCOAT_DEATH.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundRegistry.BROWNCOAT_AMBIANCE.get();
+    }
+
+    @Override
+    protected void playAttackSound() {
+        playSound(SoundRegistry.BROWNCOAT_ATTACK.get());
     }
 }
