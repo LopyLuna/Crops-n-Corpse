@@ -6,7 +6,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.client.entities.animations.PeashooterAnimations;
 import uwu.llkc.cnc.client.entities.animations.SunflowerAnimations;
 import uwu.llkc.cnc.common.entities.plants.Sunflower;
 

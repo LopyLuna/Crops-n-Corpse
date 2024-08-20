@@ -1,6 +1,9 @@
 package uwu.llkc.cnc.common.init;
 
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.network.protocol.game.ClientboundSetEquipmentPacket;
+import net.minecraft.server.level.ServerEntity;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -41,18 +44,26 @@ public class ItemRegistry {
     public static final DeferredItem<Item> FLAG = ITEMS.registerSimpleItem("flag");
     public static final DeferredItem<MultiEntitySpawnEgg> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEgg(props, List.of(
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {
+                mob.setLastArmorItem(EquipmentSlot.HEAD, new ItemStack(Items.STONE));
+                mob.setLastArmorItem(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE));
                 mob.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
                 mob.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
             }),
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {
+                mob.setLastArmorItem(EquipmentSlot.HEAD, new ItemStack(Items.STONE));
+                mob.setLastArmorItem(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
                 mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get()));
                 mob.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
             }),
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {
+                mob.setLastArmorItem(EquipmentSlot.HEAD, ItemStack.EMPTY);
+                mob.setLastArmorItem(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE));
                 mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get()));
                 mob.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
             }),
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {
+                mob.setLastArmorItem(EquipmentSlot.HEAD, ItemStack.EMPTY);
+                mob.setLastArmorItem(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE));
                 mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET));
                 mob.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
             })

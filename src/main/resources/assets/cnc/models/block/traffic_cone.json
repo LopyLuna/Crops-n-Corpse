@@ -2,7 +2,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "cnc:block/traffic_cone",
-		"particle": "cnc:block/traffic_cone"
+		"particle": "#0"
 	},
 	"elements": [
 		{

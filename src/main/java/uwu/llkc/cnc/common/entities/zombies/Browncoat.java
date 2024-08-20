@@ -1,5 +1,6 @@
 package uwu.llkc.cnc.common.entities.zombies;
 
+import com.mojang.datafixers.util.Either;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -23,18 +24,22 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
 import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
+import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 
 public class Browncoat extends CNCZombie{
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(Browncoat.class, EntityDataSerializers.BOOLEAN);
@@ -59,7 +64,7 @@ public class Browncoat extends CNCZombie{
             setItemSlot(EquipmentSlot.HEAD, new ItemStack(ItemRegistry.TRAFFIC_CONE.get()));
         } else if (random.nextFloat() < 0.15) {
             setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET));
-        } else if (random.nextFloat() < 0.5f) {
+        } else if (random.nextFloat() < 0.05f) {
             setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ItemRegistry.FLAG .get()));
         }
         return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
@@ -150,16 +155,13 @@ public class Browncoat extends CNCZombie{
 
     @Override
     protected int getBaseExperienceReward() {
-        //todo cone
-        if (this.getItemBySlot(EquipmentSlot.HEAD).is(Items.ORANGE_DYE)) {
+        if (this.getItemBySlot(EquipmentSlot.HEAD).is(ItemRegistry.TRAFFIC_CONE)) {
             return 7;
         }
-        //todo bucket
-        if (this.getItemBySlot(EquipmentSlot.HEAD).is(Items.GRAY_DYE)) {
+        if (this.getItemBySlot(EquipmentSlot.HEAD).is(Items.BUCKET)) {
             return 10;
         }
-        //todo flag
-        if (this.getItemBySlot(EquipmentSlot.MAINHAND).is(Items.STICK)) {
+        if (this.getItemBySlot(EquipmentSlot.MAINHAND).is(ItemRegistry.FLAG)) {
             return 6;
         }
         return 5;
@@ -171,7 +173,7 @@ public class Browncoat extends CNCZombie{
         entityData.set(HAS_HEAD, false);
         if (level().isClientSide) {
             var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
-            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY() + 1.5, this.getZ(), model, poseStack -> {
+            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY() + 1.5, this.getZ(), Either.left(model), poseStack -> {
                 poseStack.mulPose(Axis.YN.rotationDegrees(getYRot()));
                 poseStack.mulPose(Axis.XP.rotationDegrees(180));
             }, Vec3.directionFromRotation(0, getYRot()).x * -0.05, 0.2, Vec3.directionFromRotation(0, getYRot()).z * -0.05));
@@ -199,7 +201,7 @@ public class Browncoat extends CNCZombie{
         super.handleEntityEvent(id);
         if (id == 0) {
             var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("left_arm").getChild("left_forearm");
-            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY() + 1.25, this.getZ(), model, poseStack -> {
+            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY() + 1.25, this.getZ(), Either.left(model), poseStack -> {
                 poseStack.translate(Vec3.directionFromRotation(0, getYRot()).z *.32, 0, Vec3.directionFromRotation(0, getYRot()).x *-.32);
                 poseStack.mulPose(Axis.YP.rotationDegrees(-getYRot()));
                 poseStack.mulPose(Axis.XP.rotationDegrees(90));
@@ -221,6 +223,11 @@ public class Browncoat extends CNCZombie{
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundRegistry.BROWNCOAT_AMBIANCE.get();
+    }
+
+    @Override
+    public int getAmbientSoundInterval() {
+        return 200;
     }
 
     @Override

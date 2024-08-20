@@ -1,9 +1,13 @@
 package uwu.llkc.cnc.common.events;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
@@ -11,11 +15,15 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Vector3f;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 
 import java.util.List;
 
@@ -63,8 +71,9 @@ public class NeoForgeEvents {
         ItemStack item = event.getEntity().getItemBySlot(EquipmentSlot.HEAD);
         if (item.is(Items.BUCKET) || item.is(ItemRegistry.TRAFFIC_CONE)) {
             int durability = item.getMaxDamage() - item.getDamageValue();
-            if (durability < event.getOriginalDamage()) {
-                item.hurtAndBreak(durability, event.getEntity(), EquipmentSlot.HEAD);
+            if (durability <= event.getOriginalDamage()) {
+                item.hurtAndBreak(durability, ((ServerLevel) event.getEntity().level()), event.getEntity(),
+                        stack -> PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new DropEquipmentPayload(new ItemStack(stack), new Vector3f(0, 1.9f, 0), event.getEntity().getId(), ItemDisplayContext.HEAD)));
                 event.setNewDamage(event.getOriginalDamage() - durability);
             } else {
                 item.hurtAndBreak(((int) event.getOriginalDamage()), event.getEntity(), EquipmentSlot.HEAD);
