@@ -41,7 +41,7 @@ public class SeedPacketItem  <T extends Entity> extends Item {
     public static final MapCodec<UUID> UUID_FIELD_CODEC = UUIDUtil.CODEC.fieldOf("owner");
     public static final MapCodec<Float> HEALTH_FIELD_CODEC = Codec.FLOAT.fieldOf("Health");
 
-    private static final Supplier<Map<EntityType<?>, SeedPacketItem>> SEED_PACKET_ITEM_MAP = () -> Map.ofEntries(
+    private static final Supplier<Map<EntityType<?>, SeedPacketItem<?>>> SEED_PACKET_ITEM_MAP = () -> Map.ofEntries(
             entry(EntityTypeRegistry.PEASHOOTER.get(), ItemRegistry.PEASHOOTER_SEED_PACKET.get()),
             entry(EntityTypeRegistry.SUNFLOWER.get(), ItemRegistry.SUNFLOWER_SEED_PACKET.get())
     );

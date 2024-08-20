@@ -1,19 +1,18 @@
 package uwu.llkc.cnc.client.entities.models;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.AnimationUtils;
-import net.minecraft.client.model.HeadedModel;
-import net.minecraft.client.model.HierarchicalModel;
-import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 
-public class BrowncoatModel extends HierarchicalModel<Browncoat> implements HeadedModel {
+public class BrowncoatModel extends HierarchicalModel<Browncoat> implements HeadedModel, ArmedModel {
 	public static final ModelLayerLocation MAIN_LAYER = new ModelLayerLocation(CNCMod.rl("browncoat"), "main");
 	private final ModelPart root;
 	private final ModelPart tie;
@@ -119,6 +118,11 @@ public class BrowncoatModel extends HierarchicalModel<Browncoat> implements Head
 	@Override
 	public ModelPart getHead() {
 		return head;
+	}
+
+	@Override
+	public void translateToHand(HumanoidArm side, PoseStack poseStack) {
+		delegateBrowncoat.translateToHand(side, poseStack);
 	}
 
 	private static class HumanoidBrowncoat extends HumanoidModel<Browncoat> {
