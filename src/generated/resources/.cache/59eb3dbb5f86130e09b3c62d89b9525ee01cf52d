@@ -1,7 +1,26 @@
-// 1.21	2024-08-14T14:25:50.4830874	Loot Tables
+// 1.21	2024-08-23T18:20:05.2747711	Loot Tables
+d44989f74ec1f8f17ca168d28e8729ae5524c7a8 data/cnc/loot_table/blocks/ceiling_hanging_walnut_sign.json
 b3d76196736929f2ca43d07cc28e41d5554daf31 data/cnc/loot_table/blocks/peashooter_block.json
+df4b125d93e1cd99a9423a2990cc04566ea84ae7 data/cnc/loot_table/blocks/standing_walnut_sign.json
+790bd9b14b9b718ef05bf4482f2e8c253770d332 data/cnc/loot_table/blocks/stripped_walnut_log.json
+4566e1c3725d3c554fc192429c9f849b6d990a81 data/cnc/loot_table/blocks/stripped_walnut_wood.json
 3dccc09cd2e1b66fca80aca9c1afc622d18acedd data/cnc/loot_table/blocks/sunflower_block.json
 52a5538f0254e29c6cfca55169e5ba49748292a3 data/cnc/loot_table/blocks/traffic_cone.json
+2140dba44e061a8c749fac219e598b486befad64 data/cnc/loot_table/blocks/wall_hanging_walnut_sign.json
+37a23c4a4e07b31e11ac9317ea85ad86f22433e9 data/cnc/loot_table/blocks/walnut_button.json
+3072ea3461f1fcf6eadb7a6269d00cc28d23567a data/cnc/loot_table/blocks/walnut_door.json
+62185e71054cede55d536159291eaa7965784f0d data/cnc/loot_table/blocks/walnut_fence.json
+48d02dfcec8fbab2c6af683ce821122a3e74f97e data/cnc/loot_table/blocks/walnut_fence_gate.json
+af9097933b217205b5f87f460419400cb625c161 data/cnc/loot_table/blocks/walnut_leaves.json
+d680c6a49ee9c1f844f4d647850145572c398a33 data/cnc/loot_table/blocks/walnut_log.json
+32f88ad06623b1e4e0065e310067d70f1abc7d6c data/cnc/loot_table/blocks/walnut_planks.json
+99ea8d3f8d226c544152edb7b3f2374d5474b247 data/cnc/loot_table/blocks/walnut_pressure_plate.json
+9612fdffd43119f3f29a7ae95febdb4d73c087d2 data/cnc/loot_table/blocks/walnut_sapling.json
+bacc009d8fa03b61e7efa3057f2aeca689a28a8c data/cnc/loot_table/blocks/walnut_slab.json
+b51e5d71dedd2268a258d2cca3b7134e03402e97 data/cnc/loot_table/blocks/walnut_stairs.json
+0a571e0906078ed40b6612a5439714a3e3754968 data/cnc/loot_table/blocks/walnut_trapdoor.json
+8e549704fd711eb6793ce7b67b1e35b1c51d7644 data/cnc/loot_table/blocks/walnut_wall_sign.json
+3aa8c7335d8162da59bf011035dbd56a6ecbd403 data/cnc/loot_table/blocks/walnut_wood.json
 91f40cc34361e2719436e204036bafd958bf0b9c data/cnc/loot_table/entities/browncoat.json
 d1a6f014b0650c8d0bfe4190fbfc22b39b0118c8 data/cnc/loot_table/entities/peashooter.json
 09cd1d016abf6c4090ed6769ea2a3241981332a6 data/cnc/loot_table/entities/sunflower.json

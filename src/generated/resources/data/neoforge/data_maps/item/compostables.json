@@ -5,6 +5,9 @@
     },
     "cnc:raw_pea": {
       "chance": 0.1
+    },
+    "cnc:walnut_sapling": {
+      "chance": 0.3
     }
   }
 }

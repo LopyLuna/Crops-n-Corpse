@@ -1,0 +1,14 @@
+// 1.21	2024-08-23T18:20:05.2857718	Tags for minecraft:item mod id vanilla
+fd898b1fe141dae42b4a24daeea31257f97c6c16 data/cnc/tags/item/walnut_logs.json
+66700707a36d885815991be2b8dcd198bc948dae data/minecraft/tags/item/fence_gates.json
+fec77072b6b67b43d3f679e18811aeb1b9bb1dbc data/minecraft/tags/item/hanging_signs.json
+78a9196a78c26acb8519f97dd74ec3c64c31abed data/minecraft/tags/item/logs_that_burn.json
+1872dd5410df038819ccfa262d799c3c5b3a3ae1 data/minecraft/tags/item/planks.json
+c0cdf95260265ac346e8eaeecc1ed2732d41a415 data/minecraft/tags/item/signs.json
+ec1feda641712c943617f9aa591111752e312738 data/minecraft/tags/item/wooden_buttons.json
+2db44f04079a0ea97ecf17c035c80f32c44dc387 data/minecraft/tags/item/wooden_doors.json
+ebf30e2ecf21df3ccda69105fc7a8660716fed4c data/minecraft/tags/item/wooden_fences.json
+dc57e4902450237a049cbfbb076ed1f4f9b23e63 data/minecraft/tags/item/wooden_pressure_plates.json
+e3d3ea1fec0bed346bae1bc7a6d5e15fa072cf46 data/minecraft/tags/item/wooden_slabs.json
+501910d7f40a1255971bdca3e60564bf57e53258 data/minecraft/tags/item/wooden_stairs.json
+e16bd8cbb42e87171d864caee026a02790875c46 data/minecraft/tags/item/wooden_trapdoors.json

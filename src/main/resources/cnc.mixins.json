@@ -4,7 +4,9 @@
   "package": "uwu.llkc.cnc.common.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "BucketMixin"
+    "BucketMixin",
+    "DispenseBehaviorMixin"
+
   ],
   "client": [],
   "server": [],

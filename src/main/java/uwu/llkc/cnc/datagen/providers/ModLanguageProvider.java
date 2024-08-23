@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SignBlock;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import uwu.llkc.cnc.CNCMod;
@@ -36,8 +37,13 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ItemRegistry.SUNFLOWER_SEEDS, toEnglishTranslation(ItemRegistry.SUNFLOWER_SEEDS.getId()));
 
         for (DeferredHolder<Block, ? extends Block> entry : BlockRegistry.BLOCKS.getEntries()) {
+            if (entry.get() instanceof SignBlock) continue;
             addBlock(entry, toEnglishTranslation(entry.getId()));
         }
+        add("block.cnc.standing_walnut_sign", "Standing Walnut Sign");
+        add("block.cnc._walnut_wall_sign", "Walnut Wall Sign");
+        add("block.cnc._ceiling_hanging_walnut_sign", "Ceiling Hanging Walnut Sign");
+        add("block.cnc._hanging_walnut_wall_sign", "Hanging Walnut Wall Sign");
 
         add("itemGroup.cnc.cnc_tab", "Crops 'n' Corpse");
         add("damage_type.cnc.pea_shot", "Pea shot");

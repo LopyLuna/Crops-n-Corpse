@@ -15,6 +15,7 @@ public class CNCMod {
         EntityTypeRegistry.ENTITY_TYPES.register(modEventBus);
         DataComponentRegistry.DATA_COMPONENTS.register(modEventBus);
         BlockRegistry.BLOCKS.register(modEventBus);
+        BlockEntityTypeRegistry.BLOCK_ENTITY_TYPES.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUNDS.register(modEventBus);
     }

@@ -4,7 +4,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.CNCMod;
@@ -19,11 +18,11 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(Tags.BiomeTags.SPAWNS_PEASHOOTER)
+        tag(Tags.Biomes.SPAWNS_PEASHOOTER)
                 .addTag(BiomeTags.IS_FOREST)
-                .add(Biomes.PLAINS);
-        tag(Tags.BiomeTags.SPAWNS_SUNFLOWER)
-                .add(Biomes.PLAINS)
+                .add(net.minecraft.world.level.biome.Biomes.PLAINS);
+        tag(Tags.Biomes.SPAWNS_SUNFLOWER)
+                .add(net.minecraft.world.level.biome.Biomes.PLAINS)
                 .addTag(BiomeTags.IS_SAVANNA);
     }
 }

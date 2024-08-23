@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "cnc:block/walnut_log_top",
+    "side": "cnc:block/walnut_log"
+  }
+}

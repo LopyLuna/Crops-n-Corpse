@@ -60,12 +60,14 @@ public class Browncoat extends CNCZombie{
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-        if (random.nextFloat() < 0.30f) {
-            setItemSlot(EquipmentSlot.HEAD, new ItemStack(ItemRegistry.TRAFFIC_CONE.get()));
-        } else if (random.nextFloat() < 0.15) {
-            setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET));
-        } else if (random.nextFloat() < 0.05f) {
-            setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ItemRegistry.FLAG .get()));
+        if(spawnType != MobSpawnType.SPAWN_EGG) {
+            if (random.nextFloat() < 0.30f) {
+                setItemSlot(EquipmentSlot.HEAD, new ItemStack(ItemRegistry.TRAFFIC_CONE.get()));
+            } else if (random.nextFloat() < 0.15) {
+                setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET));
+            } else if (random.nextFloat() < 0.05f) {
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ItemRegistry.FLAG.get()));
+            }
         }
         return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
     }

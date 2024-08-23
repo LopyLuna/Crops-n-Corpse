@@ -1,9 +1,6 @@
 package uwu.llkc.cnc.common.init;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.network.protocol.game.ClientboundSetEquipmentPacket;
-import net.minecraft.server.level.ServerEntity;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -42,32 +39,32 @@ public class ItemRegistry {
     public static final DeferredItem<Item> WALNUT = ITEMS.registerSimpleItem("walnut");
     public static final DeferredItem<TrafficConeItem> TRAFFIC_CONE = ITEMS.registerItem("traffic_cone", TrafficConeItem::new, new Item.Properties().durability(15));
     public static final DeferredItem<Item> FLAG = ITEMS.registerSimpleItem("flag");
+    @SuppressWarnings("unchecked")
     public static final DeferredItem<MultiEntitySpawnEgg> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEgg(props, List.of(
-            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {
-                mob.setLastArmorItem(EquipmentSlot.HEAD, new ItemStack(Items.STONE));
-                mob.setLastArmorItem(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE));
-                mob.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                mob.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-            }),
-            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {
-                mob.setLastArmorItem(EquipmentSlot.HEAD, new ItemStack(Items.STONE));
-                mob.setLastArmorItem(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get()));
-                mob.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-            }),
-            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {
-                mob.setLastArmorItem(EquipmentSlot.HEAD, ItemStack.EMPTY);
-                mob.setLastArmorItem(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE));
-                mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get()));
-                mob.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-            }),
-            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {
-                mob.setLastArmorItem(EquipmentSlot.HEAD, ItemStack.EMPTY);
-                mob.setLastArmorItem(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE));
-                mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET));
-                mob.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-            })
+            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {}),
+            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get()))),
+            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get()))),
+            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET)))
     )));
+    public static final DeferredItem<BlockItem> STRIPPED_WALNUT_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_WALNUT_LOG);
+    public static final DeferredItem<BlockItem> WALNUT_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_LOG);
+    public static final DeferredItem<BlockItem> WALNUT_LEAVES = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_LEAVES);
+    public static final DeferredItem<BlockItem> WALNUT_SAPLING = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_SAPLING);
+    public static final DeferredItem<BlockItem> WALNUT_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_WOOD);
+    public static final DeferredItem<BlockItem> STRIPPED_WALNUT_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_WALNUT_WOOD);
+    public static final DeferredItem<BlockItem> WALNUT_PLANKS = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_PLANKS);
+    public static final DeferredItem<BlockItem> WALNUT_SIGN = ITEMS.registerItem("walnut_sign",
+            props -> new SignItem(props, BlockRegistry.STANDING_WALNUT_SIGN.get(), BlockRegistry.WALNUT_WALL_SIGN.get()));
+    public static final DeferredItem<BlockItem> HANGING_WALNUT_SIGN = ITEMS.registerItem("hanging_walnut_sign",
+            props -> new HangingSignItem(BlockRegistry.CEILING_HANGING_WALNUT_SIGN.get(), BlockRegistry.WALL_HANGING_WALNUT_SIGN.get(), props));
+    public static final DeferredItem<BlockItem> WALNUT_TRAP_DOOR = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_TRAPDOOR);
+    public static final DeferredItem<BlockItem> WALNUT_DOOR = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_DOOR);
+    public static final DeferredItem<BlockItem> WALNUT_BUTTON = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_BUTTON);
+    public static final DeferredItem<BlockItem> WALNUT_FENCE = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_FENCE);
+    public static final DeferredItem<BlockItem> WALNUT_FENCE_GATE = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_FENCE_GATE);
+    public static final DeferredItem<BlockItem> WALNUT_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_PRESSURE_PLATE);
+    public static final DeferredItem<BlockItem> WALNUT_STAIRS = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_STAIRS);
+    public static final DeferredItem<BlockItem> WALNUT_SLAB = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_SLAB);
 
     static class Foods {
         public static final FoodProperties PEA_POD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.5f).build();

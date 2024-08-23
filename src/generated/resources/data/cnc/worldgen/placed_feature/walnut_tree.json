@@ -1,0 +1,31 @@
+{
+  "feature": "cnc:walnut_tree",
+  "placement": [
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 5
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": {
+          "Name": "cnc:walnut_sapling",
+          "Properties": {
+            "stage": "0"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -131,7 +131,7 @@ public class MultiEntitySpawnEgg extends SpawnEggItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         if (player.isCrouching()) {
-            itemstack.set(DataComponentRegistry.SELECTED_ENTITY, (itemstack.getOrDefault(DataComponentRegistry.SELECTED_ENTITY, 0) + 1 % entityList.size()));
+            itemstack.set(DataComponentRegistry.SELECTED_ENTITY, (itemstack.getOrDefault(DataComponentRegistry.SELECTED_ENTITY, 0) + 1) % entityList.size());
         }
         BlockHitResult blockhitresult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
         if (blockhitresult.getType() != HitResult.Type.BLOCK) {

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "cnc:block/walnut_slab"
+    },
+    "type=double": {
+      "model": "cnc:block/walnut_planks"
+    },
+    "type=top": {
+      "model": "cnc:block/walnut_slab_top"
+    }
+  }
+}

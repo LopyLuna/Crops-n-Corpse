@@ -31,6 +31,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.EMPTY_SEED_PACKET.get());
         basicItem(ItemRegistry.PEASHOOTER_SEED_PACKET.get());
         basicItem(ItemRegistry.SUNFLOWER_SEED_PACKET.get());
+        basicItem(ItemRegistry.WALNUT_SAPLING.get());
+        leaves("walnut_leaves", CNCMod.rl("block/walnut_leaves"));
 
         withExistingParent(CNCMod.rlStr("traffic_cone"), "neoforge:item/default")
                 .customLoader(SeparateTransformsModelBuilder::begin)
@@ -38,6 +40,14 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("block/traffic_cone")))
                         .transforms().transform(ItemDisplayContext.HEAD).scale(1.6f).translation(0, 17, 0).end().end())
                 .end();
+
+        withExistingParent(CNCMod.rlStr("flag"), "neoforge:item/default")
+                .customLoader(SeparateTransformsModelBuilder::begin)
+                        .base(nested().parent(basicItem(CNCMod.rl("flag_item"))))
+                                .perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
+                                .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
+                                .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
+                                .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model")))).end();
 
         withExistingParent(ResourceLocation.withDefaultNamespace("bucket").toString(), "neoforge:item/default")
                 .customLoader(SeparateTransformsModelBuilder::begin)
@@ -53,5 +63,11 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .predicate(MultiEntitySpawnEggProperty.ID, 0.02f).end().override()
                 .model(basicItem(CNCMod.rl("buckethead_spawn_egg")))
                 .predicate(MultiEntitySpawnEggProperty.ID, 0.03f).end();
+
+        basicItem(ItemRegistry.WALNUT_SIGN.get());
+        basicItem(ItemRegistry.HANGING_WALNUT_SIGN.get());
+        basicItem(ItemRegistry.WALNUT_DOOR.get());
+        buttonInventory("walnut_button", CNCMod.rl("block/walnut_planks"));
+        fenceInventory("walnut_fence", CNCMod.rl("block/walnut_planks"));
     }
 }
