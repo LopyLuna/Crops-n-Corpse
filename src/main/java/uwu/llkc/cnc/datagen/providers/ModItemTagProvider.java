@@ -46,5 +46,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ItemRegistry.WALNUT_SLAB.get());
         tag(ItemTags.WOODEN_STAIRS)
                 .add(ItemRegistry.WALNUT_STAIRS.get());
+        tag(ItemTags.BOATS)
+                .add(ItemRegistry.WALNUT_BOAT.get());
+        tag((ItemTags.CHEST_BOATS))
+                .add(ItemRegistry.WALNUT_CHEST_BOAT.get());
     }
 }

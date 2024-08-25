@@ -3,9 +3,11 @@ package uwu.llkc.cnc.datagen.providers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
@@ -105,5 +107,12 @@ public class ModRecipeProvider extends RecipeProvider {
         stairBuilder(ItemRegistry.WALNUT_STAIRS, Ingredient.of(ItemRegistry.WALNUT_PLANKS))
                 .unlockedBy("has_planks", has(ItemRegistry.WALNUT_PLANKS.get()))
                 .save(recipeOutput);
+        woodenBoat(recipeOutput, ItemRegistry.WALNUT_BOAT, ItemRegistry.WALNUT_PLANKS);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, ItemRegistry.WALNUT_CHEST_BOAT)
+                .requires(Blocks.CHEST)
+                .requires(ItemRegistry.WALNUT_PLANKS)
+                .group("chest_boat")
+                .unlockedBy("has_boat", has(ItemTags.BOATS))
+                .save(recipeOutput, "walnut_chest_boat");
     }
 }

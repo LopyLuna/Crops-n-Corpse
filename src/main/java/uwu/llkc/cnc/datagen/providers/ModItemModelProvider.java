@@ -67,6 +67,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.WALNUT_SIGN.get());
         basicItem(ItemRegistry.HANGING_WALNUT_SIGN.get());
         basicItem(ItemRegistry.WALNUT_DOOR.get());
+        basicItem(ItemRegistry.WALNUT_BOAT.asItem());
+        basicItem(ItemRegistry.WALNUT_CHEST_BOAT.asItem());
         buttonInventory("walnut_button", CNCMod.rl("block/walnut_planks"));
         fenceInventory("walnut_fence", CNCMod.rl("block/walnut_planks"));
     }

@@ -1,4 +1,4 @@
-// 1.21	2024-08-23T18:20:05.2777721	Item Models: cnc
+// 1.21	2024-08-25T17:28:28.6654845	Item Models: cnc
 cf5c2182fe08615cb0d4119083806e680076002e assets/cnc/models/item/browncoat_spawn_egg.json
 32e87e6f5564d12a898ad60f0637697e0f7f144d assets/cnc/models/item/buckethead_spawn_egg.json
 f1fa8e6f305d25dfb5c6ccce635229bd2a0ee3a2 assets/cnc/models/item/bucket_item.json
@@ -21,7 +21,10 @@ c47119ea2463b2dc658f72017e527432deca2dc7 assets/cnc/models/item/sunflower_seed_m
 0f41e7c0689db553ce5d82f0c664b252b660b234 assets/cnc/models/item/traffic_cone.json
 a9262ee2056da5bab1a6b57f8a8f1e63137e97b0 assets/cnc/models/item/traffic_cone_item.json
 e56047acb4ddf209be0b9b5aa593a765c1a4b837 assets/cnc/models/item/walnut.json
+dd3bf344b8bf0179d82f58e91cbcad5723abf82e assets/cnc/models/item/walnut_boat.json
 69ea66d7c502a032fed46db15f2c80a80ffa47b2 assets/cnc/models/item/walnut_button.json
+bbbee25515f7242034e25bef929ecfe2822b187c assets/cnc/models/item/walnut_chest_boat.json
+5a07d0af29e2372a0ecbfeb804b887c4b99c448a assets/cnc/models/item/walnut_door.json
 76dc814906efadce2bf0bfb0fa498624622df9d7 assets/cnc/models/item/walnut_fence.json
 1a1d6e5b49d37115fe4a7d2793bf924b631ce96a assets/cnc/models/item/walnut_flour.json
 a777fa675508e9d164f9a5729c9bb086544400da assets/cnc/models/item/walnut_leaves.json

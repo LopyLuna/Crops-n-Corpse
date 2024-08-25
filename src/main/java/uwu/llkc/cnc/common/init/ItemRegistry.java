@@ -5,6 +5,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -65,6 +66,10 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> WALNUT_PRESSURE_PLATE = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_PRESSURE_PLATE);
     public static final DeferredItem<BlockItem> WALNUT_STAIRS = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_STAIRS);
     public static final DeferredItem<BlockItem> WALNUT_SLAB = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_SLAB);
+    public static final DeferredItem<BoatItem> WALNUT_BOAT = ITEMS.registerItem("walnut_boat",
+            props -> new BoatItem(false, Boat.Type.valueOf("CNC_WALNUT"), props), new Item.Properties().stacksTo(1));
+    public static final DeferredItem<BoatItem> WALNUT_CHEST_BOAT = ITEMS.registerItem("walnut_chest_boat",
+            props -> new BoatItem(true, Boat.Type.valueOf("CNC_WALNUT"), props), new Item.Properties().stacksTo(1));
 
     static class Foods {
         public static final FoodProperties PEA_POD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.5f).build();
