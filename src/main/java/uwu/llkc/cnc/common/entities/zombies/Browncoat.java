@@ -88,11 +88,6 @@ public class Browncoat extends CNCZombie{
                 .add(Attributes.ATTACK_SPEED, 1);
     }
 
-    @Override
-    public boolean canDrownInFluidType(FluidType type) {
-        return super.canDrownInFluidType(type);
-    }
-
     private void moveTie() {
         this.xTieO = this.xTie;
         this.yTieO = this.yTie;
@@ -101,32 +96,32 @@ public class Browncoat extends CNCZombie{
         double d1 = this.getY() - this.yTie;
         double d2 = this.getZ() - this.zTie;
         double d3 = 10.0;
-        if (d0 > 10.0) {
+        if (d0 > d3) {
             this.xTie = this.getX();
             this.xTieO = this.xTie;
         }
 
-        if (d2 > 10.0) {
+        if (d2 > d3) {
             this.zTie = this.getZ();
             this.zTieO = this.zTie;
         }
 
-        if (d1 > 10.0) {
+        if (d1 > d3) {
             this.yTie = this.getY();
             this.yTieO = this.yTie;
         }
 
-        if (d0 < -10.0) {
+        if (d0 < -d3) {
             this.xTie = this.getX();
             this.xTieO = this.xTie;
         }
 
-        if (d2 < -10.0) {
+        if (d2 < -d3) {
             this.zTie = this.getZ();
             this.zTieO = this.zTie;
         }
 
-        if (d1 < -10.0) {
+        if (d1 < -d3) {
             this.yTie = this.getY();
             this.yTieO = this.yTie;
         }

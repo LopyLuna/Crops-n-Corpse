@@ -31,6 +31,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.EMPTY_SEED_PACKET.get());
         basicItem(ItemRegistry.PEASHOOTER_SEED_PACKET.get());
         basicItem(ItemRegistry.SUNFLOWER_SEED_PACKET.get());
+        basicItem(ItemRegistry.WALLNUT_SEED_PACKET.get());
         basicItem(ItemRegistry.WALNUT_SAPLING.get());
         leaves("walnut_leaves", CNCMod.rl("block/walnut_leaves"));
 

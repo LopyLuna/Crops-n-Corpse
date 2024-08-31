@@ -5,8 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BucketMixin",
-    "DispenseBehaviorMixin"
-
+    "DispenseBehaviorMixin",
+    "LevelChunkMixin"
   ],
   "client": [],
   "server": [],

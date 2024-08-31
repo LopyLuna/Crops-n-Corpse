@@ -15,6 +15,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.Peashooter;
 import uwu.llkc.cnc.common.entities.plants.Sunflower;
+import uwu.llkc.cnc.common.entities.plants.Wallnut;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
@@ -27,6 +28,7 @@ public class ModEvents {
     public static void entityAttributeCreation(final EntityAttributeCreationEvent event) {
         event.put(EntityTypeRegistry.PEASHOOTER.get(), Peashooter.attributes().build());
         event.put(EntityTypeRegistry.SUNFLOWER.get(), Sunflower.attributes().build());
+        event.put(EntityTypeRegistry.WALLNUT.get(), Wallnut.attributes().build());
         event.put(EntityTypeRegistry.BROWNCOAT.get(), Browncoat.attributes().build());
     }
 
@@ -35,6 +37,7 @@ public class ModEvents {
         event.register(EntityTypeRegistry.PEASHOOTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Peashooter::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.SUNFLOWER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sunflower::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.BROWNCOAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkAnyLightMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(EntityTypeRegistry.WALLNUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Wallnut::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 
     @SubscribeEvent

@@ -26,7 +26,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
-import uwu.llkc.cnc.common.init.*;
+import uwu.llkc.cnc.common.init.EntityTypeRegistry;
+import uwu.llkc.cnc.common.init.GameRuleInit;
+import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.init.SoundRegistry;
 import uwu.llkc.cnc.common.util.ItemUtils;
 
 import java.util.List;
@@ -34,16 +37,17 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-import static java. util. Map. entry;
+import static java.util.Map.entry;
 
-public class SeedPacketItem  <T extends Entity> extends Item {
+public class SeedPacketItem<T extends Entity> extends Item {
     public static final MapCodec<EntityType<?>> ENTITY_TYPE_FIELD_CODEC = BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("id");
     public static final MapCodec<UUID> UUID_FIELD_CODEC = UUIDUtil.CODEC.fieldOf("owner");
     public static final MapCodec<Float> HEALTH_FIELD_CODEC = Codec.FLOAT.fieldOf("Health");
 
     private static final Supplier<Map<EntityType<?>, SeedPacketItem<?>>> SEED_PACKET_ITEM_MAP = () -> Map.ofEntries(
             entry(EntityTypeRegistry.PEASHOOTER.get(), ItemRegistry.PEASHOOTER_SEED_PACKET.get()),
-            entry(EntityTypeRegistry.SUNFLOWER.get(), ItemRegistry.SUNFLOWER_SEED_PACKET.get())
+            entry(EntityTypeRegistry.SUNFLOWER.get(), ItemRegistry.SUNFLOWER_SEED_PACKET.get()),
+            entry(EntityTypeRegistry.WALLNUT.get(), ItemRegistry.WALLNUT_SEED_PACKET.get())
     );
 
     private final int sunCost;

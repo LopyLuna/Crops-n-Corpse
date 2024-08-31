@@ -1,15 +1,19 @@
 package uwu.llkc.cnc.common.entities.plants;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.control.LookControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Creeper;
@@ -20,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +41,25 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
 
     protected CNCPlant(EntityType<? extends Mob> entityType, Level level) {
         super(entityType, level);
+        moveControl = new MoveControl(this) {
+            @Override
+            public void tick() {}
+        };
+
+        lookControl = new LookControl(this) {
+            @Override
+            protected boolean resetXRotOnTick() {
+                return false;
+            }
+        };
+    }
+
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
+        var pos = BlockPos.containing(getX(), getY(), getZ());
+        super.setPos(pos.getX() + 0.5, getY(), pos.getZ() + 0.5);
+        return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
     }
 
     @Override

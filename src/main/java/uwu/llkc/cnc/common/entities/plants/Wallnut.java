@@ -1,10 +1,13 @@
 package uwu.llkc.cnc.common.entities.plants;
 
-import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -12,39 +15,54 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.ai.SpawnItemGoal;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 
-public class Sunflower extends CNCPlant {
-    public final AnimationState idle = new AnimationState();
-    public final AnimationState produce = new AnimationState();
-    public final AnimationState die = new AnimationState();
+public class Wallnut extends CNCPlant {
+    public static final EntityDataAccessor<Integer> STAGE = SynchedEntityData.defineId(Wallnut.class, EntityDataSerializers.INT);
 
-    public Sunflower(EntityType<Sunflower> entityType, Level level) {
+    public final AnimationState glance = new AnimationState();
+    public final AnimationState stage1 = new AnimationState();
+    public final AnimationState stage2 = new AnimationState();
+    public final AnimationState stage3 = new AnimationState();
+    public final AnimationState death = new AnimationState();
+
+    public Wallnut(EntityType<Wallnut> entityType, Level level) {
         super(entityType, level);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(STAGE, 0);
     }
 
     public static AttributeSupplier.Builder attributes() {
         return CNCPlant.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 6);
+                .add(Attributes.FOLLOW_RANGE, 8)
+                .add(Attributes.MAX_HEALTH, 200);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        goalSelector.addGoal(2, new RandomLookAroundGoal(this));
         goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 6, 0.001f));
-        goalSelector.addGoal(3, new SpawnItemGoal(new ItemStack(ItemRegistry.SUN.asItem(), 4), 8, this, true, 1120, 1200, 40));
     }
 
     @Override
     public void tick() {
         super.tick();
         if (level().isClientSide()) {
-            idle.startIfStopped(tickCount);
+            stage1.animateWhen(entityData.get(STAGE) == 1, tickCount);
+            stage2.animateWhen(entityData.get(STAGE) == 2, tickCount);
+            stage3.animateWhen(entityData.get(STAGE) == 3, tickCount);
+            if (getRandom().nextInt(2) < 0.02) {
+                glance.startIfStopped(tickCount);
+            } else {
+                glance.stop();
+            }
         }
     }
 
@@ -56,29 +74,28 @@ public class Sunflower extends CNCPlant {
 
     @Override
     public PlantCategory getPlantCategory() {
-        return PlantCategory.SUPPORT;
+        return PlantCategory.DEFENSIVE;
     }
 
     @Override
     public void handleEntityEvent(byte id) {
         super.handleEntityEvent(id);
-        if (id == 0) {
-            produce.start(tickCount);
-            playSound(SoundRegistry.SUNFLOWER_PRODUCE.get());
-        } else if (id == 1) {
-            die.start(tickCount);
+        if (id == 1) {
+            death.start(tickCount);
         }
     }
 
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
+        //todo
         return SoundRegistry.SUNFLOWER_DEATH.get();
     }
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
+        //todo
         return SoundRegistry.SUNFLOWER_HURT.get();
     }
 }

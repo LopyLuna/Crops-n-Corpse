@@ -1,12 +1,12 @@
 package uwu.llkc.cnc.common.events;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -14,22 +14,22 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.neoforged.bus.api.Event;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
-import net.neoforged.neoforge.event.VanillaGameEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
 import uwu.llkc.cnc.CNCMod;
+import uwu.llkc.cnc.common.entities.plants.Wallnut;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 
 import java.util.List;
@@ -50,6 +50,12 @@ public class NeoForgeEvents {
                     new ItemCost(ItemRegistry.SUNFLOWER_SEEDS.get(), pRandom.nextIntBetweenInclusive(13, 18)),
                     new ItemStack(Items.EMERALD, 1),
                     16, 2, 0.02f));
+
+            trades.get(1).add((trader, random) -> new MerchantOffer(
+                    new ItemCost(ItemRegistry.WALNUT.get(), random.nextIntBetweenInclusive(8, 11)),
+                    new ItemStack(Items.EMERALD, 1),
+                    16, 2, 0.02f
+            ));
         }
     }
 
@@ -121,6 +127,15 @@ public class NeoForgeEvents {
         if (event.getItemStack().is(Items.BUCKET) && event.getItemStack().has(DataComponents.DAMAGE) && event.getItemStack().get(DataComponents.DAMAGE) > 0) {
             event.setCancellationResult(InteractionResult.FAIL);
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void blockBroken(final BlockEvent.BreakEvent event) {
+        Wallnut entity = event.getLevel().getNearestEntity(Wallnut.class, TargetingConditions.DEFAULT, null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), AABB.ofSize(event.getPos().getCenter(), 20, 20, 20));
+
+        if (entity != null && (event.getPlayer().equals(entity.getOwner()) || event.getPlayer().isCreative())) {
+            ((ChunkMixinHelper) event.getLevel().getChunk(event.getPos())).SetNextBlockPosDoBreak(event.getPos());
         }
     }
 }

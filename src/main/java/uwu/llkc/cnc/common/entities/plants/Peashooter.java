@@ -1,22 +1,19 @@
 package uwu.llkc.cnc.common.entities.plants;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.control.LookControl;
-import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
@@ -30,25 +27,6 @@ public class Peashooter extends CNCPlant implements RangedAttackMob {
 
     public Peashooter(EntityType<Peashooter> entityType, Level level) {
         super(entityType, level);
-        moveControl = new MoveControl(this) {
-            @Override
-            public void tick() {}
-        };
-
-        lookControl = new LookControl(this) {
-            @Override
-            protected boolean resetXRotOnTick() {
-                return false;
-            }
-        };
-    }
-
-    @Nullable
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-        var pos = BlockPos.containing(getX(), getY(), getZ());
-        super.setPos(pos.getX() + 0.5, getY(), pos.getZ() + 0.5);
-        return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
     }
 
     public static AttributeSupplier.Builder attributes() {
@@ -86,16 +64,6 @@ public class Peashooter extends CNCPlant implements RangedAttackMob {
     public void die(DamageSource damageSource) {
         level().broadcastEntityEvent(this, (byte)1);
         super.die(damageSource);
-    }
-
-    @Override
-    public void setTarget(@Nullable LivingEntity target) {
-        super.setTarget(target);
-    }
-
-    @Override
-    public void setPos(double x, double y, double z) {
-        super.setPos(x, y, z);
     }
 
     @Override
