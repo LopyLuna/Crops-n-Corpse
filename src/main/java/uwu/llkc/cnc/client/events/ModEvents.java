@@ -19,13 +19,8 @@ import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
-import uwu.llkc.cnc.client.entities.models.PeashooterModel;
-import uwu.llkc.cnc.client.entities.models.SunflowerModel;
-import uwu.llkc.cnc.client.entities.renderers.BrowncoatRenderer;
-import uwu.llkc.cnc.client.entities.renderers.PeaProjectileRenderer;
-import uwu.llkc.cnc.client.entities.renderers.PeashooterRenderer;
-import uwu.llkc.cnc.client.entities.renderers.SunflowerRenderer;
+import uwu.llkc.cnc.client.entities.models.*;
+import uwu.llkc.cnc.client.entities.renderers.*;
 import uwu.llkc.cnc.common.init.BlockEntityTypeRegistry;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
@@ -39,6 +34,7 @@ public class ModEvents {
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityTypeRegistry.PEASHOOTER.get(), PeashooterRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.SUNFLOWER.get(), SunflowerRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.WALLNUT.get(), WallNutRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.PEA.get(), PeaProjectileRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.BROWNCOAT.get(), BrowncoatRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.WALNUT_BOAT.get(), context -> new BoatRenderer(context, false));
@@ -53,6 +49,8 @@ public class ModEvents {
         event.registerLayerDefinition(PeashooterModel.MAIN_LAYER, PeashooterModel::createBodyLayer);
         event.registerLayerDefinition(SunflowerModel.MAIN_LAYER, SunflowerModel::createBodyLayer);
         event.registerLayerDefinition(BrowncoatModel.MAIN_LAYER, BrowncoatModel::createBodyLayer);
+        event.registerLayerDefinition(WallNutModel.MAIN_LAYER, WallNutModel::createBodyLayer);
+        event.registerLayerDefinition(WallNutArmorLayer.ARMOR, WallNutArmorLayer::createArmor);
     }
 
     @SubscribeEvent

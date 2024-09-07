@@ -41,7 +41,22 @@ public class BlockRegistry {
             props -> new SaplingBlock(TreeGrowers.WALNUT_TREE, props), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING));
 
     public static final DeferredBlock<LeavesBlock> WALNUT_LEAVES = BLOCKS.registerBlock("walnut_leaves",
-            LeavesBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES));
+            props -> new LeavesBlock(props) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES));
 
     public static final DeferredBlock<LogBlock> STRIPPED_WALNUT_WOOD = BLOCKS.registerBlock("stripped_walnut_wood",
             props -> new LogBlock(props, null), BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_SPRUCE_WOOD));

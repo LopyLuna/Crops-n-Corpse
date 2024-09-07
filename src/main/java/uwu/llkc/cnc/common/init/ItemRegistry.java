@@ -15,7 +15,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.Peashooter;
 import uwu.llkc.cnc.common.entities.plants.Sunflower;
-import uwu.llkc.cnc.common.entities.plants.Wallnut;
+import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.items.MultiEntitySpawnEgg;
 import uwu.llkc.cnc.common.items.SeedPacketItem;
 import uwu.llkc.cnc.common.items.TrafficConeItem;
@@ -30,7 +30,7 @@ public class ItemRegistry {
     public static final DeferredItem<SeedPacketItem<Entity>> EMPTY_SEED_PACKET = ITEMS.registerItem("empty_seed_packet", props -> new SeedPacketItem<>(props, 0, 0, null));
     public static final DeferredItem<SeedPacketItem<Peashooter>> PEASHOOTER_SEED_PACKET = ITEMS.registerItem("peashooter_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 16, 20, EntityTypeRegistry.PEASHOOTER));
     public static final DeferredItem<SeedPacketItem<Sunflower>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 0, 20, EntityTypeRegistry.SUNFLOWER));
-    public static final DeferredItem<SeedPacketItem<Wallnut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 0, EntityTypeRegistry.WALLNUT));
+    public static final DeferredItem<SeedPacketItem<WallNut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 0, EntityTypeRegistry.WALLNUT));
 
     public static final DeferredItem<Item> PLANT_FOOD = ITEMS.registerSimpleItem("plant_food");
     public static final DeferredItem<Item> SUN = ITEMS.registerSimpleItem("sun");

@@ -15,12 +15,14 @@ import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uwu.llkc.cnc.common.entities.plants.Wallnut;
+import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 
 @Mixin(value = {LevelChunk.class, ProtoChunk.class})
 public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinHelper {
-    public BlockPos nextBlockPosDoBreak = null;
+    private BlockPos nextBlockPosDoBreak = null;
+    private BlockPos nextPosForInteractionCheck = null;
+    private BlockState blockStateForDelayedPlace = null;
 
     public LevelChunkMixin(ChunkPos chunkPos, UpgradeData upgradeData, LevelHeightAccessor levelHeightAccessor, Registry<Biome> biomeRegistry, long inhabitedTime, @Nullable LevelChunkSection[] sections, @Nullable BlendingData blendingData) {
         super(chunkPos, upgradeData, levelHeightAccessor, biomeRegistry, inhabitedTime, sections, blendingData);
@@ -29,7 +31,10 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinH
     @WrapOperation(method = "setBlockState(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Z)Lnet/minecraft/world/level/block/state/BlockState;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/LevelChunkSection;setBlockState(IIILnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/block/state/BlockState;"))
     private BlockState getBlockState(LevelChunkSection chunk, int x, int y, int z, BlockState state, Operation<BlockState> original, BlockPos pos, BlockState otherState, boolean isMoving) {
         if (getLevel() != null && (!pos.equals(nextBlockPosDoBreak) && (state.isAir() && !getLevel().getBlockState(pos).isAir() && !isMoving))) {
-            Wallnut entity = getLevel().getNearestEntity(Wallnut.class, TargetingConditions.DEFAULT, null, pos.getX(), pos.getY(), pos.getZ(), AABB.ofSize(pos.getCenter(), 20, 20, 20));
+            if (pos.equals(nextPosForInteractionCheck)) {
+                blockStateForDelayedPlace = state;
+            }
+            WallNut entity = getLevel().getNearestEntity(WallNut.class, TargetingConditions.DEFAULT, null, pos.getX(), pos.getY(), pos.getZ(), AABB.ofSize(pos.getCenter(), 20, 20, 20));
             if (entity != null) {
                 int damage = 0;
                 float resistance = state.getBlock().getExplosionResistance();
@@ -45,7 +50,17 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinH
     }
 
     @Override
-    public void SetNextBlockPosDoBreak(BlockPos pos) {
+    public void setNextBlockPosDoBreak(BlockPos pos) {
         nextBlockPosDoBreak = pos;
+    }
+
+    @Override
+    public void setNextPosForInteractionCheck(BlockPos nextPosForInteractionCheck) {
+        this.nextPosForInteractionCheck = nextPosForInteractionCheck;
+    }
+
+    @Override
+    public BlockState getBlockStateForDelayedPlace() {
+        return blockStateForDelayedPlace;
     }
 }

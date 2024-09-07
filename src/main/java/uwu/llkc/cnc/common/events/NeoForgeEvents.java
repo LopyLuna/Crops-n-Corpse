@@ -3,6 +3,7 @@ package uwu.llkc.cnc.common.events;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -27,8 +28,9 @@ import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.common.entities.plants.Wallnut;
+import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 
@@ -120,6 +122,7 @@ public class NeoForgeEvents {
             event.setCancellationResult(InteractionResult.FAIL);
             event.setCanceled(true);
         }
+        ((ChunkMixinHelper) event.getLevel().getChunk(event.getPos())).setNextPosForInteractionCheck(event.getPos());
     }
 
     @SubscribeEvent
@@ -128,14 +131,15 @@ public class NeoForgeEvents {
             event.setCancellationResult(InteractionResult.FAIL);
             event.setCanceled(true);
         }
+
     }
 
     @SubscribeEvent
     public static void blockBroken(final BlockEvent.BreakEvent event) {
-        Wallnut entity = event.getLevel().getNearestEntity(Wallnut.class, TargetingConditions.DEFAULT, null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), AABB.ofSize(event.getPos().getCenter(), 20, 20, 20));
-
+        WallNut entity = event.getLevel().getNearestEntity(WallNut.class, TargetingConditions.DEFAULT, null, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), AABB.ofSize(event.getPos().getCenter(), 20, 20, 20));
         if (entity != null && (event.getPlayer().equals(entity.getOwner()) || event.getPlayer().isCreative())) {
-            ((ChunkMixinHelper) event.getLevel().getChunk(event.getPos())).SetNextBlockPosDoBreak(event.getPos());
+            ((ChunkMixinHelper) event.getLevel().getChunk(event.getPos())).setNextBlockPosDoBreak(event.getPos());
+            PacketDistributor.sendToPlayer(((ServerPlayer) event.getPlayer()), new SyncBlockActuallyBrokenPayload(event.getPos()));
         }
     }
 }

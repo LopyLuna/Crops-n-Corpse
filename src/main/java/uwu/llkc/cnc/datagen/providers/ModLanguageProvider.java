@@ -25,15 +25,20 @@ public class ModLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         for (DeferredHolder<EntityType<?>, ? extends EntityType<?>> entry : EntityTypeRegistry.ENTITY_TYPES.getEntries()) {
+            if (entry == EntityTypeRegistry.WALLNUT) continue;
             addEntityType(entry, toEnglishTranslation(entry.getId()));
         }
 
+        addEntityType(EntityTypeRegistry.WALLNUT, "Wall-Nut");
+
         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
+            if (entry == ItemRegistry.WALLNUT_SEED_PACKET) continue;
             if (entry.get() instanceof BlockItem) continue;
             addItem(entry, toEnglishTranslation(entry.getId()));
         }
 
         addItem(ItemRegistry.RAW_PEA, toEnglishTranslation(ItemRegistry.RAW_PEA.getId()));
+        addItem(ItemRegistry.WALLNUT_SEED_PACKET, "Wall-Nut Seed Packet");
         addItem(ItemRegistry.SUNFLOWER_SEEDS, toEnglishTranslation(ItemRegistry.SUNFLOWER_SEEDS.getId()));
 
         for (DeferredHolder<Block, ? extends Block> entry : BlockRegistry.BLOCKS.getEntries()) {

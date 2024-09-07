@@ -3,6 +3,7 @@ package uwu.llkc.cnc.datagen.providers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import uwu.llkc.cnc.common.init.ItemRegistry;
@@ -26,6 +27,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(ItemRegistry.WALNUT_WOOD.get())
                 .add(ItemRegistry.STRIPPED_WALNUT_WOOD.get())
                 .add(ItemRegistry.STRIPPED_WALNUT_LOG.get());
+        copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
         tag(ItemTags.SIGNS)
                 .add(ItemRegistry.WALNUT_SIGN.get());
         tag(ItemTags.HANGING_SIGNS)

@@ -15,12 +15,13 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.Peashooter;
 import uwu.llkc.cnc.common.entities.plants.Sunflower;
-import uwu.llkc.cnc.common.entities.plants.Wallnut;
+import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.items.MultiEntitySpawnEgg;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
+import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEvents {
@@ -28,7 +29,7 @@ public class ModEvents {
     public static void entityAttributeCreation(final EntityAttributeCreationEvent event) {
         event.put(EntityTypeRegistry.PEASHOOTER.get(), Peashooter.attributes().build());
         event.put(EntityTypeRegistry.SUNFLOWER.get(), Sunflower.attributes().build());
-        event.put(EntityTypeRegistry.WALLNUT.get(), Wallnut.attributes().build());
+        event.put(EntityTypeRegistry.WALLNUT.get(), WallNut.attributes().build());
         event.put(EntityTypeRegistry.BROWNCOAT.get(), Browncoat.attributes().build());
     }
 
@@ -37,7 +38,7 @@ public class ModEvents {
         event.register(EntityTypeRegistry.PEASHOOTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Peashooter::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.SUNFLOWER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sunflower::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.BROWNCOAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkAnyLightMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
-        event.register(EntityTypeRegistry.WALLNUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Wallnut::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(EntityTypeRegistry.WALLNUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WallNut::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 
     @SubscribeEvent
@@ -47,6 +48,11 @@ public class ModEvents {
                 DropEquipmentPayload.TYPE,
                 DropEquipmentPayload.STREAM_CODEC,
                 DropEquipmentPayload::handleData);
+        registrar.playToClient(
+                SyncBlockActuallyBrokenPayload.TYPE,
+                SyncBlockActuallyBrokenPayload.STREAM_CODEC,
+                SyncBlockActuallyBrokenPayload::handleData
+        );
     }
 
     @SubscribeEvent

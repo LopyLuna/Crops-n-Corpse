@@ -7,21 +7,17 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import uwu.llkc.cnc.common.entities.ai.SpawnItemGoal;
-import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 
-public class Wallnut extends CNCPlant {
-    public static final EntityDataAccessor<Integer> STAGE = SynchedEntityData.defineId(Wallnut.class, EntityDataSerializers.INT);
+public class WallNut extends CNCPlant {
+    public static final EntityDataAccessor<Integer> STAGE = SynchedEntityData.defineId(WallNut.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> HAS_ARMOR = SynchedEntityData.defineId(WallNut.class, EntityDataSerializers.BOOLEAN);
 
     public final AnimationState glance = new AnimationState();
     public final AnimationState stage1 = new AnimationState();
@@ -29,7 +25,7 @@ public class Wallnut extends CNCPlant {
     public final AnimationState stage3 = new AnimationState();
     public final AnimationState death = new AnimationState();
 
-    public Wallnut(EntityType<Wallnut> entityType, Level level) {
+    public WallNut(EntityType<WallNut> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -37,6 +33,7 @@ public class Wallnut extends CNCPlant {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(STAGE, 0);
+        builder.define(HAS_ARMOR, false);
     }
 
     public static AttributeSupplier.Builder attributes() {
