@@ -6,9 +6,11 @@
   "mixins": [
     "BucketMixin",
     "DispenseBehaviorMixin",
-    "LevelChunkMixin"
+    "LevelChunkMixin",
+    "ServerGamePacketListenerImplMixin"
   ],
-  "client": [],
+  "client": [
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1
