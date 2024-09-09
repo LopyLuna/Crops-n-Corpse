@@ -2,6 +2,7 @@ package uwu.llkc.cnc.common.events;
 
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -19,6 +20,7 @@ import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
+import uwu.llkc.cnc.common.init.GameRuleInit;
 import uwu.llkc.cnc.common.items.MultiEntitySpawnEgg;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
@@ -65,6 +67,7 @@ public class ModEvents {
                 }
             }
             WoodType.register(BlockRegistry.WoodTypes.WALNUT);
+            GameRuleInit.init();
         });
     }
 }

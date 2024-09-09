@@ -4,12 +4,16 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundMoveEntityPacket;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.server.level.ServerChunkCache;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -21,20 +25,26 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.PacketDistributor;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.GameRuleInit;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 import uwu.llkc.cnc.common.util.ItemUtils;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static java.util.Map.entry;
@@ -66,9 +76,14 @@ public class SeedPacketItem<T extends Entity> extends Item {
         if (context.getClickedFace() == Direction.UP && !context.getLevel().isClientSide) {
             var data = context.getItemInHand().getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
             if (!data.isEmpty() || fallbackEntityType != null) {
-                var entity = data.isEmpty() ? getFallbackEntityType() : data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(getFallbackEntityType());
+                EntityType<T> entity = data.isEmpty() ? getFallbackEntityType() : (EntityType<T>) data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(getFallbackEntityType());
                 if (context.getPlayer() != null && (context.getPlayer().hasInfiniteMaterials() || ItemUtils.tryTakeItems(context.getPlayer(), new ItemStack(ItemRegistry.SUN.get(), getSunCost())))) {
-                    entity.spawn((ServerLevel) context.getLevel(), context.getItemInHand(), context.getPlayer(), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
+
+                    entity.spawn((ServerLevel) context.getLevel(), EntityType.<T>createDefaultStackConfig((ServerLevel) context.getLevel(), context.getItemInHand(), context.getPlayer()).andThen(mob -> {
+                        mob.setYRot(context.getPlayer().getYHeadRot());
+                        mob.setYHeadRot(context.getPlayer().getYHeadRot());
+                        mob.setYBodyRot(context.getPlayer().getYHeadRot());
+                    }), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
                     if (context.getPlayer() != null && !context.getPlayer().hasInfiniteMaterials()) {
                         context.getPlayer().setItemInHand(context.getHand(), new ItemStack(ItemRegistry.EMPTY_SEED_PACKET.get(), 1));
                         if (context.getPlayer().level().getGameRules().getBoolean(GameRuleInit.RULE_SEED_PACKET_COOLDOWN)) {
@@ -120,7 +135,7 @@ public class SeedPacketItem<T extends Entity> extends Item {
         }
     }
 
-    public EntityType<?> getFallbackEntityType() {
+    public EntityType<T> getFallbackEntityType() {
         if (fallbackEntityType == null) return null;
         return fallbackEntityType.get();
     }
