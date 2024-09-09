@@ -33,6 +33,8 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinH
         if (getLevel() != null && (!pos.equals(nextBlockPosDoBreak) && (state.isAir() && !getLevel().getBlockState(pos).isAir() && !isMoving))) {
             if (pos.equals(nextPosForInteractionCheck)) {
                 blockStateForDelayedPlace = state;
+            } else {
+                nextPosForInteractionCheck = null;
             }
             WallNut entity = getLevel().getNearestEntity(WallNut.class, TargetingConditions.DEFAULT, null, pos.getX(), pos.getY(), pos.getZ(), AABB.ofSize(pos.getCenter(), 20, 20, 20));
             if (entity != null) {
@@ -62,5 +64,10 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinH
     @Override
     public BlockState getBlockStateForDelayedPlace() {
         return blockStateForDelayedPlace;
+    }
+
+    @Override
+    public BlockPos getNextPosForInteractionCheck() {
+        return nextPosForInteractionCheck;
     }
 }

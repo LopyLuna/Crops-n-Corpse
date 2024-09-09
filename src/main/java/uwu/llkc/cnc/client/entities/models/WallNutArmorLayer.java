@@ -36,8 +36,8 @@ public class WallNutArmorLayer extends RenderLayer<WallNut, WallNutModel> {
     public static LayerDefinition createArmor() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
-        PartDefinition Armor = partdefinition.addOrReplaceChild("Armor", CubeListBuilder.create().texOffs(0, 32).addBox(-7.5F, -18.0F, -6.5F, 15.0F, 18.0F, 13.0F, new CubeDeformation(0.5F))
-                .texOffs(0, 0).addBox(-7.5F, 0, -6.5F, 15.0F, 18.0F, 13.0F, new CubeDeformation(1.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition Armor = partdefinition.addOrReplaceChild("Armor", CubeListBuilder.create().texOffs(0, 32).addBox(-7.5F, 6, -6.5F, 15.0F, 18.0F, 13.0F, new CubeDeformation(0.5F))
+                .texOffs(0, 0).addBox(-7.5F, 6, -6.5F, 15.0F, 18.0F, 13.0F, new CubeDeformation(1.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
