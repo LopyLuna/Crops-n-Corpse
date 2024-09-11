@@ -56,7 +56,7 @@ public class WallNut extends CNCPlant {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 6, 0.001f));
+        goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 6, 1f));
     }
 
     @Override
@@ -66,11 +66,11 @@ public class WallNut extends CNCPlant {
             stage1.animateWhen(entityData.get(STAGE) == 1, tickCount);
             stage2.animateWhen(entityData.get(STAGE) == 2, tickCount);
             stage3.animateWhen(entityData.get(STAGE) == 3, tickCount);
-            if (getRandom().nextInt(2) < 0.02) {
-                glance.startIfStopped(tickCount);
-            } else {
-                glance.stop();
-            }
+//            if (getRandom().nextInt(2) < 0.02) {
+//                glance.startIfStopped(tickCount);
+//            } else {
+//                glance.stop();
+//            }
         }
     }
 

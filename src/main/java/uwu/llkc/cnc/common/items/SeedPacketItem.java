@@ -71,19 +71,22 @@ public class SeedPacketItem<T extends Entity> extends Item {
         this.fallbackEntityType = fallbackEntityType;
     }
 
+    private <F extends Entity> Consumer<F> getConsumer(UseOnContext context) {
+        return EntityType.<F>createDefaultStackConfig((ServerLevel) context.getLevel(), context.getItemInHand(), context.getPlayer()).andThen(mob -> {
+            mob.setYRot(context.getPlayer().getYHeadRot());
+            mob.setYHeadRot(context.getPlayer().getYHeadRot());
+            mob.setYBodyRot(context.getPlayer().getYHeadRot());
+        });
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
         if (context.getClickedFace() == Direction.UP && !context.getLevel().isClientSide) {
             var data = context.getItemInHand().getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
             if (!data.isEmpty() || fallbackEntityType != null) {
-                EntityType<T> entity = data.isEmpty() ? getFallbackEntityType() : (EntityType<T>) data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(getFallbackEntityType());
+                EntityType<?> entity = data.isEmpty() ? getFallbackEntityType() : data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(getFallbackEntityType());
                 if (context.getPlayer() != null && (context.getPlayer().hasInfiniteMaterials() || ItemUtils.tryTakeItems(context.getPlayer(), new ItemStack(ItemRegistry.SUN.get(), getSunCost())))) {
-
-                    entity.spawn((ServerLevel) context.getLevel(), EntityType.<T>createDefaultStackConfig((ServerLevel) context.getLevel(), context.getItemInHand(), context.getPlayer()).andThen(mob -> {
-                        mob.setYRot(context.getPlayer().getYHeadRot());
-                        mob.setYHeadRot(context.getPlayer().getYHeadRot());
-                        mob.setYBodyRot(context.getPlayer().getYHeadRot());
-                    }), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
+                    entity.spawn((ServerLevel) context.getLevel(), getConsumer(context), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
                     if (context.getPlayer() != null && !context.getPlayer().hasInfiniteMaterials()) {
                         context.getPlayer().setItemInHand(context.getHand(), new ItemStack(ItemRegistry.EMPTY_SEED_PACKET.get(), 1));
                         if (context.getPlayer().level().getGameRules().getBoolean(GameRuleInit.RULE_SEED_PACKET_COOLDOWN)) {

@@ -5,6 +5,8 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.entities.animations.WallNutAnimations;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
@@ -54,9 +56,12 @@ public class WallNutModel extends HierarchicalModel<WallNut> {
 		this.animate(entity.stage2, WallNutAnimations.IDLE_2, ageInTicks);
 		this.animate(entity.stage3, WallNutAnimations.IDLE_3, ageInTicks);
 
-		rightEye.x = (float) (4.43361 * Math.sin(netHeadYaw-0.878961) + 4.91421);
-		leftEye.x = (float) (4.43361 * Math.sin(netHeadYaw+0.878961) - 6.91421);
-		rightEye.y = (float) (2.72291 * Math.sin(netHeadYaw-0.677623) +11.2071);
-		leftEye.y = (float) (2.72291 * Math.sin(netHeadYaw-0.677623) +11.2071);
+
+		Vec3 rightEyeOrigin = new Vec3(-2.5f, -10.5f, -4f);
+		Vec3 leftEyeOrigin = new Vec3(2.5f, -10.5f, -4f);
+		Vec3 lookTarget = Vec3.directionFromRotation(headPitch, netHeadYaw);
+
+		rightEye.setPos(Math.clamp((float) (2.49f / lookTarget.z * lookTarget.x + rightEyeOrigin.x), -4.5f, -2.5f), Math.clamp((float) (-2.49f / lookTarget.z * lookTarget.y + rightEyeOrigin.y), -12, -9.5f), -6.49f);
+		leftEye.setPos(Math.clamp((float) (2.49f / lookTarget.z * lookTarget.x + leftEyeOrigin.x), 2.5f, 4.5f), Math.clamp((float) (-2.49f / lookTarget.z * lookTarget.y + leftEyeOrigin.y), -12, -9.5f), -6.49f);
     }
 }
