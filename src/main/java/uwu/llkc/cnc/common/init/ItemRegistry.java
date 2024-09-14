@@ -61,9 +61,9 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> STRIPPED_WALNUT_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_WALNUT_WOOD);
     public static final DeferredItem<BlockItem> WALNUT_PLANKS = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_PLANKS);
     public static final DeferredItem<BlockItem> WALNUT_SIGN = ITEMS.registerItem("walnut_sign",
-            props -> new SignItem(props, BlockRegistry.STANDING_WALNUT_SIGN.get(), BlockRegistry.WALNUT_WALL_SIGN.get()));
+            props -> new SignItem(props.stacksTo(16), BlockRegistry.STANDING_WALNUT_SIGN.get(), BlockRegistry.WALNUT_WALL_SIGN.get()));
     public static final DeferredItem<BlockItem> HANGING_WALNUT_SIGN = ITEMS.registerItem("hanging_walnut_sign",
-            props -> new HangingSignItem(BlockRegistry.CEILING_HANGING_WALNUT_SIGN.get(), BlockRegistry.WALL_HANGING_WALNUT_SIGN.get(), props));
+            props -> new HangingSignItem(BlockRegistry.CEILING_HANGING_WALNUT_SIGN.get(), BlockRegistry.WALL_HANGING_WALNUT_SIGN.get(), props.stacksTo(16)));
     public static final DeferredItem<BlockItem> WALNUT_TRAP_DOOR = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_TRAPDOOR);
     public static final DeferredItem<BlockItem> WALNUT_DOOR = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_DOOR);
     public static final DeferredItem<BlockItem> WALNUT_BUTTON = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_BUTTON);

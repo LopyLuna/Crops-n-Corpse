@@ -54,9 +54,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         signBlock(BlockRegistry.STANDING_WALNUT_SIGN.get(), BlockRegistry.WALNUT_WALL_SIGN.get(), CNCMod.rl("block/stripped_walnut_log"));
         simpleBlock(BlockRegistry.WALL_HANGING_WALNUT_SIGN.get(), models().sign("wall_hanging_walnut_sign", CNCMod.rl("block/stripped_walnut_log")));
         simpleBlock(BlockRegistry.CEILING_HANGING_WALNUT_SIGN.get(), models().sign("ceiling_hanging_walnut_sign", CNCMod.rl("block/stripped_walnut_log")));
-        trapdoorBlock(BlockRegistry.WALNUT_TRAPDOOR.get(), CNCMod.rl("block/walnut_trapdoor"), false);
+        trapdoorBlock(BlockRegistry.WALNUT_TRAPDOOR.get(), CNCMod.rl("block/walnut_trapdoor"), true);
         simpleBlockItem(BlockRegistry.WALNUT_TRAPDOOR.get(), models().getExistingFile(CNCMod.rl("block/walnut_trapdoor_bottom")));
-        doorBlock(BlockRegistry.WALNUT_DOOR.get(), CNCMod.rl("block/walnut_door_top"), CNCMod.rl("block/walnut_door_bottom"));
+        doorBlock(BlockRegistry.WALNUT_DOOR.get(), CNCMod.rl("block/walnut_door_bottom"), CNCMod.rl("block/walnut_door_top"));
         buttonBlock(BlockRegistry.WALNUT_BUTTON.get(), CNCMod.rl("block/walnut_planks"));
         pressurePlateBlock(BlockRegistry.WALNUT_PRESSURE_PLATE.get(), CNCMod.rl("block/walnut_planks"));
         simpleBlockItem(BlockRegistry.WALNUT_PRESSURE_PLATE.get(), models().getExistingFile(CNCMod.rl("block/walnut_pressure_plate")));

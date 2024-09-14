@@ -45,10 +45,10 @@ public class ModLanguageProvider extends LanguageProvider {
             if (entry.get() instanceof SignBlock) continue;
             addBlock(entry, toEnglishTranslation(entry.getId()));
         }
-        add("block.cnc.standing_walnut_sign", "Standing Walnut Sign");
-        add("block.cnc._walnut_wall_sign", "Walnut Wall Sign");
-        add("block.cnc._ceiling_hanging_walnut_sign", "Ceiling Hanging Walnut Sign");
-        add("block.cnc._hanging_walnut_wall_sign", "Hanging Walnut Wall Sign");
+        add("block.cnc.standing_walnut_sign", "Walnut Sign");
+        add("block.cnc.walnut_wall_sign", "Walnut Wall Sign");
+        add("block.cnc.ceiling_hanging_walnut_sign", "Hanging Walnut Sign");
+        add("block.cnc.hanging_walnut_wall_sign", "Hanging Walnut Sign");
 
         add("itemGroup.cnc.cnc_tab", "Crops 'n' Corpse");
         add("damage_type.cnc.pea_shot", "Pea shot");

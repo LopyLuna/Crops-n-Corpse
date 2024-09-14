@@ -1,10 +1,10 @@
-// 1.21	2024-08-25T17:28:28.6684886	Tags for minecraft:item mod id vanilla
+// 1.21	2024-09-14T12:55:08.9396218	Tags for minecraft:item mod id vanilla
 fd898b1fe141dae42b4a24daeea31257f97c6c16 data/cnc/tags/item/walnut_logs.json
 d309aca79f6c2c60df646c0a2421dc7ef3eb69ec data/minecraft/tags/item/boats.json
 2f4aa04dcd02924438df7180a201d133fe85b886 data/minecraft/tags/item/chest_boats.json
 66700707a36d885815991be2b8dcd198bc948dae data/minecraft/tags/item/fence_gates.json
 fec77072b6b67b43d3f679e18811aeb1b9bb1dbc data/minecraft/tags/item/hanging_signs.json
-78a9196a78c26acb8519f97dd74ec3c64c31abed data/minecraft/tags/item/logs_that_burn.json
+11cfa8b7b2470d4b6d15d516f880d8fdbaf7238c data/minecraft/tags/item/logs_that_burn.json
 1872dd5410df038819ccfa262d799c3c5b3a3ae1 data/minecraft/tags/item/planks.json
 c0cdf95260265ac346e8eaeecc1ed2732d41a415 data/minecraft/tags/item/signs.json
 ec1feda641712c943617f9aa591111752e312738 data/minecraft/tags/item/wooden_buttons.json

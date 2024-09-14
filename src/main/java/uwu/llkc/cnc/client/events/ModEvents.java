@@ -69,10 +69,10 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void colorBlocks(final RegisterColorHandlersEvent.Item event) {
+    public static void colorItems(final RegisterColorHandlersEvent.Item event) {
         event.register((stack, index) -> {
             BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
             return event.getBlockColors().getColor(blockstate, null, null, index);
-        });
+        }, ItemRegistry.WALNUT_LEAVES);
     }
 }
