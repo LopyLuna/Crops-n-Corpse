@@ -26,7 +26,7 @@ public class EntityTypeRegistry {
             () -> EntityType.Builder.of(Sunflower::new, MobCategory.CREATURE).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("sunflower")));
 
     public static final Supplier<EntityType<WallNut>> WALLNUT = ENTITY_TYPES.register("wallnut",
-            () -> EntityType.Builder.of(WallNut::new, MobCategory.CREATURE).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("wallnut")));
+            () -> EntityType.Builder.of(WallNut::new, MobCategory.CREATURE).sized(1, 1).eyeHeight(0.7f).build(CNCMod.rlStr("wallnut")));
 
     public static final Supplier<EntityType<Browncoat>> BROWNCOAT = ENTITY_TYPES.register("browncoat",
             () -> EntityType.Builder.of(Browncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("browncoat")));

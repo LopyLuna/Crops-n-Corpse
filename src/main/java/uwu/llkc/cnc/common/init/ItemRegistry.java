@@ -17,6 +17,7 @@ import uwu.llkc.cnc.common.entities.plants.Peashooter;
 import uwu.llkc.cnc.common.entities.plants.Sunflower;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.items.MultiEntitySpawnEgg;
+import uwu.llkc.cnc.common.items.PlantArmorItem;
 import uwu.llkc.cnc.common.items.SeedPacketItem;
 import uwu.llkc.cnc.common.items.TrafficConeItem;
 
@@ -46,6 +47,8 @@ public class ItemRegistry {
     public static final DeferredItem<Item> WALNUT = ITEMS.registerSimpleItem("walnut", new Item.Properties().food(Foods.WALNUT));
     public static final DeferredItem<TrafficConeItem> TRAFFIC_CONE = ITEMS.registerItem("traffic_cone", TrafficConeItem::new, new Item.Properties().durability(15));
     public static final DeferredItem<Item> FLAG = ITEMS.registerSimpleItem("flag");
+    public static final DeferredItem<Item> PLANT_ARMOR = ITEMS.registerItem("plant_armor",
+            PlantArmorItem::new, new Item.Properties().stacksTo(1));
     @SuppressWarnings("unchecked")
     public static final DeferredItem<MultiEntitySpawnEgg> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEgg(props, List.of(
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {}),

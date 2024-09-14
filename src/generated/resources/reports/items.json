@@ -127,6 +127,20 @@
       "minecraft:repair_cost": 0
     }
   },
+  "cnc:plant_armor": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:lore": [],
+      "minecraft:max_stack_size": 1,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
   "cnc:plant_food": {
     "components": {
       "minecraft:attribute_modifiers": {
@@ -3642,8 +3656,8 @@
               "duration": 600,
               "id": "minecraft:hunger",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             },
@@ -6818,8 +6832,8 @@
               "duration": 400,
               "id": "minecraft:regeneration",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -6829,8 +6843,8 @@
               "duration": 6000,
               "id": "minecraft:resistance",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -6840,8 +6854,8 @@
               "duration": 6000,
               "id": "minecraft:fire_resistance",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -6852,8 +6866,8 @@
               "duration": 2400,
               "id": "minecraft:absorption",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -7980,8 +7994,8 @@
               "duration": 100,
               "id": "minecraft:regeneration",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -7991,8 +8005,8 @@
               "duration": 2400,
               "id": "minecraft:absorption",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -14049,9 +14063,9 @@
               "duration": 100,
               "id": "minecraft:poison",
               "neoforge:cures": [
-                "protected_by_totem",
+                "honey",
                 "milk",
-                "honey"
+                "protected_by_totem"
               ],
               "show_icon": true
             },
@@ -14736,9 +14750,9 @@
               "duration": 1200,
               "id": "minecraft:poison",
               "neoforge:cures": [
-                "protected_by_totem",
+                "honey",
                 "milk",
-                "honey"
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -14749,8 +14763,8 @@
               "duration": 300,
               "id": "minecraft:hunger",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -14760,8 +14774,8 @@
               "duration": 300,
               "id": "minecraft:nausea",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -15931,8 +15945,8 @@
               "duration": 600,
               "id": "minecraft:hunger",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             },
@@ -17008,9 +17022,9 @@
               "duration": 100,
               "id": "minecraft:poison",
               "neoforge:cures": [
-                "protected_by_totem",
+                "honey",
                 "milk",
-                "honey"
+                "protected_by_totem"
               ],
               "show_icon": true
             }

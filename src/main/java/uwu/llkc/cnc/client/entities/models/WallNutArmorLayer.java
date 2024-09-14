@@ -30,7 +30,9 @@ public class WallNutArmorLayer extends RenderLayer<WallNut, WallNutModel> {
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, WallNut livingEntity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
         var vertexConsumer = bufferSource.getBuffer(type);
-        root.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+        if (livingEntity.getEntityData().get(WallNut.HAS_ARMOR)) {
+            root.render(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+        }
     }
 
     public static LayerDefinition createArmor() {

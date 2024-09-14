@@ -21,6 +21,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.PLANT_FOOD.get());
         basicItem(ItemRegistry.SUN.get());
         basicItem(ItemRegistry.PEA_POD.get());
+        basicItem(ItemRegistry.PLANT_ARMOR.get());
         basicItem(ItemRegistry.COOKED_PEA.get());
         basicItem(ItemRegistry.RAW_PEA.get());
         basicItem(ItemRegistry.SUNFLOWER_SEEDS.get());

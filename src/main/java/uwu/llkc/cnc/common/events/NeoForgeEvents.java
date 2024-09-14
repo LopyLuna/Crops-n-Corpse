@@ -1,6 +1,7 @@
 package uwu.llkc.cnc.common.events;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -23,17 +25,21 @@ import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
+import net.neoforged.neoforge.event.level.ExplosionKnockbackEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
 import uwu.llkc.cnc.CNCMod;
+import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
-import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME, modid = CNCMod.MOD_ID)
@@ -140,6 +146,28 @@ public class NeoForgeEvents {
         if (entity != null && (event.getPlayer().equals(entity.getOwner()) || event.getPlayer().isCreative())) {
             ((ChunkMixinHelper) event.getLevel().getChunk(event.getPos())).setNextBlockPosDoBreak(event.getPos());
             PacketDistributor.sendToPlayer(((ServerPlayer) event.getPlayer()), new SyncBlockActuallyBrokenPayload(event.getPos()));
+        }
+    }
+
+    @SubscribeEvent
+    public static void getExplosionKnockBack(final ExplosionKnockbackEvent event) {
+        if (event.getAffectedEntity() instanceof CNCPlant) event.setKnockbackVelocity(Vec3.ZERO);
+    }
+
+    @SubscribeEvent
+    public static void explosion(final ExplosionEvent.Detonate event) {
+        var pos = event.getExplosion().center();
+        WallNut entity = event.getLevel().getNearestEntity(WallNut.class, TargetingConditions.DEFAULT, null, pos.x, pos.y, pos.z, AABB.ofSize(pos, 20, 20, 20));
+        if (entity != null) {
+            if (entity.getOwnerUUID() != null) {
+                List<BlockPos> toRemove = new ArrayList<>();
+                for (BlockPos affectedBlock : event.getAffectedBlocks()) {
+                    if (affectedBlock.distManhattan(entity.blockPosition()) < 20) {
+                        toRemove.add(affectedBlock);
+                    }
+                }
+                event.getAffectedBlocks().removeAll(toRemove);
+            }
         }
     }
 }

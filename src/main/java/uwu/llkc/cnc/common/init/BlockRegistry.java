@@ -14,10 +14,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.blockentities.CustomHangingSignBlockEntity;
 import uwu.llkc.cnc.common.blockentities.CustomSignBlockEntity;
-import uwu.llkc.cnc.common.blocks.LogBlock;
-import uwu.llkc.cnc.common.blocks.PeashooterCropBlock;
-import uwu.llkc.cnc.common.blocks.SunflowerCropBlock;
-import uwu.llkc.cnc.common.blocks.TrafficConeBlock;
+import uwu.llkc.cnc.common.blocks.*;
 
 public class BlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CNCMod.MOD_ID);
@@ -40,23 +37,8 @@ public class BlockRegistry {
     public static final DeferredBlock<SaplingBlock> WALNUT_SAPLING = BLOCKS.registerBlock("walnut_sapling",
             props -> new SaplingBlock(TreeGrowers.WALNUT_TREE, props), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING));
 
-    public static final DeferredBlock<LeavesBlock> WALNUT_LEAVES = BLOCKS.registerBlock("walnut_leaves",
-            props -> new LeavesBlock(props) {
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-                    return true;
-                }
-
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-                    return 5;
-                }
-
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-                    return 5;
-                }
-            }, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES));
+    public static final DeferredBlock<WalnutLeavesBlock> WALNUT_LEAVES = BLOCKS.registerBlock("walnut_leaves",
+            WalnutLeavesBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES));
 
     public static final DeferredBlock<LogBlock> STRIPPED_WALNUT_WOOD = BLOCKS.registerBlock("stripped_walnut_wood",
             props -> new LogBlock(props, null), BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_SPRUCE_WOOD));

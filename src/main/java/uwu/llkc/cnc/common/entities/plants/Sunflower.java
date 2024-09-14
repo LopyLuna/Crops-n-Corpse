@@ -1,10 +1,9 @@
 package uwu.llkc.cnc.common.entities.plants;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -12,7 +11,6 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.ai.SpawnItemGoal;
 import uwu.llkc.cnc.common.init.ItemRegistry;
@@ -37,7 +35,7 @@ public class Sunflower extends CNCPlant {
         super.registerGoals();
         goalSelector.addGoal(2, new RandomLookAroundGoal(this));
         goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 6, 0.001f));
-        goalSelector.addGoal(3, new SpawnItemGoal(new ItemStack(ItemRegistry.SUN.asItem(), 4), 8, this, true, 1120, 1200, 40));
+        goalSelector.addGoal(3, new SpawnItemGoal(new ItemStack(ItemRegistry.SUN.asItem(), 1), 8, this, true, 1120, 1200, 40));
     }
 
     @Override
