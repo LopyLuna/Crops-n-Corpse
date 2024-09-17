@@ -153,7 +153,7 @@ public class WallNut extends CNCPlant {
                 if (player.getItemInHand(hand).getItem() == ItemRegistry.PLANT_ARMOR.get()) {
                     getEntityData().set(HAS_ARMOR, true);
                     player.getItemInHand(hand).shrink(1);
-                    return InteractionResult.sidedSuccess(level().isClientSide);
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
