@@ -42,4 +42,13 @@ public class SoundRegistry {
 
     public static final Supplier<SoundEvent> BROWNCOAT_HURT = SOUNDS.register("browncoat_hurt",
             () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.browncoat.hurt")));
+
+    public static final Supplier<SoundEvent> WALL_NUT_ARMOR_HURT = SOUNDS.register("wall_nut_armor_hurt",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.wall_nut_armor.hurt")));
+
+    public static final Supplier<SoundEvent> WALL_NUT_HURT = SOUNDS.register("wall_nut_hurt",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.wall_nut.hurt")));
+
+    public static final Supplier<SoundEvent> WALL_NUT_DEATH = SOUNDS.register("wall_nut_death",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.wall_nut_armor.death")));
 }

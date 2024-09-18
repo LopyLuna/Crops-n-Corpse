@@ -65,5 +65,17 @@ public class ModSoundProvider extends SoundDefinitionsProvider {
                         sound(CNCMod.rl("browncoat_hurt_3")),
                         sound(CNCMod.rl("browncoat_hurt_4")),
                         sound(CNCMod.rl("browncoat_hurt_5"))));
+        add(SoundRegistry.WALL_NUT_HURT, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.wall_nut_hurt")
+                .with(sound(CNCMod.rl("wall_nut_hurt_1")))
+                .with(sound(CNCMod.rl("wall_nut_hurt_2"))));
+        add(SoundRegistry.WALL_NUT_ARMOR_HURT, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.wall_nut_armor_hurt")
+                .with(sound(CNCMod.rl("wall_nut_armor_hurt_1")))
+                .with(sound(CNCMod.rl("wall_nut_armor_hurt_2")))
+                .with(sound(CNCMod.rl("wall_nut_armor_hurt_3"))));
+        add(SoundRegistry.WALL_NUT_DEATH, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.wall_nut_death")
+                .with(sound(CNCMod.rl("wall_nut_death"))));
     }
 }

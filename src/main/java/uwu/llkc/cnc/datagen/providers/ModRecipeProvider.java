@@ -48,6 +48,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_wallnut");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.PLANT_ARMOR.get())
+                .pattern(" i ")
+                .pattern("i i")
+                .pattern(" i ")
+                .define('i', Items.IRON_BLOCK)
+                .unlockedBy("has_iron", has(Items.IRON_BLOCK))
+                .save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.SUNFLOWER .get()))
                 .pattern(" f ")
                 .pattern("seF")

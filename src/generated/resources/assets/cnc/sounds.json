@@ -77,6 +77,27 @@
     ],
     "subtitle": "subtitles.cnc.sunflower_produce"
   },
+  "entity.wall_nut.hurt": {
+    "sounds": [
+      "cnc:wall_nut_hurt_1",
+      "cnc:wall_nut_hurt_2"
+    ],
+    "subtitle": "subtitles.cnc.wall_nut_hurt"
+  },
+  "entity.wall_nut_armor.death": {
+    "sounds": [
+      "cnc:wall_nut_death"
+    ],
+    "subtitle": "subtitles.cnc.wall_nut_death"
+  },
+  "entity.wall_nut_armor.hurt": {
+    "sounds": [
+      "cnc:wall_nut_armor_hurt_1",
+      "cnc:wall_nut_armor_hurt_2",
+      "cnc:wall_nut_armor_hurt_3"
+    ],
+    "subtitle": "subtitles.cnc.wall_nut_armor_hurt"
+  },
   "item.seed_packet.spawn": {
     "sounds": [
       "cnc:plant_spawn"

@@ -59,5 +59,8 @@
   "subtitles.cnc.plant_spawn": "Plant spawned",
   "subtitles.cnc.sunflower_action": "Sunflower action",
   "subtitles.cnc.sunflower_death": "Sunflower died",
-  "subtitles.cnc.sunflower_hurt": "Sunflower hurt"
+  "subtitles.cnc.sunflower_hurt": "Sunflower hurt",
+  "subtitles.cnc.wall_nut_armor_hurt": "Wall-Nut armor hurt",
+  "subtitles.cnc.wall_nut_death": "Wall-Nut died",
+  "subtitles.cnc.wall_nut_hurt": "Wall-Nut hurt"
 }

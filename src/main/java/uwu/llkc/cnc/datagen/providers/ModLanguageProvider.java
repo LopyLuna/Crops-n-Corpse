@@ -63,6 +63,9 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.cnc.browncoat_death", "Browncoat died");
         add("subtitles.cnc.browncoat_hurt", "Browncoat hurt");
         add("subtitles.cnc.plant_spawn", "Plant spawned");
+        add("subtitles.cnc.wall_nut_armor_hurt", "Wall-Nut armor hurt");
+        add("subtitles.cnc.wall_nut_hurt", "Wall-Nut hurt");
+        add("subtitles.cnc.wall_nut_death", "Wall-Nut died");
     }
 
     private String toEnglishTranslation(ResourceLocation rl) {

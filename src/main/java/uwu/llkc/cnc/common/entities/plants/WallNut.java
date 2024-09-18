@@ -5,6 +5,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -34,7 +35,7 @@ public class WallNut extends CNCPlant {
     public final AnimationState stage3 = new AnimationState();
     public final AnimationState death = new AnimationState();
 
-    public int armorHealth = 300;
+    public float armorHealth = 300;
 
     public WallNut(EntityType<WallNut> entityType, Level level) {
         super(entityType, level);
@@ -62,7 +63,7 @@ public class WallNut extends CNCPlant {
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putInt("armorHealth", armorHealth);
+        compound.putFloat("armorHealth", armorHealth);
         compound.putInt("stage", entityData.get(STAGE));
         compound.putBoolean("hasArmor", entityData.get(HAS_ARMOR));
     }
@@ -70,7 +71,7 @@ public class WallNut extends CNCPlant {
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        armorHealth = compound.getInt("armorHealth");
+        armorHealth = compound.getFloat("armorHealth");
         entityData.set(STAGE, compound.getInt("stage"));
         entityData.set(HAS_ARMOR, compound.getBoolean("hasArmor"));
     }
@@ -79,7 +80,8 @@ public class WallNut extends CNCPlant {
     protected BodyRotationControl createBodyControl() {
         return new BodyRotationControl(this) {
             @Override
-            public void clientTick() {}
+            public void clientTick() {
+            }
         };
     }
 
@@ -151,6 +153,7 @@ public class WallNut extends CNCPlant {
         if (this.getOwner() != null && player.equals(this.getOwner())) {
             if (!getEntityData().get(HAS_ARMOR)) {
                 if (player.getItemInHand(hand).getItem() == ItemRegistry.PLANT_ARMOR.get()) {
+                    playSound(SoundEvents.ARMOR_EQUIP_IRON.value());
                     getEntityData().set(HAS_ARMOR, true);
                     player.getItemInHand(hand).shrink(1);
                     return InteractionResult.SUCCESS;
@@ -169,20 +172,33 @@ public class WallNut extends CNCPlant {
 
     @Override
     public void die(DamageSource damageSource) {
-        level().broadcastEntityEvent(this, (byte)1);
+        level().broadcastEntityEvent(this, (byte) 1);
         super.die(damageSource);
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
+    protected void actuallyHurt(DamageSource damageSource, float damageAmount) {
         if (entityData.get(HAS_ARMOR)) {
-            armorHealth--;
+            armorHealth -= damageAmount;
             if (armorHealth <= 0) {
+                playSound(SoundEvents.ITEM_BREAK);
                 entityData.set(HAS_ARMOR, false);
             }
-            return true;
+            return;
         }
-        return super.hurt(source, amount);
+        super.actuallyHurt(damageSource, damageAmount);
+    }
+
+    @Override
+    public void setHealth(float health) {
+        if (getHealth() / getMaxHealth() < 0.25) {
+            entityData.set(STAGE, 3);
+        } else if (getHealth() / getMaxHealth() < 0.50) {
+            entityData.set(STAGE, 2);
+        } else if (getHealth() / getMaxHealth() < 0.75) {
+            entityData.set(STAGE, 1);
+        }
+        super.setHealth(health);
     }
 
     @Override
@@ -206,14 +222,12 @@ public class WallNut extends CNCPlant {
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        //todo
-        return SoundRegistry.SUNFLOWER_DEATH.get();
+        return SoundRegistry.WALL_NUT_DEATH.get();
     }
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        //todo
-        return SoundRegistry.SUNFLOWER_HURT.get();
+        return entityData.get(HAS_ARMOR) ? SoundRegistry.WALL_NUT_ARMOR_HURT.get() : SoundRegistry.WALL_NUT_HURT.get();
     }
 }
