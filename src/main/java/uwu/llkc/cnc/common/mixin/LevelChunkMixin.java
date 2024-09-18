@@ -1,8 +1,8 @@
 package uwu.llkc.cnc.common.mixin;
 
-import com.google.common.reflect.Reflection;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -10,6 +10,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.*;
 import net.minecraft.world.level.levelgen.blending.BlendingData;
@@ -20,8 +21,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
-
-import java.util.Arrays;
 
 @Mixin(value = {LevelChunk.class, ProtoChunk.class})
 @Debug(export = true)
@@ -47,12 +46,14 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinH
                 if (resistance > 9f && resistance <= 50) damage = 5;
                 if (resistance > 50f) damage = 15;
                 entity.hurt(getLevel().damageSources().generic(), damage);
-                return otherState;
+                getLevel().sendBlockUpdated(pos, Blocks.AIR.defaultBlockState(), getLevel().getBlockState(pos), 50);
+                return getLevel().getBlockState(pos);
             }
         }
         if (!pos.equals(nextPosForInteractionCheck)) {
             nextPosForInteractionCheck = null;
         }
+        nextBlockPosDoBreak = null;
         return original.call(chunk, x, y, z, state);
     }
 
