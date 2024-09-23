@@ -6,6 +6,7 @@
   "mixins": [
     "BucketMixin",
     "DispenseBehaviorMixin",
+    "ExplosionMixin",
     "LevelChunkMixin"
   ],
   "client": [

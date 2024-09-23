@@ -15,13 +15,11 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
 import net.minecraft.world.level.LightLayer;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.renderable.BakedModelRenderable;
-import net.neoforged.neoforge.client.model.renderable.ITextureRenderTypeLookup;
 import uwu.llkc.cnc.client.entities.renderers.BrowncoatRenderer;
 
 import java.util.function.Consumer;

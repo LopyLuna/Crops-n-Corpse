@@ -40,7 +40,7 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinH
             WallNut entity = getLevel().getNearestEntity(WallNut.class, TargetingConditions.DEFAULT, null, pos.getX(), pos.getY(), pos.getZ(), AABB.ofSize(pos.getCenter(), 20, 20, 20));
             if (entity != null && entity.getOwnerUUID() != null) {
                 int damage = 0;
-                float resistance = state.getBlock().getExplosionResistance();
+                float resistance = getLevel().getBlockState(pos).getBlock().getExplosionResistance();
                 if (resistance > 0.1f && resistance <= 5) damage = 1;
                 if (resistance > 5f && resistance <= 9) damage = 2;
                 if (resistance > 9f && resistance <= 50) damage = 5;
