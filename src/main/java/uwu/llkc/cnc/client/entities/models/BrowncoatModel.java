@@ -16,10 +16,10 @@ public class BrowncoatModel extends HierarchicalModel<Browncoat> implements Head
 	public static final ModelLayerLocation MAIN_LAYER = new ModelLayerLocation(CNCMod.rl("browncoat"), "main");
 	private final ModelPart root;
 	private final ModelPart tie;
-	private final ModelPart head;
+	public final ModelPart head;
 	private final ModelPart body;
 	private final ModelPart leftArm;
-	private final ModelPart leftForeArm;
+	public final ModelPart leftForeArm;
 	private final ModelPart rightArm;
 	private final ModelPart leftLeg;
 	private final ModelPart rightLeg;

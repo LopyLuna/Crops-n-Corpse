@@ -32,6 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
 import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
+import uwu.llkc.cnc.client.util.ClientProxy;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
@@ -164,11 +165,7 @@ public class Browncoat extends CNCZombie{
         super.die(damageSource);
         entityData.set(HAS_HEAD, false);
         if (level().isClientSide) {
-            var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
-            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY() + 1.5, this.getZ(), Either.left(model), poseStack -> {
-                poseStack.mulPose(Axis.YN.rotationDegrees(getYRot()));
-                poseStack.mulPose(Axis.XP.rotationDegrees(180));
-            }, Vec3.directionFromRotation(0, getYRot()).x * -0.05, 0.2, Vec3.directionFromRotation(0, getYRot()).z * -0.05));
+            ClientProxy.createBrowncoatHead(this);
         }
     }
 
@@ -192,12 +189,7 @@ public class Browncoat extends CNCZombie{
     public void handleEntityEvent(byte id) {
         super.handleEntityEvent(id);
         if (id == 0) {
-            var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("left_arm").getChild("left_forearm");
-            Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) level()), this.getX(), this.getY() + 1.25, this.getZ(), Either.left(model), poseStack -> {
-                poseStack.translate(Vec3.directionFromRotation(0, getYRot()).z *.32, 0, Vec3.directionFromRotation(0, getYRot()).x *-.32);
-                poseStack.mulPose(Axis.YP.rotationDegrees(-getYRot()));
-                poseStack.mulPose(Axis.XP.rotationDegrees(90));
-            }, Vec3.directionFromRotation(0, getYRot()).x * -0.05, 0, Vec3.directionFromRotation(0, getYRot()).z * -0.05));
+            ClientProxy.createBrowncoatArm(this);
         }
     }
 
