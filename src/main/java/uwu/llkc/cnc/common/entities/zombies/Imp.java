@@ -59,14 +59,6 @@ public class Imp extends CNCZombie{
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (tickCount % 5 == 0 && level().isClientSide) {
-            ClientProxy.createImpHead(this);
-        }
-    }
-
-    @Override
     public void die(DamageSource damageSource) {
         super.die(damageSource);
         entityData.set(HAS_HEAD, false);

@@ -33,7 +33,7 @@ public class EntityTypeRegistry {
             () -> EntityType.Builder.of(Browncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("browncoat")));
 
     public static final Supplier<EntityType<Imp>> IMP = ENTITY_TYPES.register("imp",
-            () -> EntityType.Builder.of(Imp::new, MobCategory.MONSTER).sized(0.6f, 1.2f).eyeHeight(0.9f).build(CNCMod.rlStr("imp")));
+            () -> EntityType.Builder.of(Imp::new, MobCategory.MONSTER).sized(0.6f, 1.0f).eyeHeight(0.9f).build(CNCMod.rlStr("imp")));
 
     public static final Supplier<EntityType<PeaProjectile>> PEA = ENTITY_TYPES.register("pea",
             () -> EntityType.Builder.of(PeaProjectile::new, MobCategory.MISC).sized(.5f, .5f).build(CNCMod.rlStr("pea")));

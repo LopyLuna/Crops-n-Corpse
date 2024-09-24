@@ -18,6 +18,8 @@ public class BiomeModifierInit {
     public static final ResourceKey<BiomeModifier> PEASHOOTER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("peashooter_spawns"));
     public static final ResourceKey<BiomeModifier> SUNFLOWER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("sunflower_spawns"));
     public static final ResourceKey<BiomeModifier> BROWNCOAT_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("browncoat_spawns"));
+    public static final ResourceKey<BiomeModifier> WALL_NUT_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("wall_nut_spawns"));
+    public static final ResourceKey<BiomeModifier> IMP_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("imp_spawns"));
 
     public static final ResourceKey<BiomeModifier> WALNUT_TREE_PLACEMENT = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("walnut_tree_placement"));
 
@@ -28,6 +30,10 @@ public class BiomeModifierInit {
                 biomes.getOrThrow(Tags.Biomes.SPAWNS_PEASHOOTER),
                 new MobSpawnSettings.SpawnerData(EntityTypeRegistry.PEASHOOTER.get(), 50, 1, 2))
         );
+        context.register(WALL_NUT_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
+                biomes.getOrThrow(Tags.Biomes.SPAWNS_PEASHOOTER),
+                new MobSpawnSettings.SpawnerData(EntityTypeRegistry.WALLNUT.get(), 20, 1, 1))
+        );
         context.register(SUNFLOWER_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
                 biomes.getOrThrow(Tags.Biomes.SPAWNS_SUNFLOWER),
                 new MobSpawnSettings.SpawnerData(EntityTypeRegistry.SUNFLOWER.get(), 50, 2, 3))
@@ -35,6 +41,10 @@ public class BiomeModifierInit {
         context.register(BROWNCOAT_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 new MobSpawnSettings.SpawnerData(EntityTypeRegistry.BROWNCOAT.get(), 30, 3, 7))
+        );
+        context.register(IMP_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
+                biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
+                new MobSpawnSettings.SpawnerData(EntityTypeRegistry.BROWNCOAT.get(), 20, 5, 7))
         );
         context.register(WALNUT_TREE_PLACEMENT, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(net.minecraft.world.level.biome.Biomes.FOREST)),
