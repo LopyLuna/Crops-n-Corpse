@@ -15,12 +15,12 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
 import net.minecraft.world.level.LightLayer;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.renderable.BakedModelRenderable;
-import uwu.llkc.cnc.client.entities.renderers.BrowncoatRenderer;
 
 import java.util.function.Consumer;
 
@@ -41,8 +41,9 @@ public class PhysicsModelParticle extends Particle {
 
     private final Either<ModelPart, BakedModel> bodyPart;
     private final Consumer<PoseStack> transformation;
+    private final ResourceLocation texture;
 
-    public PhysicsModelParticle(ClientLevel level, double x, double y, double z, Either<ModelPart, BakedModel> part, Consumer<PoseStack> transformation, double xPower, double yPower, double zPower) {
+    public PhysicsModelParticle(ClientLevel level, double x, double y, double z, Either<ModelPart, BakedModel> part, Consumer<PoseStack> transformation, double xPower, double yPower, double zPower, ResourceLocation texture) {
         super(level, x, y, z);
         this.bodyPart = part;
         this.transformation = transformation;
@@ -51,6 +52,7 @@ public class PhysicsModelParticle extends Particle {
         xd = xPower;
         yd = yPower;
         zd = zPower;
+        this.texture = texture;
     }
 
     @Override
@@ -63,10 +65,12 @@ public class PhysicsModelParticle extends Particle {
         pose.translate(f, f1, f2);
         transformation.accept(pose);
         RenderSystem.getShaderColor();
-        RenderSystem.setShaderTexture(0, BrowncoatRenderer.TEXTURE);
         var source = Minecraft.getInstance().renderBuffers().bufferSource();
-        var consumer = source.getBuffer(RenderType.entityCutoutNoCull(BrowncoatRenderer.TEXTURE));
-        bodyPart.ifLeft(modelPart -> modelPart.render(pose, consumer, LightTexture.pack(level.getBrightness(LightLayer.BLOCK, BlockPos.containing(getPos())), level.getBrightness(LightLayer.SKY, BlockPos.containing(getPos()))), OverlayTexture.NO_OVERLAY))
+        bodyPart.ifLeft(modelPart -> {
+                    RenderSystem.setShaderTexture(0, texture);
+                    var consumer = source.getBuffer(RenderType.entityCutoutNoCull(texture));
+                    modelPart.render(pose, consumer, LightTexture.pack(level.getBrightness(LightLayer.BLOCK, BlockPos.containing(getPos())), level.getBrightness(LightLayer.SKY, BlockPos.containing(getPos()))), OverlayTexture.NO_OVERLAY);
+                })
                 .ifRight(bakedModel -> BakedModelRenderable.of(bakedModel).withContext(ModelData.EMPTY).render(
                                 pose,
                                 source,

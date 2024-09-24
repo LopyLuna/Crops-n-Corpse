@@ -1,6 +1,9 @@
 {
   "values": [
-    "cnc:peashooter",
-    "cnc:sunflower"
+    "#cnc:defensive_plants",
+    "#cnc:nocturnal_plants",
+    "#cnc:defensive_plants",
+    "#cnc:support_plants",
+    "#cnc:special_plants"
   ]
 }

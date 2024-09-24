@@ -32,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtByTargetGoalPlant;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtTargetGoalPlant;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.init.Tags;
 import uwu.llkc.cnc.common.items.SeedPacketItem;
 
 import java.util.UUID;
@@ -84,13 +85,19 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
         if (!level().isClientSide) {
             ProfilerFiller profilerfiller = this.level().getProfiler();
             int i = this.tickCount + this.getId();
-            if (i % 2 != 0 && this.tickCount > 1) {
+            if (i % 2 != 1 && this.tickCount > 1) {
                 profilerfiller.push("targetSelector");
                 this.targetSelector.tickRunningGoals(false);
                 if (level().getGameTime() % 40 == 0) {
                     for (Monster nearbyEntity : level().getNearbyEntities(Monster.class, TargetingConditions.DEFAULT, this, AABB.ofSize(this.position(), 30, 10, 30))) {
-                        if (nearbyEntity.getType().is(EntityTypeTags.UNDEAD) && nearbyEntity.getTarget() == null) {
-                            nearbyEntity.setTarget(this);
+                        if (nearbyEntity.getType().is(EntityTypeTags.UNDEAD)) {
+                            if (this.getType().is(Tags.EntityTypes.DEFENSIVE_PLANTS)) {
+                                if (nearbyEntity.getTarget() == null || nearbyEntity.getTarget() instanceof Player || nearbyEntity.getTarget() instanceof CNCPlant plant && !plant.getType().is(Tags.EntityTypes.DEFENSIVE_PLANTS)) {
+                                    nearbyEntity.setTarget(this);
+                                }
+                            } else if (nearbyEntity.getTarget() == null) {
+                                nearbyEntity.setTarget(this);
+                            }
                         }
                     }
                 }
@@ -232,6 +239,4 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
     public ItemStack getPickResult() {
         return SeedPacketItem.getSeedPacket(getType());
     }
-
-    public abstract PlantCategory getPlantCategory();
 }

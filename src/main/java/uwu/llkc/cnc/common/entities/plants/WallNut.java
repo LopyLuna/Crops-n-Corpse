@@ -191,6 +191,7 @@ public class WallNut extends CNCPlant {
 
     @Override
     public void setHealth(float health) {
+        super.setHealth(health);
         if (getHealth() / getMaxHealth() < 0.25) {
             entityData.set(STAGE, 3);
         } else if (getHealth() / getMaxHealth() < 0.50) {
@@ -198,17 +199,11 @@ public class WallNut extends CNCPlant {
         } else if (getHealth() / getMaxHealth() < 0.75) {
             entityData.set(STAGE, 1);
         }
-        super.setHealth(health);
     }
 
     @Override
     public boolean canBeCollidedWith() {
         return true;
-    }
-
-    @Override
-    public PlantCategory getPlantCategory() {
-        return PlantCategory.DEFENSIVE;
     }
 
     @Override

@@ -13,7 +13,7 @@ import uwu.llkc.cnc.common.entities.plants.WallNut;
 public class WallNutRenderer extends MobRenderer<WallNut, WallNutModel> {
     public static final ResourceLocation STAGE_0 = CNCMod.rl("textures/entity/wallnut_stage0.png");
     public static final ResourceLocation STAGE_1 = CNCMod.rl("textures/entity/wallnut_stage1.png");
-    public static final ResourceLocation STAGE_2 = CNCMod.rl("textures/entity/wallnit_stage2.png");
+    public static final ResourceLocation STAGE_2 = CNCMod.rl("textures/entity/wallnut_stage2.png");
     public static final ResourceLocation STAGE_3 = CNCMod.rl("textures/entity/wallnut_stage3.png");
     public static final ResourceLocation ARMOR = CNCMod.rl("textures/entity/wallnut_armor.png");
 

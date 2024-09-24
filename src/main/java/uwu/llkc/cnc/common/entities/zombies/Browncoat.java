@@ -77,9 +77,9 @@ public class Browncoat extends CNCZombie{
 
     public static AttributeSupplier.Builder attributes() {
         return CNCPlant.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 40)
+                .add(Attributes.MAX_HEALTH, 20)
                 .add(Attributes.ARMOR, 2)
-                .add(Attributes.ATTACK_DAMAGE, 3)
+                .add(Attributes.ATTACK_DAMAGE, 2)
                 .add(Attributes.MOVEMENT_SPEED, 0.23)
                 .add(Attributes.ATTACK_SPEED, 1);
     }
@@ -176,13 +176,8 @@ public class Browncoat extends CNCZombie{
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(ZombifiedPiglin.class));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(Browncoat.class));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-    }
-
-    @Override
-    public ZombieCategory getZombieCategory() {
-        return ZombieCategory.BASIC;
     }
 
     @Override

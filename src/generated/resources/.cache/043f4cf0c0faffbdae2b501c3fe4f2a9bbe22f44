@@ -1,4 +1,15 @@
-// 1.21	2024-08-14T14:25:50.4820872	Tags for minecraft:entity_type mod id cnc
-71bcc9cb044d868027a490c62f13b110a116476a data/cnc/tags/entity_type/plants.json
+// 1.21	2024-09-24T15:19:01.4835315	Tags for minecraft:entity_type mod id cnc
+eb9234014998c75a0be0ff0a03e9770f985cb069 data/cnc/tags/entity_type/basic_zombie.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/champion_zombie.json
+3721882b5088198fe7d9b420f81b1df02b30a749 data/cnc/tags/entity_type/cnc_zombies.json
+f484763d5b10d33cc4a042e383ebeb8e67707305 data/cnc/tags/entity_type/defensive_plants.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/mini_boss_zombie.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/nocturnal_plants.json
+21ae40bcd729379b49af9afafc3750054d7b5d60 data/cnc/tags/entity_type/offensive_plants.json
+105d32209d172af75d35ba26c636ceb90b8b64d2 data/cnc/tags/entity_type/plants.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/special_plants.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/special_zombie.json
+9a4dbf61b2142c5016826a5bb27b8dfd1a4a1032 data/cnc/tags/entity_type/support_plants.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/zombie_spawner.json
 eff935a767b7149bf19fb87f09387ecc79f0f85f data/minecraft/tags/entity_type/can_breathe_under_water.json
 8676d787e9a9004ac438f2f470ccacf65bcf383c data/minecraft/tags/entity_type/undead.json

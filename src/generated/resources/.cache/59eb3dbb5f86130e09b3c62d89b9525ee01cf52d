@@ -1,4 +1,4 @@
-// 1.21	2024-09-03T20:12:48.2872396	Loot Tables
+// 1.21	2024-09-24T15:19:01.4835315	Loot Tables
 d44989f74ec1f8f17ca168d28e8729ae5524c7a8 data/cnc/loot_table/blocks/ceiling_hanging_walnut_sign.json
 b3d76196736929f2ca43d07cc28e41d5554daf31 data/cnc/loot_table/blocks/peashooter_block.json
 df4b125d93e1cd99a9423a2990cc04566ea84ae7 data/cnc/loot_table/blocks/standing_walnut_sign.json
@@ -22,6 +22,7 @@ b51e5d71dedd2268a258d2cca3b7134e03402e97 data/cnc/loot_table/blocks/walnut_stair
 8e549704fd711eb6793ce7b67b1e35b1c51d7644 data/cnc/loot_table/blocks/walnut_wall_sign.json
 3aa8c7335d8162da59bf011035dbd56a6ecbd403 data/cnc/loot_table/blocks/walnut_wood.json
 91f40cc34361e2719436e204036bafd958bf0b9c data/cnc/loot_table/entities/browncoat.json
+ca7078eb2ff616bc559e09cb50e11b8d76fab38a data/cnc/loot_table/entities/imp.json
 d1a6f014b0650c8d0bfe4190fbfc22b39b0118c8 data/cnc/loot_table/entities/peashooter.json
 09cd1d016abf6c4090ed6769ea2a3241981332a6 data/cnc/loot_table/entities/sunflower.json
 83b205b80b1c2364626a756c2e8a7d232f73d2ca data/cnc/loot_table/entities/wallnut.json

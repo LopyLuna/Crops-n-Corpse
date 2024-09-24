@@ -53,11 +53,6 @@ public class Sunflower extends CNCPlant {
     }
 
     @Override
-    public PlantCategory getPlantCategory() {
-        return PlantCategory.SUPPORT;
-    }
-
-    @Override
     public void handleEntityEvent(byte id) {
         super.handleEntityEvent(id);
         if (id == 0) {

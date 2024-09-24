@@ -67,11 +67,6 @@ public class Peashooter extends CNCPlant implements RangedAttackMob {
     }
 
     @Override
-    public PlantCategory getPlantCategory() {
-        return PlantCategory.OFFENSIVE;
-    }
-
-    @Override
     public void performRangedAttack(@NotNull LivingEntity target, float velocity) {
         PeaProjectile projectile = EntityTypeRegistry.PEA.get().create(level());
         if (projectile == null) return;

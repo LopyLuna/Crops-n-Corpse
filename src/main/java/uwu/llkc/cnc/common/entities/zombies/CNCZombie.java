@@ -8,6 +8,4 @@ public abstract class CNCZombie extends Monster {
     protected CNCZombie(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
-
-    public abstract ZombieCategory getZombieCategory();
 }

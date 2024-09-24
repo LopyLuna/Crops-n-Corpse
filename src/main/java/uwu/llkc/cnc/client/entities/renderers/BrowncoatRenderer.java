@@ -14,13 +14,13 @@ public class BrowncoatRenderer extends MobRenderer<Browncoat, BrowncoatModel> {
     public static final ResourceLocation TEXTURE = CNCMod.rl("textures/entity/browncoats/browncoat.png");
 
     public BrowncoatRenderer(EntityRendererProvider.Context context) {
-        super(context, new BrowncoatModel(context.bakeLayer(BrowncoatModel.MAIN_LAYER)), 0);
+        super(context, new BrowncoatModel(context.bakeLayer(BrowncoatModel.MAIN_LAYER)), 0.5f);
         this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), 1, 1, 1, context.getItemInHandRenderer()));
         this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull Browncoat peashooter) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull Browncoat browncoat) {
         return TEXTURE;
     }
 }

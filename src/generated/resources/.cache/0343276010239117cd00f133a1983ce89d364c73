@@ -1,4 +1,4 @@
-// 1.21	2024-09-14T15:36:41.2292735	Item Models: cnc
+// 1.21	2024-09-24T15:19:01.4835315	Item Models: cnc
 cf5c2182fe08615cb0d4119083806e680076002e assets/cnc/models/item/browncoat_spawn_egg.json
 32e87e6f5564d12a898ad60f0637697e0f7f144d assets/cnc/models/item/buckethead_spawn_egg.json
 f1fa8e6f305d25dfb5c6ccce635229bd2a0ee3a2 assets/cnc/models/item/bucket_item.json
@@ -10,6 +10,7 @@ aec227610263aeb902cfff9865ed7164870a6bb5 assets/cnc/models/item/flag.json
 0e91ae3578c4510f1eb1d086a74a59c493640ac0 assets/cnc/models/item/flag_item.json
 b56eec6db9e200dd8828650b86fc082120b9e8f1 assets/cnc/models/item/flag_spawn_egg.json
 e92548fb9109ce6fbadbe15fbfa544aff23312bc assets/cnc/models/item/hanging_walnut_sign.json
+4b5323f808bb0575a269dc08d138eff534999ad5 assets/cnc/models/item/imp_spawn_egg.json
 a4cf1433dcd16c5df8fac07829db1a29d1c6e774 assets/cnc/models/item/peashooter_seed_packet.json
 e4ac201e3fef850b0a5a1e3981e6244521d58e59 assets/cnc/models/item/pea_pod.json
 2de4a7499813c5b4c03f9a887ffafb32c1d93265 assets/cnc/models/item/plant_armor.json
