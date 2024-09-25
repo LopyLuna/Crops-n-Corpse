@@ -34,7 +34,8 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
                 .addTag(Tags.EntityTypes.SUPPORT_PLANTS)
                 .addTag(Tags.EntityTypes.SPECIAL_PLANTS);
         tag(EntityTypeTags.UNDEAD)
-                .add(EntityTypeRegistry.BROWNCOAT.get());
+                .add(EntityTypeRegistry.BROWNCOAT.get())
+                .add(EntityTypeRegistry.IMP.get());
         tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
                 .remove(EntityTypeRegistry.BROWNCOAT.get());
         tag(Tags.EntityTypes.CHAMPION_ZOMBIE);
