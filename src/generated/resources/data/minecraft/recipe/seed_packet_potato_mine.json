@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "e": {
+      "item": "cnc:empty_seed_packet"
+    },
+    "f": {
+      "item": "cnc:plant_food"
+    },
+    "p": {
+      "item": "minecraft:potato"
+    },
+    "s": {
+      "item": "cnc:sun"
+    }
+  },
+  "pattern": [
+    " p ",
+    "sef",
+    " p "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cnc:potato_mine_seed_packet"
+  }
+}
