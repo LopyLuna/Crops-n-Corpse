@@ -1,4 +1,4 @@
-// 1.21	2024-09-18T16:05:36.9383165	Recipes
+// 1.21	2024-09-27T23:41:34.5115447	Recipes
 d58d782307308041a542c6929266025b2ceaf101 data/cnc/advancement/recipes/building_blocks/stripped_walnut_wood.json
 d9da6a34e56e006cac01eaf68a18d3931d7c30d2 data/cnc/advancement/recipes/building_blocks/walnut_planks.json
 6be6b37961c92a45327e625436f2e565e8fae4eb data/cnc/advancement/recipes/building_blocks/walnut_slab.json
@@ -34,6 +34,7 @@ da3fc8279d795b87c07a8fae8a9a3834867912eb data/cnc/recipe/walnut_slab.json
 4b58d278866fd98942f8cb090281c6b8a0277804 data/cnc/recipe/walnut_trapdoor.json
 e8b2ff8ba97f29d8cc77a42084ee3e9be6abc377 data/cnc/recipe/walnut_wood.json
 8935cf14af44ade9bf0ef105b3e2b5e95466c2cd data/minecraft/advancement/recipes/combat/seed_packet_peashooter.json
+c1bc44eb42d2ccba3368e869795a6aa35d86bd15 data/minecraft/advancement/recipes/combat/seed_packet_potato_mine.json
 fe751335d8de20603d8a3004b8471bd4d0961be3 data/minecraft/advancement/recipes/combat/seed_packet_sunflower.json
 1e9e75c27c3f852245c9ef24409848de972bb1b3 data/minecraft/advancement/recipes/combat/seed_packet_wallnut.json
 cd5cce1f8fc01abf6562158abfda992a7f687764 data/minecraft/advancement/recipes/food/cooked_pea_campfire.json
@@ -47,6 +48,7 @@ ca18ec1dcd38bdd56f4cb649e47e964edaaf60ff data/minecraft/recipe/cooked_pea_campfi
 637046b7bcf098b9e2688fe110cd292e5cf0ff9a data/minecraft/recipe/cooked_pea_smoking.json
 e64bc6ac95e5052ca6ae83f3fd8fac1ad88a9613 data/minecraft/recipe/raw_pea_from_pea_pod.json
 ca2b6290d7864ef161ae812c3eb7a97db5a46f5b data/minecraft/recipe/seed_packet_peashooter.json
+5b87ce032b29cb4ef87d882a850115ad9d221542 data/minecraft/recipe/seed_packet_potato_mine.json
 6a900dd9174bcf2e8218074d6c4f1ee28703ddfc data/minecraft/recipe/seed_packet_sunflower.json
 4ae5d9124c37eb9f2b2b8ffb6a017ad261e6a8d5 data/minecraft/recipe/seed_packet_wallnut.json
 43fec871e00d0d18d4bd4eb3327a51c2bd148b85 data/minecraft/recipe/walnut_chest_boat.json

@@ -57,7 +57,8 @@ public class SeedPacketItem<T extends Entity> extends Item {
     private static final Supplier<Map<EntityType<?>, SeedPacketItem<?>>> SEED_PACKET_ITEM_MAP = () -> Map.ofEntries(
             entry(EntityTypeRegistry.PEASHOOTER.get(), ItemRegistry.PEASHOOTER_SEED_PACKET.get()),
             entry(EntityTypeRegistry.SUNFLOWER.get(), ItemRegistry.SUNFLOWER_SEED_PACKET.get()),
-            entry(EntityTypeRegistry.WALLNUT.get(), ItemRegistry.WALLNUT_SEED_PACKET.get())
+            entry(EntityTypeRegistry.WALLNUT.get(), ItemRegistry.WALLNUT_SEED_PACKET.get()),
+            entry(EntityTypeRegistry.POTATO_MINE.get(), ItemRegistry.POTATO_MINE_SEED_PACKET.get())
     );
 
     private final int sunCost;

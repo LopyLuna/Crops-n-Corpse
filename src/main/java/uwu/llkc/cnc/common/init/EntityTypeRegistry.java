@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.Peashooter;
+import uwu.llkc.cnc.common.entities.plants.PotatoMine;
 import uwu.llkc.cnc.common.entities.plants.Sunflower;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
@@ -28,6 +29,9 @@ public class EntityTypeRegistry {
 
     public static final Supplier<EntityType<WallNut>> WALLNUT = ENTITY_TYPES.register("wallnut",
             () -> EntityType.Builder.of(WallNut::new, MobCategory.CREATURE).sized(1, 1).eyeHeight(0.7f).build(CNCMod.rlStr("wallnut")));
+
+    public static final Supplier<EntityType<PotatoMine>> POTATO_MINE = ENTITY_TYPES.register("potato_mine",
+            () -> EntityType.Builder.of(PotatoMine::new, MobCategory.CREATURE).sized(1, 0.5f).build(CNCMod.rlStr("potato_mine")));
 
     public static final Supplier<EntityType<Browncoat>> BROWNCOAT = ENTITY_TYPES.register("browncoat",
             () -> EntityType.Builder.of(Browncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("browncoat")));

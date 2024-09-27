@@ -144,11 +144,6 @@ public class WallNut extends CNCPlant {
     }
 
     @Override
-    public void lerpHeadTo(float yaw, int pitch) {
-        super.lerpHeadTo(yaw, pitch);
-    }
-
-    @Override
     protected @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
         if (this.getOwner() != null && player.equals(this.getOwner())) {
             if (!getEntityData().get(HAS_ARMOR)) {

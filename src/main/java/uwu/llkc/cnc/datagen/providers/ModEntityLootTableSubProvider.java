@@ -61,5 +61,10 @@ public class ModEntityLootTableSubProvider extends EntityLootSubProvider {
                                 .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, ConstantValue.exactly(1))))));
 
         add(EntityTypeRegistry.WALLNUT.get(), new LootTable.Builder());
+
+        add(EntityTypeRegistry.POTATO_MINE.get(), new LootTable.Builder()
+                .withPool(LootPool.lootPool()
+                        .when(LootItemRandomChanceCondition.randomChance(0.4f))
+                        .add(LootItem.lootTableItem(Items.BAKED_POTATO))));
     }
 }

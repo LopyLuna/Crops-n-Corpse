@@ -20,10 +20,7 @@ import net.neoforged.neoforge.event.level.ExplosionKnockbackEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.common.entities.plants.CNCPlant;
-import uwu.llkc.cnc.common.entities.plants.Peashooter;
-import uwu.llkc.cnc.common.entities.plants.Sunflower;
-import uwu.llkc.cnc.common.entities.plants.WallNut;
+import uwu.llkc.cnc.common.entities.plants.*;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.Imp;
 import uwu.llkc.cnc.common.init.BlockRegistry;
@@ -47,6 +44,7 @@ public class ModEvents {
         event.put(EntityTypeRegistry.WALLNUT.get(), WallNut.attributes().build());
         event.put(EntityTypeRegistry.BROWNCOAT.get(), Browncoat.attributes().build());
         event.put(EntityTypeRegistry.IMP.get(), Imp.attributes().build());
+        event.put(EntityTypeRegistry.POTATO_MINE.get(), PotatoMine.attributes().build());
     }
 
     @SubscribeEvent

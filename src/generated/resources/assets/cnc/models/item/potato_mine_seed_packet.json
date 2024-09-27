@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cnc:item/potato_mine_seed_packet"
+  }
+}

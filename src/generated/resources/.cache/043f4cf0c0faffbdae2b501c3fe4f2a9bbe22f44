@@ -1,8 +1,8 @@
-// 1.21	2024-09-25T16:53:46.1368233	Tags for minecraft:entity_type mod id cnc
+// 1.21	2024-09-27T18:02:54.8194995	Tags for minecraft:entity_type mod id cnc
 eb9234014998c75a0be0ff0a03e9770f985cb069 data/cnc/tags/entity_type/basic_zombie.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/champion_zombie.json
 3721882b5088198fe7d9b420f81b1df02b30a749 data/cnc/tags/entity_type/cnc_zombies.json
-f484763d5b10d33cc4a042e383ebeb8e67707305 data/cnc/tags/entity_type/defensive_plants.json
+3b301e5a4c6e64d146cafb668946f29d05e72b26 data/cnc/tags/entity_type/defensive_plants.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/mini_boss_zombie.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/nocturnal_plants.json
 21ae40bcd729379b49af9afafc3750054d7b5d60 data/cnc/tags/entity_type/offensive_plants.json

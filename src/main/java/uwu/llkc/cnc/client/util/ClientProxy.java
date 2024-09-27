@@ -44,7 +44,7 @@ public class ClientProxy {
     public static void createImpHead(Imp imp) {
         var model = ImpModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) imp.level()), imp.getX(), imp.getY() + 0.7, imp.getZ(), Either.left(model), poseStack -> {
-            poseStack.translate(0, -0.7, 0);
+            poseStack.translate(0, 1.05, 0);
             poseStack.mulPose(Axis.YN.rotationDegrees(imp.getVisualRotationYInDegrees()));
             poseStack.mulPose(Axis.XP.rotationDegrees(180));
         }, Vec3.directionFromRotation(0, imp.getYRot()).x * -0.05, 0.2, Vec3.directionFromRotation(0, imp.getYRot()).z * -0.05, ImpRenderer.TEXTURE));

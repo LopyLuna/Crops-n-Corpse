@@ -15,6 +15,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.Peashooter;
+import uwu.llkc.cnc.common.entities.plants.PotatoMine;
 import uwu.llkc.cnc.common.entities.plants.Sunflower;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.items.MultiEntitySpawnEgg;
@@ -33,6 +34,7 @@ public class ItemRegistry {
     public static final DeferredItem<SeedPacketItem<Peashooter>> PEASHOOTER_SEED_PACKET = ITEMS.registerItem("peashooter_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 16, 40, EntityTypeRegistry.PEASHOOTER));
     public static final DeferredItem<SeedPacketItem<Sunflower>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 0, 200, EntityTypeRegistry.SUNFLOWER));
     public static final DeferredItem<SeedPacketItem<WallNut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 320, EntityTypeRegistry.WALLNUT));
+    public static final DeferredItem<SeedPacketItem<PotatoMine>> POTATO_MINE_SEED_PACKET = ITEMS.registerItem("potato_mine_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 4, 320, EntityTypeRegistry.POTATO_MINE));
 
     public static final DeferredItem<Item> PLANT_FOOD = ITEMS.registerSimpleItem("plant_food");
     public static final DeferredItem<Item> SUN = ITEMS.registerSimpleItem("sun");
