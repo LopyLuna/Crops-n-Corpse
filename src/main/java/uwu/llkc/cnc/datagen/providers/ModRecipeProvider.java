@@ -146,5 +146,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("chest_boat")
                 .unlockedBy("has_boat", has(ItemTags.BOATS))
                 .save(recipeOutput, "walnut_chest_boat");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ItemRegistry.MASHED_POTATOES)
+                .requires(Items.BOWL)
+                .requires(Items.BAKED_POTATO)
+                .unlockedBy("has_bowl", has(Items.BAKED_POTATO))
+                .save(recipeOutput);
     }
 }

@@ -3,6 +3,8 @@ package uwu.llkc.cnc.common.init;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -85,6 +87,8 @@ public class ItemRegistry {
             props -> new BoatItem(false, Boat.Type.valueOf("CNC_WALNUT"), props), new Item.Properties().stacksTo(1));
     public static final DeferredItem<BoatItem> WALNUT_CHEST_BOAT = ITEMS.registerItem("walnut_chest_boat",
             props -> new BoatItem(true, Boat.Type.valueOf("CNC_WALNUT"), props), new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> MASHED_POTATOES = ITEMS.registerSimpleItem("mashed_potatoes",
+            new Item.Properties().food(Foods.MASHED_POTATOES));
 
     static class Foods {
         public static final FoodProperties PEA_POD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.5f).build();
@@ -98,5 +102,6 @@ public class ItemRegistry {
             food.eatSeconds *= 3;
             return food.build();
         });
+        public static final FoodProperties MASHED_POTATOES = new FoodProperties.Builder().nutrition(7).saturationModifier(0.23f).usingConvertsTo(Items.BOWL).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 40), 1).build();
     }
 }

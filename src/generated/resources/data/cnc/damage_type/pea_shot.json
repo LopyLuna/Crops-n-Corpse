@@ -1,5 +1,5 @@
 {
   "exhaustion": 0.1,
-  "message_id": "damage_type.cnc.pea_shot",
+  "message_id": "pea_shot",
   "scaling": "when_caused_by_living_non_player"
 }

@@ -66,6 +66,10 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.cnc.wall_nut_armor_hurt", "Wall-Nut armor hurt");
         add("subtitles.cnc.wall_nut_hurt", "Wall-Nut hurt");
         add("subtitles.cnc.wall_nut_death", "Wall-Nut died");
+
+        add("death.attack.pea_shot", "%2$s fed %2$s their vegetables");
+        add("death.attack.potato_mine", "%1$s went SPUDOW! by %2$s");
+        add("death.attack.cnc_zombie", "%2$s ate %2$s's brainz");
     }
 
     private String toEnglishTranslation(ResourceLocation rl) {

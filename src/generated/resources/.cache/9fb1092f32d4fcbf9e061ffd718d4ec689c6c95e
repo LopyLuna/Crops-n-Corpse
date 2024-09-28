@@ -1,4 +1,4 @@
-// 1.21	2024-09-27T23:41:34.5115447	Recipes
+// 1.21	2024-09-28T14:45:45.5361236	Recipes
 d58d782307308041a542c6929266025b2ceaf101 data/cnc/advancement/recipes/building_blocks/stripped_walnut_wood.json
 d9da6a34e56e006cac01eaf68a18d3931d7c30d2 data/cnc/advancement/recipes/building_blocks/walnut_planks.json
 6be6b37961c92a45327e625436f2e565e8fae4eb data/cnc/advancement/recipes/building_blocks/walnut_slab.json
@@ -9,6 +9,7 @@ c4b56e467a1e53d0bc3291f2593b3485ed831420 data/cnc/advancement/recipes/building_b
 34d375e4b988afe3f3dc86143c8a0b4b1a1dd86b data/cnc/advancement/recipes/decorations/walnut_fence.json
 e64b2be3fc2b3d14bbe0ff16f88849efb21ab565 data/cnc/advancement/recipes/decorations/walnut_sign.json
 adad54aca898255b5e091c7543da4b12c1aabebc data/cnc/advancement/recipes/food/chocolate_chip_muffin.json
+df5a7dc23c5a1eccb75c4e7c94d074a9d6410ca2 data/cnc/advancement/recipes/food/mashed_potatoes.json
 90901e12d966ad79987e2190dd66e8d1b84fc9ff data/cnc/advancement/recipes/food/sunflower_seed_muffin.json
 070653694d105b8587943a5449b0aec9014000da data/cnc/advancement/recipes/redstone/walnut_button.json
 da2e39ba8a4ba0f1926f9ce5a7f0a22c6dd8b971 data/cnc/advancement/recipes/redstone/walnut_door.json
@@ -18,6 +19,7 @@ abcc51d6ebf9273a6b2bd9adef929eb8de4c8460 data/cnc/advancement/recipes/redstone/w
 62c06a0556635c42a11b17acaf44dc73b6574a1d data/cnc/advancement/recipes/transportation/walnut_boat.json
 265e30748565e2ef3776f01a2e5aa93816f12ada data/cnc/recipe/chocolate_chip_muffin.json
 3e02ea078f654b2602fdec62590b867b05808406 data/cnc/recipe/hanging_walnut_sign.json
+a4c8f1d7d1e8adf2e5f777a126f570453bab8d2f data/cnc/recipe/mashed_potatoes.json
 45c7050f907d4c74d94f727000712a92e4abd926 data/cnc/recipe/plant_armor.json
 7f4b2f5bea9555b437c269c894cec9929a7a8002 data/cnc/recipe/stripped_walnut_wood.json
 60b10d09afc6272ea411f48eca30d0127c53089b data/cnc/recipe/sunflower_seed_muffin.json

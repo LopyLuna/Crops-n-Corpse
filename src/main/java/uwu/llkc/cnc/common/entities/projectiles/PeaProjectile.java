@@ -13,7 +13,6 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
-import uwu.llkc.cnc.common.entities.plants.Peashooter;
 import uwu.llkc.cnc.common.init.DamageTypeInit;
 
 public class PeaProjectile extends AbstractHurtingProjectile {

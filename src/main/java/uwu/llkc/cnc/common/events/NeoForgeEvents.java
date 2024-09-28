@@ -21,6 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
@@ -33,6 +34,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
+import uwu.llkc.cnc.common.entities.plants.PotatoMine;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
@@ -168,6 +170,13 @@ public class NeoForgeEvents {
                 }
                 event.getAffectedBlocks().removeAll(toRemove);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void death(final LivingDeathEvent event) {
+        if (event.getSource().getEntity() instanceof PotatoMine) {
+            event.getEntity().addDeltaMovement(new Vec3(0, 10, 0));
         }
     }
 }

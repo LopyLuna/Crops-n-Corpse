@@ -20,10 +20,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.client.entities.animations.PotatoMineAnimations;
 import uwu.llkc.cnc.common.init.SoundRegistry;
+import uwu.llkc.cnc.common.util.MessageDamageSource;
 
 public class PotatoMine extends CNCPlant {
     public static final EntityDataAccessor<Boolean> ARMED = SynchedEntityData.defineId(PotatoMine.class, EntityDataSerializers.BOOLEAN);
@@ -123,7 +123,7 @@ public class PotatoMine extends CNCPlant {
 
 
     void explode() {
-        level().explode(this, damageSources().explosion(this, this), new ExplosionDamageCalculator() {
+        level().explode(this, new MessageDamageSource(damageSources().explosion(this, this), "death.attack.potato_mine"), new ExplosionDamageCalculator() {
             @Override
             public float getEntityDamageAmount(Explosion explosion, Entity entity) {
                 return ((float) getAttribute(Attributes.ATTACK_DAMAGE).getValue());
