@@ -51,4 +51,16 @@ public class SoundRegistry {
 
     public static final Supplier<SoundEvent> WALL_NUT_DEATH = SOUNDS.register("wall_nut_death",
             () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.wall_nut_armor.death")));
+
+    public static final Supplier<SoundEvent> IMP_ATTACK = SOUNDS.register("imp_attack",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.imp.attack")));
+
+    public static final Supplier<SoundEvent> IMP_DEATH = SOUNDS.register("imp_death",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.imp.death")));
+
+    public static final Supplier<SoundEvent> IMP_HURT = SOUNDS.register("imp_hurt",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.imp.hurt")));
+
+    public static final Supplier<SoundEvent> IMP_IDLE = SOUNDS.register("imp_idle",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.imp.ambiance")));
 }

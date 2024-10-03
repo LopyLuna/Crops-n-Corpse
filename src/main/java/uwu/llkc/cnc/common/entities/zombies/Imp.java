@@ -91,18 +91,18 @@ public class Imp extends CNCZombie{
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundRegistry.BROWNCOAT_HURT.get();
+        return SoundRegistry.IMP_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundRegistry.BROWNCOAT_DEATH.get();
+        return SoundRegistry.IMP_DEATH.get();
     }
 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundRegistry.BROWNCOAT_AMBIANCE.get();
+        return SoundRegistry.IMP_IDLE.get();
     }
 
     @Override
@@ -112,6 +112,6 @@ public class Imp extends CNCZombie{
 
     @Override
     protected void playAttackSound() {
-        playSound(SoundRegistry.BROWNCOAT_ATTACK.get());
+        playSound(SoundRegistry.IMP_ATTACK.get());
     }
 }

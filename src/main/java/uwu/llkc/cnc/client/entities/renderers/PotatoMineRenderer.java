@@ -1,5 +1,6 @@
 package uwu.llkc.cnc.client.entities.renderers;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +19,12 @@ public class PotatoMineRenderer extends MobRenderer<PotatoMine, PotatoMineModel>
     @Override
     protected float getFlipDegrees(PotatoMine livingEntity) {
         return 0f;
+    }
+
+    @Override
+    protected void scale(PotatoMine livingEntity, PoseStack poseStack, float partialTickTime) {
+        super.scale(livingEntity, poseStack, partialTickTime);
+        poseStack.scale(1.2f, 1.2f, 1.2f);
     }
 
     @Override

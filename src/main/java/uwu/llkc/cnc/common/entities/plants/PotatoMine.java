@@ -126,6 +126,11 @@ public class PotatoMine extends CNCPlant {
         level().explode(this, new MessageDamageSource(damageSources().explosion(this, this), "death.attack.potato_mine"), new ExplosionDamageCalculator() {
             @Override
             public float getEntityDamageAmount(Explosion explosion, Entity entity) {
+                if (entity instanceof CNCPlant plant) {
+                    if (plant.getOwnerUUID() == null || plant.getOwnerUUID().equals(getOwnerUUID())) {
+                        return 0;
+                    }
+                }
                 return ((float) getAttribute(Attributes.ATTACK_DAMAGE).getValue());
             }
         }, getX(), getY(), getZ(), 1.5f, false, Level.ExplosionInteraction.NONE);
@@ -170,7 +175,7 @@ public class PotatoMine extends CNCPlant {
             if (explosionCountdown == 0) {
                 level().broadcastEntityEvent(this, (byte) -1);
             }
-            if (explosionCountdown >= 15) {
+            if (explosionCountdown >= 7) {
                 explode();
             } else {
                 explosionCountdown++;

@@ -176,7 +176,7 @@ public class NeoForgeEvents {
     @SubscribeEvent
     public static void death(final LivingDeathEvent event) {
         if (event.getSource().getEntity() instanceof PotatoMine) {
-            event.getEntity().addDeltaMovement(new Vec3(0, 10, 0));
+            event.getEntity().addDeltaMovement(new Vec3(0, 3, 0));
         }
     }
 }

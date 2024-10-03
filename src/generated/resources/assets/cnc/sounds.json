@@ -32,6 +32,34 @@
     ],
     "subtitle": "subtitles.cnc.browncoat_hurt"
   },
+  "entity.imp.ambiance": {
+    "sounds": [
+      "cnc:imp_idle_1",
+      "cnc:imp_idle_2",
+      "cnc:imp_idle_3"
+    ],
+    "subtitle": "subtitles.cnc.imp_idle"
+  },
+  "entity.imp.attack": {
+    "sounds": [
+      "cnc:imp_attack"
+    ],
+    "subtitle": "subtitles.cnc.imp_attack"
+  },
+  "entity.imp.death": {
+    "sounds": [
+      "cnc:imp_death_1",
+      "cnc:imp_death_2"
+    ],
+    "subtitle": "subtitles.cnc.imp_death"
+  },
+  "entity.imp.hurt": {
+    "sounds": [
+      "cnc:imp_hurt_1",
+      "cnc:imp_hurt_2"
+    ],
+    "subtitle": "subtitles.cnc.imp_hurt"
+  },
   "entity.peashooter.death": {
     "sounds": [
       "cnc:peashooter_death_1",

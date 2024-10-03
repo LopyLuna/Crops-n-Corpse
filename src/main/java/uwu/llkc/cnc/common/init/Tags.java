@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.gameevent.GameEvent;
 import uwu.llkc.cnc.CNCMod;
 
 public class Tags {
@@ -37,5 +38,9 @@ public class Tags {
 
     public static class Items {
         public static final TagKey<Item> WALNUT_LOGS = TagKey.create(Registries.ITEM, CNCMod.rl("walnut_logs"));
+    }
+
+    public static class gameEvents {
+        public static final TagKey<GameEvent> CAN_CHERRY_BOMB_LISTEN = TagKey.create(Registries.GAME_EVENT, CNCMod.rl("can_cherry_bomb_listen"));
     }
 }

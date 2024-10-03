@@ -50,6 +50,7 @@ public class DatagenHandler {
         generator.addProvider(event.includeServer(), new ModEntityTagProvider(output, event.getLookupProvider(), existingFileHelper));
         var provider = generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, event.getLookupProvider(), BUILDER, Set.of(CNCMod.MOD_ID))).getRegistryProvider();
         generator.addProvider(event.includeServer(), new ModDamageTypeTagProvider(output, provider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModGameEventTagProvider(output, provider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModRecipeProvider(output, provider));
         generator.addProvider(event.includeServer(), new ModDataMapProvider(output, provider));
         generator.addProvider(event.includeServer(),
