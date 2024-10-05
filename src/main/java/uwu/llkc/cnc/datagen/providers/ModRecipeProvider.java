@@ -36,6 +36,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_peashooter");
 
+        //todo cherry bomb seed packet recipe
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.POTATO_MINE.get()))
                 .pattern(" p ")
                 .pattern("sef")

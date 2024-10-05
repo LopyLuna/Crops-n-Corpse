@@ -45,6 +45,7 @@ public class ModEvents {
         event.put(EntityTypeRegistry.BROWNCOAT.get(), Browncoat.attributes().build());
         event.put(EntityTypeRegistry.IMP.get(), Imp.attributes().build());
         event.put(EntityTypeRegistry.POTATO_MINE.get(), PotatoMine.attributes().build());
+        event.put(EntityTypeRegistry.CHERRY_BOMB.get(), CherryBomb.attributes().build());
     }
 
     @SubscribeEvent
@@ -54,6 +55,8 @@ public class ModEvents {
         event.register(EntityTypeRegistry.BROWNCOAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkAnyLightMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.WALLNUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WallNut::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.IMP.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkAnyLightMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(EntityTypeRegistry.POTATO_MINE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PotatoMine::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(EntityTypeRegistry.CHERRY_BOMB.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CherryBomb::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 
     @SubscribeEvent

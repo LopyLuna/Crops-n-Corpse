@@ -126,12 +126,17 @@ public class PotatoMine extends CNCPlant {
         level().explode(this, new MessageDamageSource(damageSources().explosion(this, this), "death.attack.potato_mine"), new ExplosionDamageCalculator() {
             @Override
             public float getEntityDamageAmount(Explosion explosion, Entity entity) {
+                return ((float) getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+            }
+
+            @Override
+            public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
                 if (entity instanceof CNCPlant plant) {
-                    if (plant.getOwnerUUID() == null || plant.getOwnerUUID().equals(getOwnerUUID())) {
-                        return 0;
+                    if (plant.getOwnerUUID() != null && plant.getOwnerUUID().equals(getOwnerUUID())) {
+                        return false;
                     }
                 }
-                return ((float) getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                return super.shouldDamageEntity(explosion, entity);
             }
         }, getX(), getY(), getZ(), 1.5f, false, Level.ExplosionInteraction.NONE);
         this.remove(RemovalReason.KILLED);
@@ -194,15 +199,7 @@ public class PotatoMine extends CNCPlant {
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        //todo
-        return SoundRegistry.WALL_NUT_DEATH.get();
-    }
-
-    @Nullable
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
-        //todo
-        return SoundRegistry.WALL_NUT_ARMOR_HURT.get();
+        return SoundRegistry.POTATO_MINE_DEATH.get();
     }
 
     @Override

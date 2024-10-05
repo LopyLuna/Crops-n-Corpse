@@ -34,7 +34,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.SUNFLOWER_SEED_PACKET.get());
         basicItem(ItemRegistry.WALLNUT_SEED_PACKET.get());
         basicItem(ItemRegistry.POTATO_MINE_SEED_PACKET.get());
+        basicItem(ItemRegistry.CHERRY_BOMB_SEED_PACKET.get());
         basicItem(ItemRegistry.WALNUT_SAPLING.get());
+        basicItem(ItemRegistry.MASHED_POTATOES.get());
         leaves("walnut_leaves", CNCMod.rl("block/walnut_leaves"));
 
         withExistingParent(CNCMod.rlStr("traffic_cone"), "neoforge:item/default")

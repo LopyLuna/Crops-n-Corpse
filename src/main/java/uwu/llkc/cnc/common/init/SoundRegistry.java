@@ -63,4 +63,7 @@ public class SoundRegistry {
 
     public static final Supplier<SoundEvent> IMP_IDLE = SOUNDS.register("imp_idle",
             () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.imp.ambiance")));
+
+    public static final Supplier<SoundEvent> POTATO_MINE_DEATH = SOUNDS.register("potato_mine_death",
+            () -> SoundEvent.createVariableRangeEvent(CNCMod.rl("entity.potato_mine.death")));
 }

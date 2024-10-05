@@ -62,6 +62,10 @@ public class ModEntityLootTableSubProvider extends EntityLootSubProvider {
 
         add(EntityTypeRegistry.WALLNUT.get(), new LootTable.Builder());
 
+        //todo drop cherries;
+
+        add(EntityTypeRegistry.CHERRY_BOMB.get(), new LootTable.Builder());
+
         add(EntityTypeRegistry.POTATO_MINE.get(), new LootTable.Builder()
                 .withPool(LootPool.lootPool()
                         .when(LootItemRandomChanceCondition.randomChance(0.4f))

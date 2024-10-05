@@ -93,5 +93,9 @@ public class ModSoundProvider extends SoundDefinitionsProvider {
                 .with(sound(CNCMod.rl("imp_idle_1")))
                 .with(sound(CNCMod.rl("imp_idle_2")))
                 .with(sound(CNCMod.rl("imp_idle_3"))));
+        add(SoundRegistry.POTATO_MINE_DEATH, SoundDefinition.definition()
+                .subtitle("subtitles.cnc.potato_mine_death")
+                .with(sound(CNCMod.rl("potato_mine_death_1")))
+                .with(sound(CNCMod.rl("potato_mine_death_2"))));
     }
 }

@@ -2,7 +2,6 @@ package uwu.llkc.cnc.client.events;
 
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
@@ -15,9 +14,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.entities.models.*;
 import uwu.llkc.cnc.client.entities.renderers.*;
@@ -25,7 +22,6 @@ import uwu.llkc.cnc.common.init.BlockEntityTypeRegistry;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
-import uwu.llkc.cnc.common.items.TrafficConeItem;
 import uwu.llkc.cnc.common.items.properties.MultiEntitySpawnEggProperty;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -41,6 +37,7 @@ public class ModEvents {
         event.registerEntityRenderer(EntityTypeRegistry.IMP.get(), ImpRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.WALNUT_BOAT.get(), context -> new BoatRenderer(context, false));
         event.registerEntityRenderer(EntityTypeRegistry.WALNUT_CHEST_BOAT.get(), context -> new BoatRenderer(context, true));
+        event.registerEntityRenderer(EntityTypeRegistry.CHERRY_BOMB.get(), CherryBombRenderer::new);
 
         event.registerBlockEntityRenderer(BlockEntityTypeRegistry.CUSTOM_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityTypeRegistry.CUSTOM_HANGING_SIGN.get(), HangingSignRenderer::new);
@@ -55,6 +52,7 @@ public class ModEvents {
         event.registerLayerDefinition(WallNutArmorLayer.ARMOR, WallNutArmorLayer::createArmor);
         event.registerLayerDefinition(ImpModel.MAIN_LAYER, ImpModel::createBodyLayer);
         event.registerLayerDefinition(PotatoMineModel.MAIN_LAYER, PotatoMineModel::createBodyLayer);
+        event.registerLayerDefinition(CherryBombModel.MAIN_LAYER, CherryBombModel::createBodyLayer);
     }
 
     @SubscribeEvent

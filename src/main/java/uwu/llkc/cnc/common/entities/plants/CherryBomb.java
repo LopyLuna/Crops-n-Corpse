@@ -5,15 +5,15 @@ import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
@@ -30,19 +30,33 @@ import uwu.llkc.cnc.common.init.Tags;
 import java.util.function.BiConsumer;
 
 public class CherryBomb extends CNCPlant implements VibrationSystem {
-    public final AnimationState idle = new AnimationState();
-    public final AnimationState attack = new AnimationState();
-    public final AnimationState die = new AnimationState();
+    public static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.BOOLEAN);
+
+    private static final int DISTURBED_COOLDOWN = 200;
+
+    public final AnimationState idleAwake = new AnimationState();
+    public final AnimationState idleSleeping = new AnimationState();
+    public final AnimationState flying = new AnimationState();
+    public final AnimationState explode = new AnimationState();
+
     private final DynamicGameEventListener<VibrationSystem.Listener> dynamicGameEventListener;
     private final VibrationSystem.User vibrationUser;
+
     private VibrationSystem.Data vibrationData;
+    private int disturbedTimer = 0;
 
 
     public CherryBomb(EntityType<CherryBomb> entityType, Level level) {
         super(entityType, level);
         this.vibrationUser = new CherryBomb.VibrationUser();
         this.vibrationData = new VibrationSystem.Data();
-        this.dynamicGameEventListener = new DynamicGameEventListener<VibrationSystem.Listener>(new VibrationSystem.Listener(this));
+        this.dynamicGameEventListener = new DynamicGameEventListener<>(new VibrationSystem.Listener(this));
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(FLYING, false);
     }
 
     @Override
@@ -53,6 +67,8 @@ public class CherryBomb extends CNCPlant implements VibrationSystem {
                 .encodeStart(registryops, this.vibrationData)
                 .resultOrPartial(result -> LogManager.getLogger().error("Failed to encode vibration listener for Warden: '{}'", result))
                 .ifPresent(tag -> compound.put("listener", tag));
+        compound.putBoolean("flying", entityData.get(FLYING));
+        compound.putBoolean("sleeping", getPose() == Pose.SLEEPING);
     }
 
     @Override
@@ -65,19 +81,20 @@ public class CherryBomb extends CNCPlant implements VibrationSystem {
                     .resultOrPartial(result -> LogManager.getLogger().error("Failed to parse vibration listener for Warden: '{}'", result))
                     .ifPresent(tag -> this.vibrationData = tag);
         }
+        entityData.set(FLYING, compound.getBoolean("flying"));
+
     }
 
     public static AttributeSupplier.Builder attributes() {
         return CNCPlant.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 6)
-                .add(Attributes.ATTACK_DAMAGE, 2)
-                .add(Attributes.FOLLOW_RANGE, 20);
+                .add(Attributes.MAX_HEALTH, 10)
+                .add(Attributes.ATTACK_DAMAGE, 65)
+                .add(Attributes.FOLLOW_RANGE, 7);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-
     }
 
     @Override
@@ -87,25 +104,24 @@ public class CherryBomb extends CNCPlant implements VibrationSystem {
         }
 
         super.tick();
-        if (level().isClientSide()) {
-            idle.startIfStopped(tickCount);
-        }
-    }
 
-    @Override
-    public void die(DamageSource damageSource) {
-        level().broadcastEntityEvent(this, (byte)1);
-        super.die(damageSource);
+        if (getPose() == Pose.STANDING) {
+            disturbedTimer++;
+            if (disturbedTimer >= DISTURBED_COOLDOWN) {
+                setPose(Pose.SLEEPING);
+            }
+        }
+
+        if (level().isClientSide()) {
+            idleAwake.animateWhen(getPose() != Pose.SLEEPING && !entityData.get(FLYING), tickCount);
+            idleSleeping.animateWhen(getPose() == Pose.SLEEPING && !entityData.get(FLYING), tickCount);
+            flying.animateWhen(entityData.get(FLYING), tickCount);
+        }
     }
 
     @Override
     public void handleEntityEvent(byte id) {
         super.handleEntityEvent(id);
-        if (id == 0) {
-            attack.start(tickCount);
-        } else if (id == 1) {
-            die.start(tickCount);
-        }
     }
 
     @Nullable
@@ -142,7 +158,7 @@ public class CherryBomb extends CNCPlant implements VibrationSystem {
 
         @Override
         public int getListenerRadius() {
-            return 7;
+            return 10;
         }
 
         @Override
@@ -165,7 +181,7 @@ public class CherryBomb extends CNCPlant implements VibrationSystem {
             if (!CherryBomb.this.isNoAi()
                     && !CherryBomb.this.isDeadOrDying()
                     && p_282574_.getWorldBorder().isWithinBounds(p_282323_)) {
-                return !(p_282515_.sourceEntity() instanceof LivingEntity);
+                return p_282515_.sourceEntity() instanceof LivingEntity;
             } else {
                 return false;
             }
@@ -175,10 +191,8 @@ public class CherryBomb extends CNCPlant implements VibrationSystem {
         public void onReceiveVibration(
                 ServerLevel p_281325_, BlockPos p_282386_, Holder<GameEvent> p_316139_, @javax.annotation.Nullable Entity p_281438_, @javax.annotation.Nullable Entity p_282582_, float p_283699_
         ) {
-            if (!CherryBomb.this.isDeadOrDying()) {
-                BlockPos blockpos = p_282386_;
-                //todo explode
-            }
+            disturbedTimer = 0;
+            setPose(Pose.STANDING);
         }
     }
 }

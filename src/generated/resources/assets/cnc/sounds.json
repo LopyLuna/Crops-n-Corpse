@@ -83,6 +83,13 @@
     ],
     "subtitle": "subtitles.cnc.peashooter_shoot"
   },
+  "entity.potato_mine.death": {
+    "sounds": [
+      "cnc:potato_mine_death_1",
+      "cnc:potato_mine_death_2"
+    ],
+    "subtitle": "subtitles.cnc.potato_mine_death"
+  },
   "entity.sunflower.death": {
     "sounds": [
       "cnc:sunflower_death_1",

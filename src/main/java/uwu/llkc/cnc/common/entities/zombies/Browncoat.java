@@ -1,12 +1,10 @@
 package uwu.llkc.cnc.common.entities.zombies;
 
-import com.mojang.datafixers.util.Either;
-import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -22,22 +20,18 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import uwu.llkc.cnc.client.entities.models.BrowncoatModel;
-import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
 import uwu.llkc.cnc.client.util.ClientProxy;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 
-public class Browncoat extends CNCZombie{
+public class Browncoat extends CNCZombie {
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(Browncoat.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HAS_ARM = SynchedEntityData.defineId(Browncoat.class, EntityDataSerializers.BOOLEAN);
 
@@ -48,15 +42,53 @@ public class Browncoat extends CNCZombie{
     public double yTie;
     public double zTie;
 
-
     public Browncoat(EntityType<Browncoat> entityType, Level level) {
         super(entityType, level);
+    }
+
+    @Override
+    protected void doHurtEquipment(DamageSource damageSource, float damageAmount, EquipmentSlot... slots) {
+        ItemStack oldHat = null;
+        ItemStack newHat = null;
+        for (EquipmentSlot slot : slots) {
+            if (slot == EquipmentSlot.HEAD) {
+                oldHat = getItemBySlot(EquipmentSlot.HEAD);
+            }
+        }
+        super.doHurtEquipment(damageSource, damageAmount, slots);
+        for (EquipmentSlot slot : slots) {
+            if (slot == EquipmentSlot.HEAD) {
+                newHat = getItemBySlot(EquipmentSlot.HEAD);
+            }
+        }
+
+        if (oldHat != null && newHat != null) {
+            if (oldHat.is(Items.BUCKET) && newHat.isEmpty()) {
+                if (random.nextFloat() < 0.085) {
+                    spawnAtLocation(Items.BUCKET);
+                }
+            } else if (oldHat.is(ItemRegistry.TRAFFIC_CONE) && newHat.isEmpty()){
+                if (random.nextFloat() < 0.085) {
+                    spawnAtLocation(ItemRegistry.TRAFFIC_CONE);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
     }
 
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-        if(spawnType != MobSpawnType.SPAWN_EGG) {
+        if (spawnType != MobSpawnType.SPAWN_EGG) {
             if (random.nextFloat() < 0.30f) {
                 setItemSlot(EquipmentSlot.HEAD, new ItemStack(ItemRegistry.TRAFFIC_CONE.get()));
             } else if (random.nextFloat() < 0.15) {
@@ -126,7 +158,7 @@ public class Browncoat extends CNCZombie{
         this.zTie += d2 * 0.25;
         this.yTie += d1 * 0.25;
     }
-    
+
     @Override
     public void tick() {
         super.tick();
@@ -139,7 +171,7 @@ public class Browncoat extends CNCZombie{
             super.actuallyHurt(damageSource, damageAmount);
             if (entityData.get(HAS_ARM) && getHealth() / getMaxHealth() < 0.5f) {
                 entityData.set(HAS_ARM, false);
-                level().broadcastEntityEvent(this, (byte)0);
+                level().broadcastEntityEvent(this, (byte) 0);
             }
         } else {
             super.actuallyHurt(damageSource, damageAmount);

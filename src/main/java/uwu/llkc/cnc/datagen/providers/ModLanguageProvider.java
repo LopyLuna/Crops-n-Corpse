@@ -74,6 +74,8 @@ public class ModLanguageProvider extends LanguageProvider {
         add("death.attack.pea_shot", "%2$s fed %2$s their vegetables");
         add("death.attack.potato_mine", "%1$s went SPUDOW! by %2$s");
         add("death.attack.cnc_zombie", "%2$s ate %2$s's brainz");
+
+        add("item.multi_spawn_egg.tooltip", "Shift right-click to cycle");
     }
 
     private String toEnglishTranslation(ResourceLocation rl) {

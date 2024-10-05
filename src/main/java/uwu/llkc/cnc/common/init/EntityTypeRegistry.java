@@ -8,10 +8,7 @@ import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.common.entities.plants.Peashooter;
-import uwu.llkc.cnc.common.entities.plants.PotatoMine;
-import uwu.llkc.cnc.common.entities.plants.Sunflower;
-import uwu.llkc.cnc.common.entities.plants.WallNut;
+import uwu.llkc.cnc.common.entities.plants.*;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.Imp;
@@ -32,6 +29,9 @@ public class EntityTypeRegistry {
 
     public static final Supplier<EntityType<PotatoMine>> POTATO_MINE = ENTITY_TYPES.register("potato_mine",
             () -> EntityType.Builder.of(PotatoMine::new, MobCategory.CREATURE).sized(0.9f, 0.5f).build(CNCMod.rlStr("potato_mine")));
+
+    public static final Supplier<EntityType<CherryBomb>> CHERRY_BOMB = ENTITY_TYPES.register("cherry_bomb",
+            () -> EntityType.Builder.of(CherryBomb::new, MobCategory.CREATURE).sized(1, 1).eyeHeight(0.3f).build(CNCMod.rlStr("cherry_bomb")));
 
     public static final Supplier<EntityType<Browncoat>> BROWNCOAT = ENTITY_TYPES.register("browncoat",
             () -> EntityType.Builder.of(Browncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("browncoat")));
