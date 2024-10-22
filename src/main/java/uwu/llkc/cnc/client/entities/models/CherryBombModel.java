@@ -6,6 +6,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.CherryBomb;
@@ -44,8 +45,17 @@ public class CherryBombModel extends HierarchicalModel<CherryBomb> {
 
 	@Override
 	public void setupAnim(CherryBomb entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	}
 
+	@Override
+	public void prepareMobModel(CherryBomb entity, float limbSwing, float limbSwingAmount, float partialTick) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		var leftHeadRot = entity.getEntityData().get(CherryBomb.LEFT_HEAD_ROT);
+		var rightHeadRot = entity.getEntityData().get(CherryBomb.RIGHT_HEAD_ROT);
+		var leftHeadRotO = entity.getEntityData().get(CherryBomb.LEFT_HEAD_ROT_O);
+		var rightHeadRotO = entity.getEntityData().get(CherryBomb.RIGHT_HEAD_ROT_O);
+		headLeft.setRotation(0, Mth.lerp(partialTick,Mth.DEG_TO_RAD * (leftHeadRotO.y - entity.yBodyRotO), Mth.DEG_TO_RAD * (leftHeadRot.y - entity.yBodyRot)), headLeft.zRot);
+		headRight.setRotation(0, Mth.lerp(partialTick,Mth.DEG_TO_RAD * (rightHeadRotO.y - entity.yBodyRotO), Mth.DEG_TO_RAD * (rightHeadRot.y - entity.yBodyRot)), headRight.zRot);
 	}
 
 	@Override

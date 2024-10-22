@@ -31,6 +31,6 @@ public class CherryBombRenderer extends MobRenderer<CherryBomb, CherryBombModel>
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull CherryBomb cherryBomb) {
-        return cherryBomb.getPose() == Pose.SLEEPING ? SLEEPING : NORMAL;
+        return cherryBomb.getEntityData().get(CherryBomb.SLEEPING) ? SLEEPING : NORMAL;
     }
 }

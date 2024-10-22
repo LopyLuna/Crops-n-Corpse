@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import uwu.llkc.cnc.common.entities.ai.FixedBodyRotationControl;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 
@@ -77,12 +78,8 @@ public class WallNut extends CNCPlant {
     }
 
     @Override
-    protected BodyRotationControl createBodyControl() {
-        return new BodyRotationControl(this) {
-            @Override
-            public void clientTick() {
-            }
-        };
+    protected @NotNull BodyRotationControl createBodyControl() {
+        return FixedBodyRotationControl.INSTANCE;
     }
 
     @Override
