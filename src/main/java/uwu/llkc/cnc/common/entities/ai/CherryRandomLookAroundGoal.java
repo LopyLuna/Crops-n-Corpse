@@ -10,6 +10,7 @@ public class CherryRandomLookAroundGoal extends Goal {
     private double relX;
     private double relZ;
     private int lookTime;
+    private int index;
 
     public CherryRandomLookAroundGoal(CherryBomb mob) {
         this.mob = mob;
@@ -32,6 +33,7 @@ public class CherryRandomLookAroundGoal extends Goal {
         this.relX = Math.cos(d0);
         this.relZ = Math.sin(d0);
         this.lookTime = 20 + this.mob.getRandom().nextInt(20);
+        index = mob.getRandom().nextInt(2);
     }
 
     @Override
@@ -42,6 +44,6 @@ public class CherryRandomLookAroundGoal extends Goal {
     @Override
     public void tick() {
         this.lookTime--;
-        this.mob.getLookControl().setRandomLookAt(this.mob.getX() + this.relX, this.mob.getEyeY(), this.mob.getZ() + this.relZ);
+        this.mob.getLookControl().setLookAt(this.mob.getX() + this.relX, this.mob.getEyeY(), this.mob.getZ() + this.relZ, index);
     }
 }
