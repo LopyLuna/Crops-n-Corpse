@@ -107,6 +107,7 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
                 .ifPresent(tag -> compound.put("listener", tag));
         compound.putBoolean("flying", entityData.get(FLYING));
         compound.putBoolean("sleeping", entityData.get(SLEEPING));
+        compound.putBoolean("exploding", isExploding);
     }
 
     @Override
@@ -121,6 +122,7 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
         }
         entityData.set(FLYING, compound.getBoolean("flying"));
         entityData.set(SLEEPING, compound.getBoolean("sleeping"));
+        isExploding = compound.getBoolean("exploding");
     }
 
     @Override
