@@ -3,25 +3,25 @@ package uwu.llkc.cnc.common.init;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
-import uwu.llkc.cnc.common.items.MultiEntitySpawnEgg;
-import uwu.llkc.cnc.common.items.PlantArmorItem;
-import uwu.llkc.cnc.common.items.SeedPacketItem;
-import uwu.llkc.cnc.common.items.TrafficConeItem;
+import uwu.llkc.cnc.common.items.*;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -35,7 +35,21 @@ public class ItemRegistry {
     public static final DeferredItem<SeedPacketItem<Sunflower>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 0, 200, EntityTypeRegistry.SUNFLOWER));
     public static final DeferredItem<SeedPacketItem<WallNut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 320, EntityTypeRegistry.WALLNUT));
     public static final DeferredItem<SeedPacketItem<PotatoMine>> POTATO_MINE_SEED_PACKET = ITEMS.registerItem("potato_mine_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 4, 320, EntityTypeRegistry.POTATO_MINE));
-    public static final DeferredItem<SeedPacketItem<CherryBomb>> CHERRY_BOMB_SEED_PACKET = ITEMS.registerItem("cherry_bomb_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 480, 45, EntityTypeRegistry.CHERRY_BOMB));
+    public static final DeferredItem<SeedPacketItem<CherryBomb>> CHERRY_BOMB_SEED_PACKET = ITEMS.registerItem("cherry_bomb_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 480, 45, EntityTypeRegistry.CHERRY_BOMB) {
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+            var stack = player.getItemInHand(usedHand);
+            var cherry = EntityTypeRegistry.CHERRY_BOMB.get().create(level);
+            if (cherry != null && !level.isClientSide()) {
+                cherry.getEntityData().set(CherryBomb.FLYING, true);
+                cherry.setPos(player.position());
+                cherry.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 1F, 1.0F);
+                level.addFreshEntity(cherry);
+            }
+            stack.consume(1, player);
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+        }
+    });
 
     public static final DeferredItem<Item> PLANT_FOOD = ITEMS.registerSimpleItem("plant_food");
     public static final DeferredItem<Item> SUN = ITEMS.registerSimpleItem("sun");

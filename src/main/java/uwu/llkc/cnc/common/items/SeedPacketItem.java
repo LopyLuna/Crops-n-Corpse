@@ -96,7 +96,7 @@ public class SeedPacketItem<T extends Entity> extends Item {
                 return InteractionResult.FAIL;
             }
         }
-        return InteractionResult.PASS;
+        return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
     }
 
     @Override

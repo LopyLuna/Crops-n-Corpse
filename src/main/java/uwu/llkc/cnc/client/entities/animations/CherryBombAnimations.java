@@ -6,7 +6,7 @@ import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
 public class CherryBombAnimations {
-        public static final AnimationDefinition idle_awake = AnimationDefinition.Builder.withLength(1.5F).looping()
+        public static final AnimationDefinition IDLE_AWAKE = AnimationDefinition.Builder.withLength(1.5F).looping()
                 .addAnimation("head_right", new AnimationChannel(AnimationChannel.Targets.POSITION,
                         new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.25F, KeyframeAnimations.posVec(0.0F, 0.75F, 0.0F), AnimationChannel.Interpolations.LINEAR),
@@ -72,7 +72,7 @@ public class CherryBombAnimations {
                 ))
                 .build();
 
-        public static final AnimationDefinition idle_sleeping = AnimationDefinition.Builder.withLength(2.25F).looping()
+        public static final AnimationDefinition IDLE_SLEEPING = AnimationDefinition.Builder.withLength(2.25F).looping()
                 .addAnimation("head_right", new AnimationChannel(AnimationChannel.Targets.SCALE,
                         new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.75F, KeyframeAnimations.scaleVec(1.1F, 1.1F, 1.1F), AnimationChannel.Interpolations.LINEAR),
@@ -117,7 +117,7 @@ public class CherryBombAnimations {
                 ))
                 .build();
 
-        public static final AnimationDefinition flying = AnimationDefinition.Builder.withLength(0.5F).looping()
+        public static final AnimationDefinition FLYING = AnimationDefinition.Builder.withLength(0.5F).looping()
                 .addAnimation("head_right", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(15.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.25F, KeyframeAnimations.degreeVec(20.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
@@ -150,7 +150,7 @@ public class CherryBombAnimations {
                 ))
                 .build();
 
-        public static final AnimationDefinition explodonate = AnimationDefinition.Builder.withLength(1.25F)
+        public static final AnimationDefinition EXPLODONATE = AnimationDefinition.Builder.withLength(1.25F)
                 .addAnimation("head_right", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
                         new Keyframe(0.4167F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
