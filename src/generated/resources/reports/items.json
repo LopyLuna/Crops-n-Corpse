@@ -13,6 +13,24 @@
       "minecraft:repair_cost": 0
     }
   },
+  "cnc:cherries": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:food": {
+        "nutrition": 1,
+        "saturation": 0.8
+      },
+      "minecraft:lore": [],
+      "minecraft:max_stack_size": 64,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
   "cnc:cherry_bomb_seed_packet": {
     "components": {
       "minecraft:attribute_modifiers": {
@@ -23,6 +41,94 @@
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 1,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
+  "cnc:cherry_milkshake": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:damage": 0,
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:food": {
+        "can_always_eat": true,
+        "effects": [
+          {
+            "effect": {
+              "amplifier": 2,
+              "duration": 400,
+              "id": "minecraft:regeneration",
+              "neoforge:cures": [
+                "milk",
+                "protected_by_totem"
+              ],
+              "show_icon": true
+            }
+          }
+        ],
+        "nutrition": 4,
+        "saturation": 12.8
+      },
+      "minecraft:lore": [],
+      "minecraft:max_damage": 32,
+      "minecraft:max_stack_size": 1,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
+  "cnc:cherry_muffin": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:food": {
+        "nutrition": 5,
+        "saturation": 4.0,
+        "using_converts_to": {
+          "id": "minecraft:paper"
+        }
+      },
+      "minecraft:lore": [],
+      "minecraft:max_stack_size": 64,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
+  "cnc:cherry_pie": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:food": {
+        "nutrition": 6,
+        "saturation": 7.2000003
+      },
+      "minecraft:lore": [],
+      "minecraft:max_stack_size": 64,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
+  "cnc:chocolate_cherry_cake": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:lore": [],
+      "minecraft:max_stack_size": 64,
       "minecraft:rarity": "common",
       "minecraft:repair_cost": 0
     }
@@ -44,6 +150,41 @@
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
+  "cnc:chocolate_milkshake": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:damage": 0,
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:food": {
+        "can_always_eat": true,
+        "effects": [
+          {
+            "effect": {
+              "amplifier": 2,
+              "duration": 500,
+              "id": "minecraft:haste",
+              "neoforge:cures": [
+                "milk",
+                "protected_by_totem"
+              ],
+              "show_icon": true
+            }
+          }
+        ],
+        "nutrition": 4,
+        "saturation": 12.8
+      },
+      "minecraft:lore": [],
+      "minecraft:max_damage": 32,
+      "minecraft:max_stack_size": 1,
       "minecraft:rarity": "common",
       "minecraft:repair_cost": 0
     }
@@ -95,6 +236,39 @@
       "minecraft:repair_cost": 0
     }
   },
+  "cnc:golden_cherries": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:food": {
+        "can_always_eat": true,
+        "effects": [
+          {
+            "effect": {
+              "duration": 60,
+              "id": "minecraft:regeneration",
+              "neoforge:cures": [
+                "milk",
+                "protected_by_totem"
+              ],
+              "show_icon": true
+            },
+            "probability": 0.5
+          }
+        ],
+        "nutrition": 3,
+        "saturation": 9.6
+      },
+      "minecraft:lore": [],
+      "minecraft:max_stack_size": 64,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
   "cnc:hanging_walnut_sign": {
     "components": {
       "minecraft:attribute_modifiers": {
@@ -138,8 +312,8 @@
               "duration": 40,
               "id": "minecraft:regeneration",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -356,6 +530,41 @@
       },
       "minecraft:lore": [],
       "minecraft:max_damage": 15,
+      "minecraft:max_stack_size": 1,
+      "minecraft:rarity": "common",
+      "minecraft:repair_cost": 0
+    }
+  },
+  "cnc:vanilla_milkshake": {
+    "components": {
+      "minecraft:attribute_modifiers": {
+        "modifiers": []
+      },
+      "minecraft:damage": 0,
+      "minecraft:enchantments": {
+        "levels": {}
+      },
+      "minecraft:food": {
+        "can_always_eat": true,
+        "effects": [
+          {
+            "effect": {
+              "amplifier": 2,
+              "duration": 600,
+              "id": "minecraft:speed",
+              "neoforge:cures": [
+                "milk",
+                "protected_by_totem"
+              ],
+              "show_icon": true
+            }
+          }
+        ],
+        "nutrition": 4,
+        "saturation": 12.8
+      },
+      "minecraft:lore": [],
+      "minecraft:max_damage": 32,
       "minecraft:max_stack_size": 1,
       "minecraft:rarity": "common",
       "minecraft:repair_cost": 0
@@ -3732,8 +3941,8 @@
               "duration": 600,
               "id": "minecraft:hunger",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             },
@@ -6908,8 +7117,8 @@
               "duration": 400,
               "id": "minecraft:regeneration",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -6919,8 +7128,8 @@
               "duration": 6000,
               "id": "minecraft:resistance",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -6930,8 +7139,8 @@
               "duration": 6000,
               "id": "minecraft:fire_resistance",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -6942,8 +7151,8 @@
               "duration": 2400,
               "id": "minecraft:absorption",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -8070,8 +8279,8 @@
               "duration": 100,
               "id": "minecraft:regeneration",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -8081,8 +8290,8 @@
               "duration": 2400,
               "id": "minecraft:absorption",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -14139,9 +14348,9 @@
               "duration": 100,
               "id": "minecraft:poison",
               "neoforge:cures": [
-                "protected_by_totem",
+                "honey",
                 "milk",
-                "honey"
+                "protected_by_totem"
               ],
               "show_icon": true
             },
@@ -14826,9 +15035,9 @@
               "duration": 1200,
               "id": "minecraft:poison",
               "neoforge:cures": [
-                "protected_by_totem",
+                "honey",
                 "milk",
-                "honey"
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -14839,8 +15048,8 @@
               "duration": 300,
               "id": "minecraft:hunger",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -14850,8 +15059,8 @@
               "duration": 300,
               "id": "minecraft:nausea",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             }
@@ -16021,8 +16230,8 @@
               "duration": 600,
               "id": "minecraft:hunger",
               "neoforge:cures": [
-                "protected_by_totem",
-                "milk"
+                "milk",
+                "protected_by_totem"
               ],
               "show_icon": true
             },
@@ -17098,9 +17307,9 @@
               "duration": 100,
               "id": "minecraft:poison",
               "neoforge:cures": [
-                "protected_by_totem",
+                "honey",
                 "milk",
-                "honey"
+                "protected_by_totem"
               ],
               "show_icon": true
             }

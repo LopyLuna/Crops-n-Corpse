@@ -1,0 +1,44 @@
+{
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "minecraft:bottom"
+        },
+        "east": {
+          "texture": "#inside"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "west": {
+          "texture": "#side"
+        }
+      },
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        9,
+        8,
+        13
+      ]
+    }
+  ],
+  "textures": {
+    "bottom": "cnc:block/chocolate_cherry_cake_bottom",
+    "inside": "cnc:block/chocolate_cherry_cake_inner",
+    "particle": "cnc:block/chocolate_cherry_cake_side",
+    "side": "cnc:block/chocolate_cherry_cake_side",
+    "top": "cnc:block/chocolate_cherry_cake_top"
+  }
+}

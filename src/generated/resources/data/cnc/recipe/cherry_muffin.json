@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cnc:cherries"
+    },
+    {
+      "item": "cnc:walnut_flour"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cnc:cherry_muffin"
+  }
+}

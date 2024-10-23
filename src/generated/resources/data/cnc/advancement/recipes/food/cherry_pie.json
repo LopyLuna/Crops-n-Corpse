@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cocoa": {
+    "has_cherries": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:cocoa_beans"
+            "items": "cnc:cherries"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cnc:chocolate_chip_muffin"
+        "recipe": "cnc:cherry_pie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cocoa"
+      "has_cherries"
     ]
   ],
   "rewards": {
     "recipes": [
-      "cnc:chocolate_chip_muffin"
+      "cnc:cherry_pie"
     ]
   }
 }

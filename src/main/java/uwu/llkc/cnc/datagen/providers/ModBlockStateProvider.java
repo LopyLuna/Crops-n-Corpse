@@ -3,7 +3,7 @@ package uwu.llkc.cnc.datagen.providers;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -13,6 +13,8 @@ import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.blocks.CustomCakeBlock;
 import uwu.llkc.cnc.common.blocks.PlantCropBlock;
 import uwu.llkc.cnc.common.init.BlockRegistry;
+
+import java.util.Comparator;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
@@ -73,14 +75,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(BlockRegistry.WALNUT_STAIRS.get(), models().getExistingFile(CNCMod.rl("block/walnut_stairs")));
 
         cake(10,
-                CNCMod.rl("block/cherry_chocolate_cake_side"),
-                CNCMod.rl("block/cherry_chocolate_cake_bottom"),
-                CNCMod.rl("block/cherry_chocolate_cake_top"),
-                CNCMod.rl("block/cherry_chocolate_cake_side"),
-                CNCMod.rl("block/cherry_chocolate_cake_inner"),
-                "cherry_chocolate_cake", BlockRegistry.CHOCOLATE_CHERRY_CAKE.get());
-
-        simpleBlockItem(BlockRegistry.CHOCOLATE_CHERRY_CAKE.get(), models().getExistingFile(CNCMod.rl("item/chocolate_cherry_cake")));
+                CNCMod.rl("block/chocolate_cherry_cake_side"),
+                CNCMod.rl("block/chocolate_cherry_cake_bottom"),
+                CNCMod.rl("block/chocolate_cherry_cake_top"),
+                CNCMod.rl("block/chocolate_cherry_cake_side"),
+                CNCMod.rl("block/chocolate_cherry_cake_inner"),
+                "chocolate_cherry_cake", BlockRegistry.CHOCOLATE_CHERRY_CAKE.get());
     }
 
     void crop(PlantCropBlock block, BlockModelBuilder... builders) {
@@ -95,8 +95,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
               ResourceLocation side,
               ResourceLocation inside,
               String name, CustomCakeBlock block) {
-        int offset = 16 - size;
-        getVariantBuilder(block).forAllStates(state -> {
+        int offset = (16 - size) / 2;
+        getVariantBuilder(block).forAllStatesExcept(state -> {
             int slice = state.getValue(block.bites);
             return ConfiguredModel.builder()
                     .modelFile(
@@ -108,16 +108,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
                                     .texture("inside", inside)
                                     .element()
                                     .from(offset, 0, offset)
-                                    .to(offset + slice * 2, 8, size)
-                                    .faces(((direction, faceBuilder) -> {
+                                    .to(offset + size - slice * 2, 8, 16 - offset)
+                                    .allFaces((direction, faceBuilder) -> {
                                         switch (direction) {
-                                            case DOWN -> faceBuilder.texture("#bottom")
+                                            case DOWN -> faceBuilder.texture("bottom")
                                                     .cullface(Direction.DOWN);
                                             case UP -> faceBuilder.texture("#top");
-                                            case NORTH, SOUTH, EAST -> faceBuilder.texture("#side");
-                                            case WEST -> faceBuilder.texture("#inside");
+                                            case NORTH, SOUTH, WEST -> faceBuilder.texture("#side");
+                                            case EAST -> {
+                                                if (slice == block.bites.getAllValues().mapToInt(Property.Value::value).min().orElse(-1)) {
+                                                    faceBuilder.texture("#side");
+                                                } else {
+                                                    faceBuilder.texture("#inside");
+                                                }
+                                            }
                                         }
-                                    })).end()
+                                    }).end()
                     ).build();
         });
     }

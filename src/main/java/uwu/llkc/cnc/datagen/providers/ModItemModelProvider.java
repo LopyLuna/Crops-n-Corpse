@@ -41,7 +41,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.CHERRY_MUFFIN.get());
         basicItem(ItemRegistry.GOLDEN_CHERRIES.get());
         basicItem(ItemRegistry.CHERRY_MILKSHAKE.get());
-        basicItem(ItemRegistry.CHOCOLATE_CHERRY_CAKE.get());
+        basicItem(ItemRegistry.CHOCOLATE_MILKSHAKE.get());
         basicItem(ItemRegistry.VANILLA_MILKSHAKE.get());
         leaves("walnut_leaves", CNCMod.rl("block/walnut_leaves"));
 
@@ -83,5 +83,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         buttonInventory("walnut_button", CNCMod.rl("block/walnut_planks"));
         fenceInventory("walnut_fence", CNCMod.rl("block/walnut_planks"));
         basicItem(ItemRegistry.IMP_SPAWN_EGG.asItem());
+        basicItem(ItemRegistry.CHERRY_PIE.get());
+        basicItem(ItemRegistry.CHOCOLATE_CHERRY_CAKE.get());
     }
 }

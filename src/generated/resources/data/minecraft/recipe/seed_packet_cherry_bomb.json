@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "c": {
+      "item": "cnc:cherries"
+    },
+    "e": {
+      "item": "cnc:empty_seed_packet"
+    },
+    "f": {
+      "item": "cnc:plant_food"
+    },
+    "s": {
+      "item": "cnc:sun"
+    }
+  },
+  "pattern": [
+    " c ",
+    "sef",
+    " c "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cnc:peashooter_seed_packet"
+  }
+}

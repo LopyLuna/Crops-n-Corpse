@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:sweet_berries"
+    },
+    "g": {
+      "item": "minecraft:glass_bottle"
+    },
+    "m": {
+      "item": "minecraft:milk_bucket"
+    },
+    "s": {
+      "item": "minecraft:powder_snow_bucket"
+    }
+  },
+  "pattern": [
+    " b ",
+    "sms",
+    " g "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cnc:vanilla_milkshake"
+  }
+}

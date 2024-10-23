@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cnc:chocolate_cherry_cake"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "cnc:blocks/chocolate_cherry_cake"
+}

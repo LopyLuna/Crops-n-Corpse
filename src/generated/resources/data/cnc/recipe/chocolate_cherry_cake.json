@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "minecraft:cocoa_beans"
+    },
+    "e": {
+      "item": "minecraft:egg"
+    },
+    "m": {
+      "item": "minecraft:milk_bucket"
+    },
+    "w": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "mmm",
+    "cec",
+    "www"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cnc:chocolate_cherry_cake"
+  }
+}

@@ -3,7 +3,6 @@ package uwu.llkc.cnc.common.blocks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import cpw.mods.util.Lazy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -33,6 +32,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.util.Lazy;
 
 public class CustomCakeBlock extends Block {
     public static final MapCodec<CustomCakeBlock> CODEC = RecordCodecBuilder.mapCodec(instance ->
@@ -55,11 +55,14 @@ public class CustomCakeBlock extends Block {
 
     public CustomCakeBlock(BlockBehaviour.Properties properties, int maxBites, int size, int nutrition, float saturation) {
         super(properties);
+        bites = IntegerProperty.create("bites", 0, maxBites-1);
+        StateDefinition.Builder<Block, BlockState> builder = new StateDefinition.Builder<>(this);
+        this.createBlockStateDefinition(builder);
+        this.stateDefinition = builder.create(Block::defaultBlockState, BlockState::new);
         this.maxBites = maxBites;
         this.size = size;
         this.nutrition = nutrition;
         this.saturation = saturation;
-        bites = IntegerProperty.create("bites", 0, maxBites);
         this.registerDefaultState(this.stateDefinition.any().setValue(bites, 0));
     }
 
@@ -71,7 +74,7 @@ public class CustomCakeBlock extends Block {
             player.getFoodData().eat(nutrition, saturation);
             int i = state.getValue(bites);
             level.gameEvent(player, GameEvent.EAT, pos);
-            if (i < maxBites) {
+            if (i < maxBites - 1) {
                 level.setBlock(pos, state.setValue(bites, i + 1), 3);
             } else {
                 level.removeBlock(pos, false);
@@ -147,7 +150,9 @@ public class CustomCakeBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(bites);
+        if (bites != null) {
+            builder.add(bites);
+        }
     }
 
     /**
@@ -175,11 +180,11 @@ public class CustomCakeBlock extends Block {
 
     private VoxelShape[] getShapeByBiteArray() {
         int sliceWidth = size / maxBites;
-        int offset = 16 - size;
+        int offset = (16 - size) / 2;
 
         var voxels = new VoxelShape[maxBites];
         for (int i = 0; i < maxBites; i++) {
-            voxels[i] = Block.box(offset, 0, offset, offset + sliceWidth * i, 8, offset + size);
+            voxels[i] = Block.box(offset, 0, offset, offset + Math.max(0,sliceWidth * (maxBites - i)), 8, offset + size);
         }
         return voxels;
     }

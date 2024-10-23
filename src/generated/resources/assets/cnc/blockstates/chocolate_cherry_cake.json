@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "cnc:block/chocolate_cherry_cake_slice_5"
+    },
+    "bites=1": {
+      "model": "cnc:block/chocolate_cherry_cake_slice_4"
+    },
+    "bites=2": {
+      "model": "cnc:block/chocolate_cherry_cake_slice_3"
+    },
+    "bites=3": {
+      "model": "cnc:block/chocolate_cherry_cake_slice_2"
+    },
+    "bites=4": {
+      "model": "cnc:block/chocolate_cherry_cake_slice_1"
+    }
+  }
+}
