@@ -74,6 +74,7 @@ public class ModBlockLootTableSubProvider extends BlockLootSubProvider {
         dropSelf(BlockRegistry.WALNUT_PRESSURE_PLATE.get());
         dropSelf(BlockRegistry.WALNUT_STAIRS.get());
         dropSelf(BlockRegistry.WALNUT_SLAB.get());
+        dropSelf(BlockRegistry.CHOCOLATE_CHERRY_CAKE.get());
         this.add(BlockRegistry.WALNUT_LEAVES.get(), createLeavesDrops(BlockRegistry.WALNUT_LEAVES.get(), BlockRegistry.WALNUT_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES)
                 .withPool(
                         LootPool.lootPool()

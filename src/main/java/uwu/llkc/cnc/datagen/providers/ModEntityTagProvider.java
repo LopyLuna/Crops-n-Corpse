@@ -26,6 +26,7 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
                 .add(EntityTypeRegistry.WALLNUT.get())
                 .add(EntityTypeRegistry.POTATO_MINE.get());
         tag(Tags.EntityTypes.SUPPORT_PLANTS)
+                .add(EntityTypeRegistry.CHERRY_BOMB.get())
                 .add(EntityTypeRegistry.SUNFLOWER.get());
         tag(Tags.EntityTypes.SPECIAL_PLANTS);
         tag(Tags.EntityTypes.PLANTS)

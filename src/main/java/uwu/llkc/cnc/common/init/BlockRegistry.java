@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -194,6 +195,9 @@ public class BlockRegistry {
                     return 5;
                 }
             }, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS));
+
+    public static final DeferredBlock<CustomCakeBlock> CHOCOLATE_CHERRY_CAKE = BLOCKS.registerBlock("chocolate_cherry_cake",
+            props -> new CustomCakeBlock(props, 5, 10, 4, 0.6f), BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE));
 
     public static class WoodTypes {
         public static final WoodType WALNUT = WoodType.register(new WoodType(CNCMod.rlStr("walnut"), BlockSetType.SPRUCE));

@@ -11,7 +11,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
@@ -38,11 +37,11 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class MultiEntitySpawnEgg extends SpawnEggItem {
-    public static final List<MultiEntitySpawnEgg> EGGS = new ArrayList<>();
+public class MultiEntitySpawnEggItem extends SpawnEggItem {
+    public static final List<MultiEntitySpawnEggItem> EGGS = new ArrayList<>();
     private final List<Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>> entityList;
 
-    public MultiEntitySpawnEgg(Properties properties, List<Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>> others) {
+    public MultiEntitySpawnEggItem(Properties properties, List<Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>> others) {
         super(null, 0, 0, properties);
         entityList = others;
         EGGS.add(this);

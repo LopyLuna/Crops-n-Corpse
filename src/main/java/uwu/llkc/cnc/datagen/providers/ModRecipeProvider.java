@@ -9,7 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
-import uwu.llkc.cnc.common.init.BlockRegistry;
+import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.Tags;
@@ -23,7 +23,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput recipeOutput) {
+    protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.PEASHOOTER.get()))
                 .pattern(" p ")
                 .pattern("sef")
@@ -36,7 +36,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_peashooter");
 
-        //todo cherry bomb seed packet recipe
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.PEASHOOTER.get()))
+                .pattern(" c ")
+                .pattern("sef")
+                .pattern(" c ")
+                .define('c', ItemRegistry.CHERRIES.get())
+                .define('s', ItemRegistry.SUN.get())
+                .define('f', ItemRegistry.PLANT_FOOD.get())
+                .define('e', ItemRegistry.EMPTY_SEED_PACKET.get())
+                .unlockedBy("has_packet", has(ItemRegistry.EMPTY_SEED_PACKET.get()))
+                .unlockedBy("has_cherry", has(ItemRegistry.CHERRIES.get()))
+                .save(recipeOutput, "seed_packet_cherry_bomb");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.POTATO_MINE.get()))
                 .pattern(" p ")
@@ -70,7 +80,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_iron", has(Items.IRON_BLOCK))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.SUNFLOWER .get()))
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.SUNFLOWER.get()))
                 .pattern(" f ")
                 .pattern("seF")
                 .pattern(" f ")
@@ -81,6 +91,52 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_packet", has(ItemRegistry.EMPTY_SEED_PACKET.get()))
                 .unlockedBy("has_sunflower_seeds", has(ItemRegistry.SUNFLOWER_SEEDS.get()))
                 .save(recipeOutput, "seed_packet_sunflower");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, new ItemStack(ItemRegistry.CHOCOLATE_CHERRY_CAKE.get()))
+                .pattern("mmm")
+                .pattern("cec")
+                .pattern("www")
+                .define('m', Items.MILK_BUCKET)
+                .define('c', Items.COCOA_BEANS)
+                .define('e', Items.EGG)
+                .define('w', Items.WHEAT)
+                .unlockedBy("has_cherries", has(ItemRegistry.CHERRIES))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, new ItemStack(ItemRegistry.CHERRY_MILKSHAKE.get()))
+                .pattern("cbc")
+                .pattern("sms")
+                .pattern(" g ")
+                .define('c', ItemRegistry.CHERRIES)
+                .define('b', Items.SWEET_BERRIES)
+                .define('s', Items.POWDER_SNOW_BUCKET)
+                .define('m', Items.MILK_BUCKET)
+                .define('g', Items.GLASS_BOTTLE)
+                .unlockedBy("has_snow", has(Items.POWDER_SNOW_BUCKET))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, new ItemStack(ItemRegistry.VANILLA_MILKSHAKE.get()))
+                .pattern(" b ")
+                .pattern("sms")
+                .pattern(" g ")
+                .define('b', Items.SWEET_BERRIES)
+                .define('s', Items.POWDER_SNOW_BUCKET)
+                .define('m', Items.MILK_BUCKET)
+                .define('g', Items.GLASS_BOTTLE)
+                .unlockedBy("has_snow", has(Items.POWDER_SNOW_BUCKET))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, new ItemStack(ItemRegistry.CHOCOLATE_MILKSHAKE.get()))
+                .pattern("cbc")
+                .pattern("sms")
+                .pattern(" g ")
+                .define('c', Items.COCOA_BEANS)
+                .define('b', Items.SWEET_BERRIES)
+                .define('s', Items.POWDER_SNOW_BUCKET)
+                .define('m', Items.MILK_BUCKET)
+                .define('g', Items.GLASS_BOTTLE)
+                .unlockedBy("has_snow", has(Items.POWDER_SNOW_BUCKET))
+                .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, new ItemStack(ItemRegistry.SUNFLOWER_SEED_MUFFIN.get()))
                 .requires(ItemRegistry.SUNFLOWER_SEEDS)
@@ -95,8 +151,30 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(ItemRegistry.WALNUT_FLOUR)
                 .requires(Items.PAPER)
                 .requires(Items.MILK_BUCKET)
-                .unlockedBy("has_sunflower_seeds", has(ItemRegistry.SUNFLOWER_SEEDS))
+                .unlockedBy("has_cocoa", has(Items.COCOA_BEANS))
                 .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, new ItemStack(ItemRegistry.CHERRY_MUFFIN.get()))
+                .requires(ItemRegistry.CHERRIES)
+                .requires(ItemRegistry.WALNUT_FLOUR)
+                .requires(Items.PAPER)
+                .requires(Items.MILK_BUCKET)
+                .unlockedBy("has_cherries", has(ItemRegistry.CHERRIES))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, new ItemStack(ItemRegistry.GOLDEN_CHERRIES.get()))
+                .requires(ItemRegistry.CHERRIES)
+                .requires(Items.GOLD_NUGGET, 3)
+                .unlockedBy("has_cherries", has(ItemRegistry.CHERRIES))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, new ItemStack(ItemRegistry.CHERRY_PIE.get()))
+                .requires(Items.SUGAR)
+                .requires(Items.EGG)
+                .requires(ItemRegistry.CHERRIES, 2)
+                .unlockedBy("has_cherries", has(ItemRegistry.CHERRIES))
+                .save(recipeOutput);
+
 
         stonecutterResultFromBase(recipeOutput, RecipeCategory.FOOD, ItemRegistry.WALNUT_FLOUR, ItemRegistry.WALNUT, 3);
 

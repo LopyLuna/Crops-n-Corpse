@@ -37,6 +37,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.CHERRY_BOMB_SEED_PACKET.get());
         basicItem(ItemRegistry.WALNUT_SAPLING.get());
         basicItem(ItemRegistry.MASHED_POTATOES.get());
+        basicItem(ItemRegistry.CHERRIES.get());
+        basicItem(ItemRegistry.CHERRY_MUFFIN.get());
+        basicItem(ItemRegistry.GOLDEN_CHERRIES.get());
+        basicItem(ItemRegistry.CHERRY_MILKSHAKE.get());
+        basicItem(ItemRegistry.CHOCOLATE_CHERRY_CAKE.get());
+        basicItem(ItemRegistry.VANILLA_MILKSHAKE.get());
         leaves("walnut_leaves", CNCMod.rl("block/walnut_leaves"));
 
         withExistingParent(CNCMod.rlStr("traffic_cone"), "neoforge:item/default")

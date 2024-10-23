@@ -20,7 +20,6 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
-import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.items.*;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class ItemRegistry {
     public static final DeferredItem<SeedPacketItem<Sunflower>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 0, 200, EntityTypeRegistry.SUNFLOWER));
     public static final DeferredItem<SeedPacketItem<WallNut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 320, EntityTypeRegistry.WALLNUT));
     public static final DeferredItem<SeedPacketItem<PotatoMine>> POTATO_MINE_SEED_PACKET = ITEMS.registerItem("potato_mine_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 4, 320, EntityTypeRegistry.POTATO_MINE));
-    public static final DeferredItem<SeedPacketItem<CherryBomb>> CHERRY_BOMB_SEED_PACKET = ITEMS.registerItem("cherry_bomb_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 480, 45, EntityTypeRegistry.CHERRY_BOMB) {
+    public static final DeferredItem<SeedPacketItem<CherryBomb>> CHERRY_BOMB_SEED_PACKET = ITEMS.registerItem("cherry_bomb_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 24, 900, EntityTypeRegistry.CHERRY_BOMB) {
         @Override
         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
             var stack = player.getItemInHand(usedHand);
@@ -68,7 +67,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> PLANT_ARMOR = ITEMS.registerItem("plant_armor",
             PlantArmorItem::new, new Item.Properties().stacksTo(1));
     @SuppressWarnings("unchecked")
-    public static final DeferredItem<MultiEntitySpawnEgg> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEgg(props, List.of(
+    public static final DeferredItem<MultiEntitySpawnEggItem> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEggItem(props, List.of(
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> {}),
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get()))),
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>)(Object) EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get()))),
@@ -77,6 +76,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> IMP_SPAWN_EGG = ITEMS.registerItem("imp_spawn_egg",
             props -> new DeferredSpawnEggItem(EntityTypeRegistry.IMP, 0xFFFFFF, 0xFFFFFF, props));
 
+    public static final DeferredItem<BlockItem> CHOCOLATE_CHERRY_CAKE = ITEMS.registerSimpleBlockItem(BlockRegistry.CHOCOLATE_CHERRY_CAKE);
     public static final DeferredItem<BlockItem> STRIPPED_WALNUT_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.STRIPPED_WALNUT_LOG);
     public static final DeferredItem<BlockItem> WALNUT_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_LOG);
     public static final DeferredItem<BlockItem> WALNUT_LEAVES = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_LEAVES);
@@ -102,6 +102,20 @@ public class ItemRegistry {
             props -> new BoatItem(true, Boat.Type.valueOf("CNC_WALNUT"), props), new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> MASHED_POTATOES = ITEMS.registerSimpleItem("mashed_potatoes",
             new Item.Properties().food(Foods.MASHED_POTATOES));
+    public static final DeferredItem<Item> GOLDEN_CHERRIES = ITEMS.registerSimpleItem("golden_cherries",
+            new Item.Properties().food(Foods.GOLDEN_CHERRIES));
+    public static final DeferredItem<Item> CHERRY_PIE = ITEMS.registerSimpleItem("cherry_pie",
+            new Item.Properties().food(Foods.CHERRY_PIE));
+    public static final DeferredItem<MilkshakeItem> VANILLA_MILKSHAKE = ITEMS.registerItem("vanilla_milkshake",
+            MilkshakeItem::new, new Item.Properties().durability(32).food(Foods.VANILLA_MILKSHAKE));
+    public static final DeferredItem<MilkshakeItem> CHOCOLATE_MILKSHAKE = ITEMS.registerItem("chocolate_milkshake",
+            MilkshakeItem::new, new Item.Properties().durability(32).food(Foods.CHOCOLATE_MILKSHAKE));
+    public static final DeferredItem<MilkshakeItem> CHERRY_MILKSHAKE = ITEMS.registerItem("cherry_milkshake",
+            MilkshakeItem::new, new Item.Properties().durability(32).food(Foods.CHERRY_MILKSHAKE));
+    public static final DeferredItem<Item> CHERRY_MUFFIN = ITEMS.registerSimpleItem("cherry_muffin",
+            new Item.Properties().food(Foods.CHERRY_MUFFIN));
+    public static final DeferredItem<Item> CHERRIES = ITEMS.registerSimpleItem("cherries",
+            new Item.Properties().food(Foods.CHERRIES));
 
     static class Foods {
         public static final FoodProperties PEA_POD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.5f).build();
@@ -116,5 +130,12 @@ public class ItemRegistry {
             return food.build();
         });
         public static final FoodProperties MASHED_POTATOES = new FoodProperties.Builder().nutrition(7).saturationModifier(0.23f).usingConvertsTo(Items.BOWL).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 40), 1).build();
+        public static final FoodProperties GOLDEN_CHERRIES = new FoodProperties.Builder().nutrition(3).saturationModifier(1.6f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 3), 0.5f).build();
+        public static final FoodProperties CHERRY_PIE = new FoodProperties.Builder().nutrition(6).saturationModifier(0.6f).build();
+        public static final FoodProperties VANILLA_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(1.6f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 30, 2), 1).build();
+        public static final FoodProperties CHOCOLATE_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(1.6f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 25, 2), 1).build();
+        public static final FoodProperties CHERRY_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(1.6f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 20, 2), 1).build();
+        public static final FoodProperties CHERRY_MUFFIN = new FoodProperties.Builder().nutrition(5).saturationModifier(0.4f).usingConvertsTo(Items.PAPER).build();
+        public static final FoodProperties CHERRIES = new FoodProperties.Builder().nutrition(1).saturationModifier(0.4f).build();
     }
 }

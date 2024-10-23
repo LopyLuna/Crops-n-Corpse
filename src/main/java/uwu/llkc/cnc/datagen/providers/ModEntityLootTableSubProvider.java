@@ -62,9 +62,10 @@ public class ModEntityLootTableSubProvider extends EntityLootSubProvider {
 
         add(EntityTypeRegistry.WALLNUT.get(), new LootTable.Builder());
 
-        //todo drop cherries;
-
-        add(EntityTypeRegistry.CHERRY_BOMB.get(), new LootTable.Builder());
+        add(EntityTypeRegistry.CHERRY_BOMB.get(), new LootTable.Builder()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(ItemRegistry.CHERRIES)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2))))));
 
         add(EntityTypeRegistry.POTATO_MINE.get(), new LootTable.Builder()
                 .withPool(LootPool.lootPool()

@@ -1,22 +1,15 @@
 package uwu.llkc.cnc.common.events;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.world.entity.SpawnPlacementTypes;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
-import net.neoforged.neoforge.event.level.ExplosionEvent;
-import net.neoforged.neoforge.event.level.ExplosionKnockbackEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import uwu.llkc.cnc.CNCMod;
@@ -27,13 +20,10 @@ import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.GameRuleInit;
 import uwu.llkc.cnc.common.init.ItemRegistry;
-import uwu.llkc.cnc.common.items.MultiEntitySpawnEgg;
+import uwu.llkc.cnc.common.items.MultiEntitySpawnEggItem;
 import uwu.llkc.cnc.common.items.PlantArmorItem;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEvents {
@@ -76,7 +66,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            for (MultiEntitySpawnEgg egg : MultiEntitySpawnEgg.EGGS) {
+            for (MultiEntitySpawnEggItem egg : MultiEntitySpawnEggItem.EGGS) {
                 DispenseItemBehavior dispenseBehavior = egg.createDispenseBehavior();
                 if (dispenseBehavior != null) {
                     DispenserBlock.registerBehavior(egg, dispenseBehavior);
