@@ -395,11 +395,10 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
 
     @Override
     public void handleEntityEvent(byte id) {
-        super.handleEntityEvent(id);
-        if (id == -1) {
-            isExploding = true;
-        } else if (id == -2) {
-            explode.start(tickCount);
+        switch (id) {
+            case -1 -> isExploding = true;
+            case -2 -> explode.start(tickCount);
+            default -> super.handleEntityEvent(id);
         }
     }
 

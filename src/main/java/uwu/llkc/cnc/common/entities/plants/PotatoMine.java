@@ -66,6 +66,12 @@ public class PotatoMine extends CNCPlant {
         }
     }
 
+    public static AttributeSupplier.Builder attributes() {
+        return CNCPlant.createMobAttributes()
+                .add(Attributes.ATTACK_DAMAGE, 40)
+                .add(Attributes.MAX_HEALTH, 6);
+    }
+
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
@@ -95,12 +101,6 @@ public class PotatoMine extends CNCPlant {
         builder.define(ARMED, false);
     }
 
-    public static AttributeSupplier.Builder attributes() {
-        return CNCPlant.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 40)
-                .add(Attributes.MAX_HEALTH, 6);
-    }
-
     @Override
     protected void registerGoals() {
         super.registerGoals();
@@ -117,7 +117,6 @@ public class PotatoMine extends CNCPlant {
             }
         });
     }
-
 
 
     void explode() {
@@ -178,7 +177,7 @@ public class PotatoMine extends CNCPlant {
             if (explosionCountdown == 0) {
                 level().broadcastEntityEvent(this, (byte) -1);
             }
-            if (explosionCountdown >= 7) {
+            if (explosionCountdown >= 7 && !level().isClientSide) {
                 explode();
             } else {
                 explosionCountdown++;
@@ -190,6 +189,7 @@ public class PotatoMine extends CNCPlant {
     public boolean hurt(DamageSource source, float amount) {
         if (entityData.get(ARMED)) {
             isExploding = true;
+            level().broadcastEntityEvent(this, (byte) -3);
         }
         return super.hurt(source, amount);
     }
@@ -202,17 +202,18 @@ public class PotatoMine extends CNCPlant {
 
     @Override
     public void handleEntityEvent(byte id) {
-        super.handleEntityEvent(id);
-        if (id == -1) {
-            explode.start(tickCount);
-        }
-        if (id == -2) {
-            if (!entityData.get(ARMED)) {
-                arming.startIfStopped(tickCount);
+        switch (id) {
+            case -1 -> explode.start(tickCount);
+            case -2 -> {
+                if (!entityData.get(ARMED)) {
+                    arming.startIfStopped(tickCount);
+                }
+                if (arming.getAccumulatedTime() >= PotatoMineAnimations.ARMING.lengthInSeconds() * 1000) {
+                    arming.stop();
+                }
             }
-            if (arming.getAccumulatedTime() >= PotatoMineAnimations.ARMING.lengthInSeconds() * 1000) {
-                arming.stop();
-            }
+            case -3 -> isExploding = true;
+            default -> super.handleEntityEvent(id);
         }
     }
 }
