@@ -14,7 +14,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
@@ -27,12 +26,17 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.DynamicGameEventListener;
 import net.minecraft.world.level.gameevent.EntityPositionSource;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.apache.logging.log4j.LogManager;
@@ -45,7 +49,9 @@ import uwu.llkc.cnc.common.entities.ai.IMultiHeadEntity;
 import uwu.llkc.cnc.common.entities.ai.MultiHeadLookControl;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 import uwu.llkc.cnc.common.init.Tags;
+import uwu.llkc.cnc.common.util.MessageDamageSource;
 
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadEntity {
@@ -175,6 +181,16 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
                 var entity = level().getNearestEntity(Monster.class, TargetingConditions.DEFAULT, this, getX(), getY(), getZ(), AABB.ofSize(position(), 3.5, 3.5, 3.5));
                 if (entity != null) {
                     isExploding = true;
+                } else if (getOwner() != null) {
+                    var mob = getOwner().getLastHurtMob();
+                    if (mob != null && mob.distanceToSqr(this) < 12.25) {
+                        isExploding = true;
+                    } else {
+                        mob = getOwner().getLastHurtByMob();
+                        if (mob != null && mob.distanceToSqr(this) < 12.25) {
+                            isExploding = true;
+                        }
+                    }
                 }
             }
         }
@@ -210,11 +226,11 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
         return new Vec3(x, y, z)
                 .normalize()
                 .add(
-                        this.random.triangle(0.0, 0.0172275 * (double)inaccuracy),
-                        this.random.triangle(0.0, 0.0172275 * (double)inaccuracy),
-                        this.random.triangle(0.0, 0.0172275 * (double)inaccuracy)
+                        this.random.triangle(0.0, 0.0172275 * (double) inaccuracy),
+                        this.random.triangle(0.0, 0.0172275 * (double) inaccuracy),
+                        this.random.triangle(0.0, 0.0172275 * (double) inaccuracy)
                 )
-                .scale((double)velocity);
+                .scale((double) velocity);
     }
 
     public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
@@ -222,8 +238,8 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
         this.setDeltaMovement(vec3);
         this.hasImpulse = true;
         double d0 = vec3.horizontalDistance();
-        this.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
-        this.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
+        this.setYRot((float) (Mth.atan2(vec3.x, vec3.z) * 180.0F / (float) Math.PI));
+        this.setXRot((float) (Mth.atan2(vec3.y, d0) * 180.0F / (float) Math.PI));
         this.yRotO = this.getYRot();
         this.xRotO = this.getXRot();
     }
@@ -232,13 +248,37 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
         float f = -Mth.sin(y * (float) (Math.PI / 180.0)) * Mth.cos(x * (float) (Math.PI / 180.0));
         float f1 = -Mth.sin((x + z) * (float) (Math.PI / 180.0));
         float f2 = Mth.cos(y * (float) (Math.PI / 180.0)) * Mth.cos(x * (float) (Math.PI / 180.0));
-        this.shoot((double)f, (double)f1, (double)f2, velocity, inaccuracy);
+        this.shoot((double) f, (double) f1, (double) f2, velocity, inaccuracy);
         Vec3 vec3 = shooter.getKnownMovement();
         this.setDeltaMovement(this.getDeltaMovement().add(vec3.x, shooter.onGround() ? 0.0 : vec3.y, vec3.z));
     }
 
     private void explode() {
-        level().explode(this, getX(), getY(), getZ(), 3, Level.ExplosionInteraction.MOB);
+        level().explode(this, new MessageDamageSource(damageSources().explosion(this, this), "death.attack.cherry_bomb"), new ExplosionDamageCalculator() {
+            @Override
+            public float getEntityDamageAmount(Explosion explosion, Entity entity) {
+                if (entity instanceof CherryBomb) {return 0;}
+                return ((float) getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+            }
+
+            @Override
+            public Optional<Float> getBlockExplosionResistance(Explosion explosion, BlockGetter reader, BlockPos pos, BlockState state, FluidState fluid) {
+                return super.getBlockExplosionResistance(explosion, reader, pos, state, fluid).map(f -> f + 2.5f);
+            }
+
+            @Override
+            public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
+                if (entity instanceof CNCPlant plant) {
+                    if (plant instanceof CherryBomb) {
+                        return super.shouldDamageEntity(explosion, entity);
+                    }
+                    if (plant.getOwnerUUID() != null && plant.getOwnerUUID().equals(getOwnerUUID())) {
+                        return false;
+                    }
+                }
+                return super.shouldDamageEntity(explosion, entity);
+            }
+        }, getX(), getY(), getZ(), 2f, false, Level.ExplosionInteraction.MOB);
         this.remove(RemovalReason.KILLED);
     }
 
