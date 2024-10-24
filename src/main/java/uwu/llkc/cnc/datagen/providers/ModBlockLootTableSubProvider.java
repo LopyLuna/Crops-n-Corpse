@@ -8,6 +8,7 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -52,7 +53,7 @@ public class ModBlockLootTableSubProvider extends BlockLootSubProvider {
                                                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PeashooterCropBlock.AGE, 7)))
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
                                         .apply(ApplyBonusCount.addBonusBinomialDistributionCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 1)
-                                ).otherwise(LootItem.lootTableItem(ItemRegistry.RAW_PEA.get()))))));
+                                        ).otherwise(LootItem.lootTableItem(ItemRegistry.RAW_PEA.get()))))));
         dropSelf(BlockRegistry.TRAFFIC_CONE.get());
         dropSelf(BlockRegistry.STRIPPED_WALNUT_LOG.get());
         dropSelf(BlockRegistry.WALNUT_LOG.get());
@@ -74,14 +75,13 @@ public class ModBlockLootTableSubProvider extends BlockLootSubProvider {
         dropSelf(BlockRegistry.WALNUT_PRESSURE_PLATE.get());
         dropSelf(BlockRegistry.WALNUT_STAIRS.get());
         dropSelf(BlockRegistry.WALNUT_SLAB.get());
-        dropSelf(BlockRegistry.CHOCOLATE_CHERRY_CAKE.get());
         this.add(BlockRegistry.WALNUT_LEAVES.get(), createLeavesDrops(BlockRegistry.WALNUT_LEAVES.get(), BlockRegistry.WALNUT_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES)
                 .withPool(
                         LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1.0F))
                                 .when(HAS_SHEARS.or(this.hasSilkTouch()).invert())
                                 .add(
-                                        ((LootPoolSingletonContainer.Builder<?>)this.applyExplosionCondition(BlockRegistry.WALNUT_LEAVES, LootItem.lootTableItem(ItemRegistry.WALNUT)))
+                                        ((LootPoolSingletonContainer.Builder<?>) this.applyExplosionCondition(BlockRegistry.WALNUT_LEAVES, LootItem.lootTableItem(ItemRegistry.WALNUT)))
                                                 .when(
                                                         BonusLevelTableCondition.bonusLevelFlatChance(
                                                                 registrylookup.getOrThrow(Enchantments.FORTUNE), 0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F

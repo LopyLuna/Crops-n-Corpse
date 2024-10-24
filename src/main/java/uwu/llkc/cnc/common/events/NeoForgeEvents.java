@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -27,9 +29,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.level.ExplosionEvent;
-import net.neoforged.neoforge.event.level.ExplosionKnockbackEvent;
+import net.neoforged.neoforge.event.level.*;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -38,6 +38,7 @@ import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.entities.plants.PotatoMine;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
+import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
@@ -179,6 +180,15 @@ public class NeoForgeEvents {
     public static void death(final LivingDeathEvent event) {
         if (event.getSource().getEntity() instanceof PotatoMine) {
             event.getEntity().addDeltaMovement(new Vec3(0, 3, 0));
+        }
+    }
+
+    @SubscribeEvent
+    public static void drop(final BlockDropsEvent event) {
+        if (event.getState().is(Blocks.CHERRY_LEAVES)) {
+            if (event.getLevel().getRandom().nextFloat() < 0.01f) {
+                EntityTypeRegistry.CHERRY_BOMB.get().spawn(event.getLevel(), event.getPos(), MobSpawnType.EVENT);
+            }
         }
     }
 }

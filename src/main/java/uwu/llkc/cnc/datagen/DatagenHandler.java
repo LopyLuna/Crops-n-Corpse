@@ -53,10 +53,14 @@ public class DatagenHandler {
         generator.addProvider(event.includeServer(), new ModDataMapProvider(output, provider));
         generator.addProvider(event.includeServer(),
                 new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(
-                        ModBlockLootTableSubProvider::new, LootContextParamSets.BLOCK
-                ), new LootTableProvider.SubProviderEntry(
-                        ModEntityLootTableSubProvider::new, LootContextParamSets.ENTITY
-                )), provider));
+                                ModBlockLootTableSubProvider::new, LootContextParamSets.BLOCK
+                        ), new LootTableProvider.SubProviderEntry(
+                                ModEntityLootTableSubProvider::new, LootContextParamSets.ENTITY
+                        ),
+                        new LootTableProvider.SubProviderEntry(
+                                ModLootTableSubProvider::new, LootContextParamSets.ALL_PARAMS
+                        )), provider));
+        generator.addProvider(event.includeServer(), new ModGlobalLootModifierProvider(output, provider));
         generator.addProvider(event.includeReports(), new ItemListReport(output, event.getLookupProvider()));
     }
 }

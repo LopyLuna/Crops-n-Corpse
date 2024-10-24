@@ -1,9 +1,12 @@
 package uwu.llkc.cnc.common.items;
 
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,5 +25,20 @@ public class MilkshakeItem extends Item {
             livingEntity.setItemSlot(slot, result.hurtAndConvertOnBreak(1, Items.GLASS_BOTTLE, livingEntity, slot));
         }
         return result;
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.DRINK;
+    }
+
+    @Override
+    public SoundEvent getDrinkingSound() {
+        return super.getDrinkingSound();
+    }
+
+    @Override
+    public SoundEvent getBreakingSound() {
+        return SoundEvents.PLAYER_BURP;
     }
 }
