@@ -147,6 +147,7 @@ public class WallNut extends CNCPlant {
                 if (player.getItemInHand(hand).getItem() == ItemRegistry.PLANT_ARMOR.get()) {
                     playSound(SoundEvents.ARMOR_EQUIP_IRON.value());
                     getEntityData().set(HAS_ARMOR, true);
+                    armorHealth = 300;
                     player.getItemInHand(hand).shrink(1);
                     return InteractionResult.SUCCESS;
                 }

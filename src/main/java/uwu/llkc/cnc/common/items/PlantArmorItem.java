@@ -37,6 +37,7 @@ public class PlantArmorItem extends Item {
             if (!nut.getEntityData().get(WallNut.HAS_ARMOR)) {
                 armorItem.shrink(1);
                 nut.getEntityData().set(WallNut.HAS_ARMOR, true);
+                nut.armorHealth = 300;
             }
 
             return true;
