@@ -46,7 +46,6 @@ public class CherryBombModel extends HierarchicalModel<CherryBomb> {
 
 	@Override
 	public void setupAnim(CherryBomb entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
 		animate(entity.idleAwake, CherryBombAnimations.IDLE_AWAKE, ageInTicks);
 		animate(entity.idleSleeping, CherryBombAnimations.IDLE_SLEEPING, ageInTicks);
 		animate(entity.explode, CherryBombAnimations.EXPLODONATE, ageInTicks);
@@ -55,6 +54,7 @@ public class CherryBombModel extends HierarchicalModel<CherryBomb> {
 
 	@Override
 	public void prepareMobModel(CherryBomb entity, float limbSwing, float limbSwingAmount, float partialTick) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
 		var leftHeadRot = entity.getEntityData().get(CherryBomb.LEFT_HEAD_ROT);
 		var rightHeadRot = entity.getEntityData().get(CherryBomb.RIGHT_HEAD_ROT);
 		var leftHeadRotO = entity.getEntityData().get(CherryBomb.LEFT_HEAD_ROT_O);
