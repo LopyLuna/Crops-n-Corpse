@@ -29,26 +29,12 @@ import java.util.function.Supplier;
 public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CNCMod.MOD_ID);
 
-    public static final DeferredItem<SeedPacketItem<Entity>> EMPTY_SEED_PACKET = ITEMS.registerItem("empty_seed_packet", props -> new SeedPacketItem<>(props, 0, 0, null));
-    public static final DeferredItem<SeedPacketItem<Peashooter>> PEASHOOTER_SEED_PACKET = ITEMS.registerItem("peashooter_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 16, 40, EntityTypeRegistry.PEASHOOTER));
-    public static final DeferredItem<SeedPacketItem<Sunflower>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 0, 200, EntityTypeRegistry.SUNFLOWER));
-    public static final DeferredItem<SeedPacketItem<WallNut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 320, EntityTypeRegistry.WALLNUT));
-    public static final DeferredItem<SeedPacketItem<PotatoMine>> POTATO_MINE_SEED_PACKET = ITEMS.registerItem("potato_mine_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 4, 320, EntityTypeRegistry.POTATO_MINE));
-    public static final DeferredItem<SeedPacketItem<CherryBomb>> CHERRY_BOMB_SEED_PACKET = ITEMS.registerItem("cherry_bomb_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 24, 900, EntityTypeRegistry.CHERRY_BOMB) {
-        @Override
-        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-            var stack = player.getItemInHand(usedHand);
-            var cherry = EntityTypeRegistry.CHERRY_BOMB.get().create(level);
-            if (cherry != null && !level.isClientSide()) {
-                cherry.getEntityData().set(CherryBomb.FLYING, true);
-                cherry.setPos(player.position());
-                cherry.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 1F, 1.0F);
-                level.addFreshEntity(cherry);
-            }
-            stack.consume(1, player);
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
-        }
-    });
+    public static final DeferredItem<SeedPacketItem<Entity>> EMPTY_SEED_PACKET = ITEMS.registerItem("empty_seed_packet", props -> new SeedPacketItem<>(props, 0, 0, null, false));
+    public static final DeferredItem<SeedPacketItem<Peashooter>> PEASHOOTER_SEED_PACKET = ITEMS.registerItem("peashooter_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 16, 40, EntityTypeRegistry.PEASHOOTER, false));
+    public static final DeferredItem<SeedPacketItem<Sunflower>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 0, 200, EntityTypeRegistry.SUNFLOWER, false));
+    public static final DeferredItem<SeedPacketItem<WallNut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 320, EntityTypeRegistry.WALLNUT, false));
+    public static final DeferredItem<SeedPacketItem<PotatoMine>> POTATO_MINE_SEED_PACKET = ITEMS.registerItem("potato_mine_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 4, 320, EntityTypeRegistry.POTATO_MINE, false));
+    public static final DeferredItem<SeedPacketItem<CherryBomb>> CHERRY_BOMB_SEED_PACKET = ITEMS.registerItem("cherry_bomb_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 24, 900, EntityTypeRegistry.CHERRY_BOMB, true));
 
     public static final DeferredItem<Item> PLANT_FOOD = ITEMS.registerSimpleItem("plant_food");
     public static final DeferredItem<Item> SUN = ITEMS.registerSimpleItem("sun");
