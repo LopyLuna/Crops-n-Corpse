@@ -50,7 +50,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("block.cnc.ceiling_hanging_walnut_sign", "Hanging Walnut Sign");
         add("block.cnc.hanging_walnut_wall_sign", "Hanging Walnut Sign");
 
-        add("itemGroup.cnc.cnc_tab", "Crops 'n' Corpse");
+        add("itemGroup.cnc.cnc_tab", "Crops 'n' Corpses");
         add("damage_type.cnc.pea_shot", "Pea shot");
         add("subtitles.cnc.peashooter_death", "Peashooter died");
         add("subtitles.cnc.sunflower_death", "Sunflower died");

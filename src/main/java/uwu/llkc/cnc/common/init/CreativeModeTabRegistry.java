@@ -16,7 +16,7 @@ public class CreativeModeTabRegistry {
 
     public static final Supplier<CreativeModeTab> CNC_TAB = CREATIVE_MODE_TABS.register("cnc_tab",
             () -> CreativeModeTab.builder()
-                    .title(Component.translatableWithFallback("ítemGroup." + CNCMod.MOD_ID + ".cnc_tab", "Crops 'n' Corpse"))
+                    .title(Component.translatableWithFallback("ítemGroup." + CNCMod.MOD_ID + ".cnc_tab", "Crops 'n' Corpses"))
                     .icon(() -> new ItemStack(ItemRegistry.PLANT_FOOD.get()))
                     .displayItems((params, output) -> {
                         for (DeferredHolder<Item, ? extends Item> entry : ItemRegistry.ITEMS.getEntries()) {
