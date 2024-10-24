@@ -118,24 +118,24 @@ public class ItemRegistry {
             new Item.Properties().food(Foods.CHERRIES));
 
     static class Foods {
-        public static final FoodProperties PEA_POD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.5f).build();
-        public static final FoodProperties RAW_PEA = new FoodProperties.Builder().nutrition(3).saturationModifier(0.2f).fast().build();
-        public static final FoodProperties COOKED_PEA = new FoodProperties.Builder().nutrition(4).saturationModifier(0.4f).fast().build();
-        public static final FoodProperties SUNFLOWER_SEEDS = new FoodProperties.Builder().nutrition(2).saturationModifier(0.2f).build();
-        public static final FoodProperties SUNFLOWER_SEED_MUFFIN = new FoodProperties.Builder().nutrition(6).saturationModifier(0.3f).usingConvertsTo(Items.PAPER).build();
-        public static final FoodProperties CHOCOLATE_CHIP_MUFFIN = new FoodProperties.Builder().nutrition(5).saturationModifier(0.4f).usingConvertsTo(Items.PAPER).build();
+        public static final FoodProperties PEA_POD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.25f).build();
+        public static final FoodProperties RAW_PEA = new FoodProperties.Builder().nutrition(3).saturationModifier(0.1f).fast().build();
+        public static final FoodProperties COOKED_PEA = new FoodProperties.Builder().nutrition(4).saturationModifier(0.2f).fast().build();
+        public static final FoodProperties SUNFLOWER_SEEDS = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1f).build();
+        public static final FoodProperties SUNFLOWER_SEED_MUFFIN = new FoodProperties.Builder().nutrition(6).saturationModifier(0.15f).usingConvertsTo(Items.PAPER).build();
+        public static final FoodProperties CHOCOLATE_CHIP_MUFFIN = new FoodProperties.Builder().nutrition(5).saturationModifier(0.2f).usingConvertsTo(Items.PAPER).build();
         public static final FoodProperties WALNUT = Util.make(() -> {
-            var food = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1f);
+            var food = new FoodProperties.Builder().nutrition(2).saturationModifier(0.05f);
             food.eatSeconds *= 3;
             return food.build();
         });
-        public static final FoodProperties MASHED_POTATOES = new FoodProperties.Builder().nutrition(7).saturationModifier(0.23f).usingConvertsTo(Items.BOWL).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 40), 1).build();
-        public static final FoodProperties GOLDEN_CHERRIES = new FoodProperties.Builder().nutrition(3).saturationModifier(1.6f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 60), 0.5f).build();
-        public static final FoodProperties CHERRY_PIE = new FoodProperties.Builder().nutrition(6).saturationModifier(0.6f).build();
-        public static final FoodProperties VANILLA_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(1.6f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 2), 1).build();
-        public static final FoodProperties CHOCOLATE_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(1.6f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 500, 2), 1).build();
-        public static final FoodProperties CHERRY_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(1.6f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 400, 2), 1).build();
-        public static final FoodProperties CHERRY_MUFFIN = new FoodProperties.Builder().nutrition(5).saturationModifier(0.4f).usingConvertsTo(Items.PAPER).build();
-        public static final FoodProperties CHERRIES = new FoodProperties.Builder().nutrition(1).saturationModifier(0.4f).build();
+        public static final FoodProperties MASHED_POTATOES = new FoodProperties.Builder().nutrition(7).saturationModifier(0.115f).usingConvertsTo(Items.BOWL).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 40), 1).build();
+        public static final FoodProperties GOLDEN_CHERRIES = new FoodProperties.Builder().nutrition(3).saturationModifier(0.8f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 60), 0.5f).build();
+        public static final FoodProperties CHERRY_PIE = new FoodProperties.Builder().nutrition(6).saturationModifier(0.3f).build();
+        public static final FoodProperties VANILLA_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(0.8f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 2), 1).build();
+        public static final FoodProperties CHOCOLATE_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(0.8f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 500, 2), 1).build();
+        public static final FoodProperties CHERRY_MILKSHAKE = new FoodProperties.Builder().nutrition(4).saturationModifier(0.8f).alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 400, 2), 1).build();
+        public static final FoodProperties CHERRY_MUFFIN = new FoodProperties.Builder().nutrition(5).saturationModifier(0.2f).usingConvertsTo(Items.PAPER).build();
+        public static final FoodProperties CHERRIES = new FoodProperties.Builder().nutrition(1).saturationModifier(0.2f).build();
     }
 }
