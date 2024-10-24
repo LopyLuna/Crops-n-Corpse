@@ -4,6 +4,10 @@
     {
       "chance": 0.2,
       "condition": "minecraft:random_chance"
+    },
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:cherry_leaves"
     }
   ],
   "table": "cnc:other/cherries_drop"
