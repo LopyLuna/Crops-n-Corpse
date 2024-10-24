@@ -23,7 +23,7 @@
       },
       "minecraft:food": {
         "nutrition": 1,
-        "saturation": 0.8
+        "saturation": 0.4
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,
@@ -59,7 +59,7 @@
         "effects": [
           {
             "effect": {
-              "amplifier": 2,
+              "amplifier": 1,
               "duration": 400,
               "id": "minecraft:regeneration",
               "neoforge:cures": [
@@ -71,7 +71,7 @@
           }
         ],
         "nutrition": 4,
-        "saturation": 12.8
+        "saturation": 6.4
       },
       "minecraft:lore": [],
       "minecraft:max_damage": 32,
@@ -90,7 +90,7 @@
       },
       "minecraft:food": {
         "nutrition": 5,
-        "saturation": 4.0,
+        "saturation": 2.0,
         "using_converts_to": {
           "id": "minecraft:paper"
         }
@@ -111,7 +111,7 @@
       },
       "minecraft:food": {
         "nutrition": 6,
-        "saturation": 7.2000003
+        "saturation": 3.6000001
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,
@@ -143,7 +143,7 @@
       },
       "minecraft:food": {
         "nutrition": 5,
-        "saturation": 4.0,
+        "saturation": 2.0,
         "using_converts_to": {
           "id": "minecraft:paper"
         }
@@ -168,7 +168,7 @@
         "effects": [
           {
             "effect": {
-              "amplifier": 2,
+              "amplifier": 1,
               "duration": 500,
               "id": "minecraft:haste",
               "neoforge:cures": [
@@ -180,7 +180,7 @@
           }
         ],
         "nutrition": 4,
-        "saturation": 12.8
+        "saturation": 6.4
       },
       "minecraft:lore": [],
       "minecraft:max_damage": 32,
@@ -200,7 +200,7 @@
       "minecraft:food": {
         "eat_seconds": 0.8,
         "nutrition": 4,
-        "saturation": 3.2
+        "saturation": 1.6
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,
@@ -261,7 +261,7 @@
           }
         ],
         "nutrition": 3,
-        "saturation": 9.6
+        "saturation": 4.8
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,
@@ -320,7 +320,7 @@
           }
         ],
         "nutrition": 7,
-        "saturation": 3.22,
+        "saturation": 1.61,
         "using_converts_to": {
           "id": "minecraft:bowl"
         }
@@ -341,7 +341,7 @@
       },
       "minecraft:food": {
         "nutrition": 9,
-        "saturation": 9.0
+        "saturation": 4.5
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,
@@ -416,7 +416,7 @@
       "minecraft:food": {
         "eat_seconds": 0.8,
         "nutrition": 3,
-        "saturation": 1.2
+        "saturation": 0.6
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,
@@ -476,7 +476,7 @@
       },
       "minecraft:food": {
         "nutrition": 6,
-        "saturation": 3.6000001,
+        "saturation": 1.8000001,
         "using_converts_to": {
           "id": "minecraft:paper"
         }
@@ -511,7 +511,7 @@
       },
       "minecraft:food": {
         "nutrition": 2,
-        "saturation": 0.8
+        "saturation": 0.4
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,
@@ -549,7 +549,7 @@
         "effects": [
           {
             "effect": {
-              "amplifier": 2,
+              "amplifier": 1,
               "duration": 600,
               "id": "minecraft:speed",
               "neoforge:cures": [
@@ -561,7 +561,7 @@
           }
         ],
         "nutrition": 4,
-        "saturation": 12.8
+        "saturation": 6.4
       },
       "minecraft:lore": [],
       "minecraft:max_damage": 32,
@@ -595,7 +595,7 @@
       "minecraft:food": {
         "eat_seconds": 4.8,
         "nutrition": 2,
-        "saturation": 0.4
+        "saturation": 0.2
       },
       "minecraft:lore": [],
       "minecraft:max_stack_size": 64,

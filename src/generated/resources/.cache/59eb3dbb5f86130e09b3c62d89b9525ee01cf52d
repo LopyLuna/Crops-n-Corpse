@@ -1,6 +1,6 @@
-// 1.21	2024-10-23T20:49:10.5263395	Loot Tables
+// 1.21	2024-10-24T16:30:44.7676926	Loot Tables
 d44989f74ec1f8f17ca168d28e8729ae5524c7a8 data/cnc/loot_table/blocks/ceiling_hanging_walnut_sign.json
-407e6b663482fc6e2cd51673c28c9d7b9ea51986 data/cnc/loot_table/blocks/chocolate_cherry_cake.json
+026feed868a0d241b4c1c9234c92f033c085d656 data/cnc/loot_table/blocks/chocolate_cherry_cake.json
 b3d76196736929f2ca43d07cc28e41d5554daf31 data/cnc/loot_table/blocks/peashooter_block.json
 df4b125d93e1cd99a9423a2990cc04566ea84ae7 data/cnc/loot_table/blocks/standing_walnut_sign.json
 790bd9b14b9b718ef05bf4482f2e8c253770d332 data/cnc/loot_table/blocks/stripped_walnut_log.json
@@ -29,3 +29,4 @@ d1a6f014b0650c8d0bfe4190fbfc22b39b0118c8 data/cnc/loot_table/entities/peashooter
 de5e1655c0fa304a9b9ccce87e5c8a7146275437 data/cnc/loot_table/entities/potato_mine.json
 09cd1d016abf6c4090ed6769ea2a3241981332a6 data/cnc/loot_table/entities/sunflower.json
 83b205b80b1c2364626a756c2e8a7d232f73d2ca data/cnc/loot_table/entities/wallnut.json
+734f49830f9205d7946432bf979ad6235a09a1e7 data/cnc/loot_table/other/cherries_drop.json
