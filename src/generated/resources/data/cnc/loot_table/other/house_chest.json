@@ -1,0 +1,138 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cnc:pea_pod"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cnc:raw_pea"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 3.0,
+            "min": 1.0
+          },
+          "function": "minecraft:set_count"
+        },
+        {
+          "add": false,
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 6.0,
+            "min": 2.0
+          },
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cnc:plant_food"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cnc:sun"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 9.0,
+            "min": 4.0
+          },
+          "function": "minecraft:set_count"
+        },
+        {
+          "add": false,
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 18.0,
+            "min": 8.0
+          },
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cnc:sunflower_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cnc:sunflower_seed_muffin"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 12.0,
+            "min": 4.0
+          },
+          "function": "minecraft:set_count"
+        },
+        {
+          "add": false,
+          "count": {
+            "type": "minecraft:uniform",
+            "max": 7.0,
+            "min": 3.0
+          },
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cnc:empty_seed_packet",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cnc:sunflower_seed_packet"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.1,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cnc:plant_armor"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "cnc:other/house_chest"
+}

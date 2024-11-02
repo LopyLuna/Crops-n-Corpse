@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-31T22:05:48.893798	Registries
+// 1.21.1	2024-11-02T12:59:13.7832372	Registries
 e24fbce1dfa48aef086aaa0d0ce1fd1f4a6733ae data/cnc/damage_type/pea_shot.json
 a83f12cc29956b4bdf395ca9e02bc52935481b9b data/cnc/neoforge/biome_modifier/browncoat_spawns.json
 c05b970d5e9813442645b46a0049e5ab7a3b2c63 data/cnc/neoforge/biome_modifier/cherry_spawns.json
@@ -9,9 +9,9 @@ d1d5c47ae78f4256fca64c6ca375ec6ce2043d94 data/cnc/neoforge/biome_modifier/peasho
 7e5441dc39ec45f7a44e65473dbe57eddebac200 data/cnc/neoforge/biome_modifier/walnut_tree_placement.json
 566ca2cadf695747dbe008dce2d5336d02615106 data/cnc/worldgen/configured_feature/walnut_tree.json
 777347350a0dbf5570ea1650a4cdc4e2aeeed8ff data/cnc/worldgen/placed_feature/walnut_tree.json
-8f935dee27a0786da9c47f1f79c5086aa35020de data/cnc/worldgen/structure/house_grill.json
-89bea14964506c9b909aedef7a58eadb5ce80738 data/cnc/worldgen/structure/house_mailbox.json
-2f0576a3da2c224fd1f3846479e8e4dd180b93d9 data/cnc/worldgen/structure/house_pool.json
+7225c9e25d28962e63efc0236b4ff99db45bd6d5 data/cnc/worldgen/structure/house_grill.json
+84cc3a452e8e93dcf961ffd1561dcaf04cdcff73 data/cnc/worldgen/structure/house_mailbox.json
+904771d52211555649d70182ad52843e1dcf7a40 data/cnc/worldgen/structure/house_pool.json
 0f5ec9a030d262d4173e9cae0c1f0023b459ddc9 data/cnc/worldgen/structure_set/lost_houses.json
 7ab975d11f52beec82d415bc151d77829c226547 data/cnc/worldgen/template_pool/house_grill.json
 38abab08828ae3f03d9b4c8e7a3b5ff66cc69a81 data/cnc/worldgen/template_pool/house_mailbox.json

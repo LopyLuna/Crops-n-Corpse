@@ -34,7 +34,7 @@ public class StructureInit {
                 ConstantHeight.of(VerticalAnchor.absolute(0)),
                 false,
                 Heightmap.Types.WORLD_SURFACE_WG,
-                16,
+                9,
                 5
         ));
         context.register(HOUSE_MAILBOX, new FlatGroundStructure(
@@ -45,7 +45,7 @@ public class StructureInit {
                 ConstantHeight.of(VerticalAnchor.absolute(0)),
                 false,
                 Heightmap.Types.WORLD_SURFACE_WG,
-                16,
+                9,
                 5
         ));
         context.register(HOUSE_POOL, new FlatGroundStructure(
@@ -56,7 +56,7 @@ public class StructureInit {
                 ConstantHeight.of(VerticalAnchor.absolute(0)),
                 false,
                 Heightmap.Types.WORLD_SURFACE_WG,
-                16,
+                9,
                 5
         ));
     }

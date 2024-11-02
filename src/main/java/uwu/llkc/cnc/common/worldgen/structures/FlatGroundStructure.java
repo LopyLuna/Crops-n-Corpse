@@ -166,19 +166,17 @@ public class FlatGroundStructure extends JigsawStructure {
     }
 
     private boolean isGroundFlat(GenerationStub stub, GenerationContext context) {
-        BlockPos[] positions = new BlockPos[width * width];
+        BlockPos[] positions = new BlockPos[9];
 
         int spread = width / 3;
-        for (int x = 0; x < width; x += spread) {
-            for (int z = 0; z < width; z += spread) {
-                var pos = stub.position().offset(x, 0, z);
-                positions[x + z] = pos.atY(context.chunkGenerator().getFirstOccupiedHeight(
-                        pos.getX(),
-                        pos.getZ(),
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        context.heightAccessor(),
-                        context.randomState()));
-            }
+        for (int i = 0; i < 9; i++) {
+            var pos = stub.position().offset((i / 3) * (spread + 1), 0, (i / 3) * (spread + 1));
+            positions[i] = pos.atY(context.chunkGenerator().getFirstOccupiedHeight(
+                    pos.getX(),
+                    pos.getZ(),
+                    Heightmap.Types.WORLD_SURFACE_WG,
+                    context.heightAccessor(),
+                    context.randomState()));
         }
 
         var min = Arrays.stream(positions).min(Comparator.comparingInt(BlockPos::getY)).orElse(BlockPos.ZERO);
