@@ -12,6 +12,7 @@
     "PotatoBlockMixin"
   ],
   "client": [
+    "LivingEntityRendererMixin"
   ],
   "server": [],
   "injectors": {
