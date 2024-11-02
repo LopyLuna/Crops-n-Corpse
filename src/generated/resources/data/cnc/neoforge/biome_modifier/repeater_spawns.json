@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#cnc:spawns_peashooter",
+  "spawners": {
+    "type": "cnc:repeater",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 25
+  }
+}

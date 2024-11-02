@@ -36,6 +36,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_peashooter");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.REPEATER.get()))
+                .pattern("p p")
+                .pattern("sef")
+                .pattern("p p")
+                .define('p', ItemRegistry.PEA_POD.get())
+                .define('s', ItemRegistry.SUN.get())
+                .define('f', ItemRegistry.PLANT_FOOD.get())
+                .define('e', ItemRegistry.EMPTY_SEED_PACKET.get())
+                .unlockedBy("has_packet", has(ItemRegistry.EMPTY_SEED_PACKET.get()))
+                .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
+                .save(recipeOutput, "seed_packet_repeater");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.CHERRY_BOMB.get()))
                 .pattern(" c ")
                 .pattern("sef")

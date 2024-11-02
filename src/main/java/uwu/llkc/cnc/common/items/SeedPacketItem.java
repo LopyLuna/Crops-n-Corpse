@@ -55,7 +55,8 @@ public class SeedPacketItem<T extends Entity> extends Item {
             entry(EntityTypeRegistry.SUNFLOWER.get(), ItemRegistry.SUNFLOWER_SEED_PACKET.get()),
             entry(EntityTypeRegistry.WALLNUT.get(), ItemRegistry.WALLNUT_SEED_PACKET.get()),
             entry(EntityTypeRegistry.POTATO_MINE.get(), ItemRegistry.POTATO_MINE_SEED_PACKET.get()),
-            entry(EntityTypeRegistry.CHERRY_BOMB.get(), ItemRegistry.CHERRY_BOMB_SEED_PACKET.get())
+            entry(EntityTypeRegistry.CHERRY_BOMB.get(), ItemRegistry.CHERRY_BOMB_SEED_PACKET.get()),
+            entry(EntityTypeRegistry.REPEATER.get(), ItemRegistry.REPEATER_SEED_PACKET.get())
     );
 
     private final int sunCost;

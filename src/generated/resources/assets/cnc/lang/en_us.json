@@ -58,6 +58,7 @@
   "item.cnc.plant_food": "Plant Food",
   "item.cnc.potato_mine_seed_packet": "Potato Mine Seed Packet",
   "item.cnc.raw_pea": "Raw Pea",
+  "item.cnc.repeater_seed_packet": "Repeater Seed Packet",
   "item.cnc.seed_packet.cooldown": "Cooldown:",
   "item.cnc.seed_packet.cost": "Sun Cost:",
   "item.cnc.seed_packet.hp": "Remaining Health:",

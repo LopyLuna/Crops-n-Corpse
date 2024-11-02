@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-27T23:19:34.6591042	Item Models: cnc
+// 1.21.1	2024-11-02T16:19:18.631965	Item Models: cnc
 cf5c2182fe08615cb0d4119083806e680076002e assets/cnc/models/item/browncoat_spawn_egg.json
 32e87e6f5564d12a898ad60f0637697e0f7f144d assets/cnc/models/item/buckethead_spawn_egg.json
 f1fa8e6f305d25dfb5c6ccce635229bd2a0ee3a2 assets/cnc/models/item/bucket_item.json
@@ -26,6 +26,7 @@ e4ac201e3fef850b0a5a1e3981e6244521d58e59 assets/cnc/models/item/pea_pod.json
 cf631959e0713bed68e79100db47fe1769a5d5c1 assets/cnc/models/item/plant_food.json
 573a26624cbbd35840a4f959bd361399e0d16f14 assets/cnc/models/item/potato_mine_seed_packet.json
 59b3381daf57950ad33313031764ae4ec277d750 assets/cnc/models/item/raw_pea.json
+a39e48836b8fbc2d4d03323a2658599b3c078a69 assets/cnc/models/item/repeater_seed_packet.json
 758cba7dd6595f5ab94a9f5238ddeb5868a42d9f assets/cnc/models/item/sun.json
 0873704e0abf44b606957a097a1e3aac3c8067f6 assets/cnc/models/item/sunflower_seeds.json
 c47119ea2463b2dc658f72017e527432deca2dc7 assets/cnc/models/item/sunflower_seed_muffin.json

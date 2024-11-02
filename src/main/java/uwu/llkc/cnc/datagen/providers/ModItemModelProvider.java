@@ -31,6 +31,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.WALNUT.get());
         basicItem(ItemRegistry.EMPTY_SEED_PACKET.get());
         basicItem(ItemRegistry.PEASHOOTER_SEED_PACKET.get());
+        basicItem(ItemRegistry.REPEATER_SEED_PACKET.get());
         basicItem(ItemRegistry.SUNFLOWER_SEED_PACKET.get());
         basicItem(ItemRegistry.WALLNUT_SEED_PACKET.get());
         basicItem(ItemRegistry.POTATO_MINE_SEED_PACKET.get());

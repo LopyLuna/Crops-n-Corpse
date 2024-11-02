@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "e": {
+      "item": "cnc:empty_seed_packet"
+    },
+    "f": {
+      "item": "cnc:plant_food"
+    },
+    "p": {
+      "item": "cnc:pea_pod"
+    },
+    "s": {
+      "item": "cnc:sun"
+    }
+  },
+  "pattern": [
+    "p p",
+    "sef",
+    "p p"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cnc:repeater_seed_packet"
+  }
+}
