@@ -34,7 +34,7 @@ public class EntityTypeRegistry {
             () -> EntityType.Builder.of(CherryBomb::new, MobCategory.CREATURE).sized(1, 1).eyeHeight(0.3f).build(CNCMod.rlStr("cherry_bomb")));
 
     public static final Supplier<EntityType<Repeater>> REPEATER = ENTITY_TYPES.register("repeater",
-            () -> EntityType.Builder.of(Repeater::new, MobCategory.CREATURE).sized(1, 1).eyeHeight(0.3f).build(CNCMod.rlStr("repeater")));
+            () -> EntityType.Builder.of(Repeater::new, MobCategory.CREATURE).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("repeater")));
 
     public static final Supplier<EntityType<Browncoat>> BROWNCOAT = ENTITY_TYPES.register("browncoat",
             () -> EntityType.Builder.of(Browncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("browncoat")));

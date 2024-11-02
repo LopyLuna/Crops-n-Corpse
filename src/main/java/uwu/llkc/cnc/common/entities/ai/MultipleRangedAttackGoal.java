@@ -26,7 +26,7 @@ public class MultipleRangedAttackGoal extends Goal {
     private int bulletsToFire;
 
     public MultipleRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackInterval, float attackRadius, int bulletCooldown, int bulletCount) {
-        this(rangedAttackMob, speedModifier, attackInterval, attackInterval, attackRadius, bulletCount, bulletCooldown);
+        this(rangedAttackMob, speedModifier, attackInterval, attackInterval, attackRadius, bulletCooldown, bulletCount);
     }
 
     public MultipleRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackIntervalMin, int attackIntervalMax, float attackRadius, int bulletCooldown, int bulletCount) {

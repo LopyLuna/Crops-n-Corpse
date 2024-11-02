@@ -47,7 +47,7 @@ public class RepeaterModel extends HierarchicalModel<Repeater> {
 
         PartDefinition rootHead = rootStem.addOrReplaceChild("rootHead", CubeListBuilder.create(), PartPose.offset(0.0F, -9.962F, 1.9341F));
 
-        PartDefinition Head = rootStem.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 1).addBox(-2.5F, -2.538F, -3.4341F, 5.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0, 0, 0, 0.1745F, 0.0F, 0.0F));
+        PartDefinition Head = rootHead.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 1).addBox(-2.5F, -2.538F, -3.4341F, 5.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0, 0, 0, 0.1745F, 0.0F, 0.0F));
 
         PartDefinition Eyebrows = Head.addOrReplaceChild("Eyebrows", CubeListBuilder.create(), PartPose.offset(0.0F, -1.538F, -0.4341F));
 

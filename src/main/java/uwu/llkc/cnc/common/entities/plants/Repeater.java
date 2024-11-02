@@ -41,7 +41,7 @@ public class Repeater extends CNCPlant implements RangedAttackMob {
         super.registerGoals();
         goalSelector.addGoal(2, new RandomLookAroundGoal(this));
         goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 6, 0.001f));
-        goalSelector.addGoal(0, new MultipleRangedAttackGoal(this, 1, 40, 30, 5, 2) {
+        goalSelector.addGoal(0, new MultipleRangedAttackGoal(this, 1, 20, 30, 5, 2) {
             @Override
             public boolean canContinueToUse() {
                 var use = getTarget() != null && super.canContinueToUse() && distanceTo(getTarget()) < 30;
