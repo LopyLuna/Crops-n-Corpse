@@ -6,7 +6,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3f;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.entities.animations.WallNutAnimations;
 import uwu.llkc.cnc.common.entities.plants.WallNut;

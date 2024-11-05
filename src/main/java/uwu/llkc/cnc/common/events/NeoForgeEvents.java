@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -31,6 +32,7 @@ import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.ExplosionKnockbackEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -40,6 +42,7 @@ import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.entities.plants.CherryBomb;
 import uwu.llkc.cnc.common.entities.plants.PotatoMine;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
+import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
@@ -201,6 +204,17 @@ public class NeoForgeEvents {
         if (event.getState().is(Blocks.CHERRY_LEAVES)) {
             if (event.getLevel().getRandom().nextFloat() < 0.01f) {
                 EntityTypeRegistry.CHERRY_BOMB.get().spawn(event.getLevel(), entity -> entity.getEntityData().set(CherryBomb.FLYING, true), event.getPos(), MobSpawnType.EVENT, false, false);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void entityTickEvent(final EntityTickEvent.Pre event) {
+        if (event.getEntity() instanceof Mob mob) {
+            if (mob.getData(AttachmentTypeRegistry.FROZEN) && mob.isNoAi()) {
+                mob.setNoAi(false);
+                mob.travel(new Vec3(mob.xxa, mob.zza, mob.yya));
+                mob.setNoAi(true);
             }
         }
     }

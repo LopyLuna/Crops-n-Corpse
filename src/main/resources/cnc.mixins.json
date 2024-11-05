@@ -4,6 +4,7 @@
   "package": "uwu.llkc.cnc.common.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AnimationStateMixin",
     "BlocksMixin",
     "BucketMixin",
     "DispenseBehaviorMixin",

@@ -7,7 +7,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
@@ -59,10 +58,8 @@ public class ChillEffect extends MobEffect {
 
     private void freeze(LivingEntity livingEntity) {
         if (livingEntity instanceof Mob mob) {
-            mob.goalSelector.disableControlFlag(Goal.Flag.TARGET);
-            mob.goalSelector.disableControlFlag(Goal.Flag.MOVE);
-            mob.goalSelector.disableControlFlag(Goal.Flag.JUMP);
-            mob.goalSelector.disableControlFlag(Goal.Flag.LOOK);
+            mob.yHeadRot = mob.yBodyRot;
+            mob.setNoAi(true);
         } else if (livingEntity instanceof Player player) {
 
         }
@@ -70,10 +67,7 @@ public class ChillEffect extends MobEffect {
 
     private void unFreeze(LivingEntity livingEntity) {
         if (livingEntity instanceof Mob mob) {
-            mob.goalSelector.enableControlFlag(Goal.Flag.TARGET);
-            mob.goalSelector.enableControlFlag(Goal.Flag.MOVE);
-            mob.goalSelector.enableControlFlag(Goal.Flag.JUMP);
-            mob.goalSelector.enableControlFlag(Goal.Flag.LOOK);
+            mob.setNoAi(false);
         } else if (livingEntity instanceof Player player) {
 
         }

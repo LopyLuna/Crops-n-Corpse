@@ -2,7 +2,6 @@ package uwu.llkc.cnc.common.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -16,18 +15,16 @@ import net.minecraft.world.level.chunk.*;
 import net.minecraft.world.level.levelgen.blending.BlendingData;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 
 @Mixin(value = {LevelChunk.class, ProtoChunk.class})
-@Debug(export = true)
 public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinHelper {
     private BlockPos nextBlockPosDoBreak = null;
     private BlockPos nextPosForInteractionCheck = null;
-    private BlockState blockStateForDelayedPlace = null;
+    private final BlockState blockStateForDelayedPlace = null;
 
     public LevelChunkMixin(ChunkPos chunkPos, UpgradeData upgradeData, LevelHeightAccessor levelHeightAccessor, Registry<Biome> biomeRegistry, long inhabitedTime, @Nullable LevelChunkSection[] sections, @Nullable BlendingData blendingData) {
         super(chunkPos, upgradeData, levelHeightAccessor, biomeRegistry, inhabitedTime, sections, blendingData);
