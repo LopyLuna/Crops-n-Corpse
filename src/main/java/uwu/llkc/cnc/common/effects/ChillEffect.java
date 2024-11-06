@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
 import uwu.llkc.cnc.common.init.EffectRegistry;
-import uwu.llkc.cnc.common.networking.SetFrozen;
+import uwu.llkc.cnc.common.networking.SetFrozenPayload;
 
 public class ChillEffect extends MobEffect {
     public ChillEffect(MobEffectCategory category, int color) {
@@ -29,13 +29,13 @@ public class ChillEffect extends MobEffect {
             freeze(livingEntity);
             if (!livingEntity.getData(AttachmentTypeRegistry.FROZEN)) {
                 livingEntity.setData(AttachmentTypeRegistry.FROZEN, true);
-                PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new SetFrozen(livingEntity.getId(), true));
+                PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new SetFrozenPayload(livingEntity.getId(), true));
             }
         } else {
             unFreeze(livingEntity);
             if (livingEntity.getData(AttachmentTypeRegistry.FROZEN)) {
                 livingEntity.setData(AttachmentTypeRegistry.FROZEN, false);
-                PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new SetFrozen(livingEntity.getId(), false));
+                PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new SetFrozenPayload(livingEntity.getId(), false));
             }
         }
 
