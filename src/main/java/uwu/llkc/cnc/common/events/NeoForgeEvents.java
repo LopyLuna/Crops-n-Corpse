@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -125,6 +126,9 @@ public class NeoForgeEvents {
                 item.hurtAndBreak(((int) event.getOriginalDamage()), event.getEntity(), EquipmentSlot.HEAD);
                 event.setNewDamage(0);
             }
+        }
+        if (event.getSource().is(DamageTypeTags.IS_FIRE) && event.getEntity().hasEffect(EffectRegistry.CHILL)) {
+            event.getEntity().removeEffect(EffectRegistry.CHILL);
         }
     }
 
