@@ -52,6 +52,7 @@ import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 import uwu.llkc.cnc.common.networking.SetChilledPayload;
+import uwu.llkc.cnc.common.networking.SetFrozenPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 
@@ -154,20 +155,15 @@ public class NeoForgeEvents {
 
     @SubscribeEvent
     public static void clickBlock(final PlayerInteractEvent.RightClickBlock event) {
+        if (event.getEntity().getData(AttachmentTypeRegistry.FROZEN)) {
+            event.setCancellationResult(InteractionResult.FAIL);
+            event.setCanceled(true);
+        }
         if (event.getItemStack().is(Items.BUCKET) && event.getItemStack().has(DataComponents.DAMAGE) && event.getItemStack().get(DataComponents.DAMAGE) > 0) {
             event.setCancellationResult(InteractionResult.FAIL);
             event.setCanceled(true);
         }
         ((ChunkMixinHelper) event.getLevel().getChunk(event.getPos())).setNextPosForInteractionCheck(event.getPos());
-    }
-
-    @SubscribeEvent
-    public static void clickBlock(final PlayerInteractEvent.RightClickItem event) {
-        if (event.getItemStack().is(Items.BUCKET) && event.getItemStack().has(DataComponents.DAMAGE) && event.getItemStack().get(DataComponents.DAMAGE) > 0) {
-            event.setCancellationResult(InteractionResult.FAIL);
-            event.setCanceled(true);
-        }
-
     }
 
     @SubscribeEvent
@@ -233,13 +229,15 @@ public class NeoForgeEvents {
         if (!event.isCanceled()) {
             if (event.getEffect().value().equals(EffectRegistry.CHILL.value())) {
                 PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new SetChilledPayload(event.getEntity().getId(), false));
+                PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new SetFrozenPayload(event.getEntity().getId(), false));
             }
         }
     }
 
     @SubscribeEvent
     public static void effectApplicable(final MobEffectEvent.Applicable event) {
-        if (event.getEntity().getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)) {
+        if (event.getEntity().getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES) ||
+                (!event.getEntity().onGround() && event.getEntity().getType().is(EntityTypeTags.FALL_DAMAGE_IMMUNE))) {
             event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
         }
     }

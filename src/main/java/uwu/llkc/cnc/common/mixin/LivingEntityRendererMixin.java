@@ -35,7 +35,7 @@ public abstract class LivingEntityRendererMixin {
 
     @WrapWithCondition(method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;setupAnim(Lnet/minecraft/world/entity/Entity;FFFFF)V"))
     private <T extends Entity> boolean onlySetupIfNotFrozen(EntityModel<T> instance, T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (entity instanceof LivingEntity livingEntity && livingEntity.onGround()) {
+        if (entity instanceof LivingEntity livingEntity) {
             var result = !livingEntity.getData(AttachmentTypeRegistry.FROZEN.get());
             if (!result) {
                 Map<ModelPart, PartPose> parts = entity.getData(AttachmentTypeRegistry.MODEL_PARTS);
@@ -58,7 +58,7 @@ public abstract class LivingEntityRendererMixin {
 
     @Inject(method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"))
     private void cnc$render(LivingEntity entity, float f, float g, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, CallbackInfo ci) {
-        if (entity.getData(AttachmentTypeRegistry.FROZEN.get()) && entity.onGround()) {
+        if (entity.getData(AttachmentTypeRegistry.FROZEN.get())) {
             poseStack.pushPose();
             poseStack.translate(-0.5, 0, -0.5);
             var model = Minecraft.getInstance().getModelManager().getModel(CNCMod.CHILL_CRYSTAL);

@@ -41,21 +41,23 @@ public record SetFrozenPayload(int entityId, boolean frozen) implements CustomPa
             if (entity == null) return;
             entity.setData(AttachmentTypeRegistry.FROZEN, data.frozen);
 
-            Optional<ModelLayerLocation> locations = minecraft.getEntityModels().roots.keySet().stream()
-                    .filter(layer -> layer.getModel().equals(BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType())))
-                    .findFirst();
+            if (data.frozen) {
+                Optional<ModelLayerLocation> locations = minecraft.getEntityModels().roots.keySet().stream()
+                        .filter(layer -> layer.getModel().equals(BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType())))
+                        .findFirst();
 
-            locations.map(minecraft.getEntityModels().roots::get).ifPresent(model -> {
-                if (model instanceof LayerDefinitionMixinHelper helper) {
-                    helper.cnc$getRoot().ifPresent(root -> entity.setData(
-                            AttachmentTypeRegistry.MODEL_PARTS,
-                            root.getAllParts().collect(Collectors.toMap(
-                                    part -> part,
-                                    ModelPart::storePose
-                            ))
-                    ));
-                }
-            });
+                locations.map(minecraft.getEntityModels().roots::get).ifPresent(model -> {
+                    if (model instanceof LayerDefinitionMixinHelper helper) {
+                        helper.cnc$getRoot().ifPresent(root -> entity.setData(
+                                AttachmentTypeRegistry.MODEL_PARTS,
+                                root.getAllParts().collect(Collectors.toMap(
+                                        part -> part,
+                                        ModelPart::storePose
+                                ))
+                        ));
+                    }
+                });
+            }
         });
     }
 
