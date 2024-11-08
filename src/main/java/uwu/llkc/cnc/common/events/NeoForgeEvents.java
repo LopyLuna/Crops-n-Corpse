@@ -6,6 +6,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -233,6 +234,13 @@ public class NeoForgeEvents {
             if (event.getEffect().value().equals(EffectRegistry.CHILL.value())) {
                 PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new SetChilledPayload(event.getEntity().getId(), false));
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void effectApplicable(final MobEffectEvent.Applicable event) {
+        if (event.getEntity().getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)) {
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
         }
     }
 }
