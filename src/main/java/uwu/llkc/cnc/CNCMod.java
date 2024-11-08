@@ -1,5 +1,6 @@
 package uwu.llkc.cnc;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -8,6 +9,8 @@ import uwu.llkc.cnc.common.init.*;
 
 @Mod(CNCMod.MOD_ID)
 public class CNCMod {
+    public static final ModelResourceLocation CHILL_CRYSTAL = ModelResourceLocation.standalone(rl("other/chill_crystal"));
+
     public static final String MOD_ID = "cnc";
 
     public CNCMod(IEventBus modEventBus, ModContainer modContainer) {

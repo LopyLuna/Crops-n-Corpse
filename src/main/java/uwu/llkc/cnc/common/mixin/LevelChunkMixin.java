@@ -16,23 +16,27 @@ import net.minecraft.world.level.levelgen.blending.BlendingData;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 
 @Mixin(value = {LevelChunk.class, ProtoChunk.class})
 public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinHelper {
-    private BlockPos nextBlockPosDoBreak = null;
-    private BlockPos nextPosForInteractionCheck = null;
-    private final BlockState blockStateForDelayedPlace = null;
+    @Unique
+    private final BlockState cnc$blockStateForDelayedPlace = null;
+    @Unique
+    private BlockPos cnc$nextBlockPosDoBreak = null;
+    @Unique
+    private BlockPos cnc$nextPosForInteractionCheck = null;
 
     public LevelChunkMixin(ChunkPos chunkPos, UpgradeData upgradeData, LevelHeightAccessor levelHeightAccessor, Registry<Biome> biomeRegistry, long inhabitedTime, @Nullable LevelChunkSection[] sections, @Nullable BlendingData blendingData) {
         super(chunkPos, upgradeData, levelHeightAccessor, biomeRegistry, inhabitedTime, sections, blendingData);
     }
 
     @WrapOperation(method = "setBlockState(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Z)Lnet/minecraft/world/level/block/state/BlockState;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/LevelChunkSection;setBlockState(IIILnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/block/state/BlockState;"))
-    private BlockState setBlockState(LevelChunkSection chunk, int x, int y, int z, BlockState state, Operation<BlockState> original, BlockPos pos, BlockState otherState, boolean isMoving) {
-        if (getLevel() != null &&  (!pos.equals(nextBlockPosDoBreak) && (state.isAir() && !getLevel().getBlockState(pos).isAir() && !isMoving)) && !pos.equals(nextPosForInteractionCheck)) {
+    private BlockState cnc$setBlockState(LevelChunkSection chunk, int x, int y, int z, BlockState state, Operation<BlockState> original, BlockPos pos, BlockState otherState, boolean isMoving) {
+        if (getLevel() != null && (!pos.equals(cnc$nextBlockPosDoBreak) && (state.isAir() && !getLevel().getBlockState(pos).isAir() && !isMoving)) && !pos.equals(cnc$nextPosForInteractionCheck)) {
             if (StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).walk(f -> f.limit(10).anyMatch(cls -> Block.class.isAssignableFrom(cls.getDeclaringClass())))) return original.call(chunk, x, y, z, state);
             WallNut entity = getLevel().getNearestEntity(WallNut.class, TargetingConditions.DEFAULT, null, pos.getX(), pos.getY(), pos.getZ(), AABB.ofSize(pos.getCenter(), 20, 20, 20));
             if (entity != null && entity.getOwnerUUID() != null) {
@@ -47,30 +51,30 @@ public abstract class LevelChunkMixin extends ChunkAccess implements ChunkMixinH
                 return getLevel().getBlockState(pos);
             }
         }
-        if (!pos.equals(nextPosForInteractionCheck)) {
-            nextPosForInteractionCheck = null;
+        if (!pos.equals(cnc$nextPosForInteractionCheck)) {
+            cnc$nextPosForInteractionCheck = null;
         }
-        nextBlockPosDoBreak = null;
+        cnc$nextBlockPosDoBreak = null;
         return original.call(chunk, x, y, z, state);
     }
 
     @Override
     public void setNextBlockPosDoBreak(BlockPos pos) {
-        nextBlockPosDoBreak = pos;
-    }
-
-    @Override
-    public void setNextPosForInteractionCheck(BlockPos nextPosForInteractionCheck) {
-        this.nextPosForInteractionCheck = nextPosForInteractionCheck;
+        cnc$nextBlockPosDoBreak = pos;
     }
 
     @Override
     public BlockState getBlockStateForDelayedPlace() {
-        return blockStateForDelayedPlace;
+        return cnc$blockStateForDelayedPlace;
     }
 
     @Override
     public BlockPos getNextPosForInteractionCheck() {
-        return nextPosForInteractionCheck;
+        return cnc$nextPosForInteractionCheck;
+    }
+
+    @Override
+    public void setNextPosForInteractionCheck(BlockPos nextPosForInteractionCheck) {
+        this.cnc$nextPosForInteractionCheck = nextPosForInteractionCheck;
     }
 }

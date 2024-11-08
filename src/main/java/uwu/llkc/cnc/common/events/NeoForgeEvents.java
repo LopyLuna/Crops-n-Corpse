@@ -21,11 +21,13 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
@@ -43,9 +45,11 @@ import uwu.llkc.cnc.common.entities.plants.CherryBomb;
 import uwu.llkc.cnc.common.entities.plants.PotatoMine;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
+import uwu.llkc.cnc.common.init.EffectRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
+import uwu.llkc.cnc.common.networking.SetChilledPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 
@@ -215,6 +219,15 @@ public class NeoForgeEvents {
                 mob.setNoAi(false);
                 mob.travel(new Vec3(mob.xxa, mob.zza, mob.yya));
                 mob.setNoAi(true);
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onEffectRemove(final MobEffectEvent.Remove event) {
+        if (!event.isCanceled()) {
+            if (event.getEffect().value().equals(EffectRegistry.CHILL.value())) {
+                PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new SetChilledPayload(event.getEntity().getId(), false));
             }
         }
     }

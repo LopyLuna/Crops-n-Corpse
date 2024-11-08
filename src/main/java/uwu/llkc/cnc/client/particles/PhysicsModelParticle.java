@@ -64,7 +64,6 @@ public class PhysicsModelParticle extends Particle {
         float f2 = (float)(Mth.lerp(partialTicks, this.zo, this.z) - vec3.z());
         pose.translate(f, f1, f2);
         transformation.accept(pose);
-        RenderSystem.getShaderColor();
         var source = Minecraft.getInstance().renderBuffers().bufferSource();
         bodyPart.ifLeft(modelPart -> {
                     RenderSystem.setShaderTexture(0, texture);

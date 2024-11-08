@@ -5,5 +5,5 @@ import net.minecraft.client.model.geom.ModelPart;
 import java.util.Optional;
 
 public interface LayerDefinitionMixinHelper {
-    Optional<ModelPart> crops_n_Corpse$getRoot();
+    Optional<ModelPart> cnc$getRoot();
 }

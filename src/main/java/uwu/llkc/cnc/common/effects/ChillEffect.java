@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
 import uwu.llkc.cnc.common.init.EffectRegistry;
+import uwu.llkc.cnc.common.networking.SetChilledPayload;
 import uwu.llkc.cnc.common.networking.SetFrozenPayload;
 
 public class ChillEffect extends MobEffect {
@@ -21,11 +22,12 @@ public class ChillEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+
         double freezePercentage = Math.min(0.99f, (amplifier == 0 ? 0 : (15 + amplifier * 5)) / 100d);
         double currentPercentage = 1 - (livingEntity.getEffect(EffectRegistry.CHILL).getDuration() /
                 ((double) livingEntity.getData(AttachmentTypeRegistry.CHILL_TIME)));
 
-        if (currentPercentage < freezePercentage) {
+        if (currentPercentage < freezePercentage && livingEntity.onGround()) {
             freeze(livingEntity);
             if (!livingEntity.getData(AttachmentTypeRegistry.FROZEN)) {
                 livingEntity.setData(AttachmentTypeRegistry.FROZEN, true);
@@ -44,7 +46,7 @@ public class ChillEffect extends MobEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        return true;
+        return duration != 0;
     }
 
     @Override
@@ -54,6 +56,12 @@ public class ChillEffect extends MobEffect {
         if (effect != null) {
             livingEntity.setData(AttachmentTypeRegistry.CHILL_TIME, effect.getDuration());
         }
+    }
+
+    @Override
+    public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
+        super.onEffectStarted(livingEntity, amplifier);
+        PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new SetChilledPayload(livingEntity.getId(), true));
     }
 
     private void freeze(LivingEntity livingEntity) {

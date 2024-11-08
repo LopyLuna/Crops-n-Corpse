@@ -14,6 +14,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.entities.models.*;
@@ -78,5 +79,10 @@ public class ModEvents {
             BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
             return event.getBlockColors().getColor(blockstate, null, null, index);
         }, ItemRegistry.WALNUT_LEAVES);
+    }
+
+    @SubscribeEvent
+    public static void registerModels(final ModelEvent.RegisterAdditional event) {
+        event.register(CNCMod.CHILL_CRYSTAL);
     }
 }

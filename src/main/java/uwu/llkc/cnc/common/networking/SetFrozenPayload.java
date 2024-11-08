@@ -47,7 +47,7 @@ public record SetFrozenPayload(int entityId, boolean frozen) implements CustomPa
 
             locations.map(minecraft.getEntityModels().roots::get).ifPresent(model -> {
                 if (model instanceof LayerDefinitionMixinHelper helper) {
-                    helper.crops_n_Corpse$getRoot().ifPresent(root -> entity.setData(
+                    helper.cnc$getRoot().ifPresent(root -> entity.setData(
                             AttachmentTypeRegistry.MODEL_PARTS,
                             root.getAllParts().collect(Collectors.toMap(
                                     part -> part,

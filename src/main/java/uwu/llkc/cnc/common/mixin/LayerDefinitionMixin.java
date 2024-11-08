@@ -18,13 +18,13 @@ public class LayerDefinitionMixin implements LayerDefinitionMixinHelper {
     private ModelPart crops_n_Corpse$root;
 
     @ModifyReturnValue(method = "bakeRoot", at = @At("RETURN"))
-    private ModelPart bakeRoot(ModelPart modelPart) {
+    private ModelPart cnc$bakeRoot(ModelPart modelPart) {
         this.crops_n_Corpse$root = modelPart;
         return modelPart;
     }
 
     @Override
-    public Optional<ModelPart> crops_n_Corpse$getRoot() {
+    public Optional<ModelPart> cnc$getRoot() {
         return Optional.ofNullable(crops_n_Corpse$root);
     }
 }

@@ -20,6 +20,9 @@ public class AttachmentTypeRegistry {
     public static final Supplier<AttachmentType<Boolean>> FROZEN = ATTACHMENT_TYPES.register("frozen",
             () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build());
 
+    public static final Supplier<AttachmentType<Boolean>> CHILLED = ATTACHMENT_TYPES.register("chilled",
+            () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build());
+
     public static final Supplier<AttachmentType<Map<ModelPart, PartPose>>> MODEL_PARTS = ATTACHMENT_TYPES.register("model_parts",
             () -> AttachmentType.<Map<ModelPart, PartPose>>builder(Map::of).build());
 }
