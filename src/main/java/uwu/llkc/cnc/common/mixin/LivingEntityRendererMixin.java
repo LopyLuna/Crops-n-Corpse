@@ -41,18 +41,10 @@ public abstract class LivingEntityRendererMixin {
                 Map<ModelPart, ModelPartData> parts = entity.getData(AttachmentTypeRegistry.MODEL_PARTS);
                 if (parts.isEmpty()) return true;
                 parts.forEach((part, data) -> data.toModelPart(part));
+                return false;
             }
         }
         return true;
-    }
-
-
-    @ModifyVariable(method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"), argsOnly = true)
-    private <T extends LivingEntity> MultiBufferSource cnc$render(MultiBufferSource buffer, @Local(argsOnly = true) T entity) {
-        if (entity.getData(AttachmentTypeRegistry.CHILLED.get())) {
-            return new ColoredBufferSource(buffer, 54, 139, 193, 255);
-        }
-        return buffer;
     }
 
     @Inject(method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"))
@@ -67,5 +59,13 @@ public abstract class LivingEntityRendererMixin {
             }
             poseStack.popPose();
         }
+    }
+
+    @ModifyVariable(method = "render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At("HEAD"), argsOnly = true)
+    private <T extends LivingEntity> MultiBufferSource cnc$render(MultiBufferSource buffer, @Local(argsOnly = true) T entity) {
+        if (entity.getData(AttachmentTypeRegistry.CHILLED.get())) {
+            return new ColoredBufferSource(buffer, 54, 139, 193, 255);
+        }
+        return buffer;
     }
 }
