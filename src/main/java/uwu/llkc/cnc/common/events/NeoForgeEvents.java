@@ -228,8 +228,19 @@ public class NeoForgeEvents {
     public static void onEffectRemove(final MobEffectEvent.Remove event) {
         if (!event.isCanceled()) {
             if (event.getEffect().value().equals(EffectRegistry.CHILL.value())) {
-                PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new SetChilledPayload(event.getEntity().getId(), false));
-                PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new SetFrozenPayload(event.getEntity().getId(), false));
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(event.getEntity(), new SetChilledPayload(event.getEntity().getId(), false, 0, 0));
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(event.getEntity(), new SetFrozenPayload(event.getEntity().getId(), false));
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onEffectExpire(final MobEffectEvent.Expired event) {
+        if (!event.isCanceled()) {
+            if (event.getEffectInstance() == null) return;
+            if (event.getEffectInstance().getEffect().value().equals(EffectRegistry.CHILL.value())) {
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(event.getEntity(), new SetChilledPayload(event.getEntity().getId(), false, 0, 0));
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(event.getEntity(), new SetFrozenPayload(event.getEntity().getId(), false));
             }
         }
     }

@@ -2,7 +2,6 @@ package uwu.llkc.cnc.common.networking;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -14,7 +13,8 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
-import uwu.llkc.cnc.common.util.LayerDefinitionMixinHelper;
+import uwu.llkc.cnc.common.util.ModelPartData;
+import uwu.llkc.cnc.common.util.ModelSetMixinHelper;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,13 +46,13 @@ public record SetFrozenPayload(int entityId, boolean frozen) implements CustomPa
                         .filter(layer -> layer.getModel().equals(BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType())))
                         .findFirst();
 
-                locations.map(minecraft.getEntityModels().roots::get).ifPresent(model -> {
-                    if (model instanceof LayerDefinitionMixinHelper helper) {
-                        helper.cnc$getRoot().ifPresent(root -> entity.setData(
+                locations.ifPresent(loc -> {
+                    if (Minecraft.getInstance().getEntityModels() instanceof ModelSetMixinHelper helper) {
+                        helper.cnc$getRoot(loc).ifPresent(root -> entity.setData(
                                 AttachmentTypeRegistry.MODEL_PARTS,
                                 root.getAllParts().collect(Collectors.toMap(
                                         part -> part,
-                                        ModelPart::storePose
+                                        ModelPartData::fromModelPart
                                 ))
                         ));
                     }

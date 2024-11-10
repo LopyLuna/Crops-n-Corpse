@@ -7,7 +7,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -26,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.util.ColoredBufferSource;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
+import uwu.llkc.cnc.common.util.ModelPartData;
 
 import java.util.Map;
 
@@ -38,10 +38,9 @@ public abstract class LivingEntityRendererMixin {
         if (entity instanceof LivingEntity livingEntity) {
             var result = !livingEntity.getData(AttachmentTypeRegistry.FROZEN.get());
             if (!result) {
-                Map<ModelPart, PartPose> parts = entity.getData(AttachmentTypeRegistry.MODEL_PARTS);
+                Map<ModelPart, ModelPartData> parts = entity.getData(AttachmentTypeRegistry.MODEL_PARTS);
                 if (parts.isEmpty()) return true;
-                parts.forEach(ModelPart::loadPose);
-                return false;
+                parts.forEach((part, data) -> data.toModelPart(part));
             }
         }
         return true;

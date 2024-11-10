@@ -12,7 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
 
-public record SetChilledPayload(int entityId, boolean chilled) implements CustomPacketPayload {
+public record SetChilledPayload(int entityId, boolean chilled, int duration,
+                                int strength) implements CustomPacketPayload {
     public static final Type<SetChilledPayload> TYPE = new Type<>(CNCMod.rl("set_chilled"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SetChilledPayload> STREAM_CODEC = StreamCodec.composite(
@@ -20,6 +21,10 @@ public record SetChilledPayload(int entityId, boolean chilled) implements Custom
             SetChilledPayload::entityId,
             ByteBufCodecs.BOOL,
             SetChilledPayload::chilled,
+            ByteBufCodecs.INT,
+            SetChilledPayload::duration,
+            ByteBufCodecs.INT,
+            SetChilledPayload::strength,
             SetChilledPayload::new
     );
 
@@ -30,10 +35,13 @@ public record SetChilledPayload(int entityId, boolean chilled) implements Custom
             ClientLevel level = minecraft.level;
             if (level == null) return;
 
-            Entity entity = Minecraft.getInstance().level.getEntity(data.entityId);
+            Entity entity = level.getEntity(data.entityId);
             if (entity == null) return;
 
             entity.setData(AttachmentTypeRegistry.CHILLED, data.chilled);
+            entity.setData(AttachmentTypeRegistry.CHILL_DURATION, data.duration);
+            entity.setData(AttachmentTypeRegistry.CHILL_STRENGTH, data.strength);
+            entity.setData(AttachmentTypeRegistry.CHILL_UPDATED, true);
         });
     }
 

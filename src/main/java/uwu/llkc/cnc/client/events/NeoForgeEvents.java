@@ -1,10 +1,12 @@
 package uwu.llkc.cnc.client.events;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.CalculatePlayerTurnEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import uwu.llkc.cnc.CNCMod;
@@ -44,6 +46,14 @@ public class NeoForgeEvents {
                 event.getInput().forwardImpulse = 0;
                 event.getInput().leftImpulse = 0;
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void playerTick(final ClientTickEvent.Post event) {
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player != null) {
+            player.setData(AttachmentTypeRegistry.CHILL_TIME, player.getData(AttachmentTypeRegistry.CHILL_TIME) - 1);
         }
     }
 }

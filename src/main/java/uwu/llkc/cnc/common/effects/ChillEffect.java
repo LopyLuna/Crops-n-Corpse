@@ -2,7 +2,6 @@ package uwu.llkc.cnc.common.effects;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -11,13 +10,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
 import uwu.llkc.cnc.common.init.EffectRegistry;
+import uwu.llkc.cnc.common.networking.SetChillTimePayload;
 import uwu.llkc.cnc.common.networking.SetChilledPayload;
 import uwu.llkc.cnc.common.networking.SetFrozenPayload;
-import uwu.llkc.cnc.common.util.LayerDefinitionMixinHelper;
+import uwu.llkc.cnc.common.util.ModelPartData;
+import uwu.llkc.cnc.common.util.ModelSetMixinHelper;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,10 +34,11 @@ public class ChillEffect extends MobEffect {
 
         double freezePercentage = Math.min(0.99f, (amplifier == 0 ? 0 : (15 + amplifier * 5)) / 100d);
         double currentPercentage = 1 - (livingEntity.getEffect(EffectRegistry.CHILL).getDuration() /
-                ((double) livingEntity.getData(AttachmentTypeRegistry.CHILL_TIME)));
+                ((double) livingEntity.getData(AttachmentTypeRegistry.CHILL_DURATION)));
 
         if (currentPercentage < freezePercentage) {
             freeze(livingEntity);
+            //fixme change to player check
             if (!livingEntity.getData(AttachmentTypeRegistry.FROZEN)) {
                 livingEntity.setData(AttachmentTypeRegistry.FROZEN, true);
                 if (livingEntity.level().isClientSide()) {
@@ -44,19 +46,19 @@ public class ChillEffect extends MobEffect {
                             .filter(layer -> layer.getModel().equals(BuiltInRegistries.ENTITY_TYPE.getKey(livingEntity.getType())))
                             .findFirst();
 
-                    locations.map(Minecraft.getInstance().getEntityModels().roots::get).ifPresent(model -> {
-                        if (model instanceof LayerDefinitionMixinHelper helper) {
-                            helper.cnc$getRoot().ifPresent(root -> livingEntity.setData(
+                    locations.ifPresent(loc -> {
+                        if (Minecraft.getInstance().getEntityModels() instanceof ModelSetMixinHelper helper) {
+                            helper.cnc$getRoot(loc).ifPresent(root -> livingEntity.setData(
                                     AttachmentTypeRegistry.MODEL_PARTS,
                                     root.getAllParts().collect(Collectors.toMap(
                                             part -> part,
-                                            ModelPart::storePose
+                                            ModelPartData::fromModelPart
                                     ))
                             ));
                         }
                     });
                 } else {
-                    PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new SetFrozenPayload(livingEntity.getId(), true));
+                    PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetFrozenPayload(livingEntity.getId(), true));
                 }
             }
         } else {
@@ -66,7 +68,7 @@ public class ChillEffect extends MobEffect {
                     livingEntity.setData(AttachmentTypeRegistry.FROZEN, false);
                 } else {
                     livingEntity.setData(AttachmentTypeRegistry.FROZEN, false);
-                    PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new SetFrozenPayload(livingEntity.getId(), false));
+                    PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetFrozenPayload(livingEntity.getId(), false));
                 }
             }
         }
@@ -80,34 +82,29 @@ public class ChillEffect extends MobEffect {
     }
 
     @Override
-    public void onEffectAdded(LivingEntity livingEntity, int amplifier) {
-        super.onEffectAdded(livingEntity, amplifier);
+    public void onEffectStarted(@NotNull LivingEntity livingEntity, int amplifier) {
+        super.onEffectStarted(livingEntity, amplifier);
+
         var effect = livingEntity.getEffect(EffectRegistry.CHILL);
         if (effect != null) {
-            livingEntity.setData(AttachmentTypeRegistry.CHILL_TIME, effect.getDuration());
+            if (!livingEntity.level().isClientSide()) {
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetChilledPayload(livingEntity.getId(), true, effect.getDuration(), amplifier));
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetChillTimePayload(livingEntity.getId(), effect.getDuration()));
+            }
+            livingEntity.setData(AttachmentTypeRegistry.CHILL_DURATION, effect.getDuration());
         }
-    }
-
-    @Override
-    public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
-        super.onEffectStarted(livingEntity, amplifier);
-        PacketDistributor.sendToPlayersTrackingEntity(livingEntity, new SetChilledPayload(livingEntity.getId(), true));
     }
 
     private void freeze(LivingEntity livingEntity) {
         if (livingEntity instanceof Mob mob) {
             mob.yHeadRot = mob.yBodyRot;
             mob.setNoAi(true);
-        } else if (livingEntity instanceof Player player) {
-
         }
     }
 
     private void unFreeze(LivingEntity livingEntity) {
         if (livingEntity instanceof Mob mob) {
             mob.setNoAi(false);
-        } else if (livingEntity instanceof Player player) {
-
         }
     }
 }

@@ -39,6 +39,7 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
                 .add(EntityTypeRegistry.BROWNCOAT.get())
                 .add(EntityTypeRegistry.IMP.get());
         tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
+                .remove(EntityTypeRegistry.IMP.get())
                 .remove(EntityTypeRegistry.BROWNCOAT.get());
         tag(Tags.EntityTypes.CHAMPION_ZOMBIE);
         tag(Tags.EntityTypes.ZOMBIE_SPAWNER);

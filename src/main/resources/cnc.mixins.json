@@ -13,7 +13,7 @@
     "PotatoBlockMixin"
   ],
   "client": [
-    "LayerDefinitionMixin",
+    "EntityModelSetMixin",
     "LivingEntityRendererMixin"
   ],
   "server": [],

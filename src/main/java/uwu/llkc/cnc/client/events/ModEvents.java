@@ -16,9 +16,11 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.client.entities.models.*;
-import uwu.llkc.cnc.client.entities.renderers.*;
+import uwu.llkc.cnc.client.models.entity.*;
+import uwu.llkc.cnc.client.renderers.FreezeLayer;
+import uwu.llkc.cnc.client.renderers.entity.*;
 import uwu.llkc.cnc.common.init.BlockEntityTypeRegistry;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
@@ -84,5 +86,10 @@ public class ModEvents {
     @SubscribeEvent
     public static void registerModels(final ModelEvent.RegisterAdditional event) {
         event.register(CNCMod.CHILL_CRYSTAL);
+    }
+
+    @SubscribeEvent
+    public static void renderEvent(final RegisterGuiLayersEvent event) {
+        event.registerBelowAll(FreezeLayer.FREEZE_LAYER, new FreezeLayer());
     }
 }

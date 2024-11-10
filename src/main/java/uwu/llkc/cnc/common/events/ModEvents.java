@@ -22,10 +22,7 @@ import uwu.llkc.cnc.common.init.GameRuleInit;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.items.MultiEntitySpawnEggItem;
 import uwu.llkc.cnc.common.items.PlantArmorItem;
-import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
-import uwu.llkc.cnc.common.networking.SetChilledPayload;
-import uwu.llkc.cnc.common.networking.SetFrozenPayload;
-import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
+import uwu.llkc.cnc.common.networking.*;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEvents {
@@ -74,6 +71,11 @@ public class ModEvents {
                 SetChilledPayload.TYPE,
                 SetChilledPayload.STREAM_CODEC,
                 SetChilledPayload::handleData
+        );
+        registrar.playToClient(
+                SetChillTimePayload.TYPE,
+                SetChillTimePayload.STREAM_CODEC,
+                SetChillTimePayload::handleData
         );
     }
 
