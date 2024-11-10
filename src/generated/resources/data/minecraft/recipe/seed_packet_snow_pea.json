@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "e": {
+      "item": "cnc:empty_seed_packet"
+    },
+    "f": {
+      "item": "cnc:plant_food"
+    },
+    "i": {
+      "item": "cnc:frozen_pea"
+    },
+    "s": {
+      "item": "cnc:sun"
+    }
+  },
+  "pattern": [
+    " i ",
+    "sef",
+    " i "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cnc:snow_pea_seed_packet"
+  }
+}

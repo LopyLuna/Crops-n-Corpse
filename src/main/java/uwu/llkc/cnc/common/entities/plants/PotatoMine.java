@@ -22,7 +22,7 @@ import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import uwu.llkc.cnc.client.entities.animations.PotatoMineAnimations;
+import uwu.llkc.cnc.client.animations.PotatoMineAnimations;
 import uwu.llkc.cnc.common.entities.ai.FixedBodyRotationControl;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 import uwu.llkc.cnc.common.util.MessageDamageSource;

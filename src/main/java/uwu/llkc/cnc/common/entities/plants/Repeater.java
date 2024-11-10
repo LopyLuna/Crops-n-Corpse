@@ -3,6 +3,7 @@ package uwu.llkc.cnc.common.entities.plants;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -93,6 +94,17 @@ public class Repeater extends CNCPlant implements RangedAttackMob {
             die.start(tickCount);
         }
     }
+
+
+    @Override
+    protected void actuallyHurt(DamageSource damageSource, float damageAmount) {
+        if (damageSource.is(DamageTypes.FREEZE)) {
+            Peashooter.convertToFrozen(this);
+            return;
+        }
+        super.actuallyHurt(damageSource, damageAmount);
+    }
+
 
     @Nullable
     @Override

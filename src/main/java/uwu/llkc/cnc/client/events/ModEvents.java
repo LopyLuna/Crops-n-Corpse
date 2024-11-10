@@ -14,10 +14,14 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.client.entities.models.*;
-import uwu.llkc.cnc.client.entities.renderers.*;
+import uwu.llkc.cnc.client.models.ChillModel;
+import uwu.llkc.cnc.client.models.entity.*;
+import uwu.llkc.cnc.client.renderers.FreezeLayer;
+import uwu.llkc.cnc.client.renderers.entity.*;
 import uwu.llkc.cnc.common.init.BlockEntityTypeRegistry;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
@@ -29,10 +33,12 @@ public class ModEvents {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityTypeRegistry.PEASHOOTER.get(), PeashooterRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.SNOW_PEA.get(), SnowPeaRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.SUNFLOWER.get(), SunflowerRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.WALLNUT.get(), WallNutRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.POTATO_MINE.get(), PotatoMineRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.PEA.get(), PeaProjectileRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.FROZEN_PEA.get(), FrozenPeaProjectileRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.BROWNCOAT.get(), BrowncoatRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.IMP.get(), ImpRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.WALNUT_BOAT.get(), context -> new BoatRenderer(context, false));
@@ -47,6 +53,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void registerLayers(final EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(PeashooterModel.MAIN_LAYER, PeashooterModel::createBodyLayer);
+        event.registerLayerDefinition(SnowPeaModel.MAIN_LAYER, SnowPeaModel::createBodyLayer);
         event.registerLayerDefinition(SunflowerModel.MAIN_LAYER, SunflowerModel::createBodyLayer);
         event.registerLayerDefinition(BrowncoatModel.MAIN_LAYER, BrowncoatModel::createBodyLayer);
         event.registerLayerDefinition(WallNutModel.MAIN_LAYER, WallNutModel::createBodyLayer);
@@ -78,5 +85,15 @@ public class ModEvents {
             BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
             return event.getBlockColors().getColor(blockstate, null, null, index);
         }, ItemRegistry.WALNUT_LEAVES);
+    }
+
+    @SubscribeEvent
+    public static void registerModels(final ModelEvent.RegisterAdditional event) {
+        event.register(ChillModel.CHILL_CRYSTAL);
+    }
+
+    @SubscribeEvent
+    public static void renderEvent(final RegisterGuiLayersEvent event) {
+        event.registerBelowAll(FreezeLayer.FREEZE_LAYER, new FreezeLayer());
     }
 }

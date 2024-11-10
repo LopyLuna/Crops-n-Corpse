@@ -17,6 +17,7 @@ import uwu.llkc.cnc.CNCMod;
 
 public class BiomeModifierInit {
     public static final ResourceKey<BiomeModifier> PEASHOOTER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("peashooter_spawns"));
+    public static final ResourceKey<BiomeModifier> SNOW_PEA_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("snow_pea_spawns"));
     public static final ResourceKey<BiomeModifier> REPEATER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("repeater_spawns"));
     public static final ResourceKey<BiomeModifier> SUNFLOWER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("sunflower_spawns"));
     public static final ResourceKey<BiomeModifier> BROWNCOAT_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("browncoat_spawns"));
@@ -32,6 +33,10 @@ public class BiomeModifierInit {
         context.register(PEASHOOTER_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
                 biomes.getOrThrow(Tags.Biomes.SPAWNS_PEASHOOTER),
                 new MobSpawnSettings.SpawnerData(EntityTypeRegistry.PEASHOOTER.get(), 50, 1, 2))
+        );
+        context.register(SNOW_PEA_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
+                biomes.getOrThrow(net.neoforged.neoforge.common.Tags.Biomes.IS_COLD),
+                new MobSpawnSettings.SpawnerData(EntityTypeRegistry.SNOW_PEA.get(), 50, 1, 2))
         );
         context.register(REPEATER_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
                 biomes.getOrThrow(Tags.Biomes.SPAWNS_PEASHOOTER),

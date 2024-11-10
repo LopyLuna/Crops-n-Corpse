@@ -19,6 +19,7 @@ public class ModDamageTypeTagProvider extends DamageTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(DamageTypeTags.BYPASSES_COOLDOWN)
+                .add(DamageTypeInit.FROZEN_PEA)
                 .add(DamageTypeInit.PEA_SHOT);
     }
 }

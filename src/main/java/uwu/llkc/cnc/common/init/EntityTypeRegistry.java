@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
+import uwu.llkc.cnc.common.entities.projectiles.FrozenPeaProjectile;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.Imp;
@@ -20,6 +21,9 @@ public class EntityTypeRegistry {
 
     public static final Supplier<EntityType<Peashooter>> PEASHOOTER = ENTITY_TYPES.register("peashooter",
             () -> EntityType.Builder.of(Peashooter::new, MobCategory.CREATURE).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("peashooter")));
+
+    public static final Supplier<EntityType<SnowPea>> SNOW_PEA = ENTITY_TYPES.register("snow_pea",
+            () -> EntityType.Builder.of(SnowPea::new, MobCategory.CREATURE).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("snow_pea")));
 
     public static final Supplier<EntityType<Sunflower>> SUNFLOWER = ENTITY_TYPES.register("sunflower",
             () -> EntityType.Builder.of(Sunflower::new, MobCategory.CREATURE).sized(0.5f, 1).eyeHeight(0.7f).build(CNCMod.rlStr("sunflower")));
@@ -44,6 +48,9 @@ public class EntityTypeRegistry {
 
     public static final Supplier<EntityType<PeaProjectile>> PEA = ENTITY_TYPES.register("pea",
             () -> EntityType.Builder.of(PeaProjectile::new, MobCategory.MISC).sized(.5f, .5f).build(CNCMod.rlStr("pea")));
+
+    public static final Supplier<EntityType<FrozenPeaProjectile>> FROZEN_PEA = ENTITY_TYPES.register("frozen_pea",
+            () -> EntityType.Builder.of(FrozenPeaProjectile::new, MobCategory.MISC).sized(.5f, .5f).build(CNCMod.rlStr("frozen_pea")));
 
     public static final Supplier<EntityType<Boat>> WALNUT_BOAT = ENTITY_TYPES.register("walnut_boat",
             () -> EntityType.Builder.of((EntityType<Boat> type, Level level) ->

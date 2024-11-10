@@ -5,9 +5,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -20,17 +23,20 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.ExplosionKnockbackEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -40,9 +46,13 @@ import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.entities.plants.CherryBomb;
 import uwu.llkc.cnc.common.entities.plants.PotatoMine;
 import uwu.llkc.cnc.common.entities.plants.WallNut;
+import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
+import uwu.llkc.cnc.common.init.EffectRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
+import uwu.llkc.cnc.common.networking.SetChilledPayload;
+import uwu.llkc.cnc.common.networking.SetFrozenPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 
@@ -119,6 +129,9 @@ public class NeoForgeEvents {
                 event.setNewDamage(0);
             }
         }
+        if (event.getSource().is(DamageTypeTags.IS_FIRE) && event.getEntity().hasEffect(EffectRegistry.CHILL)) {
+            event.getEntity().removeEffect(EffectRegistry.CHILL);
+        }
     }
 
     @SubscribeEvent
@@ -142,20 +155,15 @@ public class NeoForgeEvents {
 
     @SubscribeEvent
     public static void clickBlock(final PlayerInteractEvent.RightClickBlock event) {
+        if (event.getEntity().getData(AttachmentTypeRegistry.FROZEN)) {
+            event.setCancellationResult(InteractionResult.FAIL);
+            event.setCanceled(true);
+        }
         if (event.getItemStack().is(Items.BUCKET) && event.getItemStack().has(DataComponents.DAMAGE) && event.getItemStack().get(DataComponents.DAMAGE) > 0) {
             event.setCancellationResult(InteractionResult.FAIL);
             event.setCanceled(true);
         }
         ((ChunkMixinHelper) event.getLevel().getChunk(event.getPos())).setNextPosForInteractionCheck(event.getPos());
-    }
-
-    @SubscribeEvent
-    public static void clickBlock(final PlayerInteractEvent.RightClickItem event) {
-        if (event.getItemStack().is(Items.BUCKET) && event.getItemStack().has(DataComponents.DAMAGE) && event.getItemStack().get(DataComponents.DAMAGE) > 0) {
-            event.setCancellationResult(InteractionResult.FAIL);
-            event.setCanceled(true);
-        }
-
     }
 
     @SubscribeEvent
@@ -202,6 +210,46 @@ public class NeoForgeEvents {
             if (event.getLevel().getRandom().nextFloat() < 0.01f) {
                 EntityTypeRegistry.CHERRY_BOMB.get().spawn(event.getLevel(), entity -> entity.getEntityData().set(CherryBomb.FLYING, true), event.getPos(), MobSpawnType.EVENT, false, false);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void entityTickEvent(final EntityTickEvent.Pre event) {
+        if (event.getEntity() instanceof Mob mob) {
+            if (mob.getData(AttachmentTypeRegistry.FROZEN) && mob.isNoAi()) {
+                mob.setNoAi(false);
+                mob.travel(new Vec3(mob.xxa, mob.zza, mob.yya));
+                mob.setNoAi(true);
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onEffectRemove(final MobEffectEvent.Remove event) {
+        if (!event.isCanceled()) {
+            if (event.getEffect().value().equals(EffectRegistry.CHILL.value())) {
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(event.getEntity(), new SetChilledPayload(event.getEntity().getId(), false, 0, 0));
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(event.getEntity(), new SetFrozenPayload(event.getEntity().getId(), false));
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onEffectExpire(final MobEffectEvent.Expired event) {
+        if (!event.isCanceled()) {
+            if (event.getEffectInstance() == null) return;
+            if (event.getEffectInstance().getEffect().value().equals(EffectRegistry.CHILL.value())) {
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(event.getEntity(), new SetChilledPayload(event.getEntity().getId(), false, 0, 0));
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(event.getEntity(), new SetFrozenPayload(event.getEntity().getId(), false));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void effectApplicable(final MobEffectEvent.Applicable event) {
+        if (event.getEntity().getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES) ||
+                (!event.getEntity().onGround() && event.getEntity().getType().is(EntityTypeTags.FALL_DAMAGE_IMMUNE))) {
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
         }
     }
 }

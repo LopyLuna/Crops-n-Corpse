@@ -7,11 +7,14 @@
     "BlocksMixin",
     "BucketMixin",
     "DispenseBehaviorMixin",
+    "EntityMixin",
     "ExplosionMixin",
     "LevelChunkMixin",
     "PotatoBlockMixin"
   ],
   "client": [
+    "EntityModelSetMixin",
+    "LivingEntityRendererMixin"
   ],
   "server": [],
   "injectors": {

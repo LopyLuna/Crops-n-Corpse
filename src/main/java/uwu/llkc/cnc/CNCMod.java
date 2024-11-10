@@ -19,6 +19,8 @@ public class CNCMod {
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUNDS.register(modEventBus);
         StructureTypeRegistry.STRUCTURE_TYPES.register(modEventBus);
+        AttachmentTypeRegistry.ATTACHMENT_TYPES.register(modEventBus);
+        EffectRegistry.EFFECTS.register(modEventBus);
     }
 
     public static ResourceLocation rl(String path) {

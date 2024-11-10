@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "p": {
+      "item": "cnc:raw_pea"
+    },
+    "s": {
+      "item": "minecraft:snowball"
+    }
+  },
+  "pattern": [
+    "sss",
+    "sps",
+    "sss"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cnc:frozen_pea"
+  }
+}

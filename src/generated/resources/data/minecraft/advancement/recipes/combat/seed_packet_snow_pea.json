@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_packet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cnc:empty_seed_packet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_pea": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cnc:frozen_pea"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:seed_packet_snow_pea"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_packet",
+      "has_pea"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:seed_packet_snow_pea"
+    ]
+  }
+}

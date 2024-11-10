@@ -22,14 +22,14 @@ import uwu.llkc.cnc.common.init.GameRuleInit;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.items.MultiEntitySpawnEggItem;
 import uwu.llkc.cnc.common.items.PlantArmorItem;
-import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
-import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
+import uwu.llkc.cnc.common.networking.*;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEvents {
     @SubscribeEvent
     public static void entityAttributeCreation(final EntityAttributeCreationEvent event) {
         event.put(EntityTypeRegistry.PEASHOOTER.get(), Peashooter.attributes().build());
+        event.put(EntityTypeRegistry.SNOW_PEA.get(), SnowPea.attributes().build());
         event.put(EntityTypeRegistry.SUNFLOWER.get(), Sunflower.attributes().build());
         event.put(EntityTypeRegistry.WALLNUT.get(), WallNut.attributes().build());
         event.put(EntityTypeRegistry.BROWNCOAT.get(), Browncoat.attributes().build());
@@ -42,10 +42,11 @@ public class ModEvents {
     @SubscribeEvent
     public static void registerSpawnPlacements(final RegisterSpawnPlacementsEvent event) {
         event.register(EntityTypeRegistry.PEASHOOTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Peashooter::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(EntityTypeRegistry.SNOW_PEA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SnowPea::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.SUNFLOWER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sunflower::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
-        event.register(EntityTypeRegistry.BROWNCOAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkAnyLightMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(EntityTypeRegistry.BROWNCOAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.WALLNUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WallNut::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
-        event.register(EntityTypeRegistry.IMP.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkAnyLightMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(EntityTypeRegistry.IMP.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.POTATO_MINE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PotatoMine::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.CHERRY_BOMB.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CherryBomb::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.REPEATER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Repeater::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
@@ -62,6 +63,21 @@ public class ModEvents {
                 SyncBlockActuallyBrokenPayload.TYPE,
                 SyncBlockActuallyBrokenPayload.STREAM_CODEC,
                 SyncBlockActuallyBrokenPayload::handleData
+        );
+        registrar.playToClient(
+                SetFrozenPayload.TYPE,
+                SetFrozenPayload.STREAM_CODEC,
+                SetFrozenPayload::handleData
+        );
+        registrar.playToClient(
+                SetChilledPayload.TYPE,
+                SetChilledPayload.STREAM_CODEC,
+                SetChilledPayload::handleData
+        );
+        registrar.playToClient(
+                SetChillTimePayload.TYPE,
+                SetChillTimePayload.STREAM_CODEC,
+                SetChillTimePayload::handleData
         );
     }
 
