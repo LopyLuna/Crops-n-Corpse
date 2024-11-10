@@ -95,6 +95,7 @@ public class Repeater extends CNCPlant implements RangedAttackMob {
         }
     }
 
+
     @Override
     protected void actuallyHurt(DamageSource damageSource, float damageAmount) {
         if (damageSource.is(DamageTypes.FREEZE)) {
@@ -103,6 +104,7 @@ public class Repeater extends CNCPlant implements RangedAttackMob {
         }
         super.actuallyHurt(damageSource, damageAmount);
     }
+
 
     @Nullable
     @Override
