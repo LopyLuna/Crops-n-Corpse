@@ -3,7 +3,6 @@ package uwu.llkc.cnc.common.entities.plants;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,22 +10,22 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import uwu.llkc.cnc.common.entities.ai.MultipleRangedAttackGoal;
-import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
+import uwu.llkc.cnc.common.entities.projectiles.FrozenPeaProjectile;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 
-public class Repeater extends CNCPlant implements RangedAttackMob {
+public class SnowPea extends CNCPlant implements RangedAttackMob {
     public final AnimationState idle = new AnimationState();
     public final AnimationState attack = new AnimationState();
     public final AnimationState die = new AnimationState();
 
-    public Repeater(EntityType<Repeater> entityType, Level level) {
+    public SnowPea(EntityType<SnowPea> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -42,7 +41,7 @@ public class Repeater extends CNCPlant implements RangedAttackMob {
         super.registerGoals();
         goalSelector.addGoal(2, new RandomLookAroundGoal(this));
         goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 6, 0.001f));
-        goalSelector.addGoal(0, new MultipleRangedAttackGoal(this, 1, 40, 30, 5, 2) {
+        goalSelector.addGoal(0, new RangedAttackGoal(this, 1, 40, 30) {
             @Override
             public boolean canContinueToUse() {
                 var use = getTarget() != null && super.canContinueToUse() && distanceTo(getTarget()) < 30;
@@ -69,7 +68,7 @@ public class Repeater extends CNCPlant implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(@NotNull LivingEntity target, float velocity) {
-        PeaProjectile projectile = EntityTypeRegistry.PEA.get().create(level());
+        FrozenPeaProjectile projectile = EntityTypeRegistry.FROZEN_PEA.get().create(level());
         if (projectile == null) return;
         projectile.damage = 3;
         projectile.setPos(this.getX(), this.getEyeY(), this.getZ());
@@ -93,15 +92,6 @@ public class Repeater extends CNCPlant implements RangedAttackMob {
         } else if (id == 1) {
             die.start(tickCount);
         }
-    }
-
-    @Override
-    protected void actuallyHurt(DamageSource damageSource, float damageAmount) {
-        if (damageSource.is(DamageTypes.FREEZE)) {
-            Peashooter.convertToFrozen(this);
-            return;
-        }
-        super.actuallyHurt(damageSource, damageAmount);
     }
 
     @Nullable

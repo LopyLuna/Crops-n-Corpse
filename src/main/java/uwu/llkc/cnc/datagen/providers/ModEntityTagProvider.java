@@ -20,7 +20,9 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(Tags.EntityTypes.OFFENSIVE_PLANTS)
-                .add(EntityTypeRegistry.PEASHOOTER.get());
+                .add(EntityTypeRegistry.PEASHOOTER.get())
+                .add(EntityTypeRegistry.SNOW_PEA.get())
+                .add(EntityTypeRegistry.REPEATER.get());
         tag(Tags.EntityTypes.NOCTURNAL_PLANTS);
         tag(Tags.EntityTypes.DEFENSIVE_PLANTS)
                 .add(EntityTypeRegistry.WALLNUT.get())
@@ -54,5 +56,7 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
                 .addTag(Tags.EntityTypes.SPECIAL_ZOMBIE)
                 .addTag(Tags.EntityTypes.MINI_BOSS_ZOMBIE)
                 .addTag(Tags.EntityTypes.BASIC_ZOMBIE);
+        tag(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)
+                .add(EntityTypeRegistry.SNOW_PEA.get());
     }
 }

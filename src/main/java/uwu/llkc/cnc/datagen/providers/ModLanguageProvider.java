@@ -71,10 +71,11 @@ public class ModLanguageProvider extends LanguageProvider {
         add("subtitles.cnc.imp_hurt", "Imp hurt");
         add("subtitles.cnc.imp_idle", "Imp idle");
 
-        add("death.attack.pea_shot", "%1$s fed %2$s their vegetables");
+        add("death.attack.pea_shot", "%2$s fed %1$s their vegetables");
         add("death.attack.potato_mine", "%1$s went SPUDOW! by %2$s");
         add("death.attack.cherry_bomb", "%1$s was explodonated by %2$s");
-        add("death.attack.cnc_zombie", "%1$s ate %2$s's brainz");
+        add("death.attack.cnc_zombie", "%2$s ate %1$s's brainz");
+        add("death.attack.frozen_pea", "%2$s gave %1$s a cold");
 
         add("item.multi_spawn_egg.tooltip", "Shift right-click to cycle");
         add("item.cnc.seed_packet.cost", "Sun Cost:");

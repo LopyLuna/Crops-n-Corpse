@@ -29,6 +29,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void entityAttributeCreation(final EntityAttributeCreationEvent event) {
         event.put(EntityTypeRegistry.PEASHOOTER.get(), Peashooter.attributes().build());
+        event.put(EntityTypeRegistry.SNOW_PEA.get(), SnowPea.attributes().build());
         event.put(EntityTypeRegistry.SUNFLOWER.get(), Sunflower.attributes().build());
         event.put(EntityTypeRegistry.WALLNUT.get(), WallNut.attributes().build());
         event.put(EntityTypeRegistry.BROWNCOAT.get(), Browncoat.attributes().build());
@@ -41,6 +42,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void registerSpawnPlacements(final RegisterSpawnPlacementsEvent event) {
         event.register(EntityTypeRegistry.PEASHOOTER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Peashooter::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        event.register(EntityTypeRegistry.SNOW_PEA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SnowPea::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.SUNFLOWER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sunflower::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.BROWNCOAT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Browncoat::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.WALLNUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WallNut::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);

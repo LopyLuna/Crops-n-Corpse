@@ -138,6 +138,10 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
         return owner;
     }
 
+    public void setOwnerUUID(UUID owner) {
+        this.owner = owner;
+    }
+
     @Override
     protected float getKnockback(Entity attacker, DamageSource damageSource) {
         return 0;

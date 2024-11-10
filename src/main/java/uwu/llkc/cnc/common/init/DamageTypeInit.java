@@ -8,8 +8,10 @@ import uwu.llkc.cnc.CNCMod;
 
 public class DamageTypeInit {
     public static final ResourceKey<DamageType> PEA_SHOT = ResourceKey.create(Registries.DAMAGE_TYPE, CNCMod.rl("pea_shot"));
+    public static final ResourceKey<DamageType> FROZEN_PEA = ResourceKey.create(Registries.DAMAGE_TYPE, CNCMod.rl("frozen_pea"));
 
     public static void bootstrap(BootstrapContext<DamageType> context) {
         context.register(PEA_SHOT, new DamageType("pea_shot", 0.1f));
+        context.register(FROZEN_PEA, new DamageType("frozen_pea", 0.1f));
     }
 }

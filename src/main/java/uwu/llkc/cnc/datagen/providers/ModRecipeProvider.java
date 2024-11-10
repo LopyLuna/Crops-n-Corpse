@@ -84,6 +84,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_wallnut");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.SNOW_PEA.get()))
+                .pattern(" i ")
+                .pattern("sef")
+                .pattern(" i ")
+                .define('i', ItemRegistry.FROZEN_PEA.get())
+                .define('s', ItemRegistry.SUN.get())
+                .define('f', ItemRegistry.PLANT_FOOD.get())
+                .define('e', ItemRegistry.EMPTY_SEED_PACKET.get())
+                .unlockedBy("has_packet", has(ItemRegistry.EMPTY_SEED_PACKET.get()))
+                .unlockedBy("has_pea", has(ItemRegistry.FROZEN_PEA.get()))
+                .save(recipeOutput, "seed_packet_snow_pea");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.PLANT_ARMOR.get())
                 .pattern(" i ")
                 .pattern("i i")
@@ -148,6 +160,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('m', Items.MILK_BUCKET)
                 .define('g', Items.GLASS_BOTTLE)
                 .unlockedBy("has_snow", has(Items.POWDER_SNOW_BUCKET))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, new ItemStack(ItemRegistry.FROZEN_PEA.get()))
+                .pattern("sss")
+                .pattern("sps")
+                .pattern("sss")
+                .define('s', Items.SNOWBALL)
+                .define('p', ItemRegistry.RAW_PEA)
+                .unlockedBy("has_snowball", has(Items.SNOWBALL))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, new ItemStack(ItemRegistry.SUNFLOWER_SEED_MUFFIN.get()))

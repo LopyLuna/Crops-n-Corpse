@@ -32,10 +32,12 @@ public class ModEvents {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityTypeRegistry.PEASHOOTER.get(), PeashooterRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.SNOW_PEA.get(), SnowPeaRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.SUNFLOWER.get(), SunflowerRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.WALLNUT.get(), WallNutRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.POTATO_MINE.get(), PotatoMineRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.PEA.get(), PeaProjectileRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.FROZEN_PEA.get(), FrozenPeaProjectileRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.BROWNCOAT.get(), BrowncoatRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.IMP.get(), ImpRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.WALNUT_BOAT.get(), context -> new BoatRenderer(context, false));
@@ -50,6 +52,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void registerLayers(final EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(PeashooterModel.MAIN_LAYER, PeashooterModel::createBodyLayer);
+        event.registerLayerDefinition(SnowPeaModel.MAIN_LAYER, SnowPeaModel::createBodyLayer);
         event.registerLayerDefinition(SunflowerModel.MAIN_LAYER, SunflowerModel::createBodyLayer);
         event.registerLayerDefinition(BrowncoatModel.MAIN_LAYER, BrowncoatModel::createBodyLayer);
         event.registerLayerDefinition(WallNutModel.MAIN_LAYER, WallNutModel::createBodyLayer);

@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 
@@ -17,12 +18,14 @@ public class PeashooterCropBlock extends PlantCropBlock{
 
     @Override
     Optional<EntityType<?>> getEntityType(BlockState state, ServerLevel level, BlockPos pos) {
-        if (level.getRandom().nextFloat() < 0.125f){
+        if (level.getBiome(pos).is(Tags.Biomes.IS_COLD) && level.getRandom().nextFloat() < 0.05f) {
+            return Optional.of(EntityTypeRegistry.SNOW_PEA.get());
+        }
+        if (level.getRandom().nextFloat() < 0.065f) {
             return Optional.of(EntityTypeRegistry.PEASHOOTER.get());
         }
-        if (level.getRandom().nextFloat() < 0.04f){
-            //todo
-            return Optional.empty();
+        if (level.getRandom().nextFloat() < 0.02f) {
+            return Optional.of(EntityTypeRegistry.REPEATER.get());
         }
         return Optional.empty();
     }

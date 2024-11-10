@@ -1,11 +1,14 @@
 package uwu.llkc.cnc.common.entities.plants;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -60,10 +63,25 @@ public class Peashooter extends CNCPlant implements RangedAttackMob {
         }
     }
 
+    public static void convertToFrozen(CNCPlant plant) {
+        var hp = plant.getHealth();
+        var pos = plant.blockPosition();
+        var level = plant.level();
+        var ownerUUID = plant.getOwnerUUID();
+        if (level.isClientSide) return;
+        EntityTypeRegistry.SNOW_PEA.get().spawn((ServerLevel) level, entity -> {
+            entity.setOwnerUUID(ownerUUID);
+            entity.setHealth(hp);
+        }, pos, MobSpawnType.CONVERSION, true, true);
+    }
+
     @Override
-    public void die(DamageSource damageSource) {
-        level().broadcastEntityEvent(this, (byte)1);
-        super.die(damageSource);
+    protected void actuallyHurt(DamageSource damageSource, float damageAmount) {
+        if (damageSource.is(DamageTypes.FREEZE)) {
+            Peashooter.convertToFrozen(this);
+            return;
+        }
+        super.actuallyHurt(damageSource, damageAmount);
     }
 
     @Override
@@ -104,5 +122,11 @@ public class Peashooter extends CNCPlant implements RangedAttackMob {
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
         return SoundRegistry.PEASHOOTER_HURT.get();
+    }
+
+    @Override
+    public void die(DamageSource damageSource) {
+        level().broadcastEntityEvent(this, (byte)1);
+        super.die(damageSource);
     }
 }

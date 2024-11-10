@@ -29,6 +29,7 @@ public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CNCMod.MOD_ID);
 
     public static final DeferredItem<SeedPacketItem<Peashooter>> PEASHOOTER_SEED_PACKET = ITEMS.registerItem("peashooter_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 16, 40, EntityTypeRegistry.PEASHOOTER, false));
+    public static final DeferredItem<SeedPacketItem<SnowPea>> SNOW_PEA_SEED_PACKET = ITEMS.registerItem("snow_pea_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 24, 40, EntityTypeRegistry.SNOW_PEA, false));
     public static final DeferredItem<SeedPacketItem<Sunflower>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 0, 200, EntityTypeRegistry.SUNFLOWER, false));
     public static final DeferredItem<SeedPacketItem<WallNut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 320, EntityTypeRegistry.WALLNUT, false));
     public static final DeferredItem<SeedPacketItem<PotatoMine>> POTATO_MINE_SEED_PACKET = ITEMS.registerItem("potato_mine_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 4, 320, EntityTypeRegistry.POTATO_MINE, false));
@@ -70,6 +71,7 @@ public class ItemRegistry {
     public static final DeferredItem<Item> PEA_POD = ITEMS.registerSimpleItem("pea_pod", new Item.Properties().food(Foods.PEA_POD));
     public static final DeferredItem<BlockItem> RAW_PEA = ITEMS.registerItem("raw_pea",
             props -> new ItemNameBlockItem(BlockRegistry.PEASHOOTER_CROP.get(), props), new Item.Properties().food(Foods.RAW_PEA));
+    public static final DeferredItem<Item> FROZEN_PEA = ITEMS.registerSimpleItem("frozen_pea", new Item.Properties().food(Foods.FROZEN_PEA));
     public static final DeferredItem<Item> COOKED_PEA = ITEMS.registerSimpleItem("cooked_pea", new Item.Properties().food(Foods.COOKED_PEA));
     public static final DeferredItem<Item> SUNFLOWER_SEEDS = ITEMS.registerItem("sunflower_seeds",
             props -> new ItemNameBlockItem(BlockRegistry.SUNFLOWER_CROP.get(), props), new Item.Properties().food(Foods.SUNFLOWER_SEEDS));
@@ -124,6 +126,7 @@ public class ItemRegistry {
         public static final FoodProperties PEA_POD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.25f).build();
         public static final FoodProperties RAW_PEA = new FoodProperties.Builder().nutrition(3).saturationModifier(0.1f).fast().build();
         public static final FoodProperties COOKED_PEA = new FoodProperties.Builder().nutrition(4).saturationModifier(0.2f).fast().build();
+        public static final FoodProperties FROZEN_PEA = new FoodProperties.Builder().nutrition(3).saturationModifier(0.1f).effect(() -> new MobEffectInstance(EffectRegistry.CHILL, 120), 1).build();
         public static final FoodProperties SUNFLOWER_SEEDS = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1f).build();
         public static final FoodProperties SUNFLOWER_SEED_MUFFIN = new FoodProperties.Builder().nutrition(6).saturationModifier(0.15f).usingConvertsTo(Items.PAPER).build();
         public static final FoodProperties CHOCOLATE_CHIP_MUFFIN = new FoodProperties.Builder().nutrition(5).saturationModifier(0.2f).usingConvertsTo(Items.PAPER).build();
