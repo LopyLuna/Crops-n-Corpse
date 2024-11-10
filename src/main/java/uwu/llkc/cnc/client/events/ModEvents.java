@@ -18,6 +18,7 @@ import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import uwu.llkc.cnc.CNCMod;
+import uwu.llkc.cnc.client.models.ChillModel;
 import uwu.llkc.cnc.client.models.entity.*;
 import uwu.llkc.cnc.client.renderers.FreezeLayer;
 import uwu.llkc.cnc.client.renderers.entity.*;
@@ -88,7 +89,7 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void registerModels(final ModelEvent.RegisterAdditional event) {
-        event.register(CNCMod.CHILL_CRYSTAL);
+        event.register(ChillModel.CHILL_CRYSTAL);
     }
 
     @SubscribeEvent

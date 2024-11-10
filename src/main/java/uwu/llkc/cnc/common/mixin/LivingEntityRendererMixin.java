@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uwu.llkc.cnc.CNCMod;
+import uwu.llkc.cnc.client.models.ChillModel;
 import uwu.llkc.cnc.client.util.ColoredBufferSource;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
 import uwu.llkc.cnc.common.util.ModelPartData;
@@ -50,7 +50,7 @@ public abstract class LivingEntityRendererMixin {
         if (entity.getData(AttachmentTypeRegistry.FROZEN.get())) {
             poseStack.pushPose();
             poseStack.translate(-0.5, 0, -0.5);
-            var model = Minecraft.getInstance().getModelManager().getModel(CNCMod.CHILL_CRYSTAL);
+            var model = Minecraft.getInstance().getModelManager().getModel(ChillModel.CHILL_CRYSTAL);
             for (RenderType renderType : model.getRenderTypes(Blocks.AIR.defaultBlockState(), entity.getRandom(), ModelData.EMPTY)) {
                 VertexConsumer vertexConsumer = multiBufferSource.getBuffer(renderType);
                 Minecraft.getInstance().getItemRenderer().renderModelLists(model, ItemStack.EMPTY, i, LivingEntityRenderer.getOverlayCoords(entity, OverlayTexture.NO_OVERLAY), poseStack, vertexConsumer);

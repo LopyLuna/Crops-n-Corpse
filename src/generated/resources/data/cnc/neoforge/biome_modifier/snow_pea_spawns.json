@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_cold",
+  "spawners": {
+    "type": "cnc:snow_pea",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 50
+  }
+}
