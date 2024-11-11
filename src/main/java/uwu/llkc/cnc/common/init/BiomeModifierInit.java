@@ -35,7 +35,7 @@ public class BiomeModifierInit {
                 new MobSpawnSettings.SpawnerData(EntityTypeRegistry.PEASHOOTER.get(), 50, 1, 2))
         );
         context.register(SNOW_PEA_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
-                biomes.getOrThrow(net.neoforged.neoforge.common.Tags.Biomes.IS_COLD),
+                biomes.getOrThrow(net.neoforged.neoforge.common.Tags.Biomes.IS_COLD_OVERWORLD),
                 new MobSpawnSettings.SpawnerData(EntityTypeRegistry.SNOW_PEA.get(), 50, 1, 2))
         );
         context.register(REPEATER_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
