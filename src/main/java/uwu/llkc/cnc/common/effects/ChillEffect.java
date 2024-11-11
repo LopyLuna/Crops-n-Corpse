@@ -87,6 +87,9 @@ public class ChillEffect extends MobEffect {
 
         var effect = livingEntity.getEffect(EffectRegistry.CHILL);
         if (effect != null) {
+            if (amplifier < effect.getAmplifier()) {
+                return;
+            }
             if (!livingEntity.level().isClientSide()) {
                 PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetChilledPayload(livingEntity.getId(), true, effect.getDuration(), amplifier));
                 PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetChillTimePayload(livingEntity.getId(), effect.getDuration()));
