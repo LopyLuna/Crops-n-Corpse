@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-10T18:26:01.1356455	Registries
+// 1.21.1	2024-11-11T17:11:50.3347983	Registries
 6c27244aed60a3924609cc0bcc46c87f2e11aca0 data/cnc/damage_type/frozen_pea.json
 e24fbce1dfa48aef086aaa0d0ce1fd1f4a6733ae data/cnc/damage_type/pea_shot.json
 a83f12cc29956b4bdf395ca9e02bc52935481b9b data/cnc/neoforge/biome_modifier/browncoat_spawns.json
@@ -6,7 +6,7 @@ c05b970d5e9813442645b46a0049e5ab7a3b2c63 data/cnc/neoforge/biome_modifier/cherry
 738c82c5b39e3ba9f92e084671322fdbdc9c530b data/cnc/neoforge/biome_modifier/imp_spawns.json
 d1d5c47ae78f4256fca64c6ca375ec6ce2043d94 data/cnc/neoforge/biome_modifier/peashooter_spawns.json
 ce695551b82e526ddffe424a1d30c2613c92165d data/cnc/neoforge/biome_modifier/repeater_spawns.json
-3eb16e2b99dc4851ba6951140a444d54569f2bc1 data/cnc/neoforge/biome_modifier/snow_pea_spawns.json
+283314326e2995c2da2430a7b279053636dd2c05 data/cnc/neoforge/biome_modifier/snow_pea_spawns.json
 38f81929cf6d0a92af928ee6225bf1d8ba906808 data/cnc/neoforge/biome_modifier/sunflower_spawns.json
 7638de5361cfdb6378bf5cdcfbdfde828d580cfb data/cnc/neoforge/biome_modifier/wall_nut_spawns.json
 7e5441dc39ec45f7a44e65473dbe57eddebac200 data/cnc/neoforge/biome_modifier/walnut_tree_placement.json

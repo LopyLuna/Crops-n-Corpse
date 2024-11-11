@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#c:is_cold",
+  "biomes": "#c:is_cold/overworld",
   "spawners": {
     "type": "cnc:snow_pea",
     "maxCount": 2,

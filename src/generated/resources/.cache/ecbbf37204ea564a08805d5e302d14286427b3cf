@@ -1,2 +1,3 @@
-// 1.21.1	2024-11-10T17:35:48.0023376	Tags for minecraft:damage_type mod id cnc
+// 1.21.1	2024-11-11T17:11:50.3269846	Tags for minecraft:damage_type mod id cnc
 0986368e2dca48f40294f5e26b62d85adfc80edd data/minecraft/tags/damage_type/bypasses_cooldown.json
+0986368e2dca48f40294f5e26b62d85adfc80edd data/minecraft/tags/damage_type/no_knockback.json

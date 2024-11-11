@@ -21,5 +21,8 @@ public class ModDamageTypeTagProvider extends DamageTypeTagsProvider {
         tag(DamageTypeTags.BYPASSES_COOLDOWN)
                 .add(DamageTypeInit.FROZEN_PEA)
                 .add(DamageTypeInit.PEA_SHOT);
+        tag(DamageTypeTags.NO_KNOCKBACK)
+                .add(DamageTypeInit.FROZEN_PEA)
+                .add(DamageTypeInit.PEA_SHOT);
     }
 }
