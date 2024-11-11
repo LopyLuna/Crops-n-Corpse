@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import uwu.llkc.cnc.common.init.AttachmentTypeRegistry;
@@ -38,10 +39,9 @@ public class ChillEffect extends MobEffect {
 
         if (currentPercentage < freezePercentage) {
             freeze(livingEntity);
-            //fixme change to player check
             if (!livingEntity.getData(AttachmentTypeRegistry.FROZEN)) {
                 livingEntity.setData(AttachmentTypeRegistry.FROZEN, true);
-                if (livingEntity.level().isClientSide()) {
+                if (livingEntity.level().isClientSide) {
                     Optional<ModelLayerLocation> locations = Minecraft.getInstance().getEntityModels().roots.keySet().stream()
                             .filter(layer -> layer.getModel().equals(BuiltInRegistries.ENTITY_TYPE.getKey(livingEntity.getType())))
                             .findFirst();
@@ -57,7 +57,7 @@ public class ChillEffect extends MobEffect {
                             ));
                         }
                     });
-                } else {
+                } else if (!(livingEntity instanceof Player)) {
                     PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetFrozenPayload(livingEntity.getId(), true));
                 }
             }
@@ -68,7 +68,9 @@ public class ChillEffect extends MobEffect {
                     livingEntity.setData(AttachmentTypeRegistry.FROZEN, false);
                 } else {
                     livingEntity.setData(AttachmentTypeRegistry.FROZEN, false);
-                    PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetFrozenPayload(livingEntity.getId(), false));
+                    if (!(livingEntity instanceof Player)) {
+                        PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new SetFrozenPayload(livingEntity.getId(), false));
+                    }
                 }
             }
         }
