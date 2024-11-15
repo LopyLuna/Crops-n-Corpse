@@ -34,7 +34,7 @@ public class Peashooter extends CNCPlant implements RangedAttackMob {
 
     public static AttributeSupplier.Builder attributes() {
         return CNCPlant.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 6)
+                .add(Attributes.MAX_HEALTH, 10)
                 .add(Attributes.ATTACK_DAMAGE, 4)
                 .add(Attributes.FOLLOW_RANGE, 20);
     }
