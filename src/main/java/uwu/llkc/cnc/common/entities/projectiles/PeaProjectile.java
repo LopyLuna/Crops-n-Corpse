@@ -9,6 +9,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
@@ -57,6 +58,17 @@ public class PeaProjectile extends AbstractHurtingProjectile {
     public void tick() {
         super.tick();
         applyGravity();
+    }
+
+    @Override
+    public void onAddedToLevel() {
+        super.onAddedToLevel();
+        if (!this.level().isClientSide) {
+            var entities = this.level().getEntities(this, AABB.ofSize(position(), 1, 1, 1), entity -> entity instanceof LivingEntity && !entity.equals(getOwner()));
+            if (!entities.isEmpty()) {
+                onHitEntity(new EntityHitResult(entities.getFirst()));
+            }
+        }
     }
 
     @Override
