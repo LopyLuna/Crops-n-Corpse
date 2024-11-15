@@ -122,14 +122,8 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
         super.registerGoals();
         targetSelector.addGoal(0, new OwnerHurtByTargetGoalPlant(this));
         targetSelector.addGoal(0, new OwnerHurtTargetGoalPlant(this));
-        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, entity -> !entity.getUUID().equals(owner)) {
-            @Override
-            public void stop() {}
-        });
-        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, entity -> entity instanceof Enemy && !(entity instanceof Creeper) && !(this.getOwnerUUID() != null && entity instanceof OwnableEntity ownable && ownable.getOwnerUUID() != null && ownable.getOwnerUUID().equals(getOwnerUUID()))) {
-            @Override
-            public void stop() {}
-        });
+        targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, entity -> !entity.getUUID().equals(owner)));
+        targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, entity -> entity instanceof Enemy && !(entity instanceof Creeper) && !(this.getOwnerUUID() != null && entity instanceof OwnableEntity ownable && ownable.getOwnerUUID() != null && ownable.getOwnerUUID().equals(getOwnerUUID()))));
     }
 
     @Nullable
