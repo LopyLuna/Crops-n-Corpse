@@ -4,8 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -29,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.client.util.ClientProxy;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.init.ItemRegistry;
-import uwu.llkc.cnc.common.init.SoundRegistry;
 
 public class Browncoat extends CNCZombie {
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(Browncoat.class, EntityDataSerializers.BOOLEAN);
@@ -222,27 +221,22 @@ public class Browncoat extends CNCZombie {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundRegistry.BROWNCOAT_HURT.get();
+        return SoundEvents.ZOMBIE_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundRegistry.BROWNCOAT_DEATH.get();
+        return SoundEvents.ZOMBIE_DEATH;
     }
 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundRegistry.BROWNCOAT_AMBIANCE.get();
+        return SoundEvents.ZOMBIE_AMBIENT;
     }
 
     @Override
     public int getAmbientSoundInterval() {
         return 200;
-    }
-
-    @Override
-    protected void playAttackSound() {
-        playSound(SoundRegistry.BROWNCOAT_ATTACK.get());
     }
 }
