@@ -44,6 +44,8 @@ public class FreezeLayer implements LayeredDraw.Layer {
         float intensity = frozen ? Mth.lerp(percentagePercentage, 1, 0) :
                 Mth.lerp(time / freezeTime, 1, 0);
 
+        if (duration == -1) intensity = 0;
+
         float scalar = frozen ? 0 : intensity;
 
         int i = guiGraphics.guiWidth();

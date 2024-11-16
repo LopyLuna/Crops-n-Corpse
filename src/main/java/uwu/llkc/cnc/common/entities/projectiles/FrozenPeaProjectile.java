@@ -3,11 +3,13 @@ package uwu.llkc.cnc.common.entities.projectiles;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -17,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 import uwu.llkc.cnc.common.init.DamageTypeInit;
 import uwu.llkc.cnc.common.init.EffectRegistry;
+import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 
 public class FrozenPeaProjectile extends AbstractHurtingProjectile {
     public int damage;
@@ -62,7 +65,8 @@ public class FrozenPeaProjectile extends AbstractHurtingProjectile {
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
-        if (!this.level().isClientSide && result.getType() != HitResult.Type.ENTITY) {
+        if (!this.level().isClientSide & result.getType() != HitResult.Type.ENTITY) {
+            this.level().broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
     }
@@ -71,6 +75,18 @@ public class FrozenPeaProjectile extends AbstractHurtingProjectile {
     public void tick() {
         super.tick();
         applyGravity();
+        if (isOnFire()) {
+            if (!level().isClientSide) {
+                EntityTypeRegistry.PEA.get().spawn((ServerLevel) level(), entity -> {
+                    entity.setPos(position());
+                    entity.setOwner(getOwner());
+                    entity.setDeltaMovement(getDeltaMovement());
+                    entity.accelerationPower = accelerationPower;
+                    entity.damage = damage;
+                }, blockPosition(), MobSpawnType.CONVERSION, false, false);
+            }
+            discard();
+        }
     }
 
     @Override
