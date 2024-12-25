@@ -33,6 +33,14 @@ public class ModEntityLootTableSubProvider extends EntityLootSubProvider {
 
     @Override
     public void generate() {
+        add(EntityTypeRegistry.FOOT_SOLDIER.get(), new LootTable.Builder()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(Items.ROTTEN_FLESH)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, ConstantValue.exactly(1)))))
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(ItemRegistry.COMBAT_HELMET)
+                                .when(LootItemRandomChanceCondition.randomChance(0.01f)))));
         add(EntityTypeRegistry.PEASHOOTER.get(), new LootTable.Builder()
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(ItemRegistry.RAW_PEA)

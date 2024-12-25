@@ -15,6 +15,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
+import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
 import uwu.llkc.cnc.common.entities.zombies.Imp;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
@@ -37,6 +38,8 @@ public class ModEvents {
         event.put(EntityTypeRegistry.POTATO_MINE.get(), PotatoMine.attributes().build());
         event.put(EntityTypeRegistry.CHERRY_BOMB.get(), CherryBomb.attributes().build());
         event.put(EntityTypeRegistry.REPEATER.get(), Repeater.attributes().build());
+        //todo
+        event.put(EntityTypeRegistry.FOOT_SOLDIER.get(), FootSoldier.attributes().build());
     }
 
     @SubscribeEvent

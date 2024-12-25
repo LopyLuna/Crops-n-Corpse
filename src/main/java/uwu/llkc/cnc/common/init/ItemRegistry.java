@@ -58,7 +58,12 @@ public class ItemRegistry {
             PlantArmorItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> IMP_SPAWN_EGG = ITEMS.registerItem("imp_spawn_egg",
             props -> new DeferredSpawnEggItem(EntityTypeRegistry.IMP, 0xFFFFFF, 0xFFFFFF, props));
+    public static final DeferredItem<Item> FOOT_SOLDIER_SPAWN_EGG = ITEMS.registerItem("foot_soldier_spawn_egg",
+            props -> new DeferredSpawnEggItem(EntityTypeRegistry.FOOT_SOLDIER, 0xFFFFFF, 0xFFFFFF, props));
     public static final DeferredItem<TrafficConeItem> TRAFFIC_CONE = ITEMS.registerItem("traffic_cone", TrafficConeItem::new, new Item.Properties().durability(15));
+    //todo
+    public static final DeferredItem<Item> COMBAT_HELMET = ITEMS.registerItem("combat_helmet",
+            props -> new ArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, props), new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15)));
     public static final DeferredItem<Item> FLAG = ITEMS.registerSimpleItem("flag");
     @SuppressWarnings("unchecked")
     public static final DeferredItem<MultiEntitySpawnEggItem> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEggItem(props, List.of(

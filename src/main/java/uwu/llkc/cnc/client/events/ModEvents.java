@@ -40,6 +40,7 @@ public class ModEvents {
         event.registerEntityRenderer(EntityTypeRegistry.PEA.get(), PeaProjectileRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.FROZEN_PEA.get(), FrozenPeaProjectileRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.BROWNCOAT.get(), BrowncoatRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.FOOT_SOLDIER.get(), FootSoldierRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.IMP.get(), ImpRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.WALNUT_BOAT.get(), context -> new BoatRenderer(context, false));
         event.registerEntityRenderer(EntityTypeRegistry.WALNUT_CHEST_BOAT.get(), context -> new BoatRenderer(context, true));
@@ -62,6 +63,7 @@ public class ModEvents {
         event.registerLayerDefinition(PotatoMineModel.MAIN_LAYER, PotatoMineModel::createBodyLayer);
         event.registerLayerDefinition(CherryBombModel.MAIN_LAYER, CherryBombModel::createBodyLayer);
         event.registerLayerDefinition(RepeaterModel.MAIN_LAYER, RepeaterModel::createBodyLayer);
+        event.registerLayerDefinition(FootSoldierModel.MAIN_LAYER, FootSoldierModel::createBodyLayer);
     }
 
     @SubscribeEvent

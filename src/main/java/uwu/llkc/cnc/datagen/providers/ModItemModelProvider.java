@@ -19,6 +19,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(ItemRegistry.PLANT_FOOD.get());
+        basicItem(ItemRegistry.FOOT_SOLDIER_SPAWN_EGG.get());
+        basicItem(ItemRegistry.COMBAT_HELMET.get());
         basicItem(ItemRegistry.SUN.get());
         basicItem(ItemRegistry.PEA_POD.get());
         basicItem(ItemRegistry.FROZEN_PEA.get());
