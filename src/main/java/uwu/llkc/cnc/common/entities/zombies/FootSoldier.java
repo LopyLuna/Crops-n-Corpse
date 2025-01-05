@@ -20,11 +20,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.client.util.ClientProxy;
+import uwu.llkc.cnc.common.entities.ai.StinkCloudGoal;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 
 public class FootSoldier extends CNCZombie {
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(FootSoldier.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HAS_ARM = SynchedEntityData.defineId(FootSoldier.class, EntityDataSerializers.BOOLEAN);
+
+    private static final int HIT_TIME = 40;
+
+    public float totalDamage;
 
     public FootSoldier(EntityType<FootSoldier> entityType, Level level) {
         super(entityType, level);
@@ -32,7 +37,7 @@ public class FootSoldier extends CNCZombie {
 
     public static AttributeSupplier.Builder attributes() {
         return CNCPlant.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 20)
+                .add(Attributes.MAX_HEALTH, 100)
                 .add(Attributes.ARMOR, 2)
                 .add(Attributes.ATTACK_DAMAGE, 2)
                 .add(Attributes.MOVEMENT_SPEED, 0.23)
@@ -67,6 +72,15 @@ public class FootSoldier extends CNCZombie {
         } else {
             super.actuallyHurt(damageSource, damageAmount);
         }
+        totalDamage += damageAmount;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (level().getGameTime() % HIT_TIME == 3) {
+            totalDamage = 0;
+        }
     }
 
     @Override
@@ -81,6 +95,7 @@ public class FootSoldier extends CNCZombie {
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        this.goalSelector.addGoal(2, new StinkCloudGoal(this, 25));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));

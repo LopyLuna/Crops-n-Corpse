@@ -8,6 +8,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -23,6 +25,7 @@ import uwu.llkc.cnc.common.init.GameRuleInit;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.items.MultiEntitySpawnEggItem;
 import uwu.llkc.cnc.common.items.PlantArmorItem;
+import uwu.llkc.cnc.common.items.SunWandItem;
 import uwu.llkc.cnc.common.networking.*;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
@@ -97,5 +100,14 @@ public class ModEvents {
             WoodType.register(BlockRegistry.WoodTypes.WALNUT);
             GameRuleInit.init();
         });
+    }
+
+    @SubscribeEvent
+    public static void registerCapabilities(final RegisterCapabilitiesEvent event) {
+        event.registerItem(
+                Capabilities.ItemHandler.ITEM,
+                (stack, context) -> new SunWandItem.ItemHandler(stack),
+                ItemRegistry.SUN
+        );
     }
 }

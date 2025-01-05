@@ -101,6 +101,8 @@ public class ItemRegistry {
             MilkshakeItem::new, new Item.Properties().durability(32).food(Foods.CHOCOLATE_MILKSHAKE));
     public static final DeferredItem<MilkshakeItem> CHERRY_MILKSHAKE = ITEMS.registerItem("cherry_milkshake",
             MilkshakeItem::new, new Item.Properties().durability(32).food(Foods.CHERRY_MILKSHAKE));
+    public static final DeferredItem<Item> SUN_WAND = ITEMS.registerItem("sun_wand",
+            SunWandItem::new, new Item.Properties().stacksTo(1));
 
     public static final DeferredItem<BlockItem> WALNUT_LOG = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_LOG);
     public static final DeferredItem<BlockItem> WALNUT_WOOD = ITEMS.registerSimpleBlockItem(BlockRegistry.WALNUT_WOOD);
