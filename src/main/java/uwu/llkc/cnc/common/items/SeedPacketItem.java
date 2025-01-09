@@ -30,13 +30,15 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import org.apache.commons.lang3.mutable.MutableInt;
 import uwu.llkc.cnc.common.entities.plants.CherryBomb;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.GameRuleInit;
 import uwu.llkc.cnc.common.init.ItemRegistry;
 import uwu.llkc.cnc.common.init.SoundRegistry;
-import uwu.llkc.cnc.common.util.ItemUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -77,6 +79,88 @@ public class SeedPacketItem<T extends Entity> extends Item {
         return new ItemStack(SEED_PACKET_ITEM_MAP.get().get(entityType));
     }
 
+    public static boolean tryTakeSun(Player player, int required) {
+        MutableInt mutableInt = new MutableInt(required);
+        List<Runnable> tasks = new ArrayList<>();
+
+        if (tryTakeItemsFromInventory(player.getItemInHand(InteractionHand.MAIN_HAND), mutableInt, tasks)) {
+            return true;
+        }
+
+        if (tryTakeItemsFromInventory(player.getItemInHand(InteractionHand.OFF_HAND), mutableInt, tasks)) {
+            return true;
+        }
+
+        for (int i = 0; i < 9; i++) {
+            if (tryTakeItemsFromInventory(player.getInventory().getItem(i), mutableInt, tasks)) {
+                return true;
+            }
+        }
+
+        for (int i = 9; i < 36; i++) {
+            if (tryTakeItemsFromInventory(player.getInventory().getItem(i), mutableInt, tasks)) {
+                return true;
+            }
+        }
+
+        if (tryTakeItemsFromWand(player.getItemInHand(InteractionHand.MAIN_HAND), mutableInt, tasks)) {
+            return true;
+        }
+
+        if (tryTakeItemsFromWand(player.getItemInHand(InteractionHand.OFF_HAND), mutableInt, tasks)) {
+            return true;
+        }
+
+        for (int i = 0; i < 9; i++) {
+            if (tryTakeItemsFromWand(player.getInventory().getItem(i), mutableInt, tasks)) {
+                return true;
+            }
+        }
+
+        for (int i = 9; i < 36; i++) {
+            if (tryTakeItemsFromWand(player.getInventory().getItem(i), mutableInt, tasks)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean tryTakeItemsFromInventory(ItemStack stack, MutableInt required, List<Runnable> tasks) {
+        if (stack.is(ItemRegistry.SUN.get())) {
+            if (stack.getCount() >= required.intValue()) {
+                stack.shrink(required.intValue());
+                for (Runnable task : tasks) {
+                    task.run();
+                }
+                return true;
+            } else {
+                required.subtract(stack.getCount());
+                tasks.add(() -> stack.setCount(0));
+            }
+        }
+        return false;
+    }
+
+    private static boolean tryTakeItemsFromWand(ItemStack stack, MutableInt required, List<Runnable> tasks) {
+        if (stack.is(ItemRegistry.SUN_WAND.get())) {
+            var capability = stack.getCapability(Capabilities.ItemHandler.ITEM);
+            if (capability == null) return false;
+            int count = capability.getStackInSlot(0).getCount();
+            if (count >= required.intValue()) {
+                capability.extractItem(0, required.intValue(), false);
+                for (Runnable task : tasks) {
+                    task.run();
+                }
+                return true;
+            } else {
+                required.subtract(count);
+                tasks.add(() -> capability.extractItem(0, capability.getStackInSlot(0).getCount(), false));
+            }
+        }
+        return false;
+    }
+
     protected <F extends Entity> Consumer<F> getConsumer(ServerLevel level, ItemStack stack, Player player, InteractionHand hand) {
         return EntityType.<F>createDefaultStackConfig(level, stack, player).andThen(mob -> {
             mob.setYRot(player.getYHeadRot());
@@ -91,7 +175,7 @@ public class SeedPacketItem<T extends Entity> extends Item {
             var data = context.getItemInHand().getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
             if (!data.isEmpty() || fallbackEntityType != null) {
                 EntityType<?> entity = data.isEmpty() ? getFallbackEntityType() : data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(getFallbackEntityType());
-                if (context.getPlayer() != null && (context.getPlayer().hasInfiniteMaterials() || ItemUtils.tryTakeItems(context.getPlayer(), new ItemStack(ItemRegistry.SUN.get(), getSunCost())))) {
+                if (context.getPlayer() != null && (context.getPlayer().hasInfiniteMaterials() || tryTakeSun(context.getPlayer(), getSunCost()))) {
                     entity.spawn((ServerLevel) context.getLevel(), getConsumer(((ServerLevel) context.getLevel()), context.getItemInHand(), context.getPlayer(), context.getHand()), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
                     if (context.getPlayer() != null && !context.getPlayer().hasInfiniteMaterials()) {
                         context.getPlayer().setItemInHand(context.getHand(), new ItemStack(ItemRegistry.EMPTY_SEED_PACKET.get(), 1));
@@ -118,7 +202,7 @@ public class SeedPacketItem<T extends Entity> extends Item {
             var data = player.getItemInHand(usedHand).getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
             if (!data.isEmpty() || fallbackEntityType != null) {
                 EntityType<?> entity = data.isEmpty() ? getFallbackEntityType() : data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(getFallbackEntityType());
-                if (entity != null && (player.hasInfiniteMaterials() || ItemUtils.tryTakeItems(player, new ItemStack(ItemRegistry.SUN.get(), getSunCost())))) {
+                if (entity != null && (player.hasInfiniteMaterials() || tryTakeSun(player, getSunCost()))) {
                     var cherryEntity = entity.create((ServerLevel) level, getConsumer((ServerLevel) level, player.getItemInHand(usedHand), player, usedHand), player.blockPosition(), MobSpawnType.SPAWN_EGG, true, true);
                     if (cherryEntity instanceof CherryBomb cherry) {
                         cherry.getEntityData().set(CherryBomb.FLYING, true);

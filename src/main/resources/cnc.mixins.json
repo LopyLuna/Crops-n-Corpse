@@ -9,6 +9,7 @@
     "DispenseBehaviorMixin",
     "EntityMixin",
     "ExplosionMixin",
+    "ItemEntityMixin",
     "LevelChunkMixin",
     "PotatoBlockMixin"
   ],

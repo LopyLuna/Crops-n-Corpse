@@ -1,12 +1,16 @@
 package uwu.llkc.cnc.client.events;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
@@ -17,6 +21,9 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import org.joml.Quaternionf;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.models.ChillModel;
 import uwu.llkc.cnc.client.models.entity.*;
@@ -97,5 +104,19 @@ public class ModEvents {
     @SubscribeEvent
     public static void renderEvent(final RegisterGuiLayersEvent event) {
         event.registerBelowAll(FreezeLayer.FREEZE_LAYER, new FreezeLayer());
+    }
+
+    @SubscribeEvent
+    public static void registerClientItemExtensions(final RegisterClientExtensionsEvent event) {
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
+                if (player.getUseItem().equals(itemInHand) && player.getUseItemRemainingTicks() > 0) {
+                    poseStack.translate(0.3, -0.3, -0.5);
+                    poseStack.mulPose(new Quaternionf().fromAxisAngleDeg(1, 0, 0, -20));
+                }
+                return false;
+            }
+        }, ItemRegistry.SUN_WAND);
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.loaders.SeparateTransformsModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import uwu.llkc.cnc.CNCMod;
@@ -19,7 +20,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(ItemRegistry.PLANT_FOOD.get());
-        basicItem(ItemRegistry.SUN_WAND.get());
+        basicItem(ItemRegistry.SUN_WAND.asItem()).parent(new ModelFile.ExistingModelFile(ResourceLocation.withDefaultNamespace("item/handheld"), existingFileHelper));
         basicItem(ItemRegistry.FOOT_SOLDIER_SPAWN_EGG.get());
         basicItem(ItemRegistry.COMBAT_HELMET.get());
         basicItem(ItemRegistry.SUN.get());
@@ -60,11 +61,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         withExistingParent(CNCMod.rlStr("flag"), "neoforge:item/default")
                 .customLoader(SeparateTransformsModelBuilder::begin)
-                        .base(nested().parent(basicItem(CNCMod.rl("flag_item"))))
-                                .perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
-                                .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
+                .base(nested().parent(basicItem(CNCMod.rl("flag_item"))))
+                .perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
+                .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
                 .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
-                                .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model")))).end();
+                .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model")))).end();
 
         withExistingParent(ResourceLocation.withDefaultNamespace("bucket").toString(), "neoforge:item/default")
                 .customLoader(SeparateTransformsModelBuilder::begin)

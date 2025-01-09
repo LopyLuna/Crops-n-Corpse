@@ -27,6 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.common.entities.ai.OwnerHurtByTargetGoalPlant;
@@ -186,6 +187,18 @@ public abstract class CNCPlant extends Mob implements OwnableEntity {
                 itemStack.set(DataComponents.ENTITY_DATA, customData);
                 player.setItemInHand(hand, ItemUtils.createFilledResult(player.getItemInHand(hand), player, itemStack, true));
                 return InteractionResult.sidedSuccess(player.level().isClientSide);
+            }
+        } else if (this.getHealth() < this.getMaxHealth() && player.isShiftKeyDown() && player.getItemInHand(hand).is(ItemRegistry.SUN_WAND.get())) {
+            if (getOwnerUUID() != null && getOwnerUUID().equals(player.getUUID())) {
+                var cap = player.getItemInHand(hand).getCapability(Capabilities.ItemHandler.ITEM);
+                if (cap == null) return InteractionResult.FAIL;
+                var count = cap.getStackInSlot(0).getCount();
+                if (count > 0) {
+                    this.setHealth(this.getHealth() + 1);
+                    cap.extractItem(0, 1, false);
+                } else {
+                    return InteractionResult.FAIL;
+                }
             }
         }
         return InteractionResult.PASS;

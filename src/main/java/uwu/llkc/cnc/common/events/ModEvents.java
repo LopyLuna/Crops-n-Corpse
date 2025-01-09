@@ -107,7 +107,7 @@ public class ModEvents {
         event.registerItem(
                 Capabilities.ItemHandler.ITEM,
                 (stack, context) -> new SunWandItem.ItemHandler(stack),
-                ItemRegistry.SUN
+                ItemRegistry.SUN_WAND
         );
     }
 }

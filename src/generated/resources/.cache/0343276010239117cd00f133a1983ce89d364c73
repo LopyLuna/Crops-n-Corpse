@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-25T10:46:15.3176266	Item Models: cnc
+// 1.21.1	2025-01-09T12:09:34.567198	Item Models: cnc
 cf5c2182fe08615cb0d4119083806e680076002e assets/cnc/models/item/browncoat_spawn_egg.json
 32e87e6f5564d12a898ad60f0637697e0f7f144d assets/cnc/models/item/buckethead_spawn_egg.json
 f1fa8e6f305d25dfb5c6ccce635229bd2a0ee3a2 assets/cnc/models/item/bucket_item.json
@@ -35,6 +35,7 @@ b216e555e6cb0635714f029f79a313e1030e3969 assets/cnc/models/item/snow_pea_seed_pa
 0873704e0abf44b606957a097a1e3aac3c8067f6 assets/cnc/models/item/sunflower_seeds.json
 c47119ea2463b2dc658f72017e527432deca2dc7 assets/cnc/models/item/sunflower_seed_muffin.json
 9a0098009a36198626a05a3adee01f3946fca6f3 assets/cnc/models/item/sunflower_seed_packet.json
+d70d339bc817c070a9d333fc86287450e9783759 assets/cnc/models/item/sun_wand.json
 0f41e7c0689db553ce5d82f0c664b252b660b234 assets/cnc/models/item/traffic_cone.json
 a9262ee2056da5bab1a6b57f8a8f1e63137e97b0 assets/cnc/models/item/traffic_cone_item.json
 62cc82c254cb83c9f77f6a2f23a1f6eff864a2b8 assets/cnc/models/item/vanilla_milkshake.json

@@ -26,12 +26,10 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
-import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
@@ -252,28 +250,6 @@ public class NeoForgeEvents {
         if (event.getEntity().getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES) ||
                 (!event.getEntity().onGround() && event.getEntity().getType().is(EntityTypeTags.FALL_DAMAGE_IMMUNE))) {
             event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
-        }
-    }
-
-    @SubscribeEvent
-    public static void itemPickupEvent(final ItemEntityPickupEvent.Pre event) {
-        ItemStack stack = event.getItemEntity().getItem();
-        if (stack.is(ItemRegistry.SUN.asItem())) {
-            for (ItemStack item : event.getPlayer().getHandSlots()) {
-                if (item.is(ItemRegistry.SUN_WAND.get())) {
-                    var capability = item.getCapability(Capabilities.ItemHandler.ITEM);
-                    if (capability == null) return;
-                    var count = capability.getSlotLimit(0) - capability.getStackInSlot(0).getCount();
-                    if (count >= stack.getCount()) {
-                        stack.setCount(0);
-                        capability.insertItem(0, new ItemStack(ItemRegistry.SUN.get(), stack.getCount()), false);
-                    } else {
-                        var decrease = stack.getCount() - count;
-                        stack.setCount(stack.getCount() - decrease);
-                        capability.insertItem(0, new ItemStack(ItemRegistry.SUN.get(), count), false);
-                    }
-                }
-            }
         }
     }
 }

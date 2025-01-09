@@ -85,6 +85,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("item.cnc.seed_packet.none", "None");
         add("item.cnc.seed_packet.seconds", "Seconds");
         add("item.cnc.seed_packet.insufficient_sun", "Insufficient Sun");
+        add("item.cnc.sun_wand.sun", "Sun: %s");
 
         add("effect.cnc.chill", "Chill");
     }

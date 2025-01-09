@@ -47,13 +47,16 @@ neoForge {
         client {
             client()
 
+            def random = new Random()
+            def randomNumber = random.nextInt(100)
+
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            programArgument '--username=Dev' + randomNumber
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         server {
             server()
-            programArgument '--nogui'
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 

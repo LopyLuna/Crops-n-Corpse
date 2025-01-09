@@ -34,4 +34,7 @@ public class AttachmentTypeRegistry {
 
     public static final Supplier<AttachmentType<Map<ModelPart, ModelPartData>>> MODEL_PARTS = ATTACHMENT_TYPES.register("model_parts",
             () -> AttachmentType.<Map<ModelPart, ModelPartData>>builder(Map::of).build());
+
+    public static final Supplier<AttachmentType<Boolean>> ITEM_PULLED = ATTACHMENT_TYPES.register("item_pulled",
+            () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build());
 }

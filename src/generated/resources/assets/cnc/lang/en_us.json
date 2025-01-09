@@ -76,6 +76,8 @@
   "item.cnc.seed_packet.seconds": "Seconds",
   "item.cnc.snow_pea_seed_packet": "Snow Pea Seed Packet",
   "item.cnc.sun": "Sun",
+  "item.cnc.sun_wand": "Sun Wand",
+  "item.cnc.sun_wand.sun": "Sun: %s",
   "item.cnc.sunflower_seed_muffin": "Sunflower Seed Muffin",
   "item.cnc.sunflower_seed_packet": "Sunflower Seed Packet",
   "item.cnc.sunflower_seeds": "Sunflower Seeds",
