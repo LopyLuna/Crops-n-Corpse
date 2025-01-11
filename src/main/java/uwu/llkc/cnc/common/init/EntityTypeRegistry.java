@@ -11,6 +11,7 @@ import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
 import uwu.llkc.cnc.common.entities.projectiles.FrozenPeaProjectile;
 import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
+import uwu.llkc.cnc.common.entities.projectiles.ZombieStinkBomb;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
 import uwu.llkc.cnc.common.entities.zombies.Imp;
@@ -63,4 +64,7 @@ public class EntityTypeRegistry {
     public static final Supplier<EntityType<ChestBoat>> WALNUT_CHEST_BOAT = ENTITY_TYPES.register("walnut_chest_boat",
             () -> EntityType.Builder.of((EntityType<ChestBoat> type, Level level) ->
                     new ChestBoat(type, level), MobCategory.MISC).build("walnut_chest_boat"));
+
+    public static final Supplier<EntityType<ZombieStinkBomb>> ZOMBIE_STINK_BOMB = ENTITY_TYPES.register("zombie_stink_bomb",
+            () -> EntityType.Builder.of(ZombieStinkBomb::new, MobCategory.MISC).sized(.1f, .1f).build(CNCMod.rlStr("zombie_stink_bomb")));
 }

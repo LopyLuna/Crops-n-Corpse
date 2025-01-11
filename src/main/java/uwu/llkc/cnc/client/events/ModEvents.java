@@ -53,6 +53,7 @@ public class ModEvents {
         event.registerEntityRenderer(EntityTypeRegistry.WALNUT_CHEST_BOAT.get(), context -> new BoatRenderer(context, true));
         event.registerEntityRenderer(EntityTypeRegistry.CHERRY_BOMB.get(), CherryBombRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.REPEATER.get(), RepeaterRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.ZOMBIE_STINK_BOMB.get(), ZombieStinkBombRenderer::new);
 
         event.registerBlockEntityRenderer(BlockEntityTypeRegistry.CUSTOM_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityTypeRegistry.CUSTOM_HANGING_SIGN.get(), HangingSignRenderer::new);
