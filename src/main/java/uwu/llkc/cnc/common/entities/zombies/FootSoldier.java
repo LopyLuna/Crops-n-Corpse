@@ -8,22 +8,27 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.client.util.ClientProxy;
+import uwu.llkc.cnc.common.entities.ai.KeepDistanceGoal;
 import uwu.llkc.cnc.common.entities.ai.StinkCloudGoal;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
+import uwu.llkc.cnc.common.entities.projectiles.FootSoldierProjectile;
+import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 
-public class FootSoldier extends CNCZombie {
+public class FootSoldier extends CNCZombie implements RangedAttackMob {
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(FootSoldier.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HAS_ARM = SynchedEntityData.defineId(FootSoldier.class, EntityDataSerializers.BOOLEAN);
 
@@ -41,7 +46,8 @@ public class FootSoldier extends CNCZombie {
                 .add(Attributes.ARMOR, 2)
                 .add(Attributes.ATTACK_DAMAGE, 2)
                 .add(Attributes.MOVEMENT_SPEED, 0.23)
-                .add(Attributes.ATTACK_SPEED, 1);
+                .add(Attributes.ATTACK_SPEED, 1)
+                .add(Attributes.FOLLOW_RANGE, 40);
     }
 
     @Override
@@ -96,9 +102,10 @@ public class FootSoldier extends CNCZombie {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(2, new StinkCloudGoal(this, 25));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(3, new RangedAttackGoal(this, 1, 50, 25));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
+        this.goalSelector.addGoal(5, new KeepDistanceGoal(this, 15));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(FootSoldier.class));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
@@ -131,5 +138,24 @@ public class FootSoldier extends CNCZombie {
     @Override
     public int getAmbientSoundInterval() {
         return 200;
+    }
+
+    @Override
+    public void performRangedAttack(LivingEntity target, float velocity) {
+        FootSoldierProjectile projectile = EntityTypeRegistry.FOOT_SOLDIER_PROJECTILE.get().create(level());
+        if (projectile == null) return;
+        projectile.setOwner(this);
+
+        float xOffset = -.5f;
+        float yOffset = 1f;
+        float zOffset = 1f;
+
+        double x = Math.cos(Math.toRadians(getVisualRotationYInDegrees())) * xOffset + getX() - Math.sin(Math.toRadians(getVisualRotationYInDegrees())) * zOffset;
+        double y = yOffset + getY();
+        double z = Math.cos(Math.toRadians(getVisualRotationYInDegrees())) * zOffset + getZ() + Math.sin(Math.toRadians(getVisualRotationYInDegrees())) * xOffset;
+
+        projectile.setPos(x, y, z);
+        projectile.shoot(target.getX() - x, target.getEyeY() - y, target.getZ() - z, 1f, 0);
+        level().addFreshEntity(projectile);
     }
 }

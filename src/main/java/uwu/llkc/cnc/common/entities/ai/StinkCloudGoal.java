@@ -25,13 +25,14 @@ public class StinkCloudGoal extends Goal {
     @Override
     public void start() {
         super.start();
-        var plants = zombie.level().getEntitiesOfClass(CNCPlant.class, zombie.getBoundingBox().inflate(20, 5, 20), zombie::hasLineOfSight);
+        var plants = zombie.level().getEntitiesOfClass(CNCPlant.class, zombie.getBoundingBox().inflate(25, 5, 25), zombie::hasLineOfSight);
         var closestPlant = plants.stream().min(Comparator.comparingDouble(p -> p.distanceTo(zombie)));
         if (closestPlant.isEmpty()) return;
         var projectile = EntityTypeRegistry.ZOMBIE_STINK_BOMB.get().create(zombie.level());
         if (projectile == null) return;
         used = true;
         projectile.setPos(zombie.position());
+        projectile.setOwner(zombie);
         projectile.shoot(closestPlant.get().getX() - zombie.getX(), closestPlant.get().getY() - zombie.getY(), closestPlant.get().getZ() - zombie.getZ(), 1, 0);
         zombie.level().addFreshEntity(projectile);
     }

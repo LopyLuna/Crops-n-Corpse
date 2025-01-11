@@ -54,6 +54,8 @@ public class ModEvents {
         event.registerEntityRenderer(EntityTypeRegistry.CHERRY_BOMB.get(), CherryBombRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.REPEATER.get(), RepeaterRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.ZOMBIE_STINK_BOMB.get(), ZombieStinkBombRenderer::new);
+        //todo fix renderer
+        event.registerEntityRenderer(EntityTypeRegistry.FOOT_SOLDIER_PROJECTILE.get(), FootSoliderProjectileRenderer::new);
 
         event.registerBlockEntityRenderer(BlockEntityTypeRegistry.CUSTOM_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityTypeRegistry.CUSTOM_HANGING_SIGN.get(), HangingSignRenderer::new);
