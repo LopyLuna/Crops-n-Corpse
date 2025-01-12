@@ -20,8 +20,10 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.client.util.ClientProxy;
+import uwu.llkc.cnc.common.entities.ai.JumpToGoal;
 import uwu.llkc.cnc.common.entities.ai.KeepDistanceGoal;
 import uwu.llkc.cnc.common.entities.ai.StinkCloudGoal;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
@@ -35,6 +37,7 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
     private static final int HIT_TIME = 40;
 
     public float totalDamage;
+    public boolean isSafeFall = false;
 
     public FootSoldier(EntityType<FootSoldier> entityType, Level level) {
         super(entityType, level);
@@ -103,10 +106,11 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
         super.registerGoals();
         this.goalSelector.addGoal(2, new StinkCloudGoal(this, 25));
         this.goalSelector.addGoal(3, new RangedAttackGoal(this, 1, 50, 25));
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(5, new KeepDistanceGoal(this, 15));
+        this.goalSelector.addGoal(2, new JumpToGoal(this, 25, 200, 1.2f));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(FootSoldier.class));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
@@ -117,6 +121,28 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
         if (id == 0) {
             ClientProxy.createFootSoldierArm(this);
         }
+    }
+
+
+    @Override
+    protected int calculateFallDamage(float fallDistance, float damageMultiplier) {
+        if (isSafeFall) {
+            isSafeFall = false;
+            return 0;
+        }
+        return super.calculateFallDamage(fallDistance, damageMultiplier);
+    }
+
+    @Override
+    public void setOnGroundWithMovement(boolean onGround, Vec3 movement) {
+        super.setOnGroundWithMovement(onGround, movement);
+        setDiscardFriction(false);
+    }
+
+    @Override
+    public void setOnGround(boolean onGround) {
+        super.setOnGround(onGround);
+        setDiscardFriction(false);
     }
 
     @Override
