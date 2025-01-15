@@ -6,14 +6,14 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -66,7 +66,7 @@ public class ItemRegistry {
     //todo
     public static final DeferredItem<Item> COMBAT_HELMET = ITEMS.registerItem("combat_helmet",
             props -> new ArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, props), new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15)));
-    public static final DeferredItem<Item> FLAG = ITEMS.registerSimpleItem("flag");
+    public static final DeferredItem<Item> FLAG = ITEMS.registerSimpleItem("flag", new Item.Properties().attributes(ItemAttributeModifiers.builder().add(Attributes.MOVEMENT_SPEED, new AttributeModifier(CNCMod.rl("flag"), 0.5, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND).build()));
     @SuppressWarnings("unchecked")
     public static final DeferredItem<MultiEntitySpawnEggItem> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEggItem(props, List.of(
             new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>) (Object) EntityTypeRegistry.BROWNCOAT, mob -> {
