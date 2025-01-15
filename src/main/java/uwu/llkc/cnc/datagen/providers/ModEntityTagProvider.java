@@ -39,17 +39,21 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
                 .addTag(Tags.EntityTypes.SPECIAL_PLANTS);
         tag(EntityTypeTags.UNDEAD)
                 .add(EntityTypeRegistry.BROWNCOAT.get())
-                .add(EntityTypeRegistry.IMP.get());
+                .add(EntityTypeRegistry.IMP.get())
+                .add(EntityTypeRegistry.FOOT_SOLDIER.get())
+                .add(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get());
         tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
                 .remove(EntityTypeRegistry.IMP.get())
                 .remove(EntityTypeRegistry.BROWNCOAT.get());
-        tag(Tags.EntityTypes.CHAMPION_ZOMBIE);
+        tag(Tags.EntityTypes.CHAMPION_ZOMBIE)
+                .add(EntityTypeRegistry.FOOT_SOLDIER.get());
         tag(Tags.EntityTypes.ZOMBIE_SPAWNER);
         tag(Tags.EntityTypes.SPECIAL_ZOMBIE);
         tag(Tags.EntityTypes.MINI_BOSS_ZOMBIE);
         tag(Tags.EntityTypes.BASIC_ZOMBIE)
                 .add(EntityTypeRegistry.BROWNCOAT.get())
-                .add(EntityTypeRegistry.IMP.get());
+                .add(EntityTypeRegistry.IMP.get())
+                .add(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get());
         tag(Tags.EntityTypes.CNC_ZOMBIES)
                 .addTag(Tags.EntityTypes.CHAMPION_ZOMBIE)
                 .addTag(Tags.EntityTypes.ZOMBIE_SPAWNER)

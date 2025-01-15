@@ -72,6 +72,12 @@ public class ModEntityLootTableSubProvider extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
                                 .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, ConstantValue.exactly(1))))));
 
+        add(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get(), new LootTable.Builder()
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(Items.ROTTEN_FLESH)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, ConstantValue.exactly(1))))));
+
         add(EntityTypeRegistry.IMP.get(), new LootTable.Builder()
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(Items.ROTTEN_FLESH)

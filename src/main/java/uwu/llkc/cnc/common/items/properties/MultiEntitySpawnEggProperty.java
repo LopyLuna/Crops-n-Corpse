@@ -20,5 +20,4 @@ public class MultiEntitySpawnEggProperty implements ClampedItemPropertyFunction 
     public float unclampedCall(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
         return stack.getOrDefault(DataComponentRegistry.SELECTED_ENTITY, 0) / 100f;
     }
-
 }

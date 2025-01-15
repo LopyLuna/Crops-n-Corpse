@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/template_spawn_egg",
   "textures": {
     "layer0": "cnc:item/foot_soldier_spawn_egg"
   }

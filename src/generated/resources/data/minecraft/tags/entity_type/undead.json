@@ -1,6 +1,8 @@
 {
   "values": [
     "cnc:browncoat",
-    "cnc:imp"
+    "cnc:imp",
+    "cnc:foot_soldier",
+    "cnc:mummified_browncoat"
   ]
 }

@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-09T12:09:34.567198	Item Models: cnc
+// 1.21.1	2025-01-15T14:21:16.7803684	Item Models: cnc
 cf5c2182fe08615cb0d4119083806e680076002e assets/cnc/models/item/browncoat_spawn_egg.json
 32e87e6f5564d12a898ad60f0637697e0f7f144d assets/cnc/models/item/buckethead_spawn_egg.json
 f1fa8e6f305d25dfb5c6ccce635229bd2a0ee3a2 assets/cnc/models/item/bucket_item.json
@@ -17,7 +17,7 @@ bae10552bb5838699033177b3af9c5ed9539b54a assets/cnc/models/item/conehead_spawn_e
 9ab168192032fb70faef94328562082a283cf992 assets/cnc/models/item/flag.json
 0e91ae3578c4510f1eb1d086a74a59c493640ac0 assets/cnc/models/item/flag_item.json
 b56eec6db9e200dd8828650b86fc082120b9e8f1 assets/cnc/models/item/flag_spawn_egg.json
-e6864361f4cdd5c456775b49a5a43c6060b3ecbe assets/cnc/models/item/foot_soldier_spawn_egg.json
+81eeb8be0eaf8cff3444009ee3e3520d46da30fa assets/cnc/models/item/foot_soldier_spawn_egg.json
 0a86cf00c5ba32a83f483fea4c94f0f5703b29c1 assets/cnc/models/item/frozen_pea.json
 96f0ec5b3c6b5671dc26d37dbd01badd7a90a215 assets/cnc/models/item/golden_cherries.json
 e92548fb9109ce6fbadbe15fbfa544aff23312bc assets/cnc/models/item/hanging_walnut_sign.json

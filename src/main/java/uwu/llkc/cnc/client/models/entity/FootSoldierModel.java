@@ -1,22 +1,39 @@
 package uwu.llkc.cnc.client.models.entity;
 
-import net.minecraft.client.model.AbstractZombieModel;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.world.entity.HumanoidArm;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
 
-public class FootSoldierModel extends AbstractZombieModel<FootSoldier> {
+public class FootSoldierModel extends HierarchicalModel<FootSoldier> implements HeadedModel, ArmedModel {
     public static final ModelLayerLocation MAIN_LAYER = new ModelLayerLocation(CNCMod.rl("foot_soldier"), "main");
     public final ModelPart leftForeArm;
+    private final ModelPart root;
+    private final ModelPart head;
+    private final ModelPart body;
+    private final ModelPart rightArm;
+    private final ModelPart leftArm;
+    private final ModelPart rightLeg;
+    private final ModelPart leftLeg;
+    private final HumanoidFootSoldier humanoid;
 
 
     public FootSoldierModel(ModelPart root) {
-        super(root);
         leftForeArm = root.getChild("left_arm").getChild("forearm");
+        this.root = root;
+        this.head = root.getChild("head");
+        this.body = root.getChild("body");
+        this.rightArm = root.getChild("right_arm");
+        this.leftArm = root.getChild("left_arm");
+        this.rightLeg = root.getChild("right_leg");
+        this.leftLeg = root.getChild("left_leg");
+        this.humanoid = new HumanoidFootSoldier(root);
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -57,13 +74,48 @@ public class FootSoldierModel extends AbstractZombieModel<FootSoldier> {
 
     @Override
     public void setupAnim(FootSoldier entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        humanoid.attackTime = attackTime;
+        humanoid.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        copyFromDelegate();
         head.visible = entity.getEntityData().get(Browncoat.HAS_HEAD);
         leftForeArm.visible = entity.getEntityData().get(Browncoat.HAS_ARM);
     }
 
+    private void copyFromDelegate() {
+        this.head.loadPose(humanoid.head.storePose());
+        this.body.loadPose(humanoid.body.storePose());
+        this.rightArm.loadPose(humanoid.rightArm.storePose());
+        this.leftArm.loadPose(humanoid.leftArm.storePose());
+        this.rightLeg.loadPose(humanoid.rightLeg.storePose());
+        this.leftLeg.loadPose(humanoid.leftLeg.storePose());
+    }
+
     @Override
-    public boolean isAggressive(FootSoldier entity) {
-        return entity.isAggressive();
+    public ModelPart getHead() {
+        return head;
+    }
+
+
+    @Override
+    public void translateToHand(HumanoidArm side, PoseStack poseStack) {
+        humanoid.translateToHand(side, poseStack);
+    }
+
+    @Override
+    public ModelPart root() {
+        return root;
+    }
+
+    private static class HumanoidFootSoldier extends HumanoidModel<FootSoldier> {
+
+        public HumanoidFootSoldier(ModelPart root) {
+            super(root);
+        }
+
+        @Override
+        public void setupAnim(FootSoldier entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+            super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            AnimationUtils.animateZombieArms(HumanoidFootSoldier.this.leftArm, HumanoidFootSoldier.this.rightArm, entity.isAggressive(), attackTime, ageInTicks);
+        }
     }
 }

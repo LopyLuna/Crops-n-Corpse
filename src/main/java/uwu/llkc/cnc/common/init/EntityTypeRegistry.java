@@ -16,6 +16,7 @@ import uwu.llkc.cnc.common.entities.projectiles.ZombieStinkBomb;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
 import uwu.llkc.cnc.common.entities.zombies.Imp;
+import uwu.llkc.cnc.common.entities.zombies.MummifiedBrowncoat;
 
 import java.util.function.Supplier;
 
@@ -46,6 +47,10 @@ public class EntityTypeRegistry {
     public static final Supplier<EntityType<Browncoat>> BROWNCOAT = ENTITY_TYPES.register("browncoat",
             () -> EntityType.Builder.of(Browncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("browncoat")));
 
+    public static final Supplier<EntityType<MummifiedBrowncoat>> MUMMIFIED_BROWNCOAT = ENTITY_TYPES.register("mummified_browncoat",
+            () -> EntityType.Builder.of(MummifiedBrowncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("mummified_browncoat")));
+
+
     public static final Supplier<EntityType<FootSoldier>> FOOT_SOLDIER = ENTITY_TYPES.register("foot_soldier",
             () -> EntityType.Builder.of(FootSoldier::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("foot_soldier")));
 
@@ -71,4 +76,5 @@ public class EntityTypeRegistry {
 
     public static final Supplier<EntityType<FootSoldierProjectile>> FOOT_SOLDIER_PROJECTILE = ENTITY_TYPES.register("foot_soldier_projectile",
             () -> EntityType.Builder.of(FootSoldierProjectile::new, MobCategory.MISC).sized(.1f, .1f).build(CNCMod.rlStr("foot_soldier_projectile")));
+
 }

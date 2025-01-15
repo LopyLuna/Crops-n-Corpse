@@ -54,6 +54,7 @@ public class ModEvents {
         event.registerEntityRenderer(EntityTypeRegistry.CHERRY_BOMB.get(), CherryBombRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.REPEATER.get(), RepeaterRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.ZOMBIE_STINK_BOMB.get(), ZombieStinkBombRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get(), MummifiedBrowncoatRenderer::new);
         //todo fix renderer
         event.registerEntityRenderer(EntityTypeRegistry.FOOT_SOLDIER_PROJECTILE.get(), FootSoliderProjectileRenderer::new);
 
@@ -74,12 +75,15 @@ public class ModEvents {
         event.registerLayerDefinition(CherryBombModel.MAIN_LAYER, CherryBombModel::createBodyLayer);
         event.registerLayerDefinition(RepeaterModel.MAIN_LAYER, RepeaterModel::createBodyLayer);
         event.registerLayerDefinition(FootSoldierModel.MAIN_LAYER, FootSoldierModel::createBodyLayer);
+        event.registerLayerDefinition(MummifiedBrowncoatModel.MAIN_LAYER, MummifiedBrowncoatModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             ItemProperties.register(ItemRegistry.BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
+            //ItemProperties.register(Items.BUCKET, );
+
             Sheets.addWoodType(BlockRegistry.WoodTypes.WALNUT);
         });
     }

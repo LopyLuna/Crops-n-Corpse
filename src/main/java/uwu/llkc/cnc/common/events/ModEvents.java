@@ -41,6 +41,7 @@ public class ModEvents {
         event.put(EntityTypeRegistry.POTATO_MINE.get(), PotatoMine.attributes().build());
         event.put(EntityTypeRegistry.CHERRY_BOMB.get(), CherryBomb.attributes().build());
         event.put(EntityTypeRegistry.REPEATER.get(), Repeater.attributes().build());
+        event.put(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get(), Browncoat.attributes().build());
         //todo
         event.put(EntityTypeRegistry.FOOT_SOLDIER.get(), FootSoldier.attributes().build());
     }

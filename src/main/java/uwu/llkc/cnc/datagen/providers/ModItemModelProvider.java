@@ -90,6 +90,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         buttonInventory("walnut_button", CNCMod.rl("block/walnut_planks"));
         fenceInventory("walnut_fence", CNCMod.rl("block/walnut_planks"));
         basicItem(ItemRegistry.IMP_SPAWN_EGG.asItem());
+        //todo
+        spawnEggItem(ItemRegistry.FOOT_SOLDIER_SPAWN_EGG.get());
         basicItem(ItemRegistry.CHERRY_PIE.get());
         basicItem(ItemRegistry.CHOCOLATE_CHERRY_CAKE.get());
     }

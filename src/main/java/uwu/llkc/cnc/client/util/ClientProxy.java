@@ -12,19 +12,22 @@ import org.joml.Quaternionf;
 import uwu.llkc.cnc.client.models.entity.BrowncoatModel;
 import uwu.llkc.cnc.client.models.entity.FootSoldierModel;
 import uwu.llkc.cnc.client.models.entity.ImpModel;
+import uwu.llkc.cnc.client.models.entity.MummifiedBrowncoatModel;
 import uwu.llkc.cnc.client.particles.PhysicsModelParticle;
 import uwu.llkc.cnc.client.renderers.entity.BrowncoatRenderer;
 import uwu.llkc.cnc.client.renderers.entity.FootSoldierRenderer;
 import uwu.llkc.cnc.client.renderers.entity.ImpRenderer;
+import uwu.llkc.cnc.client.renderers.entity.MummifiedBrowncoatRenderer;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
 import uwu.llkc.cnc.common.entities.zombies.Imp;
+import uwu.llkc.cnc.common.entities.zombies.MummifiedBrowncoat;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 
 public class ClientProxy {
-    public static void createBrowncoatHead(LivingEntity browncoat) {
+    public static void createBrowncoatHead(Browncoat browncoat) {
         var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("head");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.5, browncoat.getZ(), Either.left(model), poseStack -> {
             poseStack.mulPose(Axis.YN.rotationDegrees(browncoat.getVisualRotationYInDegrees()));
@@ -41,6 +44,23 @@ public class ClientProxy {
         }, Vec3.directionFromRotation(0, browncoat.getYRot()).x * -0.05, 0, Vec3.directionFromRotation(0, browncoat.getYRot()).z * -0.05, BrowncoatRenderer.TEXTURE));
     }
 
+    public static void createMummifiedBrowncoatHead(MummifiedBrowncoat browncoat) {
+        var model = MummifiedBrowncoatModel.createBodyLayer().bakeRoot().getChild("head");
+        Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.5, browncoat.getZ(), Either.left(model), poseStack -> {
+            poseStack.mulPose(Axis.YN.rotationDegrees(browncoat.getVisualRotationYInDegrees()));
+            poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        }, Vec3.directionFromRotation(0, browncoat.getYRot()).x * -0.05, 0.2, Vec3.directionFromRotation(0, browncoat.getYRot()).z * -0.05, MummifiedBrowncoatRenderer.TEXTURE));
+    }
+
+    public static void createMummifiedBrowncoatArm(MummifiedBrowncoat browncoat) {
+        var model = MummifiedBrowncoatModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("ForeArm");
+        Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.25, browncoat.getZ(), Either.left(model), poseStack -> {
+            poseStack.translate(Vec3.directionFromRotation(0, browncoat.getYRot()).z * .32, 0, Vec3.directionFromRotation(0, browncoat.getYRot()).x * -.32);
+            poseStack.mulPose(Axis.YP.rotationDegrees(-browncoat.getVisualRotationYInDegrees()));
+            poseStack.mulPose(Axis.XP.rotationDegrees(90));
+        }, Vec3.directionFromRotation(0, browncoat.getYRot()).x * -0.05, 0, Vec3.directionFromRotation(0, browncoat.getYRot()).z * -0.05, MummifiedBrowncoatRenderer.TEXTURE));
+    }
+
     public static void createFootSoldierHead(FootSoldier footSoldier) {
         var model = FootSoldierModel.createBodyLayer().bakeRoot().getChild("head");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) footSoldier.level()), footSoldier.getX(), footSoldier.getY() + 1.5, footSoldier.getZ(), Either.left(model), poseStack -> {
@@ -50,7 +70,7 @@ public class ClientProxy {
     }
 
     public static void createFootSoldierArm(FootSoldier footSoldier) {
-        var model = FootSoldierModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("forearm");
+        var model = FootSoldierModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("ForeArm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) footSoldier.level()), footSoldier.getX(), footSoldier.getY() + 1.25, footSoldier.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(Vec3.directionFromRotation(0, footSoldier.getYRot()).z * .32, 0, Vec3.directionFromRotation(0, footSoldier.getYRot()).x * -.32);
             poseStack.mulPose(Axis.YP.rotationDegrees(-footSoldier.getVisualRotationYInDegrees()));

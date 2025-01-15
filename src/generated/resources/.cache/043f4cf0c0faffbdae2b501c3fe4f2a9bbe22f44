@@ -1,6 +1,6 @@
-// 1.21.1	2024-11-10T17:35:47.9921562	Tags for minecraft:entity_type mod id cnc
-eb9234014998c75a0be0ff0a03e9770f985cb069 data/cnc/tags/entity_type/basic_zombie.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/champion_zombie.json
+// 1.21.1	2025-01-15T14:21:16.7717168	Tags for minecraft:entity_type mod id cnc
+2b58456b87ac0d03603d47074770f58f7e30d35e data/cnc/tags/entity_type/basic_zombie.json
+f192fba7104bd5468c3a11a0280f6b9c8ff4518f data/cnc/tags/entity_type/champion_zombie.json
 3721882b5088198fe7d9b420f81b1df02b30a749 data/cnc/tags/entity_type/cnc_zombies.json
 3b301e5a4c6e64d146cafb668946f29d05e72b26 data/cnc/tags/entity_type/defensive_plants.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/mini_boss_zombie.json
@@ -13,4 +13,4 @@ eb9234014998c75a0be0ff0a03e9770f985cb069 data/cnc/tags/entity_type/basic_zombie.
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/cnc/tags/entity_type/zombie_spawner.json
 5b4fec117aa45da7ed560b4c7346e4fd665d0749 data/minecraft/tags/entity_type/can_breathe_under_water.json
 1c4076968064a565a6095fed688c22d98b7c8e76 data/minecraft/tags/entity_type/freeze_immune_entity_types.json
-eb9234014998c75a0be0ff0a03e9770f985cb069 data/minecraft/tags/entity_type/undead.json
+9fb06b97094a84e8ca04306fea2fe6ae76acbcdd data/minecraft/tags/entity_type/undead.json

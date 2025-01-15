@@ -47,8 +47,8 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
         return CNCPlant.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 100)
                 .add(Attributes.ARMOR, 2)
-                .add(Attributes.ATTACK_DAMAGE, 2)
-                .add(Attributes.MOVEMENT_SPEED, 0.23)
+                .add(Attributes.ATTACK_DAMAGE, 4)
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_SPEED, 1)
                 .add(Attributes.FOLLOW_RANGE, 40);
     }
