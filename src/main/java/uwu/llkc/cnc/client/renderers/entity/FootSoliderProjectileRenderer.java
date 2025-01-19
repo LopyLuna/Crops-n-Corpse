@@ -40,19 +40,19 @@ public class FootSoliderProjectileRenderer extends EntityRenderer<FootSoldierPro
     public void render(FootSoldierProjectile entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         if (entity.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(entity) < 12.25)) {
             poseStack.pushPose();
-            poseStack.scale(this.scale, this.scale, this.scale);
+            //poseStack.scale(this.scale, this.scale, this.scale);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
             VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(entity)));
 
 
-            consumer.addVertex(poseStack.last(), -1, 1, 0)
-                    .setUv(0, 1).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
-            consumer.addVertex(poseStack.last(), 1, 1, 0)
-                    .setUv(1, 1).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
-            consumer.addVertex(poseStack.last(), 1, -1, 0)
-                    .setUv(1, 0).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
-            consumer.addVertex(poseStack.last(), -1, -1, 0)
-                    .setUv(0, 0).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), -.5f, -.5f, 0)
+                    .setUv(8, 7).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), .5f, -.5f, 0)
+                    .setUv(7, 7).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), .5f, .5f, 0)
+                    .setUv(7, 8).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), -.5f, .5f, 0)
+                    .setUv(8, 8).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
 
             poseStack.popPose();
             super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
