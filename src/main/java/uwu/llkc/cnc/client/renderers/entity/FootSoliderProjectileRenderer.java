@@ -1,20 +1,21 @@
 package uwu.llkc.cnc.client.renderers.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.Items;
+import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.projectiles.FootSoldierProjectile;
 
 public class FootSoliderProjectileRenderer extends EntityRenderer<FootSoldierProjectile> {
     private static final float MIN_CAMERA_DISTANCE_SQUARED = 12.25F;
+    private static final ResourceLocation TEXTURE = CNCMod.rl("textures/other/foot_soldier_bullet.png");
     private final ItemRenderer itemRenderer;
     private final float scale;
     private final boolean fullBright;
@@ -41,17 +42,18 @@ public class FootSoliderProjectileRenderer extends EntityRenderer<FootSoldierPro
             poseStack.pushPose();
             poseStack.scale(this.scale, this.scale, this.scale);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-            this.itemRenderer
-                    .renderStatic(
-                            Items.SNIFFER_EGG.getDefaultInstance(),
-                            ItemDisplayContext.GROUND,
-                            packedLight,
-                            OverlayTexture.NO_OVERLAY,
-                            poseStack,
-                            buffer,
-                            entity.level(),
-                            entity.getId()
-                    );
+            VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(entity)));
+
+
+            consumer.addVertex(poseStack.last(), -1, 1, 0)
+                    .setUv(0, 1).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), 1, 1, 0)
+                    .setUv(1, 1).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), 1, -1, 0)
+                    .setUv(1, 0).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), -1, -1, 0)
+                    .setUv(0, 0).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+
             poseStack.popPose();
             super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
         }
@@ -62,6 +64,6 @@ public class FootSoliderProjectileRenderer extends EntityRenderer<FootSoldierPro
      */
     @Override
     public ResourceLocation getTextureLocation(FootSoldierProjectile entity) {
-        return TextureAtlas.LOCATION_BLOCKS;
+        return TEXTURE;
     }
 }
