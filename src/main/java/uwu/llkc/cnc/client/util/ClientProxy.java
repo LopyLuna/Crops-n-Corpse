@@ -70,7 +70,7 @@ public class ClientProxy {
     }
 
     public static void createFootSoldierArm(FootSoldier footSoldier) {
-        var model = FootSoldierModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("ForeArm");
+        var model = FootSoldierModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("forearm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) footSoldier.level()), footSoldier.getX(), footSoldier.getY() + 1.25, footSoldier.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(Vec3.directionFromRotation(0, footSoldier.getYRot()).z * .32, 0, Vec3.directionFromRotation(0, footSoldier.getYRot()).x * -.32);
             poseStack.mulPose(Axis.YP.rotationDegrees(-footSoldier.getVisualRotationYInDegrees()));
