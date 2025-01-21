@@ -40,7 +40,7 @@ public class FootSoliderProjectileRenderer extends EntityRenderer<FootSoldierPro
     public void render(FootSoldierProjectile entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         if (entity.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(entity) < 12.25)) {
             poseStack.pushPose();
-            //poseStack.scale(this.scale, this.scale, this.scale);
+            poseStack.scale(this.scale, this.scale, this.scale);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
             VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(entity)));
 

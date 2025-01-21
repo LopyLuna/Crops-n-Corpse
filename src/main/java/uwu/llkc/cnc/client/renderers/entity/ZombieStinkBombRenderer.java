@@ -1,20 +1,22 @@
 package uwu.llkc.cnc.client.renderers.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.Items;
+import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.projectiles.ZombieStinkBomb;
 
 public class ZombieStinkBombRenderer extends EntityRenderer<ZombieStinkBomb> {
     private static final float MIN_CAMERA_DISTANCE_SQUARED = 12.25F;
+    private static final ResourceLocation TEXTURE = CNCMod.rl("textures/other/zombie_stink_bomb.png");
+
     private final ItemRenderer itemRenderer;
     private final float scale;
     private final boolean fullBright;
@@ -41,17 +43,18 @@ public class ZombieStinkBombRenderer extends EntityRenderer<ZombieStinkBomb> {
             poseStack.pushPose();
             poseStack.scale(this.scale, this.scale, this.scale);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-            this.itemRenderer
-                    .renderStatic(
-                            Items.SNIFFER_EGG.getDefaultInstance(),
-                            ItemDisplayContext.GROUND,
-                            packedLight,
-                            OverlayTexture.NO_OVERLAY,
-                            poseStack,
-                            buffer,
-                            entity.level(),
-                            entity.getId()
-                    );
+            VertexConsumer consumer = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(entity)));
+
+
+            consumer.addVertex(poseStack.last(), -.5f, -.5f, 0)
+                    .setUv(8, 7).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), .5f, -.5f, 0)
+                    .setUv(7, 7).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), .5f, .5f, 0)
+                    .setUv(7, 8).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+            consumer.addVertex(poseStack.last(), -.5f, .5f, 0)
+                    .setUv(8, 8).setColor(-1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(1, 0, 0);
+
             poseStack.popPose();
             super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
         }
@@ -62,6 +65,6 @@ public class ZombieStinkBombRenderer extends EntityRenderer<ZombieStinkBomb> {
      */
     @Override
     public ResourceLocation getTextureLocation(ZombieStinkBomb entity) {
-        return TextureAtlas.LOCATION_BLOCKS;
+        return TEXTURE;
     }
 }

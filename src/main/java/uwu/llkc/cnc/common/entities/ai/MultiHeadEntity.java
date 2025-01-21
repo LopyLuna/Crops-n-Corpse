@@ -2,7 +2,7 @@ package uwu.llkc.cnc.common.entities.ai;
 
 import org.joml.Vector3f;
 
-public interface IMultiHeadEntity {
+public interface MultiHeadEntity {
     int headCount();
     Vector3f getHeadPosition(int head);
     int getHeadRotSpeed(int head);

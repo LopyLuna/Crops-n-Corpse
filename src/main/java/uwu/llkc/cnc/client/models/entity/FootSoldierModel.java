@@ -8,6 +8,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.HumanoidArm;
 import uwu.llkc.cnc.CNCMod;
+import uwu.llkc.cnc.client.animations.FootSoldierAnimations;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
 
@@ -74,11 +75,16 @@ public class FootSoldierModel extends HierarchicalModel<FootSoldier> implements 
 
     @Override
     public void setupAnim(FootSoldier entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+
         humanoid.attackTime = attackTime;
         humanoid.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         copyFromDelegate();
         head.visible = entity.getEntityData().get(Browncoat.HAS_HEAD);
         leftForeArm.visible = entity.getEntityData().get(Browncoat.HAS_ARM);
+
+        this.animate(entity.zpgState, FootSoldierAnimations.ZPG, ageInTicks);
+
     }
 
     private void copyFromDelegate() {

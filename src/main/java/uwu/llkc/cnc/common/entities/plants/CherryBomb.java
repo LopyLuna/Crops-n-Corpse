@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import uwu.llkc.cnc.common.entities.ai.CherryRandomLookAroundGoal;
 import uwu.llkc.cnc.common.entities.ai.FixedBodyRotationControl;
-import uwu.llkc.cnc.common.entities.ai.IMultiHeadEntity;
+import uwu.llkc.cnc.common.entities.ai.MultiHeadEntity;
 import uwu.llkc.cnc.common.entities.ai.MultiHeadLookControl;
 import uwu.llkc.cnc.common.init.SoundRegistry;
 import uwu.llkc.cnc.common.init.Tags;
@@ -54,7 +54,7 @@ import uwu.llkc.cnc.common.util.MessageDamageSource;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadEntity {
+public class CherryBomb extends CNCPlant implements VibrationSystem, MultiHeadEntity {
     public static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> SLEEPING = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IGNITED = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.BOOLEAN);

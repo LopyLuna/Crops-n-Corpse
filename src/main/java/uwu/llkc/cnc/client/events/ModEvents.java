@@ -57,6 +57,7 @@ public class ModEvents {
         event.registerEntityRenderer(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get(), MummifiedBrowncoatRenderer::new);
         //todo fix renderer
         event.registerEntityRenderer(EntityTypeRegistry.FOOT_SOLDIER_PROJECTILE.get(), FootSoliderProjectileRenderer::new);
+        event.registerEntityRenderer(EntityTypeRegistry.ZPG_PROJECTILE.get(), ZpgRenderer::new);
 
         event.registerBlockEntityRenderer(BlockEntityTypeRegistry.CUSTOM_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityTypeRegistry.CUSTOM_HANGING_SIGN.get(), HangingSignRenderer::new);
@@ -76,6 +77,7 @@ public class ModEvents {
         event.registerLayerDefinition(RepeaterModel.MAIN_LAYER, RepeaterModel::createBodyLayer);
         event.registerLayerDefinition(FootSoldierModel.MAIN_LAYER, FootSoldierModel::createBodyLayer);
         event.registerLayerDefinition(MummifiedBrowncoatModel.MAIN_LAYER, MummifiedBrowncoatModel::createBodyLayer);
+        event.registerLayerDefinition(ZpgModel.LAYER_LOCATION, ZpgModel::createBodyLayer);
     }
 
     @SubscribeEvent

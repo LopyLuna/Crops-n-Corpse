@@ -9,10 +9,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
-import uwu.llkc.cnc.common.entities.projectiles.FootSoldierProjectile;
-import uwu.llkc.cnc.common.entities.projectiles.FrozenPeaProjectile;
-import uwu.llkc.cnc.common.entities.projectiles.PeaProjectile;
-import uwu.llkc.cnc.common.entities.projectiles.ZombieStinkBomb;
+import uwu.llkc.cnc.common.entities.projectiles.*;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
 import uwu.llkc.cnc.common.entities.zombies.Imp;
@@ -76,5 +73,8 @@ public class EntityTypeRegistry {
 
     public static final Supplier<EntityType<FootSoldierProjectile>> FOOT_SOLDIER_PROJECTILE = ENTITY_TYPES.register("foot_soldier_projectile",
             () -> EntityType.Builder.of(FootSoldierProjectile::new, MobCategory.MISC).sized(.1f, .1f).build(CNCMod.rlStr("foot_soldier_projectile")));
+
+    public static final Supplier<EntityType<ZpgProjectile>> ZPG_PROJECTILE = ENTITY_TYPES.register("zpg_projectile",
+            () -> EntityType.Builder.of(ZpgProjectile::new, MobCategory.MISC).sized(.1f, .1f).build(CNCMod.rlStr("zpg_projectile")));
 
 }

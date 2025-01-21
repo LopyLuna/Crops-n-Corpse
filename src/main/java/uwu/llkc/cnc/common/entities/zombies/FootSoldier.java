@@ -7,19 +7,19 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import uwu.llkc.cnc.client.util.ClientProxy;
@@ -33,6 +33,8 @@ import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 public class FootSoldier extends CNCZombie implements RangedAttackMob {
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(FootSoldier.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HAS_ARM = SynchedEntityData.defineId(FootSoldier.class, EntityDataSerializers.BOOLEAN);
+
+    public AnimationState zpgState = new AnimationState();
 
     private static final int HIT_TIME = 40;
 
@@ -104,6 +106,7 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
     @Override
     protected void registerGoals() {
         super.registerGoals();
+        this.goalSelector.addGoal(1, new ZpgGoal());
         this.goalSelector.addGoal(2, new StinkCloudGoal(this, 25));
         this.goalSelector.addGoal(3, new RangedAttackGoal(this, 1, 50, 25));
         this.goalSelector.addGoal(5, new KeepDistanceGoal(this, 15));
@@ -120,6 +123,8 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
         super.handleEntityEvent(id);
         if (id == 0) {
             ClientProxy.createFootSoldierArm(this);
+        } else if (id == -1) {
+            zpgState.startIfStopped(tickCount);
         }
     }
 
@@ -173,15 +178,55 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
         projectile.setOwner(this);
 
         float xOffset = -.5f;
-        float yOffset = 1f;
-        float zOffset = 1f;
+        float yOffset = 1.3f;
+        float zOffset = 1.2f;
 
         double x = Math.cos(Math.toRadians(getVisualRotationYInDegrees())) * xOffset + getX() - Math.sin(Math.toRadians(getVisualRotationYInDegrees())) * zOffset;
         double y = yOffset + getY();
         double z = Math.cos(Math.toRadians(getVisualRotationYInDegrees())) * zOffset + getZ() + Math.sin(Math.toRadians(getVisualRotationYInDegrees())) * xOffset;
 
         projectile.setPos(x, y, z);
-        projectile.shoot(target.getX() - x, target.getEyeY() - y, target.getZ() - z, 1f, 0);
+        projectile.shoot(target.getX() - x, target.getEyeY() - y, target.getZ() - z, .7f, 0);
         level().addFreshEntity(projectile);
+    }
+
+
+    private class ZpgGoal extends Goal {
+        private static final int ANIMATION_TIMING = 20;
+        private static final int COOLDOWN = 1800;
+        private int animationTimer = 0;
+        private int time = 0;
+        private CNCPlant target;
+
+        @Override
+        public boolean canUse() {
+            //todo check for gatling pea first
+            target = level().getNearestEntity(CNCPlant.class, TargetingConditions.forCombat(), FootSoldier.this, FootSoldier.this.getX(), FootSoldier.this.getY(), FootSoldier.this.getZ(), AABB.ofSize(FootSoldier.this.position(), 40, 5, 40));
+            return time++ > COOLDOWN && target != null;
+        }
+
+        @Override
+        public void start() {
+            level().broadcastEntityEvent(FootSoldier.this, (byte) -1);
+            lookControl.setLookAt(target);
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+            animationTimer++;
+            if (animationTimer > ANIMATION_TIMING) {
+                animationTimer = 0;
+                var zpg = EntityTypeRegistry.ZPG_PROJECTILE.get().create(level());
+                if (zpg == null) return;
+                zpg.setPos(getX(), getY() + 0.2f, getZ());
+                zpg.shoot(target.getX() - getX(), target.getY() - getY(), target.getZ() - getZ(), .5f, 0);
+            }
+        }
     }
 }

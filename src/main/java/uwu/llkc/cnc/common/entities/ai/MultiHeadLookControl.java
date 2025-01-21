@@ -6,12 +6,11 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3f;
 
 import java.util.Arrays;
 import java.util.Optional;
 
-public class MultiHeadLookControl<T extends Mob & IMultiHeadEntity> extends LookControl {
+public class MultiHeadLookControl<T extends Mob & MultiHeadEntity> extends LookControl {
     private final LookControl[] lookControls;
 
     public MultiHeadLookControl(T mob) {
