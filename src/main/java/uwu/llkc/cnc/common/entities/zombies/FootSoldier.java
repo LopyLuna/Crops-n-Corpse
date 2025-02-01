@@ -126,6 +126,8 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
             ClientProxy.createFootSoldierArm(this);
         } else if (id == -1) {
             zpgState.startIfStopped(tickCount);
+        } else if (id == -2) {
+            zpgState.stop();
         }
     }
 
@@ -196,8 +198,9 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
         private static final int ANIMATION_TIMING = 20;
         private static final int COOLDOWN = 1800;
         private int animationTimer = 0;
-        private int time = 0;
+        boolean stopAnim = false;
         private CNCPlant target;
+        private int time = 1500;
 
         @Override
         public boolean canUse() {
@@ -213,6 +216,12 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
         }
 
         @Override
+        public void stop() {
+            super.stop();
+            level().broadcastEntityEvent(FootSoldier.this, (byte) -2);
+        }
+
+        @Override
         public boolean requiresUpdateEveryTick() {
             return true;
         }
@@ -221,12 +230,19 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
         public void tick() {
             super.tick();
             animationTimer++;
-            if (animationTimer > ANIMATION_TIMING) {
+            if (animationTimer > ANIMATION_TIMING && !stopAnim) {
                 animationTimer = 0;
                 var zpg = EntityTypeRegistry.ZPG_PROJECTILE.get().create(level());
                 if (zpg == null) return;
-                zpg.setPos(getX(), getY() + 0.2f, getZ());
+                zpg.setPos(getX(), getY() + 0.6f, getZ());
                 zpg.shoot(target.getX() - getX(), target.getY() - getY(), target.getZ() - getZ(), .5f, 0);
+                level().addFreshEntity(zpg);
+                stopAnim = true;
+            }
+            if (animationTimer > ANIMATION_TIMING && stopAnim) {
+                animationTimer = 0;
+                time = 0;
+                stop();
             }
         }
     }
