@@ -234,7 +234,7 @@ public class FootSoldier extends CNCZombie implements RangedAttackMob {
                 animationTimer = 0;
                 var zpg = EntityTypeRegistry.ZPG_PROJECTILE.get().create(level());
                 if (zpg == null) return;
-                zpg.setPos(getX(), getY() + 0.6f, getZ());
+                zpg.setPos(getX(), getY() + 1f, getZ());
                 zpg.shoot(target.getX() - getX(), target.getY() - getY(), target.getZ() - getZ(), .5f, 0);
                 level().addFreshEntity(zpg);
                 stopAnim = true;
