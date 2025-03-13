@@ -1,6 +1,5 @@
 package uwu.llkc.cnc.common.items;
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,11 +36,11 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class MultiEntitySpawnEggItem extends SpawnEggItem {
-    public static final List<MultiEntitySpawnEggItem> EGGS = new ArrayList<>();
-    private final List<Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>> entityList;
+public class MultiEntitySpawnEggItem<E extends Mob> extends SpawnEggItem {
+    public static final List<MultiEntitySpawnEggItem<?>> EGGS = new ArrayList<>();
+    private final List<EntitySpawnInstance<E>> entityList;
 
-    public MultiEntitySpawnEggItem(Properties properties, List<Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>> others) {
+    public MultiEntitySpawnEggItem(Properties properties, List<EntitySpawnInstance<E>> others) {
         super(null, 0, 0, properties);
         entityList = others;
         EGGS.add(this);
@@ -54,15 +53,15 @@ public class MultiEntitySpawnEggItem extends SpawnEggItem {
 
     @Override
     protected EntityType<?> getDefaultType() {
-        return entityList.getFirst().getFirst().get();
+        return entityList.getFirst().mob.get();
     }
 
     @Override
-    public EntityType<? extends Mob> getType(ItemStack stack) {
-        return getPair(stack).getFirst().get();
+    public EntityType<E> getType(ItemStack stack) {
+        return getInstance(stack).mob().get();
     }
 
-    private Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>> getPair(ItemStack stack) {
+    private EntitySpawnInstance<E> getInstance(ItemStack stack) {
         int index = stack.getOrDefault(DataComponentRegistry.SELECTED_ENTITY, 0);
         return entityList.get(index);
     }
@@ -108,8 +107,8 @@ public class MultiEntitySpawnEggItem extends SpawnEggItem {
                     blockpos1 = blockpos.relative(direction);
                 }
 
-                EntityType<? extends Mob> entitytype = this.getType(itemstack);
-                Mob entity = entitytype.spawn(
+                var entitytype = this.getType(itemstack);
+                var entity = entitytype.spawn(
                         (ServerLevel)level,
                         itemstack,
                         context.getPlayer(),
@@ -119,7 +118,7 @@ public class MultiEntitySpawnEggItem extends SpawnEggItem {
                         !Objects.equals(blockpos, blockpos1) && direction == Direction.UP
                 );
                 if (entity != null) {
-                    getPair(itemstack).getSecond().accept(entity);
+                    getInstance(itemstack).action.accept(entity);
                     itemstack.shrink(1);
                     level.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockpos);
                 }
@@ -145,12 +144,12 @@ public class MultiEntitySpawnEggItem extends SpawnEggItem {
             if (!(level.getBlockState(blockpos).getBlock() instanceof LiquidBlock)) {
                 return InteractionResultHolder.pass(itemstack);
             } else if (level.mayInteract(player, blockpos) && player.mayUseItemAt(blockpos, blockhitresult.getDirection(), itemstack)) {
-                EntityType<? extends Mob> entitytype = this.getType(itemstack);
-                Mob entity = entitytype.spawn((ServerLevel)level, itemstack, player, blockpos, MobSpawnType.SPAWN_EGG, false, false);
+                var entitytype = this.getType(itemstack);
+                var entity = entitytype.spawn((ServerLevel) level, itemstack, player, blockpos, MobSpawnType.SPAWN_EGG, false, false);
                 if (entity == null) {
                     return InteractionResultHolder.pass(itemstack);
                 } else {
-                    getPair(itemstack).getSecond().accept(entity);
+                    getInstance(itemstack).action().accept(entity);
                     itemstack.consume(1, player);
                     player.awardStat(Stats.ITEM_USED.get(this));
                     level.gameEvent(player, GameEvent.ENTITY_PLACE, entity.position());
@@ -163,8 +162,17 @@ public class MultiEntitySpawnEggItem extends SpawnEggItem {
     }
 
     @Override
+    public Component getName(ItemStack stack) {
+        return super.getName(stack).copy().append(" (").append(getInstance(stack).name()).append(")");
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("item.multi_spawn_egg.tooltip").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+        tooltipComponents.add(Component.translatable("item.multi_spawn_egg.tooltip2", getInstance(stack).name).withStyle(ChatFormatting.ITALIC, ChatFormatting.BLUE));
+    }
+
+    public record EntitySpawnInstance<T extends Mob>(Supplier<EntityType<T>> mob, Consumer<T> action, String name) {
     }
 }

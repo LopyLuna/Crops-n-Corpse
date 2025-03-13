@@ -84,6 +84,7 @@ public class ModEvents {
     public static void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             ItemProperties.register(ItemRegistry.BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
+            ItemProperties.register(ItemRegistry.MUMMIFIED_BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
             //ItemProperties.register(Items.BUCKET, );
 
             Sheets.addWoodType(BlockRegistry.WoodTypes.WALNUT);

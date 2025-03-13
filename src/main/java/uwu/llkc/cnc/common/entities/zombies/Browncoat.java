@@ -77,11 +77,15 @@ public class Browncoat extends CNCZombie {
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
+        compound.putBoolean("hasHead", entityData.get(HAS_HEAD));
+        compound.putBoolean("hasArm", entityData.get(HAS_ARM));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
+        entityData.set(HAS_HEAD, !compound.contains("hasHead") || compound.getBoolean("hasHead"));
+        entityData.set(HAS_ARM, !compound.contains("hasHead") || compound.getBoolean("hasArm"));
     }
 
     @Nullable
@@ -110,9 +114,7 @@ public class Browncoat extends CNCZombie {
         return CNCPlant.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20)
                 .add(Attributes.ARMOR, 2)
-                //todo flag zombie should do more damage
                 .add(Attributes.ATTACK_DAMAGE, 2)
-                //todo flag zombie should be faster
                 .add(Attributes.MOVEMENT_SPEED, 0.23)
                 .add(Attributes.ATTACK_SPEED, 1);
     }

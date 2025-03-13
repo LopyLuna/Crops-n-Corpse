@@ -1,5 +1,6 @@
 package uwu.llkc.cnc.common.entities.zombies;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -23,6 +24,11 @@ import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 public class MummifiedImp extends CNCZombie {
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(MummifiedImp.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HAS_ARM = SynchedEntityData.defineId(MummifiedImp.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> HAS_SANDSTORM = SynchedEntityData.defineId(MummifiedBrowncoat.class, EntityDataSerializers.BOOLEAN);
+
+    private static final int SANDSTORM_TIME = 200;
+    private static final float SANDSTORM_CHANCE = 0.5f;
+
 
     public MummifiedImp(EntityType<MummifiedImp> entityType, Level level) {
         super(entityType, level);
@@ -35,6 +41,20 @@ public class MummifiedImp extends CNCZombie {
                 .add(Attributes.ATTACK_DAMAGE, 1)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_SPEED, 1.2);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putBoolean("hasHead", entityData.get(HAS_HEAD));
+        compound.putBoolean("hasArm", entityData.get(HAS_ARM));
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        entityData.set(HAS_HEAD, !compound.contains("hasHead") || compound.getBoolean("hasHead"));
+        entityData.set(HAS_ARM, !compound.contains("hasHead") || compound.getBoolean("hasArm"));
     }
 
     @Override

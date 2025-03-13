@@ -53,7 +53,7 @@ public class ClientProxy {
     }
 
     public static void createMummifiedBrowncoatArm(MummifiedBrowncoat browncoat) {
-        var model = MummifiedBrowncoatModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("forearm");
+        var model = MummifiedBrowncoatModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("Forearm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.25, browncoat.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(Vec3.directionFromRotation(0, browncoat.getYRot()).z * .32, 0, Vec3.directionFromRotation(0, browncoat.getYRot()).x * -.32);
             poseStack.mulPose(Axis.YP.rotationDegrees(-browncoat.getVisualRotationYInDegrees()));

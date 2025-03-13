@@ -1,12 +1,13 @@
 package uwu.llkc.cnc.common.init;
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -19,11 +20,12 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
+import uwu.llkc.cnc.common.entities.zombies.Browncoat;
+import uwu.llkc.cnc.common.entities.zombies.MummifiedBrowncoat;
 import uwu.llkc.cnc.common.items.*;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CNCMod.MOD_ID);
@@ -58,22 +60,28 @@ public class ItemRegistry {
             PlantArmorItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> IMP_SPAWN_EGG = ITEMS.registerItem("imp_spawn_egg",
             props -> new DeferredSpawnEggItem(EntityTypeRegistry.IMP, 0xFFFFFF, 0xFFFFFF, props));
-    public static final DeferredItem<Item> MUMMIFIED_BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("mummified_browncoat_spawn_egg",
-            props -> new DeferredSpawnEggItem(EntityTypeRegistry.MUMMIFIED_BROWNCOAT, 0xFFFFFF, 0xFFFFFF, props));
+
     public static final DeferredItem<Item> FOOT_SOLDIER_SPAWN_EGG = ITEMS.registerItem("foot_soldier_spawn_egg",
             props -> new DeferredSpawnEggItem(EntityTypeRegistry.FOOT_SOLDIER, 0xFFFFFF, 0xFFFFFF, props));
     public static final DeferredItem<TrafficConeItem> TRAFFIC_CONE = ITEMS.registerItem("traffic_cone", TrafficConeItem::new, new Item.Properties().durability(15));
     //todo
     public static final DeferredItem<Item> COMBAT_HELMET = ITEMS.registerItem("combat_helmet",
             props -> new ArmorItem(ArmorMaterials.IRON, ArmorItem.Type.HELMET, props), new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15)));
-    public static final DeferredItem<Item> FLAG = ITEMS.registerSimpleItem("flag", new Item.Properties().attributes(ItemAttributeModifiers.builder().add(Attributes.MOVEMENT_SPEED, new AttributeModifier(CNCMod.rl("flag"), 0.5, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND).build()));
-    @SuppressWarnings("unchecked")
-    public static final DeferredItem<MultiEntitySpawnEggItem> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEggItem(props, List.of(
-            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>) (Object) EntityTypeRegistry.BROWNCOAT, mob -> {
-            }),
-            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>) (Object) EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get()))),
-            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>) (Object) EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get()))),
-            new Pair<Supplier<EntityType<? extends Mob>>, Consumer<Mob>>((Supplier<EntityType<? extends Mob>>) (Object) EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET)))
+    public static final DeferredItem<Item> FLAG = ITEMS.registerSimpleItem("flag", new Item.Properties().attributes(ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(CNCMod.rl("flag_damage"), 0.5, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.MOVEMENT_SPEED, new AttributeModifier(CNCMod.rl("flag_movement"), 0.05, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build()));
+
+    public static final DeferredItem<MultiEntitySpawnEggItem<Browncoat>> BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("browncoat_spawn_egg", props -> new MultiEntitySpawnEggItem<>(props, List.of(
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.BROWNCOAT, mob -> {
+            }, "Browncoat"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get())), "Flag Bearer"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get())), "Conehead"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET)), "Buckethead")
+    )));
+    public static final DeferredItem<MultiEntitySpawnEggItem<MummifiedBrowncoat>> MUMMIFIED_BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("mummified_browncoat_spawn_egg", props -> new MultiEntitySpawnEggItem<>(props, List.of(
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.MUMMIFIED_BROWNCOAT, mob -> {
+            }, "Mummified Browncoat"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.MUMMIFIED_BROWNCOAT, mob -> mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get())), "Mummified Flag Bearer"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.MUMMIFIED_BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get())), "Mummified Conehead"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.MUMMIFIED_BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET)), "Mummified Buckethead")
     )));
     public static final DeferredItem<Item> PEA_POD = ITEMS.registerSimpleItem("pea_pod", new Item.Properties().food(Foods.PEA_POD));
     public static final DeferredItem<BlockItem> RAW_PEA = ITEMS.registerItem("raw_pea",

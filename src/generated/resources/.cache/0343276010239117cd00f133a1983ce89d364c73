@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-15T14:21:16.7803684	Item Models: cnc
+// 1.21.1	2025-03-12T13:03:28.7391095	Item Models: cnc
 cf5c2182fe08615cb0d4119083806e680076002e assets/cnc/models/item/browncoat_spawn_egg.json
 32e87e6f5564d12a898ad60f0637697e0f7f144d assets/cnc/models/item/buckethead_spawn_egg.json
 f1fa8e6f305d25dfb5c6ccce635229bd2a0ee3a2 assets/cnc/models/item/bucket_item.json
@@ -23,6 +23,10 @@ b56eec6db9e200dd8828650b86fc082120b9e8f1 assets/cnc/models/item/flag_spawn_egg.j
 e92548fb9109ce6fbadbe15fbfa544aff23312bc assets/cnc/models/item/hanging_walnut_sign.json
 4b5323f808bb0575a269dc08d138eff534999ad5 assets/cnc/models/item/imp_spawn_egg.json
 55574f51d35b2a51fe8e43ff5b666247fde6f1fd assets/cnc/models/item/mashed_potatoes.json
+9abd08e284f4722d7b0f53b20f8b6411d751764e assets/cnc/models/item/mummified_browncoat_spawn_egg.json
+1c067bbe688e910110774c0a498512445fde95a2 assets/cnc/models/item/mummy_buckethead_spawn_egg.json
+2c7d69ef1a303d5e8c8bed0b9796bdc29bb9efdb assets/cnc/models/item/mummy_conehead_spawn_egg.json
+aaafc2a9b6a7edc063414feed737abc128643ee9 assets/cnc/models/item/mummy_flag_spawn_egg.json
 a4cf1433dcd16c5df8fac07829db1a29d1c6e774 assets/cnc/models/item/peashooter_seed_packet.json
 e4ac201e3fef850b0a5a1e3981e6244521d58e59 assets/cnc/models/item/pea_pod.json
 2de4a7499813c5b4c03f9a887ffafb32c1d93265 assets/cnc/models/item/plant_armor.json

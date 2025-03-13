@@ -82,6 +82,15 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .model(basicItem(CNCMod.rl("buckethead_spawn_egg")))
                 .predicate(MultiEntitySpawnEggProperty.ID, 0.03f).end();
 
+        withExistingParent("mummified_browncoat_spawn_egg", "item/generated")
+                .texture("layer0", CNCMod.rl("item/mummy_browncoat_spawn_egg")).override()
+                .model(basicItem(CNCMod.rl("mummy_flag_spawn_egg")))
+                .predicate(MultiEntitySpawnEggProperty.ID, 0.01f).end().override()
+                .model(basicItem(CNCMod.rl("mummy_conehead_spawn_egg")))
+                .predicate(MultiEntitySpawnEggProperty.ID, 0.02f).end().override()
+                .model(basicItem(CNCMod.rl("mummy_buckethead_spawn_egg")))
+                .predicate(MultiEntitySpawnEggProperty.ID, 0.03f).end();
+
         basicItem(ItemRegistry.WALNUT_SIGN.get());
         basicItem(ItemRegistry.HANGING_WALNUT_SIGN.get());
         basicItem(ItemRegistry.WALNUT_DOOR.get());

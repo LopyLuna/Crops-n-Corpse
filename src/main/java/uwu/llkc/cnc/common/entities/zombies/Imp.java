@@ -1,5 +1,6 @@
 package uwu.llkc.cnc.common.entities.zombies;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -36,6 +37,20 @@ public class Imp extends CNCZombie {
                 .add(Attributes.ATTACK_DAMAGE, 1)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_SPEED, 1.2);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putBoolean("hasHead", entityData.get(HAS_HEAD));
+        compound.putBoolean("hasArm", entityData.get(HAS_ARM));
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        entityData.set(HAS_HEAD, !compound.contains("hasHead") || compound.getBoolean("hasHead"));
+        entityData.set(HAS_ARM, !compound.contains("hasHead") || compound.getBoolean("hasArm"));
     }
 
     @Override

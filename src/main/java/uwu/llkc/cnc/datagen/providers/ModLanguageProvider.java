@@ -78,6 +78,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("death.attack.frozen_pea", "%2$s gave %1$s a cold");
 
         add("item.multi_spawn_egg.tooltip", "Shift right-click to cycle");
+        add("item.multi_spawn_egg.tooltip2", "Selected: %s");
         add("item.cnc.seed_packet.cost", "Sun Cost:");
         add("item.cnc.seed_packet.cooldown", "Cooldown:");
         add("item.cnc.seed_packet.hp", "Remaining Health:");

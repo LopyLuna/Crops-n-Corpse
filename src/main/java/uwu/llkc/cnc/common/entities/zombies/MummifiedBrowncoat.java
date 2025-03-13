@@ -39,7 +39,7 @@ public class MummifiedBrowncoat extends CNCZombie {
 
     private static final int SANDSTORM_TIME = 200;
     private static final float SANDSTORM_CHANCE = 0.5f;
-    private static final AttributeModifier SANDSTORM_MOD = new AttributeModifier(CNCMod.rl("sandstorm"), 2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    public static final AttributeModifier SANDSTORM_MOD = new AttributeModifier(CNCMod.rl("sandstorm"), 2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
 
     public double xTieO;
     public double yTieO;
@@ -93,11 +93,15 @@ public class MummifiedBrowncoat extends CNCZombie {
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
+        compound.putBoolean("hasHead", entityData.get(HAS_HEAD));
+        compound.putBoolean("hasArm", entityData.get(HAS_ARM));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
+        entityData.set(HAS_HEAD, !compound.contains("hasHead") || compound.getBoolean("hasHead"));
+        entityData.set(HAS_ARM, !compound.contains("hasHead") || compound.getBoolean("hasArm"));
     }
 
     @Nullable
@@ -170,7 +174,7 @@ public class MummifiedBrowncoat extends CNCZombie {
     public void tick() {
         super.tick();
         moveTie();
-        if (level().getBiome(blockPosition()).is(Tags.Biomes.IS_SANDY)) {
+        if (level().getBiome(blockPosition()).is(Tags.Biomes.IS_SANDY) && !entityData.get(HAS_SANDSTORM) && level().isThundering()) {
             if (level().getGameTime() % SANDSTORM_TIME == 5) {
                 if (random.nextFloat() < SANDSTORM_CHANCE) {
                     entityData.set(HAS_SANDSTORM, true);

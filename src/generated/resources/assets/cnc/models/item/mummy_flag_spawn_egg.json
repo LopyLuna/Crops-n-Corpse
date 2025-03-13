@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cnc:item/mummy_flag_spawn_egg"
+  }
+}
