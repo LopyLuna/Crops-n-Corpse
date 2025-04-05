@@ -8,11 +8,11 @@ import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.client.models.entity.BrowncoatModel;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 
-public class BrowncoatRenderer extends HumanoidMobRenderer<Browncoat, BrowncoatModel> {
+public class BrowncoatRenderer extends HumanoidMobRenderer<Browncoat, BrowncoatModel<Browncoat>> {
     public static final ResourceLocation TEXTURE = CNCMod.rl("textures/entity/browncoat.png");
 
     public BrowncoatRenderer(EntityRendererProvider.Context context) {
-        super(context, new BrowncoatModel(context.bakeLayer(BrowncoatModel.MAIN_LAYER)), 0.5f);
+        super(context, new BrowncoatModel<>(context.bakeLayer(BrowncoatModel.MAIN_LAYER)), 0.5f);
     }
 
     @Override

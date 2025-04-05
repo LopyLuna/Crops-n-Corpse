@@ -76,7 +76,6 @@ public class ModEvents {
         event.registerLayerDefinition(CherryBombModel.MAIN_LAYER, CherryBombModel::createBodyLayer);
         event.registerLayerDefinition(RepeaterModel.MAIN_LAYER, RepeaterModel::createBodyLayer);
         event.registerLayerDefinition(FootSoldierModel.MAIN_LAYER, FootSoldierModel::createBodyLayer);
-        event.registerLayerDefinition(MummifiedBrowncoatModel.MAIN_LAYER, MummifiedBrowncoatModel::createBodyLayer);
         event.registerLayerDefinition(ZpgModel.LAYER_LOCATION, ZpgModel::createBodyLayer);
     }
 

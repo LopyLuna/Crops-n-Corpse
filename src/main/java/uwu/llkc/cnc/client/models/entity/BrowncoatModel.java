@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 
-public class BrowncoatModel extends AbstractZombieModel<Browncoat> implements HeadedModel, ArmedModel {
+public class BrowncoatModel<T extends Browncoat> extends AbstractZombieModel<T> implements HeadedModel, ArmedModel {
     public static final ModelLayerLocation MAIN_LAYER = new ModelLayerLocation(CNCMod.rl("browncoat"), "main");
     public final ModelPart leftForeArm;
     private final ModelPart tie;
@@ -49,7 +49,7 @@ public class BrowncoatModel extends AbstractZombieModel<Browncoat> implements He
     }
 
     @Override
-    public void setupAnim(Browncoat entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
         var partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
@@ -83,7 +83,7 @@ public class BrowncoatModel extends AbstractZombieModel<Browncoat> implements He
     }
 
     @Override
-    public boolean isAggressive(Browncoat entity) {
+    public boolean isAggressive(T entity) {
         return entity.isAggressive();
     }
 

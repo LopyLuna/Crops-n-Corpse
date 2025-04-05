@@ -26,7 +26,7 @@ public class Imp extends CNCZombie {
     public static final EntityDataAccessor<Boolean> HAS_HEAD = SynchedEntityData.defineId(Imp.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> HAS_ARM = SynchedEntityData.defineId(Imp.class, EntityDataSerializers.BOOLEAN);
 
-    public Imp(EntityType<Imp> entityType, Level level) {
+    public Imp(EntityType<? extends Imp> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -78,7 +78,7 @@ public class Imp extends CNCZombie {
         super.die(damageSource);
         entityData.set(HAS_HEAD, false);
         if (level().isClientSide) {
-            ClientProxy.createImpHead(this);
+            createImpHead();
         }
     }
 
@@ -97,8 +97,16 @@ public class Imp extends CNCZombie {
     public void handleEntityEvent(byte id) {
         super.handleEntityEvent(id);
         if (id == 0) {
-            ClientProxy.createImpArm(this);
+            createImpArm();
         }
+    }
+
+    protected void createImpArm() {
+        ClientProxy.createImpArm(this);
+    }
+
+    public void createImpHead() {
+        ClientProxy.createImpHead(this);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class Browncoat extends CNCZombie {
     public double yTie;
     public double zTie;
 
-    public Browncoat(EntityType<Browncoat> entityType, Level level) {
+    public Browncoat(EntityType<? extends Browncoat> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -200,7 +200,7 @@ public class Browncoat extends CNCZombie {
         super.die(damageSource);
         entityData.set(HAS_HEAD, false);
         if (level().isClientSide) {
-            ClientProxy.createBrowncoatHead(this);
+            createBrowncoatHead();
         }
     }
 
@@ -219,8 +219,16 @@ public class Browncoat extends CNCZombie {
     public void handleEntityEvent(byte id) {
         super.handleEntityEvent(id);
         if (id == 0) {
-            ClientProxy.createBrowncoatArm(this);
+            createBrowncoatArm();
         }
+    }
+
+    protected void createBrowncoatArm() {
+        ClientProxy.createBrowncoatArm(this);
+    }
+
+    protected void createBrowncoatHead() {
+        ClientProxy.createBrowncoatHead(this);
     }
 
     @Override
