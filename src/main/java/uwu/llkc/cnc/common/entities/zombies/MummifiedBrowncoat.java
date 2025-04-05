@@ -95,6 +95,7 @@ public class MummifiedBrowncoat extends CNCZombie {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("hasHead", entityData.get(HAS_HEAD));
         compound.putBoolean("hasArm", entityData.get(HAS_ARM));
+        compound.putBoolean("hasSandstorm", entityData.get(HAS_SANDSTORM));
     }
 
     @Override
@@ -102,6 +103,7 @@ public class MummifiedBrowncoat extends CNCZombie {
         super.readAdditionalSaveData(compound);
         entityData.set(HAS_HEAD, !compound.contains("hasHead") || compound.getBoolean("hasHead"));
         entityData.set(HAS_ARM, !compound.contains("hasHead") || compound.getBoolean("hasArm"));
+        entityData.set(HAS_SANDSTORM, compound.getBoolean("hasSandstorm"));
     }
 
     @Nullable

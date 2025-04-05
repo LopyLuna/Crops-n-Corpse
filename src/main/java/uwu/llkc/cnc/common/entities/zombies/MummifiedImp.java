@@ -7,7 +7,11 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -18,7 +22,9 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
+import uwu.llkc.cnc.client.util.ClientProxy;
 import uwu.llkc.cnc.common.entities.plants.CNCPlant;
 
 public class MummifiedImp extends CNCZombie {
@@ -48,6 +54,7 @@ public class MummifiedImp extends CNCZombie {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("hasHead", entityData.get(HAS_HEAD));
         compound.putBoolean("hasArm", entityData.get(HAS_ARM));
+        compound.putBoolean("hasSandstorm", entityData.get(HAS_SANDSTORM));
     }
 
     @Override
@@ -55,6 +62,7 @@ public class MummifiedImp extends CNCZombie {
         super.readAdditionalSaveData(compound);
         entityData.set(HAS_HEAD, !compound.contains("hasHead") || compound.getBoolean("hasHead"));
         entityData.set(HAS_ARM, !compound.contains("hasHead") || compound.getBoolean("hasArm"));
+        entityData.set(HAS_SANDSTORM, compound.getBoolean("hasSandstorm"));
     }
 
     @Override
@@ -62,6 +70,7 @@ public class MummifiedImp extends CNCZombie {
         super.defineSynchedData(builder);
         builder.define(HAS_HEAD, true);
         builder.define(HAS_ARM, true);
+        builder.define(HAS_SANDSTORM, false);
     }
 
     @Override
@@ -78,11 +87,35 @@ public class MummifiedImp extends CNCZombie {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (level().getBiome(blockPosition()).is(Tags.Biomes.IS_SANDY) && !entityData.get(HAS_SANDSTORM) && level().isThundering()) {
+            if (level().getGameTime() % SANDSTORM_TIME == 5) {
+                if (random.nextFloat() < SANDSTORM_CHANCE) {
+                    entityData.set(HAS_SANDSTORM, true);
+                    getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(MummifiedBrowncoat.SANDSTORM_MOD);
+                }
+            }
+        }
+        if (entityData.get(HAS_SANDSTORM)) {
+            if (level().getBiome(blockPosition()).is(Tags.Biomes.IS_SANDY)) {
+                if (level(.getGameTime() % 280 == 5) {
+                    entityData.set(HAS_SANDSTORM, false);
+                    getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(MummifiedBrowncoat.SANDSTORM_MOD);
+                }
+            } else {
+                entityData.set(HAS_SANDSTORM, false);
+                getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(MummifiedBrowncoat.SANDSTORM_MOD);
+            }
+        }
+    }
+
+    @Override
     public void die(DamageSource damageSource) {
         super.die(damageSource);
         entityData.set(HAS_HEAD, false);
         if (level().isClientSide) {
-            //fixme ClientProxy.createImpHead(this);
+            ClientProxy.createMummifiedImpHead(this);
         }
     }
 
@@ -98,10 +131,23 @@ public class MummifiedImp extends CNCZombie {
     }
 
     @Override
+    public boolean doHurtTarget(Entity entity) {
+        boolean flag = super.doHurtTarget(entity);
+        if (flag && this.getMainHandItem().isEmpty() && entity instanceof LivingEntity) {
+            float f = this.level().getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
+            ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.HUNGER, 140 * (int) f), this);
+        }
+
+        return flag;
+    }
+
+
+
+    @Override
     public void handleEntityEvent(byte id) {
         super.handleEntityEvent(id);
         if (id == 0) {
-            //fixme ClientProxy.createImpArm(this);
+            ClientProxy.createMummfiedImpArm(this);
         }
     }
 

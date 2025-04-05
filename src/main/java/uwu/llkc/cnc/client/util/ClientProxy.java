@@ -18,10 +18,7 @@ import uwu.llkc.cnc.client.renderers.entity.BrowncoatRenderer;
 import uwu.llkc.cnc.client.renderers.entity.FootSoldierRenderer;
 import uwu.llkc.cnc.client.renderers.entity.ImpRenderer;
 import uwu.llkc.cnc.client.renderers.entity.MummifiedBrowncoatRenderer;
-import uwu.llkc.cnc.common.entities.zombies.Browncoat;
-import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
-import uwu.llkc.cnc.common.entities.zombies.Imp;
-import uwu.llkc.cnc.common.entities.zombies.MummifiedBrowncoat;
+import uwu.llkc.cnc.common.entities.zombies.*;
 import uwu.llkc.cnc.common.networking.DropEquipmentPayload;
 import uwu.llkc.cnc.common.networking.SyncBlockActuallyBrokenPayload;
 import uwu.llkc.cnc.common.util.ChunkMixinHelper;
@@ -88,6 +85,24 @@ public class ClientProxy {
     }
 
     public static void createImpArm(Imp imp) {
+        var model = ImpModel.createBodyLayer().bakeRoot().getChild("left_arm");
+        Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) imp.level()), imp.getX(), imp.getY() + 0.6, imp.getZ(), Either.left(model), poseStack -> {
+            poseStack.translate(0, -0.6, 0);
+            poseStack.mulPose(Axis.YP.rotationDegrees(-imp.getVisualRotationYInDegrees()));
+            poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        }, Vec3.directionFromRotation(0, imp.getYRot()).x * -0.05, 0, Vec3.directionFromRotation(0, imp.getYRot()).z * -0.05, MummifiedBrowncoatModel.TEXTURE));
+    }
+
+    public static void createMummifiedHead(MummifiedImp imp) {
+        var model = ImpModel.createBodyLayer().bakeRoot().getChild("head");
+        Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) imp.level()), imp.getX(), imp.getY() + 0.7, imp.getZ(), Either.left(model), poseStack -> {
+            poseStack.translate(0, 1.05, 0);
+            poseStack.mulPose(Axis.YN.rotationDegrees(imp.getVisualRotationYInDegrees()));
+            poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        }, Vec3.directionFromRotation(0, imp.getYRot()).x * -0.05, 0.2, Vec3.directionFromRotation(0, imp.getYRot()).z * -0.05, ImpRenderer.TEXTURE));
+    }
+
+    public static void createMummifiedArm(MummifiedImp imp) {
         var model = ImpModel.createBodyLayer().bakeRoot().getChild("left_arm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) imp.level()), imp.getX(), imp.getY() + 0.6, imp.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(0, -0.6, 0);
