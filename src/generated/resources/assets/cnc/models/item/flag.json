@@ -1,21 +1,17 @@
 {
   "parent": "neoforge:item/default",
-  "base": {
-    "parent": "cnc:item/flag_item"
-  },
-  "loader": "neoforge:separate_transforms",
-  "perspectives": {
-    "firstperson_lefthand": {
-      "parent": "cnc:item/flag_model"
+  "overrides": [
+    {
+      "model": "cnc:item/flag_default",
+      "predicate": {
+        "cnc:zombie_variant_property": 0.0
+      }
     },
-    "firstperson_righthand": {
-      "parent": "cnc:item/flag_model"
-    },
-    "thirdperson_lefthand": {
-      "parent": "cnc:item/flag_model"
-    },
-    "thirdperson_righthand": {
-      "parent": "cnc:item/flag_model"
+    {
+      "model": "cnc:item/mummy_flag",
+      "predicate": {
+        "cnc:zombie_variant_property": 0.1
+      }
     }
-  }
+  ]
 }

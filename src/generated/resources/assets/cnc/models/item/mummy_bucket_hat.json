@@ -1,0 +1,12 @@
+{
+  "parent": "neoforge:item/default",
+  "base": {
+    "parent": "minecraft:item/bucket"
+  },
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "head": {
+      "parent": "cnc:item/mummy_bucket"
+    }
+  }
+}

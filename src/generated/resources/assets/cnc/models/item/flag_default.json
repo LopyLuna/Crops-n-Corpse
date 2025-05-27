@@ -1,0 +1,21 @@
+{
+  "parent": "cnc:item/flag_item",
+  "base": {
+    "parent": "cnc:item/flag_item"
+  },
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "firstperson_lefthand": {
+      "parent": "cnc:item/flag_model"
+    },
+    "firstperson_righthand": {
+      "parent": "cnc:item/flag_model"
+    },
+    "thirdperson_lefthand": {
+      "parent": "cnc:item/flag_model"
+    },
+    "thirdperson_righthand": {
+      "parent": "cnc:item/flag_model"
+    }
+  }
+}

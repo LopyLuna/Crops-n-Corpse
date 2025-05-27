@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
@@ -33,6 +34,7 @@ import uwu.llkc.cnc.common.init.BlockEntityTypeRegistry;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 import uwu.llkc.cnc.common.init.EntityTypeRegistry;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.items.ZombieVariantProperty;
 import uwu.llkc.cnc.common.items.properties.MultiEntitySpawnEggProperty;
 
 @EventBusSubscriber(modid = CNCMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -84,7 +86,9 @@ public class ModEvents {
         event.enqueueWork(() -> {
             ItemProperties.register(ItemRegistry.BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
             ItemProperties.register(ItemRegistry.MUMMIFIED_BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
-            //ItemProperties.register(Items.BUCKET, );
+            ItemProperties.register(Items.BUCKET, ZombieVariantProperty.ID, ZombieVariantProperty.INSTANCE);
+            ItemProperties.register(ItemRegistry.TRAFFIC_CONE.get(), ZombieVariantProperty.ID, ZombieVariantProperty.INSTANCE);
+            ItemProperties.register(ItemRegistry.FLAG.get(), ZombieVariantProperty.ID, ZombieVariantProperty.INSTANCE);
 
             Sheets.addWoodType(BlockRegistry.WoodTypes.WALNUT);
         });

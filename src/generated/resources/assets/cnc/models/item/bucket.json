@@ -2,13 +2,13 @@
   "parent": "neoforge:item/default",
   "overrides": [
     {
-      "model": "cnc:item/traffic_cone_default",
+      "model": "cnc:item/bucket_hat_item",
       "predicate": {
         "cnc:zombie_variant_property": 0.0
       }
     },
     {
-      "model": "cnc:item/traffic_cone_mummy",
+      "model": "cnc:item/mummy_bucket_hat",
       "predicate": {
         "cnc:zombie_variant_property": 0.1
       }

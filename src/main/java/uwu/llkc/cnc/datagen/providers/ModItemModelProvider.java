@@ -9,6 +9,7 @@ import net.neoforged.neoforge.client.model.generators.loaders.SeparateTransforms
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.init.ItemRegistry;
+import uwu.llkc.cnc.common.items.ZombieVariantProperty;
 import uwu.llkc.cnc.common.items.properties.MultiEntitySpawnEggProperty;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -50,28 +51,72 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ItemRegistry.CHERRY_MILKSHAKE.get());
         basicItem(ItemRegistry.CHOCOLATE_MILKSHAKE.get());
         basicItem(ItemRegistry.VANILLA_MILKSHAKE.get());
+        basicItem(CNCMod.rl("traffic_cone_item"));
+        basicItem(CNCMod.rl("flag_item"));
         leaves("walnut_leaves", CNCMod.rl("block/walnut_leaves"));
 
         withExistingParent(CNCMod.rlStr("traffic_cone"), "neoforge:item/default")
-                .customLoader(SeparateTransformsModelBuilder::begin)
-                .base(nested().parent(basicItem(CNCMod.rl("traffic_cone_item"))))
-                .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("block/traffic_cone")))
-                        .transforms().transform(ItemDisplayContext.HEAD).scale(1.6f).translation(0, 17, 0).end().end())
-                .end();
+                .override()
+                .predicate(ZombieVariantProperty.ID, 0f)
+                .model(
+                        withExistingParent(CNCMod.rlStr("traffic_cone_default"), "neoforge:item/default")
+                                .customLoader(SeparateTransformsModelBuilder::begin)
+                                .base(nested().parent(getExistingFile(CNCMod.rl("traffic_cone_item"))))
+                                .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("block/traffic_cone")))
+                                        .transforms().transform(ItemDisplayContext.HEAD).scale(1.6f).translation(0, 17, 0).end()
+                                        .end()).end()
+                ).end()
+                .override()
+                .predicate(ZombieVariantProperty.ID, 0.1f)
+                .model(
+                        withExistingParent(CNCMod.rlStr("traffic_cone_mummy"), "neoforge:item/default")
+                                .customLoader(SeparateTransformsModelBuilder::begin)
+                                .base(nested().parent(getExistingFile(CNCMod.rl("traffic_cone_item"))))
+                                .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("block/mummy_traffic_cone")))
+                                        .transforms().transform(ItemDisplayContext.HEAD).scale(1.6f).translation(0, 17, 0).end()
+                                        .end()).end()
+                );
 
         withExistingParent(CNCMod.rlStr("flag"), "neoforge:item/default")
-                .customLoader(SeparateTransformsModelBuilder::begin)
-                .base(nested().parent(basicItem(CNCMod.rl("flag_item"))))
-                .perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
-                .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
-                .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
-                .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model")))).end();
+                .override()
+                .predicate(ZombieVariantProperty.ID, 0f)
+                .model(
+                        withExistingParent(CNCMod.rlStr("flag_default"), CNCMod.rl("flag_item"))
+                                .customLoader(SeparateTransformsModelBuilder::begin)
+                                .base(nested().parent(getExistingFile(CNCMod.rl("flag_item"))))
+                                .perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
+                                .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
+                                .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model"))))
+                                .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/flag_model")))).end()
+                ).end().override()
+                .predicate(ZombieVariantProperty.ID, 0.1f)
+                .model(
+                        withExistingParent(CNCMod.rlStr("mummy_flag"), CNCMod.rl("flag_item"))
+                                .customLoader(SeparateTransformsModelBuilder::begin)
+                                .base(nested().parent(getExistingFile(CNCMod.rl("flag_item"))))
+                                .perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/mummy_flag_model"))))
+                                .perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/mummy_flag_model"))))
+                                .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/mummy_flag_model"))))
+                                .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/mummy_flag_model")))).end()
+                ).end();
 
-        withExistingParent(ResourceLocation.withDefaultNamespace("bucket").toString(), "neoforge:item/default")
-                .customLoader(SeparateTransformsModelBuilder::begin)
-                .base(nested().parent(basicItem(CNCMod.rl("bucket_item"))))
-                .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("item/bucket"))))
+        withExistingParent(CNCMod.rlStr("bucket"), "neoforge:item/default")
+                .override()
+                .predicate(ZombieVariantProperty.ID, 0f)
+                .model(withExistingParent(CNCMod.rl("bucket_hat_item").toString(), "neoforge:item/default")
+                        .customLoader(SeparateTransformsModelBuilder::begin)
+                        .base(nested().parent(getExistingFile(ResourceLocation.withDefaultNamespace("bucket"))))
+                        .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("item/bucket_hat"))))
+                        .end())
+                .end().override()
+                .predicate(ZombieVariantProperty.ID, 0.1f)
+                .model(withExistingParent(CNCMod.rl("mummy_bucket_hat").toString(), "neoforge:item/default")
+                        .customLoader(SeparateTransformsModelBuilder::begin)
+                        .base(nested().parent(getExistingFile(ResourceLocation.withDefaultNamespace("bucket"))))
+                        .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("item/mummy_bucket"))))
+                        .end())
                 .end();
+
 
         withExistingParent("browncoat_spawn_egg", "item/generated")
                 .texture("layer0", CNCMod.rl("item/browncoat_spawn_egg")).override()
