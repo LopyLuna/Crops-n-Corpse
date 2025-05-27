@@ -42,5 +42,13 @@
 			"children": [0, 1]
 		}
 	],
-	"render_type": "minecraft:cutout"
+  "render_type": "minecraft:cutout",
+  "overrides": [
+    {
+      "predicate": {
+        "cnc:zombie_variant_property": 0.1
+      },
+      "model": "cnc:block/mummy_traffic_cone"
+    }
+  ]
 }

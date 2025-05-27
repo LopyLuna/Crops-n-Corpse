@@ -47,5 +47,13 @@
 			"color": 0,
 			"children": [0, 1]
 		}
+    ],
+  "overrides": [
+    {
+      "predicate": {
+        "cnc:zombie_variant_property": 0.1
+      },
+      "model": "cnc:item/mummy_bucket"
+    }
 	]
 }
