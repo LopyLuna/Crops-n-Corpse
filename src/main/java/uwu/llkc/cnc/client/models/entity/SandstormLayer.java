@@ -2,7 +2,6 @@ package uwu.llkc.cnc.client.models.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.AbstractZombieModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -11,16 +10,16 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.monster.Monster;
+import uwu.llkc.cnc.common.entities.zombies.MummifiedBrowncoat;
 
 import java.util.function.Predicate;
 
-public class SandstormLayer<E extends Monster> extends RenderLayer<E, AbstractZombieModel<E>> {
+public class SandstormLayer<E extends MummifiedBrowncoat> extends RenderLayer<E, MummifiedBrowncoatModel<E>> {
     private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/breeze/breeze_wind.png");
     private final WindModel<E> model;
     private final Predicate<E> shouldRender;
 
-    public SandstormLayer(EntityRendererProvider.Context context, RenderLayerParent<E, AbstractZombieModel<E>> renderer, Predicate<E> shouldRender) {
+    public SandstormLayer(EntityRendererProvider.Context context, RenderLayerParent<E, MummifiedBrowncoatModel<E>> renderer, Predicate<E> shouldRender) {
         super(renderer);
         this.model = new WindModel<>(context.bakeLayer(ModelLayers.BREEZE_WIND));
         this.shouldRender = shouldRender;

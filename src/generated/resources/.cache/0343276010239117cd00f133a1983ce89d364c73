@@ -1,6 +1,5 @@
-// 1.21.1	2025-04-14T17:47:07.6358679	Item Models: cnc
+// 1.21.1	2025-06-30T16:39:29.967215	Item Models: cnc
 cf5c2182fe08615cb0d4119083806e680076002e assets/cnc/models/item/browncoat_spawn_egg.json
-5512e7f13caee60d07d2865595e070dbacbe2949 assets/cnc/models/item/bucket.json
 32e87e6f5564d12a898ad60f0637697e0f7f144d assets/cnc/models/item/buckethead_spawn_egg.json
 e27bdfe97bd712b0bcc7ed750136441e1e3680d9 assets/cnc/models/item/bucket_hat_item.json
 20a813514916a0a270d34f2307e7762a2749bb7c assets/cnc/models/item/cherries.json
@@ -60,3 +59,4 @@ bbbee25515f7242034e25bef929ecfe2822b187c assets/cnc/models/item/walnut_chest_boa
 a777fa675508e9d164f9a5729c9bb086544400da assets/cnc/models/item/walnut_leaves.json
 02c1ae58563583cf74675df5120bca36e025e55f assets/cnc/models/item/walnut_sapling.json
 cba7b6086115056bc3ece138d7b39b4d28dbac79 assets/cnc/models/item/walnut_sign.json
+5512e7f13caee60d07d2865595e070dbacbe2949 assets/minecraft/models/item/bucket.json

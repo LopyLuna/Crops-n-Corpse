@@ -57,7 +57,7 @@ public class ModEvents {
         event.registerEntityRenderer(EntityTypeRegistry.REPEATER.get(), RepeaterRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.ZOMBIE_STINK_BOMB.get(), ZombieStinkBombRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get(), MummifiedBrowncoatRenderer::new);
-        //todo fix renderer
+        event.registerEntityRenderer(EntityTypeRegistry.PIRATE_BROWNCOAT.get(), PirateBrowncoatRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.FOOT_SOLDIER_PROJECTILE.get(), FootSoliderProjectileRenderer::new);
         event.registerEntityRenderer(EntityTypeRegistry.ZPG_PROJECTILE.get(), ZpgRenderer::new);
 
@@ -71,6 +71,7 @@ public class ModEvents {
         event.registerLayerDefinition(SnowPeaModel.MAIN_LAYER, SnowPeaModel::createBodyLayer);
         event.registerLayerDefinition(SunflowerModel.MAIN_LAYER, SunflowerModel::createBodyLayer);
         event.registerLayerDefinition(BrowncoatModel.MAIN_LAYER, BrowncoatModel::createBodyLayer);
+        event.registerLayerDefinition(PirateBrowncoatModel.MAIN_LAYER, PirateBrowncoatModel::createBodyLayer);
         event.registerLayerDefinition(WallNutModel.MAIN_LAYER, WallNutModel::createBodyLayer);
         event.registerLayerDefinition(WallNutArmorLayer.ARMOR, WallNutArmorLayer::createArmor);
         event.registerLayerDefinition(ImpModel.MAIN_LAYER, ImpModel::createBodyLayer);
@@ -79,6 +80,7 @@ public class ModEvents {
         event.registerLayerDefinition(RepeaterModel.MAIN_LAYER, RepeaterModel::createBodyLayer);
         event.registerLayerDefinition(FootSoldierModel.MAIN_LAYER, FootSoldierModel::createBodyLayer);
         event.registerLayerDefinition(ZpgModel.LAYER_LOCATION, ZpgModel::createBodyLayer);
+        event.registerLayerDefinition(MummifiedBrowncoatModel.MAIN_LAYER, MummifiedBrowncoatModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -86,6 +88,7 @@ public class ModEvents {
         event.enqueueWork(() -> {
             ItemProperties.register(ItemRegistry.BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
             ItemProperties.register(ItemRegistry.MUMMIFIED_BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
+            ItemProperties.register(ItemRegistry.PIRATE_BROWNCOAT_SPAWN_EGG.get(), MultiEntitySpawnEggProperty.ID, MultiEntitySpawnEggProperty.INSTANCE);
             ItemProperties.register(Items.BUCKET, ZombieVariantProperty.ID, ZombieVariantProperty.INSTANCE);
             ItemProperties.register(ItemRegistry.TRAFFIC_CONE.get(), ZombieVariantProperty.ID, ZombieVariantProperty.INSTANCE);
             ItemProperties.register(ItemRegistry.FLAG.get(), ZombieVariantProperty.ID, ZombieVariantProperty.INSTANCE);

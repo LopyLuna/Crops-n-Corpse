@@ -16,6 +16,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import uwu.llkc.cnc.CNCMod;
 
 public class BiomeModifierInit {
+    //todo pirate spawns
     public static final ResourceKey<BiomeModifier> PEASHOOTER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("peashooter_spawns"));
     public static final ResourceKey<BiomeModifier> SNOW_PEA_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("snow_pea_spawns"));
     public static final ResourceKey<BiomeModifier> REPEATER_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("repeater_spawns"));

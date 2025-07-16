@@ -10,7 +10,9 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -70,13 +72,21 @@ public class ModEntityLootTableSubProvider extends EntityLootSubProvider {
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(Items.ROTTEN_FLESH)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, ConstantValue.exactly(1))))));
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, ConstantValue.exactly(1)))))
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(ItemRegistry.PLANT_FOOD)
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.15f, 0.01f))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))));
 
         add(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get(), new LootTable.Builder()
                 .withPool(LootPool.lootPool()
                         .add(LootItem.lootTableItem(Items.ROTTEN_FLESH)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, ConstantValue.exactly(1))))));
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, ConstantValue.exactly(1)))))
+                .withPool(LootPool.lootPool()
+                        .add(LootItem.lootTableItem(ItemRegistry.PLANT_FOOD)
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.15f, 0.01f))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))));
 
         add(EntityTypeRegistry.IMP.get(), new LootTable.Builder()
                 .withPool(LootPool.lootPool()

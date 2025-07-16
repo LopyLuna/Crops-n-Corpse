@@ -42,7 +42,7 @@ public class ModEvents {
         event.put(EntityTypeRegistry.CHERRY_BOMB.get(), CherryBomb.attributes().build());
         event.put(EntityTypeRegistry.REPEATER.get(), Repeater.attributes().build());
         event.put(EntityTypeRegistry.MUMMIFIED_BROWNCOAT.get(), Browncoat.attributes().build());
-        //todo
+        event.put(EntityTypeRegistry.PIRATE_BROWNCOAT.get(), Browncoat.attributes().build());
         event.put(EntityTypeRegistry.FOOT_SOLDIER.get(), FootSoldier.attributes().build());
     }
 
@@ -57,6 +57,7 @@ public class ModEvents {
         event.register(EntityTypeRegistry.POTATO_MINE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PotatoMine::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.CHERRY_BOMB.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CherryBomb::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         event.register(EntityTypeRegistry.REPEATER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Repeater::checkMobSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        //todo register mummified and pirate browncoats spawns
     }
 
     @SubscribeEvent

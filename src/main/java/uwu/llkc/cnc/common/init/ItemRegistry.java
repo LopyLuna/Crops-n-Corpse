@@ -22,6 +22,7 @@ import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
 import uwu.llkc.cnc.common.entities.zombies.MummifiedBrowncoat;
+import uwu.llkc.cnc.common.entities.zombies.PirateBrowncoat;
 import uwu.llkc.cnc.common.items.*;
 
 import java.util.List;
@@ -82,6 +83,13 @@ public class ItemRegistry {
             new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.MUMMIFIED_BROWNCOAT, mob -> mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get())), "Mummified Flag Bearer"),
             new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.MUMMIFIED_BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get())), "Mummified Conehead"),
             new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.MUMMIFIED_BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET)), "Mummified Buckethead")
+    )));
+    public static final DeferredItem<MultiEntitySpawnEggItem<PirateBrowncoat>> PIRATE_BROWNCOAT_SPAWN_EGG = ITEMS.registerItem("pirate_browncoat_spawn_egg", props -> new MultiEntitySpawnEggItem<>(props, List.of(
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.PIRATE_BROWNCOAT, mob -> {
+            }, "Pirate Browncoat"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.PIRATE_BROWNCOAT, mob -> mob.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(FLAG.get())), "Pirate Flag Bearer"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.PIRATE_BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(TRAFFIC_CONE.get())), "Pirate Conehead"),
+            new MultiEntitySpawnEggItem.EntitySpawnInstance<>(EntityTypeRegistry.PIRATE_BROWNCOAT, mob -> mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.BUCKET)), "Pirate Buckethead")
     )));
     public static final DeferredItem<Item> PEA_POD = ITEMS.registerSimpleItem("pea_pod", new Item.Properties().food(Foods.PEA_POD));
     public static final DeferredItem<BlockItem> RAW_PEA = ITEMS.registerItem("raw_pea",

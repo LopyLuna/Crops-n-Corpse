@@ -1,10 +1,11 @@
 {
+  "format_version": "1.21.6",
   "texture_size": [
     32,
     32
   ],
   "textures": {
-    "0": "cnc:item/mummy_bucket_hat"
+    "0": "cnc:item/mummy_bucket"
   },
   "elements": [
     {
@@ -136,9 +137,9 @@
         },
         "west": {
           "uv": [
-            2,
-            10,
             4,
+            10,
+            6,
             12
           ],
           "texture": "#0"
@@ -214,9 +215,9 @@
         },
         "west": {
           "uv": [
-            6,
+            0,
             10,
-            8,
+            2,
             12
           ],
           "texture": "#0"
@@ -242,6 +243,20 @@
       }
     }
   ],
+  "display": {
+    "head": {
+      "translation": [
+        0,
+        12.5,
+        0
+      ],
+      "scale": [
+        1.6,
+        1.6,
+        1.6
+      ]
+    }
+  },
   "groups": [
     {
       "name": "Bucket",

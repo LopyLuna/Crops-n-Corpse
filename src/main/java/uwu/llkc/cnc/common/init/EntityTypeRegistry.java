@@ -10,10 +10,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.plants.*;
 import uwu.llkc.cnc.common.entities.projectiles.*;
-import uwu.llkc.cnc.common.entities.zombies.Browncoat;
-import uwu.llkc.cnc.common.entities.zombies.FootSoldier;
-import uwu.llkc.cnc.common.entities.zombies.Imp;
-import uwu.llkc.cnc.common.entities.zombies.MummifiedBrowncoat;
+import uwu.llkc.cnc.common.entities.zombies.*;
 
 import java.util.function.Supplier;
 
@@ -47,6 +44,8 @@ public class EntityTypeRegistry {
     public static final Supplier<EntityType<MummifiedBrowncoat>> MUMMIFIED_BROWNCOAT = ENTITY_TYPES.register("mummified_browncoat",
             () -> EntityType.Builder.of(MummifiedBrowncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("mummified_browncoat")));
 
+    public static final Supplier<EntityType<PirateBrowncoat>> PIRATE_BROWNCOAT = ENTITY_TYPES.register("pirate_browncoat",
+            () -> EntityType.Builder.of(PirateBrowncoat::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("pirate_browncoat")));
 
     public static final Supplier<EntityType<FootSoldier>> FOOT_SOLDIER = ENTITY_TYPES.register("foot_soldier",
             () -> EntityType.Builder.of(FootSoldier::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).build(CNCMod.rlStr("foot_soldier")));

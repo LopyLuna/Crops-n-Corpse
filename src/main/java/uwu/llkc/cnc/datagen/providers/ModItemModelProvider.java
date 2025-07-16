@@ -77,6 +77,23 @@ public class ModItemModelProvider extends ItemModelProvider {
                                         .end()).end()
                 );
 
+        withExistingParent("minecraft:bucket", "neoforge:item/default")
+                .override()
+                .predicate(ZombieVariantProperty.ID, 0f)
+                .model(withExistingParent(CNCMod.rl("bucket_hat_item").toString(), "neoforge:item/default")
+                        .customLoader(SeparateTransformsModelBuilder::begin)
+                        .base(nested().parent(getExistingFile(ResourceLocation.withDefaultNamespace("bucket"))))
+                        .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("item/bucket_hat"))))
+                        .end())
+                .end().override()
+                .predicate(ZombieVariantProperty.ID, 0.1f)
+                .model(withExistingParent(CNCMod.rl("mummy_bucket_hat").toString(), "neoforge:item/default")
+                        .customLoader(SeparateTransformsModelBuilder::begin)
+                        .base(nested().parent(getExistingFile(ResourceLocation.withDefaultNamespace("bucket"))))
+                        .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("item/mummy_bucket"))))
+                        .end())
+                .end();
+
         withExistingParent(CNCMod.rlStr("flag"), "neoforge:item/default")
                 .override()
                 .predicate(ZombieVariantProperty.ID, 0f)
@@ -99,24 +116,6 @@ public class ModItemModelProvider extends ItemModelProvider {
                                 .perspective(ItemDisplayContext.THIRD_PERSON_LEFT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/mummy_flag_model"))))
                                 .perspective(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, nested().parent(getExistingFile(CNCMod.rl("item/mummy_flag_model")))).end()
                 ).end();
-
-        withExistingParent(CNCMod.rlStr("bucket"), "neoforge:item/default")
-                .override()
-                .predicate(ZombieVariantProperty.ID, 0f)
-                .model(withExistingParent(CNCMod.rl("bucket_hat_item").toString(), "neoforge:item/default")
-                        .customLoader(SeparateTransformsModelBuilder::begin)
-                        .base(nested().parent(getExistingFile(ResourceLocation.withDefaultNamespace("bucket"))))
-                        .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("item/bucket_hat"))))
-                        .end())
-                .end().override()
-                .predicate(ZombieVariantProperty.ID, 0.1f)
-                .model(withExistingParent(CNCMod.rl("mummy_bucket_hat").toString(), "neoforge:item/default")
-                        .customLoader(SeparateTransformsModelBuilder::begin)
-                        .base(nested().parent(getExistingFile(ResourceLocation.withDefaultNamespace("bucket"))))
-                        .perspective(ItemDisplayContext.HEAD, nested().parent(getExistingFile(CNCMod.rl("item/mummy_bucket"))))
-                        .end())
-                .end();
-
 
         withExistingParent("browncoat_spawn_egg", "item/generated")
                 .texture("layer0", CNCMod.rl("item/browncoat_spawn_egg")).override()
