@@ -1,59 +1,81 @@
 package uwu.llkc.cnc.client.models.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.AbstractZombieModel;
-import net.minecraft.client.model.ArmedModel;
-import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.entities.zombies.Browncoat;
+import uwu.llkc.cnc.common.entities.zombies.PirateBrowncoat;
 
-public class PirateBrowncoatModel<T extends Browncoat> extends AbstractZombieModel<T> implements HeadedModel, ArmedModel {
+public class PirateBrowncoatModel extends HierarchicalModel<PirateBrowncoat> implements HeadedModel, ArmedModel {
     public static final ModelLayerLocation MAIN_LAYER = new ModelLayerLocation(CNCMod.rl("pirate_browncoat"), "main");
-    public final ModelPart leftForeArm;
+    public final ModelPart head;
     private final ModelPart tie;
+    public final ModelPart leftForeArm;
+    private final ModelPart root;
+    private final ModelPart body;
+    private final ModelPart leftArm;
+    private final ModelPart rightArm;
+    private final ModelPart leftLeg;
+    private final ModelPart rightLeg;
+    private final HumanoidBrowncoat delegateBrowncoat;
 
     public PirateBrowncoatModel(ModelPart root) {
-        super(root);
-        this.tie = root.getChild("tie");
+        this.root = root.getChild("root");
+        this.tie = this.root.getChild("tie");
+        this.head = this.root.getChild("head");
+        this.body = this.root.getChild("body");
+        leftArm = this.root.getChild("left_arm");
         leftForeArm = this.leftArm.getChild("left_forearm");
+        rightArm = this.root.getChild("right_arm");
+        leftLeg = this.root.getChild("left_leg");
+        rightLeg = this.root.getChild("right_leg");
+        delegateBrowncoat = new HumanoidBrowncoat(this.root);
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
+        PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0F, 0.0F));
 
-        PartDefinition Head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
+        PartDefinition Head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
                 .texOffs(24, 1).addBox(-1.5F, -6.0F, 4.0F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
                 .texOffs(32, 3).addBox(0.0F, -8.0F, 5.0F, 0.0F, 7.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition Body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0, 0.0F));
+        PartDefinition Body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 12, 0.0F));
 
-        //fixme: fix positioning
-        PartDefinition Tie = partdefinition.addOrReplaceChild("tie", CubeListBuilder.create().texOffs(37, 1).addBox(-2.0F, -1.0F, 1.0F, 4.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -5.0F, -3.1F));
+        PartDefinition Tie = root.addOrReplaceChild("tie", CubeListBuilder.create().texOffs(37, 1).addBox(-2.0F, 0, 0, 4.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0F, -2.1F));
 
-        PartDefinition RightLeg = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 12.0F, 0.0F));
+        PartDefinition RightLeg = root.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 12.0F, 0.0F));
 
-        PartDefinition LeftLeg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 32).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 12.0F, 0.0F));
+        PartDefinition LeftLeg = root.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 32).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 12.0F, 0.0F));
 
-        PartDefinition LeftArm = partdefinition.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(16, 32).addBox(0.0F, -2.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.0F, 2.0F, 0.0F, -1.309F, 0.0F, 0.0F));
+        PartDefinition LeftArm = root.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(16, 32).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.0F, 2.0F, 0.0F, -1.309F, 0.0F, 0.0F));
 
-        PartDefinition left_forearm = LeftArm.addOrReplaceChild("left_forearm", CubeListBuilder.create().texOffs(16, 42).addBox(3.0F, 3.6049F, -0.0694F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 0.3951F, -1.9306F));
+        PartDefinition Forearm = LeftArm.addOrReplaceChild("left_forearm", CubeListBuilder.create().texOffs(16, 42).addBox(2.0F, 3.6049F, -0.0694F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 0.3951F, -1.9306F));
 
-        PartDefinition RightArm = partdefinition.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(40, 16).addBox(-4.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.0F, 2.0F, 0.0F, -1.309F, 0.0F, 0.0F));
-
-        PartDefinition hat = partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition RightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(40, 16).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.0F, 2.0F, 0.0F, -1.309F, 0.0F, 0.0F));
+        PartDefinition hat = root.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 128, 128);
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+    public ModelPart root() {
+        return root;
+    }
+
+    @Override
+    public void setupAnim(PirateBrowncoat entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        delegateBrowncoat.attackTime = this.attackTime;
+        delegateBrowncoat.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        copyFromDelegate();
 
         var partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
         double d0 = Mth.lerp(partialTicks, entity.xTieO, entity.xTie) - Mth.lerp(partialTicks, entity.xo, entity.getX());
@@ -85,13 +107,35 @@ public class PirateBrowncoatModel<T extends Browncoat> extends AbstractZombieMod
         leftForeArm.visible = entity.getEntityData().get(Browncoat.HAS_ARM);
     }
 
-    @Override
-    public boolean isAggressive(T entity) {
-        return entity.isAggressive();
+    private void copyFromDelegate() {
+        this.head.loadPose(delegateBrowncoat.head.storePose());
+        this.body.loadPose(delegateBrowncoat.body.storePose());
+        this.rightArm.loadPose(delegateBrowncoat.rightArm.storePose());
+        this.leftArm.loadPose(delegateBrowncoat.leftArm.storePose());
+        this.rightLeg.loadPose(delegateBrowncoat.rightLeg.storePose());
+        this.leftLeg.loadPose(delegateBrowncoat.leftLeg.storePose());
     }
+
 
     @Override
     public ModelPart getHead() {
         return head;
+    }
+
+    @Override
+    public void translateToHand(HumanoidArm side, PoseStack poseStack) {
+        delegateBrowncoat.translateToHand(side, poseStack);
+    }
+
+    private static class HumanoidBrowncoat extends HumanoidModel<PirateBrowncoat> {
+        public HumanoidBrowncoat(ModelPart root) {
+            super(root);
+        }
+
+        @Override
+        public void setupAnim(PirateBrowncoat entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+            super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            AnimationUtils.animateZombieArms(HumanoidBrowncoat.this.leftArm, HumanoidBrowncoat.this.rightArm, entity.isAggressive(), attackTime, ageInTicks);
+        }
     }
 }

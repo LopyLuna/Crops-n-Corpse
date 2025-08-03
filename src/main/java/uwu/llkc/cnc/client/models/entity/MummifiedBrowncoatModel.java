@@ -45,7 +45,6 @@ public class MummifiedBrowncoatModel<E extends MummifiedBrowncoat> extends Hiera
 
         PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0F, 0.0F));
 
-
         PartDefinition Head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4, -8, -4, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F))
                 .texOffs(32, 0).addBox(-4, -8, -4, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.offset(0, 0.0F, 0));
 

@@ -22,7 +22,7 @@ import uwu.llkc.cnc.common.util.ChunkMixinHelper;
 
 public class ClientProxy {
     public static void createBrowncoatHead(Browncoat browncoat) {
-        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("head");
+        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.5, browncoat.getZ(), Either.left(model), poseStack -> {
             poseStack.mulPose(Axis.YN.rotationDegrees(browncoat.getVisualRotationYInDegrees()));
             poseStack.mulPose(Axis.XP.rotationDegrees(180));
@@ -30,7 +30,7 @@ public class ClientProxy {
     }
 
     public static void createBrowncoatArm(Browncoat browncoat) {
-        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("left_forearm");
+        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("left_arm").getChild("left_forearm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.25, browncoat.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(Vec3.directionFromRotation(0, browncoat.getYRot()).z * .32, 0, Vec3.directionFromRotation(0, browncoat.getYRot()).x * -.32);
             poseStack.mulPose(Axis.YP.rotationDegrees(-browncoat.getVisualRotationYInDegrees()));
@@ -39,7 +39,7 @@ public class ClientProxy {
     }
 
     public static void createPirateBrowncoatHead(Browncoat browncoat) {
-        var model = PirateBrowncoatModel.createBodyLayer().bakeRoot().getChild("head");
+        var model = PirateBrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.5, browncoat.getZ(), Either.left(model), poseStack -> {
             poseStack.mulPose(Axis.YN.rotationDegrees(browncoat.getVisualRotationYInDegrees()));
             poseStack.mulPose(Axis.XP.rotationDegrees(180));
@@ -47,7 +47,7 @@ public class ClientProxy {
     }
 
     public static void createPirateBrowncoatArm(Browncoat browncoat) {
-        var model = PirateBrowncoatModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("left_forearm");
+        var model = PirateBrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("left_arm").getChild("left_forearm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.25, browncoat.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(Vec3.directionFromRotation(0, browncoat.getYRot()).z * .32, 0, Vec3.directionFromRotation(0, browncoat.getYRot()).x * -.32);
             poseStack.mulPose(Axis.YP.rotationDegrees(-browncoat.getVisualRotationYInDegrees()));
@@ -56,7 +56,7 @@ public class ClientProxy {
     }
 
     public static void createMummifiedBrowncoatHead(MummifiedBrowncoat browncoat) {
-        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("head");
+        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.5, browncoat.getZ(), Either.left(model), poseStack -> {
             poseStack.mulPose(Axis.YN.rotationDegrees(browncoat.getVisualRotationYInDegrees()));
             poseStack.mulPose(Axis.XP.rotationDegrees(180));
@@ -64,7 +64,7 @@ public class ClientProxy {
     }
 
     public static void createMummifiedBrowncoatArm(MummifiedBrowncoat browncoat) {
-        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("left_arm").getChild("left_forearm");
+        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("left_arm").getChild("left_forearm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) browncoat.level()), browncoat.getX(), browncoat.getY() + 1.25, browncoat.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(Vec3.directionFromRotation(0, browncoat.getYRot()).z * .32, 0, Vec3.directionFromRotation(0, browncoat.getYRot()).x * -.32);
             poseStack.mulPose(Axis.YP.rotationDegrees(-browncoat.getVisualRotationYInDegrees()));
@@ -90,7 +90,7 @@ public class ClientProxy {
     }
 
     public static void createImpHead(Imp imp) {
-        var model = ImpModel.createBodyLayer().bakeRoot().getChild("head");
+        var model = ImpModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) imp.level()), imp.getX(), imp.getY() + 0.7, imp.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(0, 1.05, 0);
             poseStack.mulPose(Axis.YN.rotationDegrees(imp.getVisualRotationYInDegrees()));
@@ -99,7 +99,7 @@ public class ClientProxy {
     }
 
     public static void createImpArm(Imp imp) {
-        var model = ImpModel.createBodyLayer().bakeRoot().getChild("left_arm");
+        var model = ImpModel.createBodyLayer().bakeRoot().getChild("root").getChild("left_arm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) imp.level()), imp.getX(), imp.getY() + 0.6, imp.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(0, -0.6, 0);
             poseStack.mulPose(Axis.YP.rotationDegrees(-imp.getVisualRotationYInDegrees()));
@@ -109,7 +109,7 @@ public class ClientProxy {
 
 
     public static void createMummifiedImpHead(MummifiedImp imp) {
-        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("head");
+        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("head");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) imp.level()), imp.getX(), imp.getY() + 0.7, imp.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(0, 1.05, 0);
             poseStack.mulPose(Axis.YN.rotationDegrees(imp.getVisualRotationYInDegrees()));
@@ -119,7 +119,7 @@ public class ClientProxy {
 
 
     public static void createMummifiedImpArm(MummifiedImp imp) {
-        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("left_arm");
+        var model = BrowncoatModel.createBodyLayer().bakeRoot().getChild("root").getChild("left_arm");
         Minecraft.getInstance().particleEngine.add(new PhysicsModelParticle(((ClientLevel) imp.level()), imp.getX(), imp.getY() + 0.6, imp.getZ(), Either.left(model), poseStack -> {
             poseStack.translate(0, -0.6, 0);
             poseStack.mulPose(Axis.YP.rotationDegrees(-imp.getVisualRotationYInDegrees()));

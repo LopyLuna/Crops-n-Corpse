@@ -62,5 +62,7 @@ public class ModEntityTagProvider extends EntityTypeTagsProvider {
                 .addTag(Tags.EntityTypes.BASIC_ZOMBIE);
         tag(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)
                 .add(EntityTypeRegistry.SNOW_PEA.get());
+        tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER)
+                .add(EntityTypeRegistry.PIRATE_BROWNCOAT.get());
     }
 }
